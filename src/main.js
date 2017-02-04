@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 
+// dummy comment for front branch commit
+
 // ========================================================
 // Store Instantiation
 // ========================================================
