@@ -1,6 +1,6 @@
 <?php
 
-class user {
+class User {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $mail;
@@ -11,10 +11,10 @@ class user {
     private $rank;
     private $signupDate;
     
-   // Construction de la classe
-   public function __construct(array $donnees) {
+    // Construction de la classe
+    public function __construct(array $donnees) {
        return $this->hydrate($donnees);
-   }
+    }
     
     // Setters and getters
     public function get_id() {
@@ -22,7 +22,7 @@ class user {
     }
     
     public function set_id() {
-         $this->id = $id;      
+        $this->id = $id;      
     }
     
     public function get_mail() {
@@ -30,7 +30,7 @@ class user {
     }
     
     public function set_mail() {
-         $this->mail = $mail;      
+        $this->mail = $mail;      
     }
     
     public function get_username() {
@@ -38,7 +38,7 @@ class user {
     }
     
     public function set_username() {
-         $this->username = $username;      
+        $this->username = $username;      
     }
     
     public function get_password() {
@@ -46,7 +46,7 @@ class user {
     }
     
     public function set_password() {
-         $this->password = $password;      
+        $this->password = $password;      
     }
     
     public function get_avatar() {
@@ -54,7 +54,7 @@ class user {
     }
     
     public function set_avatar() {
-         $this->avatar = $avatar;      
+        $this->avatar = $avatar;      
     }
     
     public function get_birthDate() {
@@ -62,7 +62,7 @@ class user {
     }
     
     public function set_birthDate() {
-         $this->birthDate = $birthDate;      
+        $this->birthDate = $birthDate;      
     }
     
     public function get_rank() {
@@ -70,7 +70,7 @@ class user {
     }
     
     public function set_rank() {
-         $this->rank = $rank;      
+        $this->rank = $rank;      
     }
     
     public function get_signupDate() {
@@ -78,23 +78,22 @@ class user {
     }
     
     public function set_signupDate() {
-         $this->signupDate = $signupDate;      
+        $this->signupDate = $signupDate;      
     }
 
-// Hydrate
-public function hydrate(array $donnees) {
-    foreach ($donnees as $key => $value) {
-        // On récupère le nom du setter correspondant à l'attribut
-        $method = 'set'. ucfirst($key);
-        
-        //Si le setter correspondant exite :
-        if(method_exists($this, $method)) {
-            // On appelle le setter
-            $this->$method($value);
+    // Hydrate
+    public function hydrate(array $donnees) {
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à l'attribut
+            $method = 'set'. ucfirst($key);
+            
+            // Si le setter correspondant existe :
+            if(method_exists($this, $method)) {
+                // On appelle le setter
+                $this->$method($value);
+            }
         }
-}
-}
-    
+    }
 }
 
 ?>

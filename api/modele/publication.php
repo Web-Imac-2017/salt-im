@@ -1,15 +1,15 @@
 <?php
 
-class publication {
+class Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $text;
     private $date;
     
-   // Construction de la classe
-   public function __construct(array $donnees) {
-       return $this->hydrate($donnees);
-   }
+    // Construction de la classe
+    public function __construct(array $donnees) {
+        return $this->hydrate($donnees);
+    }
     
     // Setters and getters
     public function get_id() {
@@ -17,7 +17,7 @@ class publication {
     }
     
     public function set_id() {
-         $this->id = $id;      
+        $this->id = $id;      
     }
     
     public function get_text() {
@@ -25,7 +25,7 @@ class publication {
     }
     
     public function set_text() {
-         $this->text = $text;      
+        $this->text = $text;      
     }
     
     public function get_date() {
@@ -33,23 +33,22 @@ class publication {
     }
     
     public function set_date() {
-         $this->date = $date;      
+        $this->date = $date;      
     }
 
-// Hydrate
-public function hydrate(array $donnees) {
-    foreach ($donnees as $key => $value) {
-        // On récupère le nom du setter correspondant à l'attribut
-        $method = 'set'. ucfirst($key);
-        
-        //Si le setter correspondant exite :
-        if(method_exists($this, $method)) {
-            // On appelle le setter
-            $this->$method($value);
+    // Hydrate
+    public function hydrate(array $donnees) {
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à l'attribut
+            $method = 'set'. ucfirst($key);
+
+            // Si le setter correspondant existe :
+            if(method_exists($this, $method)) {
+                // On appelle le setter
+                $this->$method($value);
+            }
         }
-}
-}
-    
+    }
 }
 
 ?>
