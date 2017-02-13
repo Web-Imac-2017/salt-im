@@ -1,6 +1,6 @@
 <?php
 
-class subject {
+class Subject {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $title;
