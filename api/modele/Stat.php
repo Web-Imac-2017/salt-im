@@ -17,7 +17,7 @@ class Stat {
     }
     
     public function set_id() {
-         $this->id = $id;      
+         $this->id = $id;
     }
     
     public function get_name() {
