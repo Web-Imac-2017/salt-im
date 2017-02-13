@@ -1,6 +1,6 @@
 <?php
 
-class Subject {
+class Subject extends Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $title;

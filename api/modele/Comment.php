@@ -1,6 +1,6 @@
 <?php
 
-class Comment {
+class Comment extends Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $text;
