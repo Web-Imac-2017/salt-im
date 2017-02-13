@@ -1,14 +1,18 @@
 <?php
 
-class nom_classe {
+class user {
     // Ligne à multiplier selon le nombre d'attributs
-    private $nom_attribut;
-    
-    private static $id=0;
+    private $id;
+    private $mail;
+    private $username;
+    private $password;
+    private $avatar;
+    private $birthDate;
+    private $rank;
+    private signupDate;
     
    // Construction de la classe
    public function __construct(array $donnees) {
-        self::$id++;
        return $this->hydrate($donnees);
    }
 
