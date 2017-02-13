@@ -1,6 +1,6 @@
 <?php
 
-class Publication {
+abstract class Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $text;
