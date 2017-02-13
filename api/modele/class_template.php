@@ -15,7 +15,7 @@ class nom_classe {
     // Set et get des attributs-----------------------
     // A multiplier selon le nombre d'attributs
     public function get_nom_attribut() {
-    return $this->nom_attribut();
+    return $this->nom_attribut;
     }
     
     public function set_nom_attribut() {
