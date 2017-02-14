@@ -55,7 +55,7 @@ class SubjectsManager {
     return $subjects;
   }
 
-  public function update(User $subject)
+  public function update(Subject $subject)
   {
     // Prépare une requête de type UPDATE.
     $q = $this->_db->prepare('UPDATE subject SET text = :text, date = :date, title = :title, flair = :flair, type = :type WHERE id = :id');

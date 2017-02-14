@@ -3,8 +3,6 @@
 class Comment extends Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
-    private $text;
-    private $date;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -19,22 +17,6 @@ class Comment extends Publication {
     
     public function set_id() {
         $this->id = $id;      
-    }
-
-    public function get_cond() {
-        return $this->text;
-    }
-    
-    public function set_cond() {
-        $this->text= $text;      
-    }
-
-    public function get_name() {
-        return $this->date;
-    }
-    
-    public function set_name() {
-        $this->date = $date;      
     }
     // Fin du multiplier--------------------------------
 
