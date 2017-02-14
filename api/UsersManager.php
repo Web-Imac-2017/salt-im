@@ -10,7 +10,7 @@ class UsersManager {
   public function add(User $user)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO user("", mail, username, password, avatar, birthDate, rank, signupDate) VALUES(:mail, :username, :password, :avatar, :birthDate, :rank, :signupDate)');
+    $q = $this->_db->prepare('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate) VALUES(:mail, :username, :password, :avatar, :birthDate, :rank, :signupDate)');
     
     // Assignation des valeurs du user.
     $q->bindValue(':mail', $user->get_mail());
