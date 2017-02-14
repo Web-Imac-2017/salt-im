@@ -1,5 +1,5 @@
 <?php
-class badgesManager {
+class BadgesManager {
   private $_db; // Instance de PDO.
 
   public function __construct($db)
