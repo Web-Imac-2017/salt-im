@@ -4,7 +4,6 @@ import './Research.scss'
 
 export const Research = () => (
   <div>
-    <h1>React Redux Starter Kit</h1>
     <IndexLink to='/' activeClassName='route--active'>
       Home
     </IndexLink>
