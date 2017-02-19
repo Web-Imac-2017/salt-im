@@ -11,6 +11,20 @@ class User {
     private $rank;
     private $signupDate;
     
+    // Hydrate
+    public function hydrate(array $donnees) {
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à l'attribut
+            $method = 'set_'.$key;
+            
+            // Si le setter correspondant existe :
+            if(method_exists($this, $method)) {
+                // On appelle le setter
+                $this->$method($value);
+            }
+        }
+    }
+    
     // Construction de la classe
     public function __construct(array $donnees) {
        return $this->hydrate($donnees);
@@ -21,7 +35,7 @@ class User {
         return $this->id;
     }
     
-    public function set_id() {
+    public function set_id($id) {
         $this->id = $id;      
     }
     
@@ -29,7 +43,7 @@ class User {
         return $this->mail;
     }
     
-    public function set_mail() {
+    public function set_mail($mail) {
         $this->mail = $mail;      
     }
     
@@ -37,7 +51,7 @@ class User {
         return $this->username;
     }
     
-    public function set_username() {
+    public function set_username($username) {
         $this->username = $username;      
     }
     
@@ -45,7 +59,7 @@ class User {
         return $this->password;
     }
     
-    public function set_password() {
+    public function set_password($password) {
         $this->password = $password;      
     }
     
@@ -53,7 +67,7 @@ class User {
         return $this->avatar;
     }
     
-    public function set_avatar() {
+    public function set_avatar($avatar) {
         $this->avatar = $avatar;      
     }
     
@@ -61,7 +75,7 @@ class User {
         return $this->birthDate;
     }
     
-    public function set_birthDate() {
+    public function set_birthDate($birthDate) {
         $this->birthDate = $birthDate;      
     }
     
@@ -69,7 +83,7 @@ class User {
         return $this->rank;
     }
     
-    public function set_rank() {
+    public function set_rank($rank) {
         $this->rank = $rank;      
     }
     
@@ -77,22 +91,8 @@ class User {
         return $this->signupDate;
     }
     
-    public function set_signupDate() {
+    public function set_signupDate($signupDate) {
         $this->signupDate = $signupDate;      
-    }
-
-    // Hydrate
-    public function hydrate(array $donnees) {
-        foreach ($donnees as $key => $value) {
-            // On récupère le nom du setter correspondant à l'attribut
-            $method = 'set'.ucfirst($key);
-            
-            // Si le setter correspondant existe :
-            if(method_exists($this, $method)) {
-                // On appelle le setter
-                $this->$method($value);
-            }
-        }
     }
 }
 
