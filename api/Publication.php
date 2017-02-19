@@ -16,7 +16,7 @@ abstract class Publication {
         return $this->id;
     }
     
-    public function set_id() {
+    public function set_id($id) {
         $this->id = $id;      
     }
     
@@ -24,7 +24,7 @@ abstract class Publication {
         return $this->text;
     }
     
-    public function set_text() {
+    public function set_text($text) {
         $this->text = $text;      
     }
     
@@ -32,7 +32,7 @@ abstract class Publication {
         return $this->date;
     }
     
-    public function set_date() {
+    public function set_date($date) {
         $this->date = $date;      
     }
 
@@ -40,7 +40,7 @@ abstract class Publication {
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut
-            $method = 'set'. ucfirst($key);
+            $method = 'set_'. ucfirst($key);
 
             // Si le setter correspondant existe :
             if(method_exists($this, $method)) {

@@ -57,17 +57,7 @@ public function getDb() {
   public function update(User $user)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE user SET mail = :mail, username = :username, password = :password, avatar = :avatar, birthDate = :birthDate, rank = :rank, signupDate = :signupDate WHERE id = :id');
-
-    // Assignation des valeurs à la requête.
-    $q->bindValue(':id', $user->get_id(), PDO::PARAM_INT);
-    $q->bindValue(':mail', $user->get_mail());
-    $q->bindValue(':username', $user->get_username());
-    $q->bindValue(':password', $user->get_password());
-    $q->bindValue(':avatar', $user->get_avatar());
-    $q->bindValue(':birthDate', $user->get_birthDate());
-    $q->bindValue(':rank', $user->get_rank());
-    $q->bindValue(':signupDate', $user->get_signupDate());
+    $q = $this->_db->prepare('UPDATE user SET mail = "'.$user->get_mail().'", username = "'.$user->get_username().'", password = "'.$user->get_password().'", avatar = "'.$user->get_avatar().'", birthDate = "'.$user->get_birthDate().'", rank = "'.$user->get_rank().'", signupDate = "'.$user->get_signupDate().'" WHERE id = "'.$user->get_id().'"');
     
     // Exécution de la requête.
     $q->execute();

@@ -10,12 +10,7 @@ class CommentsManager {
   public function add(Comment $comment)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO comment(text, date) VALUES(:text, :date)');
-    
-    // Assignation des valeurs du subject.
-    $q->bindValue(':text', $comment->get_text());
-    $q->bindValue(':date', $comment->get_date());
-    
+    $q = $this->_db->prepare('INSERT INTO comment(text, date) VALUES("'.$comment->get_text()'", "'.$comment->get_date().'")');
     // Exécution de la requête.
     $q->execute();
   }
@@ -23,7 +18,7 @@ class CommentsManager {
   public function delete(Comment $comment)
   {
     // Exécute une requête de type DELETE.
-      $this->_db->exec('DELETE FROM comment WHERE id = '.$comment->get_id());
+      $this->_db->exec('DELETE FROM comment WHERE id = "'.$comment->get_id().'"');
   }
 
   public function get($id)
@@ -31,7 +26,7 @@ class CommentsManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Subject.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, text, date FROM comment WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, text, date FROM comment WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Comment($donnees);
@@ -55,11 +50,7 @@ class CommentsManager {
   public function update(Comment $comment)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE comment SET text = :text, date = :date WHERE id = :id');
-
-    // Assignation des valeurs à la requête.
-    $q->bindValue(':text', $comment->get_text());
-    $q->bindValue(':date', $comment->get_date());
+    $q = $this->_db->prepare('UPDATE comment SET text = "'.$comment->get_text()'", date = "'.$comment->get_date().'" WHERE id = "'.$comment->get_id().'"');
     
     // Exécution de la requête.
     $q->execute();

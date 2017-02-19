@@ -10,12 +10,8 @@ class MediasManager {
   public function add(Media $media)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO media(link, type) VALUES(:link, :type)');
-    
-    // Assignation des valeurs du media.
-    $q->bindValue(':link', $media->get_link());
-    $q->bindValue(':type', $media->get_type());
-    
+    $q = $this->_db->prepare('INSERT INTO media(link, type) VALUES("'.$media->get_link().'", "'.$media->get_type().'")');
+      
     // Exécution de la requête.
     $q->execute();
   }
@@ -23,7 +19,7 @@ class MediasManager {
   public function delete(Media $media)
   {
     // Exécute une requête de type DELETE.
-      $this->_db->exec('DELETE FROM media WHERE id = '.$media->get_id());
+      $this->_db->exec('DELETE FROM media WHERE id = "'.$media->get_id().'"');
   }
 
   public function get($id)
@@ -31,7 +27,7 @@ class MediasManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet media.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, link, type FROM media WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, link, type FROM media WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Media($donnees);
@@ -55,11 +51,7 @@ class MediasManager {
   public function update(Media $media)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE media SET link = :link, type = :type WHERE id = :id');
-
-    // Assignation des valeurs à la requête.
-    $q->bindValue(':link', $media->get_link());
-    $q->bindValue(':type', $media->get_type());
+    $q = $this->_db->prepare('UPDATE media SET link = "'.$media->get_link().'", type = "'.$media->get_type().'" WHERE id = "'.$media->get_id().'"');
     
     // Exécution de la requête.
     $q->execute();

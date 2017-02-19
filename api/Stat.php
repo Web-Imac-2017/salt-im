@@ -16,7 +16,7 @@ class Stat {
         return $this->id;
     }
     
-    public function set_id() {
+    public function set_id($id) {
         $this->id = $id;
     }
     
@@ -24,7 +24,7 @@ class Stat {
         return $this->name;
     }
     
-    public function set_name() {
+    public function set_name($name) {
         $this->name = $name;      
     }
     
@@ -32,7 +32,7 @@ class Stat {
         return $this->value;
     }
     
-    public function set_value() {
+    public function set_value($value) {
         $this->value = $value;      
     }
 
@@ -40,7 +40,7 @@ class Stat {
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut
-            $method = 'set'. ucfirst($key);
+            $method = 'set_'. ucfirst($key);
             
             // Si le setter correspondant existe :
             if(method_exists($this, $method)) {

@@ -16,7 +16,7 @@ class Media {
         return $this->id;
     }
     
-    public function set_id() {
+    public function set_id($id) {
         $this->id = $id;      
     }
     
@@ -24,7 +24,7 @@ class Media {
         return $this->text;
     }
     
-    public function set_link() {
+    public function set_link($link) {
         $this->link = $link;      
     }
     
@@ -32,7 +32,7 @@ class Media {
         return $this->type;
     }
     
-    public function set_type() {
+    public function set_type($type) {
         $this->type = $type;      
     }
 
@@ -40,7 +40,7 @@ class Media {
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut
-            $method = 'set'. ucfirst($key);
+            $method = 'set_'. ucfirst($key);
             
             // Si le setter correspondant existe :
             if(method_exists($this, $method)) {

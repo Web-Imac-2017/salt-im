@@ -18,7 +18,7 @@ class Badge {
         return $this->id;
     }
     
-    public function set_id() {
+    public function set_id($id) {
         $this->id = $id;      
     }
 
@@ -26,7 +26,7 @@ class Badge {
         return $this->cond;
     }
     
-    public function set_cond() {
+    public function set_cond($cond) {
         $this->cond = $cond;      
     }
 
@@ -34,7 +34,7 @@ class Badge {
         return $this->name;
     }
     
-    public function set_name() {
+    public function set_name($name) {
         $this->name = $name;      
     }
 
@@ -42,7 +42,7 @@ class Badge {
         return $this->icon;
     }
     
-    public function set_icon() {
+    public function set_icon($icon) {
         $this->icon = $icon;      
     }
     // Fin du multiplier--------------------------------
@@ -51,7 +51,7 @@ class Badge {
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut
-            $method = 'set'. ucfirst($key);
+            $method = 'set_'. ucfirst($key);
             
             // Si le setter correspondant existe :
             if(method_exists($this, $method)) {

@@ -10,11 +10,8 @@ class TagsManager {
   public function add(Tag $tag)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO tag(name) VALUES(:name)');
-    
-    // Assignation des valeurs du tag.
-    $q->bindValue(':name', $tag->get_name());
-    
+    $q = $this->_db->prepare('INSERT INTO tag(name) VALUES("'.$tag->get_name().'")');
+      
     // Exécution de la requête.
     $q->execute();
   }
@@ -22,7 +19,7 @@ class TagsManager {
   public function delete(Tag $tag)
   {
     // Exécute une requête de type DELETE.
-      $this->_db->exec('DELETE FROM tag WHERE id = '.$tag->get_id());
+      $this->_db->exec('DELETE FROM tag WHERE id = "'.$tag->get_id().'"');
   }
 
   public function get($id)
@@ -30,7 +27,7 @@ class TagsManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet tag.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT name FROM tag WHERE id = '.$id);
+    $q = $this->_db->query('SELECT name FROM tag WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Tag($donnees);
@@ -54,10 +51,7 @@ class TagsManager {
   public function update(Tag $tag)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE tag SET name = :name WHERE id = :id');
-
-    // Assignation des valeurs à la requête.
-    $q->bindValue(':name', $tag->get_name());
+    $q = $this->_db->prepare('UPDATE tag SET name = "'.$tag->get_name().'" WHERE id = "'.$tag->get_id().'"');
     
     // Exécution de la requête.
     $q->execute();
