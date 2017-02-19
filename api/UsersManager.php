@@ -6,27 +6,24 @@ class UsersManager {
   {
     $this->setDb($db);
   }
+    
+    
+    
+public function getDb() {
+    return $this->_db;
+}
 
-  public function add(User $user)
-  {
-    // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate) VALUES(:mail, :username, :password, :avatar, :birthDate, :rank, :signupDate)');
-    
-    // Assignation des valeurs du user.
-    $q->bindValue(':mail', $user->get_mail());
-    $q->bindValue(':username', $user->get_username());
-    $q->bindValue(':password', $user->get_password());
-    $q->bindValue(':avatar', $user->get_avatar());
-    $q->bindValue(':birthDate', $user->get_birthDate());
-    $q->bindValue(':rank', $user->get_rank());
-    $q->bindValue(':signupDate', $user->get_signupDate());
-    
+  public function add(User $user) {
+    // Préparation de la requête 
+    $q = $this->_db->prepare('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$user->get_password().'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "'.$user->get_rank().'", "'.$user->get_signupDate().'")');
+      
     // Exécution de la requête.
+      var_dump($q);
     $q->execute();
+      
   }
 
-  public function delete(User $user)
-  {
+  public function delete(User $user) {
     // Exécute une requête de type DELETE.
       $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
   }
@@ -80,4 +77,5 @@ class UsersManager {
   {
     $this->_db = $db;
   }
+    
 }
