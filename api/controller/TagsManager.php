@@ -27,7 +27,7 @@ class TagsManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet tag.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT name FROM tag WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT id, name FROM tag WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Tag($donnees);
@@ -38,7 +38,7 @@ class TagsManager {
     // Retourne la liste de tous les tags.
     $tags = [];
 
-    $q = $this->_db->query('SELECT name FROM tag ORDER BY id');
+    $q = $this->_db->query('SELECT id, name FROM tag ORDER BY id');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {

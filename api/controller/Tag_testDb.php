@@ -111,9 +111,11 @@ $listeTags = $manager->getList();
 <?php 
     
     for ($i=0; $i<count($listeTags);$i++) {
-    echo "<tr> <td>".$listeTags[$i]->get_name()."</td><td> <a href='test2.php?id_del=".$listeTags[$i]->get_id()."'>Supprimer</a></td> </tr>";
+    echo "<tr> <td>".$listeTags[$i]->get_name()."</td><td> <a href='?id_del='".$listeTags[$i]->get_id()."'>Supprimer</a></td> </tr>";
    
     }
+
+    
     
     ?>
     </tbody>
