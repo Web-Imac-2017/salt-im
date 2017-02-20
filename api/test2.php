@@ -65,6 +65,40 @@ $manager->add($new_user);
     
 }
 
+//~~ Update
+
+if (isset($_GET['user_update'])) {
+    
+$user_update = $manager->get($_GET['user_update']);
+
+if ($_GET['username_up'] != NULL) {
+    $user_update->set_username($_GET['username_up']);
+}
+
+if ($_GET['mail_up'] != NULL) {
+    $user_update->set_mail($_GET['mail_up']);
+}
+    
+if ($_GET['password_up'] != NULL) {
+    $user_update->set_password($_GET['password_up']);
+}
+    
+if ($_GET['birthDate_up'] != NULL) {
+    $user_update->set_birthDate($_GET['birthDate_up']);
+}
+    
+if ($_GET['avatar_up'] != NULL) {
+    $user_update->set_avatar($_GET['avatar_up']);
+}
+
+if (isset($user_update)) {
+    $manager->update($user_update);
+}
+    
+}
+    
+
+
 //~~ Supprimer
 
 if (isset($_GET['id_del'])) {
@@ -113,6 +147,56 @@ $listeUsers = $manager->getList();
     <input type="submit" value="Ajouter">
     
 </form>
+
+<h1>Update</h1>
+
+<h2>Choisir un utilisateur à modifier</h2>
+
+<form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+   <p>
+       <label for="pays">Quel utilisateur modifier ?</label><br />
+       <select name="user_update" id="user_update">
+         <?php 
+          for ($i=0; $i<count($listeUsers);$i++) {
+            echo '<option value="'.$listeUsers[$i]->get_id().'">'.$listeUsers[$i]->get_username().'</option>';
+            }               
+        ?>
+       </select>
+       <input type="submit" value="Choisir">
+       
+   </p>
+</form>
+
+<?php 
+
+if (isset($_GET['user_update'])) {
+
+echo '<form action="'.$_SERVER['PHP_SELF'].'" method="get">';
+  
+echo '<label for="username_up">Username :</label>
+    <input type="text" name="username_up" placeholder="'.$user_update->get_username().'">
+    
+    <label for="password_up">Password :</label>
+    <input type="password" name="password_up" placeholder="'.$user_update->get_password().'">
+    
+    <label for="mail_up">Mail :</label>
+    <input type="mail" name="mail_up" placeholder="'.$user_update->get_mail().'">
+    
+    <label for="birthDate_up">Birthdate :</label>
+    <input type="text" name="birthDate_up" placeholder="'.$user_update->get_birthDate().'">
+    
+    <label for="avatar_up">Avatar :</label>
+    <input type="text" name="avatar_up" placeholder="'.$user_update->get_avatar().'">
+    
+    <input type="hidden" name="user_update" value="'.$user_update->get_id().'">
+    
+    <input type="submit" value="Modifier">
+    </form>';
+    
+    
+}
+    ?>
+
 
 
 <h1>Tableau des Utilisateurs</h1>
