@@ -24,7 +24,7 @@
 require "User.php";
 require "UsersManager.php";
 
-    //Connexion à la base
+//Connexion à la base -------------------------
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -40,52 +40,54 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
 }
 
+//-------------------------------------------
+
 $manager = new UsersManager($db);
 
 // Traitement du formulaire
 
 //~~ Ajouter
 
-if (isset($_GET['nom']) && isset($_GET['pv']) && isset($_GET['atk'])) {
-    
-$form_nom = $_GET['nom'];
-$form_pv = $_GET['pv'];
-$form_atk = $_GET['atk'];
+if (isset($_GET['username']) && isset($_GET['mail']) && isset($_GET['password']) && isset($_GET['birthDate']) && isset($_GET['avatar'])) {
 
-
-$tab_new_perso = array(
-    "nom" => $form_nom,
-    "atk" => $form_atk,
-    "pv" => $form_pv
+$tab_new_user = array(
+    "username" => $_GET['username'],
+    "mail" => $_GET['mail'],
+    "password" => $_GET['password'],
+    "birthDate" => $_GET['birthDate'],
+    "avatar" => $_GET['avatar'],
+    "rank" => 1,
+    "signupDate" => date('Y-m-d')
     );
 
-$new_perso = new Personnage($tab_new_perso);
-$manager->add($new_perso);
+$new_user = new User($tab_new_user);
+$manager->add($new_user);
     
 }
 
 //~~ Supprimer
 
 if (isset($_GET['id_del'])) {
- $id = $_GET['id_del'];
-    $manager->del($id);
+    $id = $_GET['id_del'];
+$user_del = $manager->get($id);
+    $manager->delete($user_del);
     
 }
 
 
-// Récupérer les persos
-$resultats=$conn->query('SELECT * FROM S4TP2_Personnages');
+// Récupérer les users
+$resultats=$db->query('SELECT * FROM user');
 $resultats->setFetchMode(PDO::FETCH_ASSOC);
 while( $resultat = $resultats->fetch() )
 {
-        $toto = new Personnage($resultat);
+        $toto = new User($resultat);
 }      
 $resultats->closeCursor();
 
 
 
 echo "<br> <br>";
-$listePersos = $manager->getList();
+$listeUsers = $manager->getList();
 
 ?>
 
@@ -107,10 +109,6 @@ $listePersos = $manager->getList();
     
     <label for="avatar">Avatar :</label>
     <input type="text" name="avatar">
-    
-    <input type="hidden" name="rank" value="newbie">
-    
-    <input type="hidden" name="signupDate" value="<? echo date(Y-m-d) ?>">
     
     <input type="submit" value="Ajouter">
     
@@ -137,8 +135,8 @@ $listePersos = $manager->getList();
    <tbody>
 <?php 
     
-    for ($i=0; $i<count($users);$i++) {
-    echo "<tr> <td>".$personnages[$i]->getNom()."</td> <td>".$personnages[$i]->getPv()."</td> <td>".$personnages[$i]->getAtk()."</td> <td> <a href='index.php?id_del=".$personnages[$i]->getId() ."'>Supprimer</a></td> </tr>";
+    for ($i=0; $i<count($listeUsers);$i++) {
+    echo "<tr> <td>".$listeUsers[$i]->get_username()."</td> <td>".$listeUsers[$i]->get_password()."</td> <td>".$listeUsers[$i]->get_mail()."</td> <td>".$listeUsers[$i]->get_birthDate()."</td> <td>".$listeUsers[$i]->get_avatar()."</td> <td>".$listeUsers[$i]->get_rank()."</td> <td>".$listeUsers[$i]->get_signupDate()."</td> <td> <a href='test2.php?id_del=".$listeUsers[$i]->get_id()."'>Supprimer</a></td> </tr>";
    
     }
     
