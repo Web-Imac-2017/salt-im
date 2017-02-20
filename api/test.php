@@ -12,8 +12,6 @@ $user = new User([
   'signupDate' => '2017-02-19'
 ]);
 
-//require 'Database.php';
-//$db = new Database();
 try {
 $db = new PDO('mysql:host=127.0.0.1;dbname=salt', 'root', '');
 } catch (PDOException $e) {
