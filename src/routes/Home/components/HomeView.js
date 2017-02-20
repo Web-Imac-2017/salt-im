@@ -2,6 +2,7 @@ import React from 'react'
 import DuckImage from '../assets/Duck.jpg'
 import './HomeView.scss'
 import ListPost from '../../../components/ListPost/ListPost.js'
+import SearchBar from '../../../components/SearchBar/SearchBar.js'
 
 var dataListPost = [
     {
@@ -27,8 +28,12 @@ var dataListPost = [
 ]
 
 export const HomeView = () => (
-  <div>
-    <h4>Welcome!</h4>
+  
+  <div className="home">
+    <h1 className="home__title">Salty</h1>
+
+    <SearchBar/>
+
     <ListPost title="Posts tendances" data={dataListPost}/>
   </div>
 )

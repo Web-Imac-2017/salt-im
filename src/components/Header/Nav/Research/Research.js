@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 
 export const Research = () => (
   <div>
-    Research
+    <div className="searchBtn"></div>
   </div>
 )
 

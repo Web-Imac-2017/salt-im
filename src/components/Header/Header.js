@@ -2,22 +2,37 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Header.scss'
 
-import Logo from './Nav/Logo/Logo.js'
-import ItemWrapper from './Nav/Item/ItemWrapper.js'
 import Research from './Nav/Research/Research.js'
-import Favorite from './Nav/Favorite/Favorite.js'
 import Account from './Nav/Account/Account.js'
 
-
 export const Header = () => (
-  <div>
+  
+  <div className="header">
+    
     <div className="header__left">
-      <Logo/>
-      <ItemWrapper/>
+      
+      <div className="logo">
+        <div className="logo__img"></div>
+        <p className="logo__title">Salt-Im</p>
+      </div>
+
+      <div className="itemnav">
+        <ul className="itemnav__list">
+            <li className="itemnav__list__item">Tags</li>
+            <li className="itemnav__list__item">Posts</li>
+            <li className="itemnav__list__item">Vicos</li>
+        </ul>
+      </div>
     </div>
+    
     <div className="header__right">
+
+      <div className="addPostBtn">Ajouter un post</div>
+      
       <Research/>
-      <Favorite/>
+      
+      <div className="saveBtn"></div>
+      
       <Account/>
     </div>
   </div>

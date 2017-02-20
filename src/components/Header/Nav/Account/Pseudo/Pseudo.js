@@ -4,7 +4,7 @@ import './Pseudo.scss'
 
 export const Pseudo = () => (
   <div>
-    <p>pseudo</p>
+    <p className="user__name">ptitcon77</p>
   </div>
 )
 

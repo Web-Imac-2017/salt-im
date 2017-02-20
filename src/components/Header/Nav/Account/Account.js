@@ -4,9 +4,9 @@ import Pic from "./Pic/Pic.js"
 import Pseudo from "./Pseudo/Pseudo.js"
 
 export const Account = () => (
-  <div>
-    <Pic/>
+  <div className="user">
     <Pseudo/>
+    <Pic/>
   </div>
 )
 

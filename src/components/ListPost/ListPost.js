@@ -1,8 +1,10 @@
 import React from 'react'
 import './ListPost.scss'
-import PostPreview from "./PostPreview/PostPreview.js"
+import PostPreview from './PostPreview/PostPreview.js'
+import R from 'ramda'
 
 export const ListPost = (props) => {
+    
     let postsNode = props.data.map( (elmt,i) => (
         <PostPreview key={i} data={elmt}/>
     ))
