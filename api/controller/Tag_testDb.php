@@ -21,8 +21,8 @@
     
 
 <?php
-require "User.php";
-require "UsersManager.php";
+require "Tag.php";
+require "TagsManager.php";
 
 //Connexion à la base -------------------------
 $servername = "localhost";
@@ -42,19 +42,19 @@ catch(PDOException $e)
 
 //-------------------------------------------
 
-$manager = new UsersManager($db);
+$manager = new TagsManager($db);
 
 // Traitement du formulaire
 
 //~~ Ajouter
 
-if (isset($_GET['username']) && isset($_GET['mail']) && isset($_GET['password']) && isset($_GET['birthDate']) && isset($_GET['avatar'])) {
+if (isset($_GET['name'])) {
 
 $tab_new_tag = array(
     "name" => $_GET['name']
     );
 
-$new_user = new User($tab_new_tag);
+$new_tag = new Tag($tab_new_tag);
 $manager->add($new_tag);
     
 }
@@ -63,25 +63,25 @@ $manager->add($new_tag);
 
 if (isset($_GET['id_del'])) {
     $id = $_GET['id_del'];
-$user_del = $manager->get($id);
-    $manager->delete($user_del);
+$tag_del = $manager->get($id);
+    $manager->delete($tag_del);
     
 }
 
 
-// Récupérer les users
-$resultats=$db->query('SELECT * FROM user');
+// Récupérer les tags
+$resultats=$db->query('SELECT * FROM tag');
 $resultats->setFetchMode(PDO::FETCH_ASSOC);
 while( $resultat = $resultats->fetch() )
 {
-        $toto = new User($resultat);
+        $toto = new Tag($resultat);
 }      
 $resultats->closeCursor();
 
 
 
 echo "<br> <br>";
-$listeUsers = $manager->getList();
+$listeTags = $manager->getList();
 
 ?>
 
@@ -89,48 +89,29 @@ $listeUsers = $manager->getList();
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
   
-   <label for="username">Username :</label>
-    <input type="text" name="username">
-    
-    <label for="password">Password :</label>
-    <input type="password" name="password">
-    
-    <label for="mail">Mail :</label>
-    <input type="mail" name="mail">
-    
-    <label for="birthDate">Birthdate :</label>
-    <input type="text" name="birthDate">
-    
-    <label for="avatar">Avatar :</label>
-    <input type="text" name="avatar">
+   <label for="name">Name :</label>
+    <input type="text" name="name">
     
     <input type="submit" value="Ajouter">
     
 </form>
 
 
-<h1>Tableau des Utilisateurs</h1>
+<h1>Tableau des Tags</h1>
 <table>
-   <caption>Utilisateurs</caption>
+   <caption>Tags</caption>
 
    <thead> <!-- En-tête du tableau -->
        <tr>
-           <th>Username</th>
-           <th>Password</th>
-           <th>Mail</th>
-           <th>Birthdate</th>
-           <th>Avatar</th>
-           <th>Rank</th>
-           <th>Signupdate</th>           
-           <th>Supprimer</th>
+           <th>Name</th>
        </tr>
    </thead>
    
    <tbody>
 <?php 
     
-    for ($i=0; $i<count($listeUsers);$i++) {
-    echo "<tr> <td>".$listeUsers[$i]->get_username()."</td> <td>".$listeUsers[$i]->get_password()."</td> <td>".$listeUsers[$i]->get_mail()."</td> <td>".$listeUsers[$i]->get_birthDate()."</td> <td>".$listeUsers[$i]->get_avatar()."</td> <td>".$listeUsers[$i]->get_rank()."</td> <td>".$listeUsers[$i]->get_signupDate()."</td> <td> <a href='test2.php?id_del=".$listeUsers[$i]->get_id()."'>Supprimer</a></td> </tr>";
+    for ($i=0; $i<count($listeTags);$i++) {
+    echo "<tr> <td>".$listeTags[$i]->get_name()."</td><td> <a href='test2.php?id_del=".$listeTags[$i]->get_id()."'>Supprimer</a></td> </tr>";
    
     }
     
