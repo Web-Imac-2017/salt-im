@@ -220,7 +220,7 @@ echo '<label for="username_up">Username :</label>
 <?php 
     
     for ($i=0; $i<count($listeUsers);$i++) {
-    echo "<tr> <td>".$listeUsers[$i]->get_username()."</td> <td>".$listeUsers[$i]->get_password()."</td> <td>".$listeUsers[$i]->get_mail()."</td> <td>".$listeUsers[$i]->get_birthDate()."</td> <td>".$listeUsers[$i]->get_avatar()."</td> <td>".$listeUsers[$i]->get_rank()."</td> <td>".$listeUsers[$i]->get_signupDate()."</td> <td> <a href='?id_del=".$listeUsers[$i]->get_id()."'>Supprimer</a></td> </tr>";
+    echo "<tr> <td>".$listeUsers[$i]->get_username()."</td> <td>".$listeUsers[$i]->get_password()."</td> <td>".$listeUsers[$i]->get_mail()."</td> <td>".$listeUsers[$i]->get_birthDate()."</td> <td>".$listeUsers[$i]->get_avatar()."</td> <td>".$listeUsers[$i]->get_rank()."</td> <td>".$listeUsers[$i]->get_signupDate()."</td> <td> <a href='test2.php?id_del=".$listeUsers[$i]->get_id()."'>Supprimer</a></td> </tr>";
    
     }
     

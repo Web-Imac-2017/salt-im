@@ -10,7 +10,8 @@ class CommentsManager {
   public function add(Comment $comment)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO comment(text, date) VALUES("'.$comment->get_text()'", "'.$comment->get_date().'")');
+    $q = $this->_db->prepare('INSERT INTO comment(text, date) VALUES("'.$comment->get_text()'", "'.$comment->get_date().'")
+    ');
     // Exécution de la requête.
     $q->execute();
   }
