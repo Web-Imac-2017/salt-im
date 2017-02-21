@@ -6,12 +6,17 @@ import Post from './Post'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
+let postRoute = {
+  path: 'post/:postId',
+  indexRoute: Post
+}
+
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
   indexRoute  : Home,
   childRoutes : [
-
+    postRoute
   ]
 })
 

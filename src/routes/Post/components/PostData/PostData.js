@@ -4,27 +4,28 @@ import PicData from './PicData/PicData.js'
 import TextData from './TextData/TextData.js'
 import LinkData from './LinkData/LinkData.js'
 
-export const PostData = () => {
-    let type = "pic",
-        nodeData;
-    switch(type) {
+export const PostData = (props) => {
+    let nodeData;
+    switch(props.data.type) {
         case "video":
-            nodeData = (<VideoData/>);
+            nodeData = (<VideoData data={props.data}/>);
             break;
-        case "pic":
-            nodeData =(<PicData/>)
+        case "image":
+            nodeData =(<PicData data={props.data}/>)
             break;
         case "link":
-            nodeData = (<LinkData/>);
+            nodeData = (<LinkData data={props.data}/>);
             break;
         default:
-            nodeData = (<TextData/>);
+            nodeData = (<TextData data={props.data}/>);
             break;
     }
 
     return(
       <div className="postdata">
-        {nodeData}
+        <div className="postdata__top">
+            {nodeData}
+        </div>
       </div>
     )
 }

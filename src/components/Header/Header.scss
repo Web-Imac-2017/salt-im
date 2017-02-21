@@ -23,7 +23,7 @@
 
 	background: -webkit-linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
 	background: linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
-	
+
 	&__left{
 		display:flex;
 		flex-direction: row;
@@ -34,6 +34,8 @@
 			align-content: center;
 			justify-content: center;
 			align-items: center;
+			color:white;
+				text-decoration:none;
 			&__img{
 				width: 45px;
 				height: 45px;
@@ -43,6 +45,8 @@
 			&__title{
 				margin-left: 20px;
 				font-weight: 700;
+				color:white;
+				text-decoration:none;
 			}
 		}
 
@@ -74,7 +78,7 @@
 			text-align: center;
 
 			&:hover{
-				
+
 			}
 		}
 
