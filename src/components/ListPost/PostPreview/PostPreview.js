@@ -4,6 +4,7 @@ import './PostPreview.scss'
 import Tags from './Tags/Tags.js'
 import PreviewLeft from './PreviewLeft/PreviewLeft.js'
 import PreviewActions from './PreviewActions/PreviewActions.js'
+import Wave from './Wave/Wave.js'
 
 export const PostPreview = (props) => {
     return(
@@ -12,13 +13,13 @@ export const PostPreview = (props) => {
                 <PreviewLeft data={props.data}/>
             </div>
             <div className="preview__right">
-                <div className="preview__title">{props.data.title}</div>
-                <Tags data={props.data.tags}/>
-                <div className="preview__description">{props.data.description}</div>
-                <div className="preview__score">Salt : {props.data.salt}</div>
-                <div className="preview__score">Pepper : {props.data.pepper}</div>
-
-                <PreviewActions/>
+                <div className="preview__content">
+                    <div className="preview__title">{props.data.title}</div>
+                    <Tags data={props.data.tags}/>
+                    <div className="preview__description">{props.data.description}</div>
+                    <PreviewActions/>
+                </div>
+                <Wave data={props.data}/>
             </div>
         </div>
     )

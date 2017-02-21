@@ -3,7 +3,7 @@ import './Tag.scss'
 
 export const Tags = (props) => (
     <div className="preview__tag">
-        {props.data}
+        #{props.data}
     </div>
 )
 
