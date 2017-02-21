@@ -15,7 +15,7 @@
 		display: flex;
 		align-content: center;
 		align-items: center;
-		
+
 		// C'est la border bottom
 		&:after{
 			content: "";
@@ -36,12 +36,12 @@
 
 		input::-moz-placeholder {
 			font-family: $cousine;
-			color: #000 !important;	
+			color: #000 !important;
 			opacity: 1;
 		}
 		::-webkit-input-placeholder{
 			font-family: $cousine;
-			color: #000 !important;	
+			color: #000 !important;
 			opacity: 1;
 		}
 		:-ms-input-placeholder{
@@ -51,7 +51,7 @@
 		}
 		::placeholder{
 			font-family: $cousine;
-			color: #000 !important;	
+			color: #000 !important;
 			opacity: 1;
 		}
 
