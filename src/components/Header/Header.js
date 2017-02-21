@@ -6,15 +6,15 @@ import Research from './Nav/Research/Research.js'
 import Account from './Nav/Account/Account.js'
 
 export const Header = () => (
-  
+
   <div className="header">
-    
+
     <div className="header__left">
-      
-      <div className="logo">
+
+      <Link className="logo" to="/">
         <div className="logo__img"></div>
         <p className="logo__title">Salt-Im</p>
-      </div>
+      </Link>
 
       <div className="itemnav">
         <ul className="itemnav__list">
@@ -24,15 +24,15 @@ export const Header = () => (
         </ul>
       </div>
     </div>
-    
+
     <div className="header__right">
 
       <div className="addPostBtn">Ajouter un post</div>
-      
+
       <Research/>
-      
+
       <div className="saveBtn"></div>
-      
+
       <Account/>
     </div>
   </div>

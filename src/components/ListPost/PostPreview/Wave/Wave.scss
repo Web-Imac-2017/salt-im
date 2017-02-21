@@ -1,0 +1,81 @@
+.box {
+      width: 800px;
+    height: 800px;
+    border-radius: 5px;
+    box-shadow: 0 2px 30px transparent;
+    position: absolute;
+    top:0;
+    overflow: hidden;
+    transform: translateZ(0) translateY(-50%) scaleY(.4);
+    opacity: .3;
+    top:20%;
+    pointer-events:none;
+}
+
+.wave {
+  opacity: .4;
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  background: #0af;
+  width: 166%;
+  height: 166%;
+  margin-left: -750px;
+  margin-bottom: -750px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 6000ms infinite linear;
+}
+
+.wave.-three {
+  animation: drift 5500ms infinite linear;
+  background:#FF00B8;
+  opacity: 0.2;
+}
+
+.wave.-two {
+  animation: drift 5000ms infinite linear;
+  opacity: .1;
+  background: yellow;
+}
+
+.box:after {
+  content: '';
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(#FF0000, 0.1), rgba(#FF00B8, 0) 80%, rgba(white, .05));
+  z-index: 11;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave.-two {
+  animation: drift 5000ms infinite linear;
+  opacity: .4;
+  background: purple;
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+.salt {
+  width: 100%;
+  height: 100%;
+  transform-origin:bottom;
+  transform: scaleY(0.4);
+}
+
+.rigolade {
+      width: 100%;
+    height: 100%;
+    -webkit-transform-origin: top;
+    transform-origin: bottom;
+    -webkit-transform: scale(0.7);
+    position: absolute;
+    transform: scaleY(0.95);
+    top: 0;
+}

@@ -15,7 +15,7 @@
 	justify-content: space-between;
 
 	width: 100%;
-	padding: 5px 10px;
+	padding: 0 10px;
 
 	font-family: $karla;
 	color: #fff;
@@ -23,7 +23,7 @@
 
 	background: -webkit-linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
 	background: linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
-	
+
 	&__left{
 		display:flex;
 		flex-direction: row;
@@ -34,6 +34,8 @@
 			align-content: center;
 			justify-content: center;
 			align-items: center;
+			color:white;
+				text-decoration:none;
 			&__img{
 				width: 45px;
 				height: 45px;
@@ -43,6 +45,8 @@
 			&__title{
 				margin-left: 20px;
 				font-weight: 700;
+				color:white;
+				text-decoration:none;
 			}
 		}
 
@@ -72,6 +76,10 @@
 			margin-right: 15px;
 			font-size: 0.9em;
 			text-align: center;
+
+			&:hover{
+
+			}
 		}
 
 		.saveBtn, .searchBtn, .user .user__img{
@@ -85,7 +93,13 @@
 		}
 
 		.searchBtn{
-			background: url(./nav/assets/search.svg) no-repeat center/70%;	
+			background: url(./nav/assets/search.svg) no-repeat center/70%;
+			transition: all 0.2s ease-in-out;
+			&:hover{
+				cursor: pointer;
+				background: url(./nav/assets/searchFill.svg) no-repeat center/70%;
+				transform: scale(1.2);
+			}
 		}
 
 		.user{

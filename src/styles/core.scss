@@ -5,6 +5,10 @@
 $karla : "Karla", sans-serif;
 $cousine : "Cousine", monospace;
 
+// Colors.
+$darkblue: #4D71BA;
+$cyan : #3DAEAA;
+
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
 html {
@@ -22,4 +26,16 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+.flex {
+    display:flex;
+
+    &-4 {
+        flex:4;
+    }
+
+    &-6 {
+        flex:6;
+    }
 }
