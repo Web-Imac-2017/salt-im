@@ -9,6 +9,7 @@
     transform: translateZ(0) translateY(-50%) scaleY(.4);
     opacity: .3;
     top:20%;
+    pointer-events:none;
 }
 
 .wave {

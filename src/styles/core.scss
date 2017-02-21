@@ -27,3 +27,15 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+.flex {
+    display:flex;
+
+    &-4 {
+        flex:4;
+    }
+
+    &-6 {
+        flex:6;
+    }
+}

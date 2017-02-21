@@ -24,7 +24,9 @@ export const PostData = (props) => {
     return(
       <div className="postdata">
         <div className="postdata__top">
-            {nodeData}
+            <div className="content-wrapper">
+                {nodeData}
+            </div>
         </div>
       </div>
     )

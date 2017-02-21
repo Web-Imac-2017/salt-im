@@ -49,6 +49,12 @@
         border-radius:4px;
         border:1px solid $cyan;
         color:$cyan;
+        transition:0.3s;
+
+        &:hover {
+            background:$cyan;
+            color:white;
+        }
     }
 
     &__description {

@@ -1,4 +1,5 @@
 import React from 'react'
+import './PostView.scss'
 import PostData from './PostData/PostData.js'
 
 let dataPost = {
