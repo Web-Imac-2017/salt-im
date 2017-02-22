@@ -13,12 +13,12 @@ export const VideoData = (props) => {
 
     return(
         <div className="videodata flex">
-            <div className="videodata__left flex-4">
+            <div className="videodata__left flex-3">
                 <div className="iframeWrapper">
                     <iframe src={"https://www.youtube.com/embed/"+ytUrl+"?ecver=2"} width="480" height="360" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
-            <div className="videodata__right flex-6">
+            <div className="videodata__right flex-7">
                 <MainData data={props.data}/>
             </div>
         </div>

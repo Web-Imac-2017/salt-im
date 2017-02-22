@@ -13,16 +13,16 @@ let dataPost = {
     "tags":["boisson","mere"]
 }
 
-dataPost = {
-    "id":1,
-    "type":"video",
-    "url":"https://www.youtube.com/watch?v=_dux_Ugs2lk",
-    "title":"Super title putaclic sa mère",
-    "description":"Sa darrone ils boivent du sprite sa mère",
-    "salt":18,
-    "pepper":20,
-    "tags":["boisson","mere"]
-}
+// dataPost = {
+//     "id":1,
+//     "type":"video",
+//     "url":"https://www.youtube.com/watch?v=_dux_Ugs2lk",
+//     "title":"Titre putaclic de sa mère qui boit du sprite",
+//     "description":"Sa darrone ils boivent du sprite sa mère",
+//     "salt":18,
+//     "pepper":20,
+//     "tags":["boisson","mere"]
+// }
 
 export const PostView = () => (
 

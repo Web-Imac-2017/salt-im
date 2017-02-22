@@ -1,3 +1,5 @@
+@import '../../../styles/core.scss';
+
 .postdata {
     &__top {
         background:white;
@@ -14,5 +16,9 @@
             background:white;
             left: 0;
         }
+    }
+
+    .content-wrapper {
+        padding: 50px 0;
     }
 }

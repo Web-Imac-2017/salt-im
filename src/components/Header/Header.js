@@ -8,7 +8,6 @@ import Account from './Nav/Account/Account.js'
 export const Header = () => (
 
   <div className="header">
-
     <div className="header__left">
 
       <Link className="logo" to="/">
