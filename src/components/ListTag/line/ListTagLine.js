@@ -1,8 +1,6 @@
 import React from 'react'
 import './ListTagLine.scss'
 import Tag from './Tag/Tag.js'
-import R from 'ramda'
-
 
 export const ListTagLine = (props) => {
     let tagsNode = props.data.map( (elmt,i) => (
