@@ -1,10 +1,5 @@
 @import '../../styles/core.scss';
 
-/* .route--active {
-  font-weight: bold;
-  text-decoration: underline;
-} */
-
 .header{
 	position: fixed;
 	z-index: 2;
@@ -56,6 +51,12 @@
 				&__item{
 					list-style-type: none;
 					margin-right: 25px;
+					transition: all 0.2s ease-in-out;
+					border-bottom: 1px solid transparent;
+					&:hover{
+						border-bottom: 1px solid #fff;
+						cursor: pointer;	
+					}
 				}
 			}
 		}
@@ -76,9 +77,11 @@
 			margin-right: 15px;
 			font-size: 0.9em;
 			text-align: center;
-
+			transition: all 0.2s ease-in-out;
 			&:hover{
-
+				background: #fff;
+				cursor:pointer;
+				color: #000;
 			}
 		}
 

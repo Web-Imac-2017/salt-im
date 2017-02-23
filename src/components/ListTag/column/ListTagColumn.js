@@ -1,7 +1,7 @@
 import React from 'react'
 import './ListTagColumn.scss'
 import Tag from '../Tag/Tag.js'
-import CreateTag from '../CreateTag/CreateTag.js'
+// import CreateTag from '../CreateTag/CreateTag.js'
 
 
 export const ListTagColumn = (props) => {
@@ -10,12 +10,12 @@ export const ListTagColumn = (props) => {
     ))
 
     return (
-      <div className="tags__column__div">
-        <p>Tags Tendances</p>
-        <CreateTag/>
-        <div className="list__tags__column">
-         {tagsNode}
-       </div>
+      <div className="tagsColumn">
+        
+        <div className="tagsColumn__list">
+            {tagsNode}
+        </div>
+
      </div>
     )
 }
