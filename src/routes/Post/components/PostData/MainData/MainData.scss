@@ -5,6 +5,11 @@
         font-family: $karla;
         color:$darkblue;
     }
+
+    &__author {
+        font-family: $cousine;
+        margin-bottom:5px;
+    }
 }
 
 .data {
@@ -21,4 +26,38 @@
 .data__description {
     font-family: $cousine;
     margin-bottom: 20px;
+}
+
+.data__author {
+    font-family: $cousine;
+    margin-bottom:5px;
+}
+
+.data__link {
+    font-family: $cousine;
+    text-decoration: none;
+    position: relative;
+    color:black;
+    font-weight: bolder;
+    display:inline-block;
+    margin-bottom:15px;
+
+    &:after {
+        content:"";
+        display: block;
+        background:black;
+        height: 1px;
+        width: 100%;
+        position:absolute;
+        left:0;
+        bottom:-2px;
+    }
+}
+
+.postdata .content-wrapper .data{
+    position:relative;
+
+    .preview__tags {
+        padding-bottom:60px;
+    }
 }

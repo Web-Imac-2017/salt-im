@@ -1,8 +1,11 @@
 import React from 'react'
+import MainData from '../MainData/MainData.js'
 
-export const TextData = () => (
+export const TextData = (props) => (
     <div className="textdata">
-        text
+        <div className="textdata__text flex">
+            <MainData data={props.data}/>
+        </div>
     </div>
 )
 

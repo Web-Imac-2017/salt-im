@@ -13,7 +13,9 @@ var dataListPost = [
         "description":"Sa darrone ils boivent du sprite sa mère",
         "salt":19,
         "pepper":20,
-        "tags":["boisson","mere","buzz"]
+        "tags":["boisson","mere","buzz"],
+        "date":"12 jan. 2017",
+        "author":"Thomas Lerouô"
     },
     {
         "id":1,
@@ -23,13 +25,15 @@ var dataListPost = [
         "description":"Sa darrone ils boivent du sprite sa mère",
         "salt":18,
         "pepper":20,
-        "tags":["boisson","mere"]
+        "tags":["boisson","mere"],
+        "date":"12 jan. 2017",
+        "author":"Thomas Lerouô"
     }
 ]
 
 export const HomeView = () => (
-  
-  <div className="home">
+
+  <div className="home center">
     <h1 className="home__title">Salty</h1>
 
     <SearchBar/>

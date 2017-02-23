@@ -1,6 +1,9 @@
 @import '../../../styles/core.scss';
 
+$valTop:50px;
+
 .postdata {
+    position:relative;
     &__top {
         background:white;
         position: relative;
@@ -19,6 +22,25 @@
     }
 
     .content-wrapper {
-        padding: 50px 0;
+        padding: $valTop 0;
+        position:relative;
+    }
+
+    &__signal {
+        position:absolute;
+        top:$valTop;
+        right: 0;
+        font-family: $cousine;
+        font-weight: bolder;
+
+        &:after {
+            content:"";
+            display:block;
+            height:1px;
+            width:100%;
+            bottom:0;
+            left:0;
+            background:black;
+        }
     }
 }
