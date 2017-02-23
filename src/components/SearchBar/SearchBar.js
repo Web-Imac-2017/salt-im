@@ -4,12 +4,12 @@ import './SearchBar.scss'
 
 export const SearchBar = () => (
   <div className="searchbar">
-    
+
     <h2 className="searchbar__text">Chercher un post, un tag, un profil</h2>
-    
+
     <div className="searchbar__input">
       <div className="searchbar__input__iconsearch"></div>
-      <input placeholder="Esipe vs l'imac, parce que c'est cool" type="text" className="searchbar__input__obj" />
+      <input placeholder="Qui se rappelle de la harsh noise" type="text" className="searchbar__input__obj" />
     </div>
   </div>
 )

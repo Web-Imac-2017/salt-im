@@ -1,0 +1,99 @@
+.preview__action {
+    margin-right: 40px;
+
+    &__icon, &__value {
+        display: inline-block;
+        vertical-align: bottom;
+    }
+
+    &__icon {
+        margin-right: 5px;
+    }
+
+    &__reactions {
+        pointer-events:none;
+        opacity: 0;
+        position:absolute;
+        display:flex;
+        top:0;
+        transition: 0.3s;
+        left:50%;
+        z-index: 1;
+        transform:translate(-50%,-80%);
+    }
+
+    &--salty{
+        position: relative;
+        &:hover {
+            .preview__action__reactions {
+                opacity:1;
+                transform:translate(-50%,-100%);
+                pointer-events:initial;
+            }
+        }
+    }
+
+    &__reaction {
+        flex:1;
+        margin-right:15px;
+        transform:scale(1);
+        transition:0.1s;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            transform:scale(1.1);
+        }
+
+    }
+
+    &__reactionwrapper {
+        padding:10px 15px;
+        display:flex;
+        margin-bottom:10px;
+        background:white;
+        border-radius:15px;
+        -webkit-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
+        -moz-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
+        box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
+    }
+
+    &__arrow {
+        border-color: white transparent;
+        border-style: solid;
+        border-width: 20px 20px 0px 20px;
+        height: 0px;
+        width: 0px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-position:center;
+
+    &--comment {
+        background-image: url("./assets/comment.svg");
+    }
+
+    &--share {
+        background-image: url("./assets/share.svg");
+    }
+
+    &--favorite {
+        background-image: url("./assets/favorite.svg");
+    }
+
+    &--salty {
+        width: 36px;
+        height: 20px;
+        background-image: url("./assets/salty.svg");
+    }
+}
