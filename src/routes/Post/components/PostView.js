@@ -4,12 +4,14 @@ import PostData from './PostData/PostData.js'
 
 let dataPost = {
     "id":1,
-    "type":"image",
+    "type":"link",
     "url":"http://vignette3.wikia.nocookie.net/logopedia/images/f/f5/Sprite_logo2.jpg/revision/latest?cb=20140618132523",
     "title":"Super title putaclic sa mère",
     "description":"Sa darrone ils boivent du sprite sa mère",
     "salt":18,
     "pepper":20,
+    "date":"12 jan. 2017",
+    "author":"Thomas Lerouô",
     "tags":["boisson","mere"]
 }
 

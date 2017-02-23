@@ -26,6 +26,7 @@ export const PostData = (props) => {
         <div className="postdata__top">
             <div className="content-wrapper">
                 {nodeData}
+                <div className="postdata__signal">signaler</div>
             </div>
         </div>
       </div>
