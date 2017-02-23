@@ -8,6 +8,7 @@ $cousine : "Cousine", monospace;
 // Colors.
 $darkblue: #4D71BA;
 $cyan : #3DAEAA;
+$backcolor:#F7FAFF;
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -20,6 +21,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background:$backcolor;
 }
 
 *,
