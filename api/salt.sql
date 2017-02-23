@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 13 Février 2017 à 15:17
--- Version du serveur :  10.1.21-MariaDB
--- Version de PHP :  5.6.30
+-- Généré le :  Jeu 23 Février 2017 à 16:46
+-- Version du serveur :  5.7.9
+-- Version de PHP :  5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,14 +23,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `badge`
+--
+
+DROP TABLE IF EXISTS `badge`;
+CREATE TABLE IF NOT EXISTS `badge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cond` int(11) NOT NULL,
+  `name` tinytext NOT NULL,
+  `icon` tinytext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `comment`
 --
 
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL,
-  `text` text NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `publication_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `publication_id` (`publication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -38,11 +55,15 @@ CREATE TABLE `comment` (
 -- Structure de la table `media`
 --
 
-CREATE TABLE `media` (
-  `id` int(11) NOT NULL,
-  `link` tinytext NOT NULL,
-  `type` tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE IF NOT EXISTS `media` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `link` text NOT NULL,
+  `type` tinytext NOT NULL,
+  `publication_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `publication_id` (`publication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,24 +71,33 @@ CREATE TABLE `media` (
 -- Structure de la table `publication`
 --
 
-CREATE TABLE `publication` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `publication`;
+CREATE TABLE IF NOT EXISTS `publication` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date` date NOT NULL,
+  `stat_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stat_id` (`stat_id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `rank`
+-- Structure de la table `rel_tag_publication`
 --
 
-CREATE TABLE `rank` (
-  `id` int(11) NOT NULL,
-  `cond` int(11) NOT NULL,
-  `name` tinytext NOT NULL,
-  `icon` tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `rel_tag_publication`;
+CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `publication_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `publication_id` (`publication_id`),
+  UNIQUE KEY `tag_id` (`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -75,10 +105,12 @@ CREATE TABLE `rank` (
 -- Structure de la table `stat`
 --
 
-CREATE TABLE `stat` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `stat`;
+CREATE TABLE IF NOT EXISTS `stat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
-  `value` int(11) NOT NULL
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -87,12 +119,16 @@ CREATE TABLE `stat` (
 -- Structure de la table `subject`
 --
 
-CREATE TABLE `subject` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `subject`;
+CREATE TABLE IF NOT EXISTS `subject` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` tinytext NOT NULL,
   `flair` tinytext NOT NULL,
-  `type` tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `type` tinytext NOT NULL,
+  `publication_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `publication_id` (`publication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -100,10 +136,12 @@ CREATE TABLE `subject` (
 -- Structure de la table `tag`
 --
 
-CREATE TABLE `tag` (
-  `id` int(11) NOT NULL,
-  `name` tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` tinytext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,113 +149,66 @@ CREATE TABLE `tag` (
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `mail` tinytext NOT NULL,
   `username` tinytext NOT NULL,
   `password` text NOT NULL,
-  `avatar` tinytext NOT NULL,
+  `avatar` text NOT NULL,
   `birthDate` date NOT NULL,
   `rank` int(11) NOT NULL,
-  `signupDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `signupDate` date NOT NULL,
+  `badge_id` int(11) NOT NULL,
+  `stat_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `badge_id` (`badge_id`),
+  UNIQUE KEY `stat_id` (`stat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables exportées
+-- Contraintes pour les tables exportées
 --
 
 --
--- Index pour la table `comment`
+-- Contraintes pour la table `comment`
 --
 ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
--- Index pour la table `media`
+-- Contraintes pour la table `media`
 --
 ALTER TABLE `media`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `media_ibfk_1` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
--- Index pour la table `publication`
+-- Contraintes pour la table `publication`
 --
 ALTER TABLE `publication`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `publication_ibfk_1` FOREIGN KEY (`stat_id`) REFERENCES `stat` (`id`),
+  ADD CONSTRAINT `publication_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Index pour la table `rank`
+-- Contraintes pour la table `rel_tag_publication`
 --
-ALTER TABLE `rank`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `rel_tag_publication`
+  ADD CONSTRAINT `rel_tag_publication_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`),
+  ADD CONSTRAINT `rel_tag_publication_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
--- Index pour la table `stat`
---
-ALTER TABLE `stat`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `subject`
+-- Contraintes pour la table `subject`
 --
 ALTER TABLE `subject`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
--- Index pour la table `tag`
---
-ALTER TABLE `tag`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `user`
+-- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`),
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`stat_id`) REFERENCES `stat` (`id`);
 
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `comment`
---
-ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `media`
---
-ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `publication`
---
-ALTER TABLE `publication`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `rank`
---
-ALTER TABLE `rank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `stat`
---
-ALTER TABLE `stat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `subject`
---
-ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `tag`
---
-ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

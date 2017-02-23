@@ -10,10 +10,12 @@ class SubjectsManager {
   public function add(Subject $subject)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO subject(text, date, title, flair, type) VALUES("'.$subject->get_text().'", "'.$subject->get_date().'", "'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'")');
+    $q = $this->_db->prepare('INSERT INTO subject(title, flair, type) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'")');
+    $q_m = $this->_db->prepare('INSERT INTO publication(text, date) VALUES("'.$subject->get_text().'", "'.$subject->get_date().'")');
     
     // Exécution de la requête.
     $q->execute();
+    $q_m->execute();
   }
 
   public function delete(Subject $subject)
