@@ -2,6 +2,10 @@
 
 .tagview{
     
+    max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+
     &__titleTrends, &__titleAll{
         font-family: $cousine;
         font-size: 1.5em;
