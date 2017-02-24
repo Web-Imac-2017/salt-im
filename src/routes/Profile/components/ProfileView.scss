@@ -1,1 +1,83 @@
 @import '../styles/core.scss';
+
+.profile{
+
+	padding: 35px 0;
+
+	&__header{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-content: center;
+		align-items: center;
+		font-family: $cousine;
+		
+		&__pic{
+			width: 160px;
+			height: 160px;
+			background-size: cover;
+			background-position: center;
+		}
+		&__infos{
+			
+			flex-basis: 60%;
+
+			&__pseudo{
+				font-size: 1.1em;
+				font-weight: 700;
+			}
+
+			&__email{
+				font-size: 1.1em;
+				font-weight: 400;
+			}
+
+			&__rank{
+				font-size: 1.5em;
+				font-weight: 700;
+			}
+		}
+		
+
+		&__updateBtn{
+			align-self: flex-start;
+			padding: 15px 30px;
+			font-family: $cousine;
+			font-size: 0.8em;
+			border: none;
+			background: #fff;
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+		}
+	}
+
+	&__nav{
+
+		font-family: $cousine;
+		font-size: 1.1em;
+		font-weight: 700;
+		margin-top: 30px;
+		
+		&__list{
+			display:inline-flex;
+			padding: 0;
+
+			&__item{
+				list-style-type:none;
+				margin-right: 20px;
+				border-bottom: 2px solid transparent;
+				transition: all 0.2s ease-in-out;
+				font-weight:400;
+				&:hover{
+					cursor:pointer;
+					border-bottom: 2px solid #000;
+				}
+			}
+
+			&--active{
+				font-weight: 700;
+				border-bottom: 2px solid #000;
+			}
+		}
+	}
+
+}

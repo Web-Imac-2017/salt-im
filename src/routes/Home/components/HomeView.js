@@ -71,7 +71,9 @@ export const HomeView = () => (
 
     <ListTagColumn data={dataTags}/>    
 
-    <ListPost title="Posts tendances" data={dataListPost}/>
+    <p className="tagview__titleTrends">Posts les plus salés</p>
+
+    <ListPost data={dataListPost}/>
   </div>
 )
 
