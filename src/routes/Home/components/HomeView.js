@@ -1,12 +1,11 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
 import './HomeView.scss'
 import '../../Tags/components/TagView.scss'
 import ListPost from '../../../components/ListPost/ListPost.js'
 import SearchBar from '../../../components/SearchBar/SearchBar.js'
 import ListTagColumn from '../../../components/ListTag/column/ListTagColumn.js'
 
-var dataListPost = [
+const dataListPost = [
     {
         "id":0,
         "type":"link",

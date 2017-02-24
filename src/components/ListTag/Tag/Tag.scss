@@ -36,10 +36,14 @@
 	}
 
 	&--chevron{
-		font-weight: 700 !important;
+		font-weight: 400 !important;
 		&:before{
 			content: ">";
 			margin-right: 10px;
+		}
+		&:hover{
+			cursor: pointer;
+			font-weight: 700 !important;
 		}
 	}
 }
