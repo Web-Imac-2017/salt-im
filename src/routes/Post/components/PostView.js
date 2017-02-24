@@ -1,6 +1,8 @@
 import React from 'react'
 import './PostView.scss'
+import '../../Tags/components/TagView.scss'
 import PostData from './PostData/PostData.js'
+import ListComment from '../../../components/ListComment/ListComment.js'
 
 const dataPost = {
     "id":1,
@@ -14,6 +16,39 @@ const dataPost = {
     "author":"Thomas Lerouô",
     "tags":["boisson","mere"]
 }
+
+const dataComments = [
+  {
+    "user":"Jean Yves",
+    "userPic":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
+    "date":"03 fév. 2017, 9h54",
+    "message":"Ceci est une commentaire salé et non constructif",
+    "salt":"27"
+  },
+  {
+    "user":"Christopher Lassus",
+    "userPic":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
+    "date":"06 fév. 2017, 12h33",
+    "message":" Being angry, agitated, upset. William Beckett(After his Sweater Shrinks): After all of that stressing about what we were going to wear and going shopping and scrambling. I'm a little salty.",
+    "salt":"27",
+    "answers": [
+        {
+            "user":"Jean Yves",
+            "userPic":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
+            "date":"03 fév. 2017, 9h54",
+            "message":"Ceci est une commentaire salé et non constructif",
+            "salt":"27"
+        },
+        {
+            "user":"Jean Yves",
+            "userPic":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
+            "date":"03 fév. 2017, 9h54",
+            "message":"Ceci est une commentaire salé et non constructif",
+            "salt":"27"
+        }
+    ]
+  }
+]
 
 // dataPost = {
 //     "id":1,
@@ -30,6 +65,12 @@ export const PostView = () => (
 
   <div className="post">
     <PostData data={dataPost}/>
+
+    <div className="post__commentBlock center">
+        <p className="tagview__titleAll">Commentaires</p>
+        <ListComment data={dataComments}/>
+    </div>
+    
   </div>
 )
 

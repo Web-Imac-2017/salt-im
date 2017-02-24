@@ -2,6 +2,7 @@ import React from 'react'
 import './ListComment.scss'
 import Comment from './Comment/Comment.js'
 
+
 export const ListComment = (props) => {
 
     let commentsNode = props.data.map( (elmt,i) => (
