@@ -2,7 +2,7 @@ import React from 'react'
 import './PostView.scss'
 import PostData from './PostData/PostData.js'
 
-let dataPost = {
+const dataPost = {
     "id":1,
     "type":"link",
     "url":"http://vignette3.wikia.nocookie.net/logopedia/images/f/f5/Sprite_logo2.jpg/revision/latest?cb=20140618132523",
