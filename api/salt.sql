@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 23 Février 2017 à 16:46
+-- Généré le :  Dim 26 Février 2017 à 15:37
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -44,8 +44,10 @@ CREATE TABLE IF NOT EXISTS `badge` (
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `related_publication_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `related_publication_id` (`related_publication_id`),
   UNIQUE KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -174,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Contraintes pour la table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`related_publication_id`) REFERENCES `publication` (`id`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
 -- Contraintes pour la table `media`
