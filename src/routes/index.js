@@ -4,6 +4,7 @@ import Home from './Home'
 import Post from './Post'
 import Tags from './Tags'
 import PostCreator from './PostCreator'
+import TagCreator from './TagCreator'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -23,6 +24,11 @@ let CreatePostRoute = {
   indexRoute: PostCreator
 }
 
+let CreateTagRoute = {
+  path: 'create/tag',
+  indexRoute: TagCreator
+}
+
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
@@ -30,7 +36,8 @@ export const createRoutes = (store) => ({
   childRoutes : [
     postRoute,
     tagsRoute,
-    CreatePostRoute
+    CreatePostRoute,
+    CreateTagRoute
   ]
 })
 

@@ -65,4 +65,23 @@
 			background: transparent;
 		}
 	}
+
+	@include mobile {
+		margin-bottom: 20px;
+
+		&__input {
+			&__obj {
+				font-size: 1.5em;
+			}
+
+			&__iconsearch {
+				width: 30px;
+				height:30px;
+			}
+
+			&:after {
+				margin-top:26px;
+			}
+		}
+	}
 }

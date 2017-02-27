@@ -18,6 +18,10 @@ export const PostPreview = (props) => {
                     <Tags data={props.data.tags}/>
                     <div className="preview__description">{props.data.description}</div>
                     <PreviewActions/>
+                    <div className="preview__infos">
+                        <div className="preview__author">{props.data.author}</div>
+                        <div className="preview__date">le {props.data.date}</div>
+                    </div>
                 </div>
                 <Wave data={props.data}/>
             </div>
