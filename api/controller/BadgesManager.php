@@ -27,7 +27,7 @@ class BadgesManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet badge.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, cond, name, icon FROM badge WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT * FROM badge WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Badge($donnees);
