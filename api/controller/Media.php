@@ -22,7 +22,7 @@ class Media {
     }
     
     public function get_link() {
-        return $this->text;
+        return $this->link;
     }
     
     public function set_link($link) {

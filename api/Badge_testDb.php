@@ -50,7 +50,6 @@ $manager = new UsersManager($db);
 
 if (isset($_GET['username']) && isset($_GET['mail']) && isset($_GET['password']) && isset($_GET['birthDate']) && isset($_GET['avatar'])) {
 
-<<<<<<< HEAD:api/test2.php
 $tab_new_user = array(
     "username" => $_GET['username'],
     "mail" => $_GET['mail'],
@@ -63,14 +62,6 @@ $tab_new_user = array(
 
 $new_user = new User($tab_new_user);
 $manager->add($new_user);
-=======
-$tab_new_tag = array(
-    "name" => $_GET['name']
-    );
-
-$new_user = new User($tab_new_tag);
-$manager->add($new_tag);
->>>>>>> 6bb1ca71fc898ba02b84eb236eb440397792043f:api/Tag_testDb.php
     
 }
 
