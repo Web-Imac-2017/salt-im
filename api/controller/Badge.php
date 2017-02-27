@@ -7,6 +7,7 @@ class Badge {
     private $name;
     private $icon;
     
+    
     // Construction de la classe
     public function __construct(array $donnees) {
         return $this->hydrate($donnees);

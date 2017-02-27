@@ -3,6 +3,7 @@
 class Comment extends Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
+    private $related_publication_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -17,6 +18,14 @@ class Comment extends Publication {
     
     public function set_id($id) {
         $this->id = $id;      
+    }
+
+    public function get_related_publication_id() {
+        return $this->related_publication_id;
+    }
+    
+    public function set_related_publication_id($related_publication_id) {
+        $this->related_publication_id = $related_publication_id;      
     }
     // Fin du multiplier--------------------------------
 

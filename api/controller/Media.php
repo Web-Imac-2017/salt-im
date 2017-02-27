@@ -5,6 +5,7 @@ class Media {
     private $id;
     private $link;
     private $type;
+    private $publication_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -35,6 +36,16 @@ class Media {
     public function set_type($type) {
         $this->type = $type;      
     }
+
+
+    public function get_publication_id() {
+        return $this->publication_id;
+    }
+    
+    public function set_publication_id($publication_id) {
+        $this->publication_id = $publication_id;
+    }
+
 
     // Hydrate
     public function hydrate(array $donnees) {

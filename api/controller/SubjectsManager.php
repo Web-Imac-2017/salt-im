@@ -8,19 +8,29 @@ class SubjectsManager {
   }
 
   public function add(Subject $subject)
-  {
-    // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO subject(title, flair, type) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'")');
-    $q_m = $this->_db->prepare('INSERT INTO publication(text, date) VALUES("'.$subject->get_text().'", "'.$subject->get_date().'")');
+  {      
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$subject->get_text().'", "'.$subject->get_date().'", "'.$subject->get_user_id().'")');
+    $publication_id = mysql_insert_id();
+      
+    $this->_db->exec('INSERT INTO subject(title, flair, type, publication_id) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'", "'.$publication_id.'")');
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("sel", "0", "'.$publication_id.'")');
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("poivre", "0", "'.$publication_id.'")'); 
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("humour", "0", "'.$publication_id.'")'); 
     
-    // Exécution de la requête.
-    $q->execute();
-    $q_m->execute();
   }
 
   public function delete(Subject $subject)
   {
     // Exécute une requête de type DELETE.
+      $publication_id = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$subject->get_id().'"');
+      
+      $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id.'"');
+      
+      $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id.'"');
+      
       $this->_db->exec('DELETE FROM subject WHERE id = "'.$subject->get_id().'"');
   }
 
@@ -29,7 +39,7 @@ class SubjectsManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Subject.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, text, date, title, flair, type FROM subject WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT * FROM subject WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Subject($donnees);
@@ -40,7 +50,7 @@ class SubjectsManager {
     // Retourne la liste de tous les subjects.
     $subjects = [];
 
-    $q = $this->_db->query('SELECT id, text, date, title, flair, type FROM subject ORDER BY id');
+    $q = $this->_db->query('SELECT * FROM subject ORDER BY id');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
@@ -49,14 +59,26 @@ class SubjectsManager {
 
     return $subjects;
   }
+    
+  public function getStat(Subject $subject) {
+    $stats = [];
+    
+    $q = $this->_db->query('SELECT * FROM stat WHERE related_element_id = "'.$subject->get_id().'"');
+      
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $stats[] = new Stat($donnees);
+    }
+
+    return $stats;
+}
 
   public function update(Subject $subject)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE subject SET text = "'.$subject->get_text().'", date = "'.$subject->get_date().'", title = "'.$subject->get_title().'", flair = "'.$subject->get_flair().'", type = "'.$subject->get_type().'" WHERE id = "'.$subject->get_id().'"');
-    
-    // Exécution de la requête.
-    $q->execute();
+    $this->_db->exec('UPDATE subject SET title = "'.$subject->get_title().'", flair = "'.$subject->get_flair().'", type = "'.$subject->get_type().'" WHERE id = "'.$subject->get_id().'"');
+      
+    $this->_db->exec('UPDATE publication SET text = "'.$subject->get_text().'", date = "'.$subject->get_date().'"');
   }
 
   public function setDb(PDO $db)
