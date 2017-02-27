@@ -5,6 +5,7 @@ class Media {
     private $id;
     private $link;
     private $type;
+    private $publication_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -36,8 +37,8 @@ class Media {
         $this->type = $type;      
     }
 
-    public function get_postId() {
-        return $this->postId;
+    public function get_publication_id() {
+        return $this->publication_id;
     }
     
     // Hydrate
