@@ -59,7 +59,16 @@ class BadgesManager {
   
     // Renvoie la liste d'utilisateurs ayant le badge en paramètre
 public function getUser(Badge $badge) {
-    
+    $users = [];
+
+    $q = $this->_db->query('SELECT * FROM user WHERE user.badge_id = badge.id');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $users[] = new User($donnees);
+    }
+
+    return $users;
     
 }
 
