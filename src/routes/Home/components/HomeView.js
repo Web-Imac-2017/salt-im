@@ -4,6 +4,7 @@ import '../../Tags/components/TagView.scss'
 import ListPost from '../../../components/ListPost/ListPost.js'
 import SearchBar from '../../../components/SearchBar/SearchBar.js'
 import ListTagColumn from '../../../components/ListTag/column/ListTagColumn.js'
+import Filter from '../../../components/Filter/Filter.js'
 
 const dataListPost = [
     {
@@ -69,9 +70,10 @@ export const HomeView = () => (
 
     <p className="tagview__titleTrends">Tags tendances</p>
 
-    <ListTagColumn data={dataTags}/>    
+    <ListTagColumn data={dataTags}/>
 
     <p className="tagview__titleTrends">Posts les plus salés</p>
+    <Filter/>
 
     <ListPost data={dataListPost}/>
   </div>
