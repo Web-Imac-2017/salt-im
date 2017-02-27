@@ -58,6 +58,19 @@ class CommentsManager {
 
     return $comments;
   }
+    
+  public function getStat(Comment $comment) {
+    $stats = [];
+    
+    $q = $this->_db->query('SELECT * FROM stat WHERE related_element_id = "'.$comment->get_id().'"');
+      
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $stats[] = new Stat($donnees);
+    }
+
+    return $stats;
+}
 
   public function update(Comment $comment)
   {

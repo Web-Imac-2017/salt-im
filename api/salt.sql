@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 26 Février 2017 à 15:37
+-- Généré le :  Lun 27 Février 2017 à 19:21
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -54,6 +54,20 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `help`
+--
+
+DROP TABLE IF EXISTS `help`;
+CREATE TABLE IF NOT EXISTS `help` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `publication_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `publication_id` (`publication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `media`
 --
 
@@ -78,10 +92,8 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text NOT NULL,
   `date` date NOT NULL,
-  `stat_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `stat_id` (`stat_id`),
   UNIQUE KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -180,6 +192,12 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
+-- Contraintes pour la table `help`
+--
+ALTER TABLE `help`
+  ADD CONSTRAINT `help_ibfk_1` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
+
+--
 -- Contraintes pour la table `media`
 --
 ALTER TABLE `media`
@@ -189,8 +207,7 @@ ALTER TABLE `media`
 -- Contraintes pour la table `publication`
 --
 ALTER TABLE `publication`
-  ADD CONSTRAINT `publication_ibfk_1` FOREIGN KEY (`stat_id`) REFERENCES `stat` (`id`),
-  ADD CONSTRAINT `publication_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `publication_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Contraintes pour la table `rel_tag_publication`
