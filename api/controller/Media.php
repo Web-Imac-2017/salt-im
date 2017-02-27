@@ -37,10 +37,16 @@ class Media {
         $this->type = $type;      
     }
 
+
     public function get_publication_id() {
         return $this->publication_id;
     }
     
+    public function set_publication_id($publication_id) {
+        $this->publication_id = $publication_id;
+    }
+
+
     // Hydrate
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {

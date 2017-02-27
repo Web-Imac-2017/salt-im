@@ -1,4 +1,5 @@
 <?php
+
 class CommentsManager {
   private $_db; // Instance de PDO.
 
@@ -9,17 +10,27 @@ class CommentsManager {
 
   public function add(Comment $comment)
   {
-    // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO comment(text, date) VALUES("'.$comment->get_text()'", "'.$comment->get_date().'")
-    ');
-    // Exécution de la requête.
-    $q->execute();
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.$comment->get_date().'", "'.$comment->get_user_id().'")');
+    $publication_id = mysql_insert_id();
+
+    $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$comment->get_related_publication_id().'", "'.$publication_id.'")');
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("sel", "0", "'.$publication_id.'")');
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("poivre", "0", "'.$publication_id.'")'); 
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("humour", "0", "'.$publication_id.'")');
   }
 
   public function delete(Comment $comment)
   {
-    // Exécute une requête de type DELETE.
-      $this->_db->exec('DELETE FROM comment WHERE id = "'.$comment->get_id().'"');
+    $publication_id = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.comment->get_id().'")');
+    
+    $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id.'"');
+      
+    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id.'"');
+      
+    $this->_db->exec('DELETE FROM comment WHERE id = "'.$comment->get_id().'"');
   }
 
   public function get($id)
