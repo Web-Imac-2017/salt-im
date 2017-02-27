@@ -5,6 +5,7 @@ class Stat {
     private $id;
     private $name;
     private $value;
+    private $related_element_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -34,6 +35,14 @@ class Stat {
     
     public function set_value($value) {
         $this->value = $value;      
+    }
+    
+    public function get_related_element_id() {
+        return $this->related_element_id;
+    }
+    
+    public function set_related_element_id($related_element_id) {
+        $this->related_element_id = $related_element_id;      
     }
 
     // Hydrate
