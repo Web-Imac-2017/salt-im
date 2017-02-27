@@ -5,6 +5,7 @@ abstract class Publication {
     private $id;
     private $text;
     private $date;
+    private $user_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -34,6 +35,16 @@ abstract class Publication {
     
     public function set_date($date) {
         $this->date = $date;      
+    }
+
+    // Getter user id
+    public function get_user_id() {
+        return $this->user_id;
+    }
+    
+    // Setter user id
+    public function set_user_id($user_id) {
+        $this->user_id = $user_id;      
     }
 
     // Hydrate
