@@ -7,7 +7,7 @@
 	align-content: center;
 	jusify-content: center;
 	margin-bottom: 40px;
-	flex-basis: 20%;	
+	flex-basis: 20%;
 
 	&__img{
 		width: 180px;
@@ -45,5 +45,21 @@
 			cursor: pointer;
 			font-weight: 700 !important;
 		}
+	}
+
+	@include mobile {
+		display: table;
+		width: 30%;
+		margin-right: 20px;
+		margin-bottom:0px;
+
+		&__title {
+			font-size: 1em;
+		}
+
+	    &__img {
+	    	width: 30vw;
+	    	height: 45vw;
+	    }
 	}
 }

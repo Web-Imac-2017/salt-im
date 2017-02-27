@@ -67,7 +67,12 @@
 	}
 
 	@include mobile {
-		margin-bottom: 20px;
+		margin-bottom: 50px;
+		margin-top:30px;
+
+		&__text {
+			margin-left:0;
+		}
 
 		&__input {
 			&__obj {

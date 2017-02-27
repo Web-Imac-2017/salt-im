@@ -29,6 +29,7 @@ let CreatePostRoute = {
 let CreateTagRoute = {
   path: 'create/tag',
   indexRoute: TagCreator
+}
 const tagRoute = {
   path: 'tag/:tagId',
   indexRoute: Tag
@@ -47,7 +48,7 @@ export const createRoutes = (store) => ({
     postRoute,
     tagsRoute,
     CreatePostRoute,
-    CreateTagRoute
+    CreateTagRoute,
     tagRoute,
     profileRoute
   ]

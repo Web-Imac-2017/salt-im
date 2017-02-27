@@ -1,3 +1,5 @@
+@import '../styles/core.scss';
+
 .tagsColumn{
 	&__list{
 		display: flex;
@@ -6,5 +8,26 @@
 		align-content: center;
 		align-items: center;
 		justify-content: space-between;
+
+        @include mobile {
+            flex-direction: initial;
+            flex-wrap: initial;
+            align-content: initial;
+            align-items: initial;
+            justify-content: initial;
+            overflow-x: scroll;
+            width: calc(100% + 40px);
+            margin-left: -20px;
+
+            .tag {
+                &:first-child {
+                    margin-left: 20px;
+                }
+
+                &:last-child {
+                    margin-right: 20px;
+                }
+            }
+        }
 	}
 }
