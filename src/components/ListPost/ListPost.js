@@ -1,7 +1,6 @@
 import React from 'react'
 import './ListPost.scss'
 import PostPreview from './PostPreview/PostPreview.js'
-import R from 'ramda'
 
 export const ListPost = (props) => {
 
@@ -11,7 +10,6 @@ export const ListPost = (props) => {
 
     return (
         <div className="listpost">
-          <div className="listpost__title">{props.title}</div>
           <div className="listpost__postwrapper">
             {postsNode}
           </div>

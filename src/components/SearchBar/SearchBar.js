@@ -9,7 +9,7 @@ export const SearchBar = () => (
 
     <div className="searchbar__input">
       <div className="searchbar__input__iconsearch"></div>
-      <input placeholder="Qui se rappelle de la harsh noise" type="text" className="searchbar__input__obj" />
+      <input placeholder="Qui se rappelle de la harsh noise ?" type="text" className="searchbar__input__obj" />
     </div>
   </div>
 )

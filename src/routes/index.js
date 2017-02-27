@@ -5,16 +5,18 @@ import Post from './Post'
 import Tags from './Tags'
 import PostCreator from './PostCreator'
 import TagCreator from './TagCreator'
+import Tag from './Tag'
+import Profile from './Profile'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-let postRoute = {
+const postRoute = {
   path: 'post/:postId',
   indexRoute: Post
 }
 
-let tagsRoute = {
+const tagsRoute = {
   path: 'tags',
   indexRoute: Tags
 }
@@ -27,6 +29,14 @@ let CreatePostRoute = {
 let CreateTagRoute = {
   path: 'create/tag',
   indexRoute: TagCreator
+const tagRoute = {
+  path: 'tag/:tagId',
+  indexRoute: Tag
+}
+
+const profileRoute = {
+  path: 'profile',
+  indexRoute: Profile
 }
 
 export const createRoutes = (store) => ({
@@ -38,6 +48,8 @@ export const createRoutes = (store) => ({
     tagsRoute,
     CreatePostRoute,
     CreateTagRoute
+    tagRoute,
+    profileRoute
   ]
 })
 

@@ -6,6 +6,17 @@ export const Tag = (props) => {
     const backgroundUrlStyle = {
         backgroundImage: "url("+props.data.picUrl+")"
     }
+    if(props.size){
+        return(
+            <div className="tag">
+
+                <div className="tag__title tag--chevron">
+                    {props.data.title}
+                </div>
+
+            </div>
+        )
+    }
     return(
         <div className="tag">
 

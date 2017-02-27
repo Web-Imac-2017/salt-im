@@ -2,6 +2,12 @@
 
 $valTop:50px;
 
+.center{
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .postdata {
     position:relative;
     &__top {

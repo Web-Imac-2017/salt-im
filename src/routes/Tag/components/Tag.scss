@@ -1,0 +1,19 @@
+@import '../styles/core.scss';
+
+.tagSingle{
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+
+	&__title{
+		font-family: $cousine;
+		font-size: 3.5em;
+		margin: 0;
+	}
+
+	&__description{
+		font-family: $karla;
+		font-size: 1.1em;
+		margin: 0;
+	}
+}

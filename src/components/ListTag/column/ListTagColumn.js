@@ -5,7 +5,7 @@ import Tag from '../Tag/Tag.js'
 
 
 export const ListTagColumn = (props) => {
-    let tagsNode = props.data.map( (elmt,i) => (
+    const tagsNode = props.data.map( (elmt,i) => (
         <Tag key={i} data={elmt}/>
     ))
 

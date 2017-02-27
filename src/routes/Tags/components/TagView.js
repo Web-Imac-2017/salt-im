@@ -3,7 +3,7 @@ import './TagView.scss'
 import ListTagColumn from '../../../components/ListTag/column/ListTagColumn.js'
 import ListTagLine from '../../../components/ListTag/line/ListTagLine.js'
 
-let dataTags = [
+const dataTags = [
   {
     "title":"Nasa",
     "picUrl":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
@@ -56,13 +56,15 @@ let dataTags = [
   }
 ]
 
+const size = "small";
+
 export const TagView = () => (
 
   <div className="tagview">
-    <p className="tagview__titleTrends">Tags Tendances</p>
+    <p className="tagview__titleTrends">Tags tendances</p>
     <ListTagColumn data={dataTags}/>
     <p className="tagview__titleAll">Retrouvez tous les tags</p>
-    <ListTagLine data={dataTags}/>
+    <ListTagLine data={dataTags} size={size}/>
   </div>
 )
 
