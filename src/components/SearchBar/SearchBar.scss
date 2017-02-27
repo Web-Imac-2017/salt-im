@@ -38,22 +38,22 @@
 		input::-moz-placeholder {
 			font-family: $cousine;
 			color: #000 !important;
-			opacity: 1;
+			opacity: 0.4;
 		}
 		::-webkit-input-placeholder{
 			font-family: $cousine;
 			color: #000 !important;
-			opacity: 1;
+			opacity: 0.4;
 		}
 		:-ms-input-placeholder{
 			font-family: $cousine;
 			color: #000 !important;
-			opacity: 1;
+			opacity: 0.4;
 		}
 		::placeholder{
 			font-family: $cousine;
 			color: #000 !important;
-			opacity: 1;
+			opacity: 0.4;
 		}
 
 		&__obj{

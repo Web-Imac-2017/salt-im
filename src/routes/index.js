@@ -3,6 +3,7 @@ import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import Post from './Post'
 import Tags from './Tags'
+import Tag from './Tag'
 import Profile from './Profile'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -18,6 +19,11 @@ const tagsRoute = {
   indexRoute: Tags
 }
 
+const tagRoute = {
+  path: 'tag/:tagId',
+  indexRoute: Tag
+}
+
 const profileRoute = {
   path: 'profile',
   indexRoute: Profile
@@ -30,6 +36,7 @@ export const createRoutes = (store) => ({
   childRoutes : [
     postRoute,
     tagsRoute,
+    tagRoute,
     profileRoute
   ]
 })
