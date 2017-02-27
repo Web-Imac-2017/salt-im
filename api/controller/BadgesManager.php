@@ -56,6 +56,12 @@ class BadgesManager {
     // Exécution de la requête.
     $q->execute();
   }
+  
+    // Renvoie la liste d'utilisateurs ayant le badge en paramètre
+public function getUser(Badge $badge) {
+    
+    
+}
 
   public function setDb(PDO $db)
   {
