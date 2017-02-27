@@ -36,6 +36,10 @@ class Media {
         $this->type = $type;      
     }
 
+    public function get_postId() {
+        return $this->postId;
+    }
+    
     // Hydrate
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
