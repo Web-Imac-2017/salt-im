@@ -7,6 +7,8 @@ import PostCreator from './PostCreator'
 import TagCreator from './TagCreator'
 import Tag from './Tag'
 import Profile from './Profile'
+import Authentification from './Authentification'
+import Signup from './Signup'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -40,6 +42,16 @@ const profileRoute = {
   indexRoute: Profile
 }
 
+const authentificationRoute = {
+  path: 'auth',
+  indexRoute: Authentification
+}
+
+const signupRoute = {
+  path: 'signup',
+  indexRoute: Signup
+}
+
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
@@ -50,7 +62,9 @@ export const createRoutes = (store) => ({
     CreatePostRoute,
     CreateTagRoute,
     tagRoute,
-    profileRoute
+    profileRoute,
+    authentificationRoute,
+    signupRoute
   ]
 })
 
