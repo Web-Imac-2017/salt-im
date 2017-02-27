@@ -71,6 +71,20 @@ class CommentsManager {
 
     return $stats;
 }
+    
+  public function getTags(Comment $comment) {
+    $stats = [];
+    
+    $q = $this->_db->query(
+        'SELECT * FROM stat WHERE related_element_id = "'.$comment->get_id().'"');
+      
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $stats[] = new Stat($donnees);
+    }
+
+    return $stats;
+}
 
   public function update(Comment $comment)
   {
@@ -79,6 +93,7 @@ class CommentsManager {
     
     // Exécution de la requête.
     $q->execute();
+      
   }
 
   public function setDb(PDO $db)

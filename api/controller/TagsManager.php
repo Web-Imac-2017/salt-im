@@ -47,6 +47,32 @@ class TagsManager {
 
     return $tags;
   }
+    
+  public function getSubjects(Tag $tag) {
+    $subjects = [];
+      
+    $q = $this->_db->query('SELECT * FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
+    
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $subjects[] = new Subject($donnees);
+    }
+
+    return $subjects;
+  }
+    
+  public function getComments(Tag $tag) {
+    $comments = [];
+      
+    $q = $this->_db->query('SELECT * FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
+    
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $comments[] = new Comment($donnees);
+    }
+
+    return $comments;
+  }
 
   public function update(Tag $tag)
   {
