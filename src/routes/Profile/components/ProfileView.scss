@@ -11,7 +11,7 @@
 		align-content: center;
 		align-items: center;
 		font-family: $cousine;
-		
+
 		&__pic{
 			width: 160px;
 			height: 160px;
@@ -19,7 +19,7 @@
 			background-position: center;
 		}
 		&__infos{
-			
+
 			flex-basis: 60%;
 
 			&__pseudo{
@@ -37,7 +37,7 @@
 				font-weight: 700;
 			}
 		}
-		
+
 
 		&__updateBtn{
 			align-self: flex-start;
@@ -56,7 +56,7 @@
 		font-size: 1.1em;
 		font-weight: 700;
 		margin-top: 30px;
-		
+
 		&__list{
 			display:inline-flex;
 			padding: 0;
@@ -76,6 +76,74 @@
 			&--active{
 				font-weight: 700;
 				border-bottom: 2px solid #000;
+			}
+		}
+	}
+
+	@include mobile {
+		padding: 35px 15px;
+
+		&__header {
+			display: block;
+			vertical-align: top;
+
+			&__infos {
+			    display: inline-block;
+    			margin-left: 10px;
+    			vertical-align:top;
+
+    			&__pseudo {
+    				margin-top:0;
+    				font-size: 1em;
+    			}
+
+    			&__email {
+    				margin: 0;
+    				font-size: 0.9em;
+    			}
+
+    			&__rank {
+    				margin: 10px;
+    				font-size: 1em;
+    			}
+			}
+
+			&__updateBtn {
+				margin-top:20px;
+			}
+
+			&__pic {
+			    display: inline-block;
+			    vertical-align:top;
+    			width: 40%;
+    			height:calc(40vw - 30px);
+			}
+		}
+
+		&__nav {
+			position: relative;
+			&:after {
+				content:"";
+				display:block;
+				position:absolute;
+				right:-20px;
+				top:0;
+				height:100%;
+				width: 50px;
+				background: linear-gradient(to right, rgba(0,183,234,0) 0%,#f7faff 100%);
+			}
+			&__list {
+				    flex-direction: row;
+				    flex-wrap: nowrap;
+				    align-content: initial;
+				    align-items: initial;
+				    justify-content: initial;
+				    overflow-x: scroll;
+				    width: calc(100% + 40px);
+				    margin-left: 0px;
+				&__item {
+					display:table;
+				}
 			}
 		}
 	}
