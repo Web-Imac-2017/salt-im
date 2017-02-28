@@ -26,7 +26,7 @@ export const Header = () => (
 
     <div className="header__right">
 
-      <div className="addPostBtn">Ajouter un post</div>
+      <Link to="/create/post"><div className="addPostBtn">Ajouter un post</div></Link>
 
       <Research/>
 
