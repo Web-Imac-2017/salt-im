@@ -6,6 +6,11 @@
 $karla : "Karla", sans-serif;
 $cousine : "Cousine", monospace;
 
+a:visited, a:hover, a:link, a:active{
+	outline: 0;
+}
+
+
 // Colors.
 $darkblue: #4D71BA;
 $cyan : #3DAEAA;

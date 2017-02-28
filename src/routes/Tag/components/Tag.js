@@ -2,6 +2,7 @@ import React from 'react'
 import './Tag.scss'
 import ListPost from '../../../components/ListPost/ListPost.js'
 import '../../Tags/components/TagView.scss'
+import Filter from '../../../components/Filter/Filter.js'
 
 const dataTags = {
     "title":"Nasa",
@@ -44,6 +45,7 @@ export const Tag = () => (
     <p className="tagSingle__description">{dataTags.description}</p>
 
     <p className="tagview__titleTrends">Posts les plus salés</p>
+    <Filter/>
     <ListPost data={dataListPost} />
 
 

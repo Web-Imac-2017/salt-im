@@ -3,6 +3,7 @@ import './PostView.scss'
 import '../../Tags/components/TagView.scss'
 import PostData from './PostData/PostData.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
+import Filter from '../../../components/Filter/Filter.js'
 
 const dataPost = {
     "id":1,
@@ -68,9 +69,10 @@ export const PostView = () => (
 
     <div className="post__commentBlock center">
         <p className="tagview__titleAll">Commentaires</p>
+        <Filter/>
         <ListComment data={dataComments}/>
     </div>
-    
+
   </div>
 )
 
