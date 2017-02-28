@@ -73,17 +73,16 @@ class CommentsManager {
 }
     
   public function getTags(Comment $comment) {
-    $stats = [];
-    
-    $q = $this->_db->query(
-        'SELECT * FROM stat WHERE related_element_id = "'.$comment->get_id().'"');
+    $tags = [];
       
+    $q = $this->_db->query('SELECT * FROM tag JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
+    
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $stats[] = new Stat($donnees);
+      $tags[] = new Tag($donnees);
     }
 
-    return $stats;
+    return $comments;
 }
 
   public function update(Comment $comment)
