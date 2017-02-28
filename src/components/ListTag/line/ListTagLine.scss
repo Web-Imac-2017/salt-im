@@ -1,3 +1,5 @@
+@import '../styles/core.scss';
+
 .tagsLine{
 
 	&__list{
@@ -7,5 +9,14 @@
 		align-content: center;
 		align-items: center;
 		justify-content: space-between;
+
+        @include mobile {
+            align-items:baseline;
+            .tag {
+                display: block;
+                flex: 1;
+                flex-basis:40%;
+            }
+        }
 	}
 }
