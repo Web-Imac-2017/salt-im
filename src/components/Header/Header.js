@@ -4,6 +4,11 @@ import './Header.scss'
 
 import Research from './Nav/Research/Research.js'
 import Account from './Nav/Account/Account.js'
+import BigSearch from './BigSearch/BigSearch.js';
+
+const changeSearch = (props) => {
+  console.log(props)
+}
 
 export const Header = () => (
 
@@ -28,12 +33,13 @@ export const Header = () => (
 
       <Link to="/create/post"><div className="addPostBtn">Ajouter un post</div></Link>
 
-      <Research/>
+      <Research changeSearch={changeSearch}/>
 
       <div className="saveBtn"></div>
 
       <Account/>
     </div>
+    <BigSearch/>
   </div>
 )
 

@@ -1,8 +1,12 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 
-export const Research = () => (
-  <div>
+const toggleSearch = (props) => {
+    props.changeSearch(props);
+}
+
+export const Research = (props) => (
+  <div onClick={toggleSearch.bind(this, props)}>
     <div className="searchBtn"></div>
   </div>
 )
