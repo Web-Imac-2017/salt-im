@@ -20,6 +20,9 @@
  * $router->addRule('test/regles/:id/hello',array('controller'=>'index','action'=>'withRule'));
  * </code>
  */
+
+require "controller/indexController.php";
+
 class Router
 {
 
@@ -112,7 +115,7 @@ class Router
      * Singleton de la classe
      * @return Router
      */
-    public function getInstance()
+    public static function getInstance()
     {
         if (!isset(self::$instance))
             self::$instance = new Router();
@@ -170,6 +173,7 @@ class Router
         include $this->file;
 
         $class      = $this->controller . 'Controller';
+        
 		if(!empty($this->codeLangue))
 			$controller = new $class($this->getParameters(),$this->codeLangue);
 		else

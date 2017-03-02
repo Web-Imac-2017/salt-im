@@ -3,6 +3,7 @@ Options +Indexes
 
 # active le module de réécriture d'URL
 RewriteEngine On
+RewriteRule !\.(js|ico|gif|jpg|JPG|png|css)$ index.php
 
 # fixe les règles d'écriture. Ici, nous utilisons une liste blanche
 
