@@ -22,6 +22,7 @@
  */
 
 require "controller/indexController.php";
+require "controller/postController.php";
 
 class Router
 {

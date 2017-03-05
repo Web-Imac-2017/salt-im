@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 27 Février 2017 à 19:21
+-- Généré le :  Dim 05 Mars 2017 à 17:02
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -33,7 +33,14 @@ CREATE TABLE IF NOT EXISTS `badge` (
   `name` tinytext NOT NULL,
   `icon` tinytext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `badge`
+--
+
+INSERT INTO `badge` (`id`, `cond`, `name`, `icon`) VALUES
+(1, 1, 'Noob', 'dedededededed');
 
 -- --------------------------------------------------------
 
@@ -95,7 +102,14 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `publication`
+--
+
+INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
+(1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1);
 
 -- --------------------------------------------------------
 
@@ -124,8 +138,10 @@ CREATE TABLE IF NOT EXISTS `stat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `value` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `related_element_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `related_element_id` (`related_element_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -142,7 +158,14 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `subject`
+--
+
+INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
+(1, 'Il prend une photo Skyblog pour la mettre sur son LinkedIn', 'Trop lol', 'subject', 1);
 
 -- --------------------------------------------------------
 
@@ -174,11 +197,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `rank` int(11) NOT NULL,
   `signupDate` date NOT NULL,
   `badge_id` int(11) NOT NULL,
-  `stat_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `badge_id` (`badge_id`),
-  UNIQUE KEY `stat_id` (`stat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `badge_id` (`badge_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`id`, `mail`, `username`, `password`, `avatar`, `birthDate`, `rank`, `signupDate`, `badge_id`) VALUES
+(1, 'jc@gmail.com', 'JC', 'zef54fe6sf6e', 'jc.jpg', '1956-07-05', 0, '2017-03-01', 1);
 
 --
 -- Contraintes pour les tables exportées
@@ -217,6 +245,16 @@ ALTER TABLE `rel_tag_publication`
   ADD CONSTRAINT `rel_tag_publication_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
+-- Contraintes pour la table `stat`
+--
+ALTER TABLE `stat`
+  ADD CONSTRAINT `stat_ibfk_1` FOREIGN KEY (`related_element_id`) REFERENCES `comment` (`id`),
+  ADD CONSTRAINT `stat_ibfk_2` FOREIGN KEY (`related_element_id`) REFERENCES `help` (`id`),
+  ADD CONSTRAINT `stat_ibfk_3` FOREIGN KEY (`related_element_id`) REFERENCES `publication` (`id`),
+  ADD CONSTRAINT `stat_ibfk_4` FOREIGN KEY (`related_element_id`) REFERENCES `subject` (`id`),
+  ADD CONSTRAINT `stat_ibfk_5` FOREIGN KEY (`related_element_id`) REFERENCES `user` (`id`);
+
+--
 -- Contraintes pour la table `subject`
 --
 ALTER TABLE `subject`
@@ -226,8 +264,7 @@ ALTER TABLE `subject`
 -- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`),
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`stat_id`) REFERENCES `stat` (`id`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

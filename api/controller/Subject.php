@@ -6,7 +6,6 @@ class Subject extends Publication {
     private $title;
     private $flair;
     private $type;
-    private $user_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -34,11 +33,6 @@ class Subject extends Publication {
         return $this->type;
     }
     
-    // Getter user
-    public function get_user_id() {
-        return $this->user_id;
-    }
-    
     // Setter id
     public function set_id($id) {
         $this->id = $id;      
@@ -57,11 +51,6 @@ class Subject extends Publication {
     // Setter type
     public function set_type($type) {
         $this->type = $type;      
-    }
-    
-    // Setter user
-    public function set_user_id($user_id) {
-        $this->user_id = $user_id;      
     }
     // Fin du multiplier--------------------------------
 
