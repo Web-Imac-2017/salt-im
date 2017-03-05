@@ -4,6 +4,19 @@ import '../../Tags/components/TagView.scss'
 import PostData from './PostData/PostData.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
 
+import { connect } from 'react-redux'  
+import { fetchPost, saveCurrentPost } from '../modules/post'
+
+
+import type { PostObject } from '../interfaces/post'
+
+
+type Props = {  
+  post: ?PostObject,
+  fetchPost: Function
+}
+
+/*
 const dataPost = {
     "id":1,
     "type":"link",
@@ -15,7 +28,7 @@ const dataPost = {
     "date":"12 jan. 2017",
     "author":"Thomas Lerouô",
     "tags":["boisson","mere"]
-}
+}*/
 
 const dataComments = [
   {
@@ -61,9 +74,25 @@ const dataComments = [
 //     "tags":["boisson","mere"]
 // }
 
-export const PostView = () => (
+
+const mapActionCreators: {fetchPost: Function} = {  
+  fetchPost
+}
+
+const mapStateToProps = (state): { post: ?PostObject} => ({  
+  post: state.post.posts.find(post => post.id === state.post.current)
+})
+
+
+
+
+export const PostView = (props:Props) => (
 
   <div className="post">
+    <h2>
+        {props.post.title}
+    </h2>
+
     <PostData data={dataPost}/>
 
     <div className="post__commentBlock center">
