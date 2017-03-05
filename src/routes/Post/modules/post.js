@@ -81,7 +81,7 @@ const POST_ACTION_HANDLERS = {
   [REQUEST_POST]: (state: PostStateObject): PostStateObject => {
     return ({ ...state, fetching: true })
   },
-  [RECIEVE_Post]: (state: PostStateObject, action: {payload: PostObject}): PostStateObject => {
+  [RECIEVE_POST]: (state: PostStateObject, action: {payload: PostObject}): PostStateObject => {
     return ({ ...state, posts: state.posts.concat(action.payload), current: action.payload.id, fetching: false })
   }
 }

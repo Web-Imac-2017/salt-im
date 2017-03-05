@@ -5,7 +5,7 @@ import PostData from './PostData/PostData.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
 
 import { connect } from 'react-redux'  
-import { fetchPost, saveCurrentPost } from '../modules/post'
+import { fetchPost } from '../modules/post'
 
 
 import type { PostObject } from '../interfaces/post'
@@ -86,21 +86,21 @@ const mapStateToProps = (state): { post: ?PostObject} => ({
 
 
 
-export const PostView = (props:Props) => (
-
+export const PostView = (props:Props) => {
+console.log(props)
+return(
   <div className="post">
-    <h2>
-        {props.post.title}
-    </h2>
 
-    <PostData data={dataPost}/>
+
+
+    /*<PostData data={dataPost}/>
 
     <div className="post__commentBlock center">
         <p className="tagview__titleAll">Commentaires</p>
         <ListComment data={dataComments}/>
-    </div>
+    </div>*/
     
-  </div>
-)
+  </div>)
+}
 
 export default PostView
