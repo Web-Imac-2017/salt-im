@@ -39,10 +39,10 @@ class statController  {
     public function jsonSerialize(Stat $stat) {
         // Represent your object using a nested array or stdClass,
         $data = array(
-            'id' => utf8_encode($subject->get_id()),
-            'name' => utf8_encode($subject->get_namelink()),
-            'value' => utf8_encode($subject->get_value()),
-            'related_element_id' => utf8_encode($subject->get_related_element_id()),
+            'id' => utf8_encode($stat->get_id()),
+            'name' => utf8_encode($stat->get_namelink()),
+            'value' => utf8_encode($stat->get_value()),
+            'related_element_id' => utf8_encode($stat->get_related_element_id()),
         );
         // in the way you want it arranged in your API
         return $data;
