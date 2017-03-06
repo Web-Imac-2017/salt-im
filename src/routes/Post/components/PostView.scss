@@ -10,6 +10,15 @@ $valTop:50px;
 
 .postdata {
     position:relative;
+    @include mobile {
+        .preview__tags {
+            padding-bottom:10px !important;
+        }
+
+        .preview__actions {
+            overflow-x:hidden;
+        }
+    }
     &__top {
         background:white;
         position: relative;
@@ -27,6 +36,21 @@ $valTop:50px;
         }
     }
 
+    .linkdata {
+        &__left {
+            background-size:cover;
+            background-position:center;
+        }
+
+        @include mobile {
+            display:block;
+            &__left {
+                height: calc(100vw - 40px);
+                margin: 0 auto;
+            }
+        }
+    }
+
     .content-wrapper {
         padding: $valTop 0;
         position:relative;
@@ -38,6 +62,10 @@ $valTop:50px;
         right: 0;
         font-family: $cousine;
         font-weight: bolder;
+
+        @include mobile {
+            right: 20px;
+        }
 
         &:after {
             content:"";
