@@ -38,10 +38,24 @@ class CommentsManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Subject.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, text, date FROM comment WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT id FROM comment WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    return new Comment($donnees);
+    $comment = new Comment($donnees);
+
+    // Récupère la publication constituée par ce commentaire
+    $q = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.$id.'"');
+    $publication_id = $q->fetch(PDO::FETCH_ASSOC);
+      
+    // Récupère les infos de la publication
+    $q = $this->_db->query('SELECT id, texte, user_id, date FROM publication WHERE id = "'.$publication_id.'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    
+    $comment->set_text($donnees['text']);
+    $comment->set_user_id($donnees['user_id']);
+    $comment->set_date($donnees['date']);
+      
+    return $comment; // retourne l'objet comment spécifié en id
   }
 
   public function getList()

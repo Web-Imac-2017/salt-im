@@ -24,6 +24,7 @@
 require "controller/indexController.php";
 require "controller/postController.php";
 require_once "controller/mediaController.php";
+require "controller/commentController.php";
 
 class Router
 {
