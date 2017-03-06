@@ -21,9 +21,9 @@
  * </code>
  */
 
-require "controller/indexController.php";
-require "controller/postController.php";
-require "controller/commentController.php";
+require_once "controller/indexController.php";
+require_once "controller/postController.php";
+require_once "controller/commentController.php";
 
 class Router
 {

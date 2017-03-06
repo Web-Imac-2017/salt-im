@@ -2,7 +2,7 @@
 
 //echo 'Index <br>';
 
-require 'Router.class.php';
+require_once 'Router.class.php';
 
 $router = Router::getInstance();
 //Définition du dossier contenant les controlleur

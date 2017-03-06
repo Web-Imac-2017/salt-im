@@ -1,10 +1,10 @@
 <?php
 
-require "Publication.php";
+require_once "Publication.php";
 
-require "Comment.php";
+/*require_once "Comment.php";*/
 
-require "CommentsManager.php";
+require_once "CommentsManager.php";
 
 class commentController  {
     
