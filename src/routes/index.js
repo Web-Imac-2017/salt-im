@@ -1,7 +1,7 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
-import Post from './Post'
+import postRoute from './Post'
 import Tags from './Tags'
 import Tag from './Tag'
 import Profile from './Profile'
@@ -9,10 +9,10 @@ import Profile from './Profile'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-const postRoute = {
+/*const postRoute = {
   path: 'post/:postId',
   indexRoute: Post
-}
+}*/
 
 const tagsRoute = {
   path: 'tags',
@@ -34,7 +34,7 @@ export const createRoutes = (store) => ({
   component   : CoreLayout,
   indexRoute  : Home,
   childRoutes : [
-    postRoute,
+    postRoute(store),
     tagsRoute,
     tagRoute,
     profileRoute

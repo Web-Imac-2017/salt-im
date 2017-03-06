@@ -4,12 +4,7 @@ import '../../Tags/components/TagView.scss'
 import PostData from './PostData/PostData.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
 
-import { connect } from 'react-redux'  
-import { fetchPost } from '../modules/post'
-
-
 import type { PostObject } from '../interfaces/post'
-
 
 type Props = {  
   post: ?PostObject,
@@ -28,7 +23,7 @@ const dataPost = {
     "date":"12 jan. 2017",
     "author":"Thomas Lerouô",
     "tags":["boisson","mere"]
-}*/
+}
 
 const dataComments = [
   {
@@ -62,45 +57,23 @@ const dataComments = [
     ]
   }
 ]
-
-// dataPost = {
-//     "id":1,
-//     "type":"video",
-//     "url":"https://www.youtube.com/watch?v=_dux_Ugs2lk",
-//     "title":"Titre putaclic de sa mère qui boit du sprite",
-//     "description":"Sa darrone ils boivent du sprite sa mère",
-//     "salt":18,
-//     "pepper":20,
-//     "tags":["boisson","mere"]
-// }
+*/
 
 
-const mapActionCreators: {fetchPost: Function} = {  
-  fetchPost
+export const PostView = (props: Props) => {
+    
+    console.log(props.fetchPost)
+    
+    return(
+        <div className="post">
+    
+        </div>
+    )
 }
 
-const mapStateToProps = (state): { post: ?PostObject} => ({  
-  post: state.post.posts.find(post => post.id === state.post.current)
-})
-
-
-
-
-export const PostView = (props:Props) => {
-console.log(props)
-return(
-  <div className="post">
-
-
-
-    /*<PostData data={dataPost}/>
-
-    <div className="post__commentBlock center">
-        <p className="tagview__titleAll">Commentaires</p>
-        <ListComment data={dataComments}/>
-    </div>*/
-    
-  </div>)
+PostView.propTypes = {  
+  post: React.PropTypes.object,
+  fetchPost: React.PropTypes.func.isRequired,
 }
 
 export default PostView
