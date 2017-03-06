@@ -17,7 +17,7 @@ export const Header = () => (
 
       <Link className="logo" to="/">
         <div className="logo__img"></div>
-        <p className="logo__title">Salt-Im</p>
+        <p className="logo__title">The Salt Factory</p>
       </Link>
 
       <div className="itemnav">
