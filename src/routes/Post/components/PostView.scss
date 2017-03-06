@@ -63,6 +63,10 @@ $valTop:50px;
         font-family: $cousine;
         font-weight: bolder;
 
+        @include mobile {
+            right: 20px;
+        }
+
         &:after {
             content:"";
             display:block;
