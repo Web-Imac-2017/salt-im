@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.5.2
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 05 Mars 2017 à 17:02
+-- Généré le :  Lun 06 Mars 2017 à 17:10
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -101,15 +101,16 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `date` date NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `publication`
 --
 
 INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
-(1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1);
+(1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1),
+(2, 'd', '2017-03-01', 1);
 
 -- --------------------------------------------------------
 
@@ -158,14 +159,14 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `subject`
 --
 
 INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
-(1, 'Il prend une photo Skyblog pour la mettre sur son LinkedIn', 'Trop lol', 'subject', 1);
+(1, 'gg', 'g', 'g', 1);
 
 -- --------------------------------------------------------
 
