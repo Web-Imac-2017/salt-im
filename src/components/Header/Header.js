@@ -32,6 +32,7 @@ export const Header = () => (
     <div className="header__right">
 
       <Link to="/create/post"><div className="addPostBtn">Ajouter un post</div></Link>
+      <Link to="/create/post"><div className="addPostBtn--mobile"><div className="addPostBtn__text">+</div></div></Link>
 
       <Research changeSearch={changeSearch}/>
 
@@ -39,7 +40,6 @@ export const Header = () => (
 
       <Account/>
     </div>
-    <BigSearch/>
   </div>
 )
 
