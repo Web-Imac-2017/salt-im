@@ -1,19 +1,17 @@
 <?php
 
-require "Publication.php";
+require_once "Media.php";
 
-require "Subject.php";
+require_once "MediasManager.php";
 
-require "SubjectsManager.php";
-
-class postController  {
+class mediaController  {
     
     private $id;
     
     public static function getInstance(array $donnees)
     {
         if (!isset(self::$instance))
-            self::$instance = new postController($donnees);
+            self::$instance = new mediaController($donnees);
         return self::$instance;
     }
     
@@ -23,21 +21,11 @@ class postController  {
     
     public function index() {
         include "connect.php";
-        $manager = new SubjectsManager($db);
+        $manager = new MediasManager($db);
         $id = $this->id;
-        $subject = $manager->get($id);
-        var_dump($subject);
-        $json = json_encode($this->jsonSerialize($subject));
+        $media = $manager->get($id);
+        $json = json_encode($this->jsonSerialize($media));
         echo $json;
-    }
-    
-    public function remove() {
-        include "connect.php";
-        $manager = new SubjectsManager($db);
-        $id = $this->id;
-        $subject = $manager->get($id);
-        $manager->delete($subject);
-        echo "Le fichier a été supprimé.";
     }
     
     public function set_id($id) {
@@ -48,16 +36,13 @@ class postController  {
         return $this->id; 
     }
     
-    public function jsonSerialize(Subject $subject) {
+    public function jsonSerialize(Media $media) {
         // Represent your object using a nested array or stdClass,
         $data = array(
-            'id' => utf8_encode($subject->get_id()),
-            'title' => utf8_encode($subject->get_title()),
-            'flair' => utf8_encode($subject->get_flair()),
-            'type' => utf8_encode($subject->get_type()),
-            'text' => utf8_encode($subject->get_text()),
-            'date' => utf8_encode($subject->get_date()),
-            'user_id' => utf8_encode($subject->get_user_id())
+            'id' => utf8_encode($media->get_id()),
+            'link' => utf8_encode($media->get_link()),
+            'type' => utf8_encode($media->get_type()),
+            'publication_id' => utf8_encode($media->get_publication_id()),
         );
         // in the way you want it arranged in your API
         return $data;

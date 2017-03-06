@@ -4,6 +4,6 @@ class errorController {
     
     
     public static function alert() {
-        echo 'error';
+        echo 'Olele il y a une erreur !';
     }
 }
