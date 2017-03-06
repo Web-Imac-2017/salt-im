@@ -39,10 +39,10 @@ class mediaController  {
     public function jsonSerialize(Media $media) {
         // Represent your object using a nested array or stdClass,
         $data = array(
-            'id' => utf8_encode($subject->get_id()),
-            'link' => utf8_encode($subject->get_link()),
-            'type' => utf8_encode($subject->get_type()),
-            'publication_id' => utf8_encode($subject->get_publication_id()),
+            'id' => utf8_encode($media->get_id()),
+            'link' => utf8_encode($media->get_link()),
+            'type' => utf8_encode($media->get_type()),
+            'publication_id' => utf8_encode($media->get_publication_id()),
         );
         // in the way you want it arranged in your API
         return $data;
