@@ -1,8 +1,8 @@
 <?php
 
-require "Media.php";
+require_once "Media.php";
 
-require "MediasManager.php";
+require_once "MediasManager.php";
 
 class mediaController  {
     

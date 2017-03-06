@@ -23,6 +23,7 @@
 
 require "controller/indexController.php";
 require "controller/postController.php";
+require_once "controller/mediaController.php";
 
 class Router
 {
