@@ -25,13 +25,17 @@ class SubjectsManager {
   public function delete(Subject $subject)
   {
     // Exécute une requête de type DELETE.
-      $publication_id = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$subject->get_id().'"');
-      
-      $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id.'"');
-      
-      $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id.'"');
+      $result = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$subject->get_id().'"');
+      $publication_id = $result->fetch(PDO::FETCH_ASSOC);
+      var_dump($publication_id);
       
       $this->_db->exec('DELETE FROM subject WHERE id = "'.$subject->get_id().'"');
+      
+      $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
+      
+      $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
+      
+      
   }
 
   public function getList()
@@ -79,7 +83,6 @@ class SubjectsManager {
     // Récupère le subject
     $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    
     $subject = new Subject($donnees);
       
     // Récupère l'id de la publication associée  

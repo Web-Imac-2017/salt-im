@@ -26,8 +26,18 @@ class postController  {
         $manager = new SubjectsManager($db);
         $id = $this->id;
         $subject = $manager->get($id);
+        var_dump($subject);
         $json = json_encode($this->jsonSerialize($subject));
         echo $json;
+    }
+    
+    public function remove() {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $id = $this->id;
+        $subject = $manager->get($id);
+        $manager->delete($subject);
+        echo "Le fichier a été supprimé.";
     }
     
     public function set_id($id) {
