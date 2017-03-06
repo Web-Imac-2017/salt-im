@@ -24,13 +24,14 @@ class CommentsManager {
 
   public function delete(Comment $comment)
   {
-    $publication_id = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.comment->get_id().'")');
-    
-    $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id.'"');
-      
-    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id.'"');
+    $result = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.$comment->get_id().'")');
+    $publication_id = $result->fetch(PDO::FETCH_ASSOC);
       
     $this->_db->exec('DELETE FROM comment WHERE id = "'.$comment->get_id().'"');
+      
+    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
+    
+    $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
   }
 
   public function get($id)
@@ -48,7 +49,7 @@ class CommentsManager {
     $publication_id = $q->fetch(PDO::FETCH_ASSOC);
       
     // Récupère les infos de la publication
-    $q = $this->_db->query('SELECT id, texte, user_id, date FROM publication WHERE id = "'.$publication_id.'"');
+    $q = $this->_db->query('SELECT id, text, user_id, date FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     
     $comment->set_text($donnees['text']);
@@ -68,6 +69,19 @@ class CommentsManager {
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $comments[] = new Comment($donnees);
+    }
+
+    return $comments;
+  }
+    
+  public function getCommentsFromPost($id) {
+    $comments = [];
+
+    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $comments[] = $this->get($donnees['id']);
     }
 
     return $comments;
@@ -102,10 +116,9 @@ class CommentsManager {
   public function update(Comment $comment)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE comment SET text = "'.$comment->get_text()'", date = "'.$comment->get_date().'" WHERE id = "'.$comment->get_id().'"');
+    //$q = $this->_db->prepare('UPDATE comment SET text = "'.$comment->get_text()'", date = "'.$comment->get_date().'" WHERE id = "'.$comment->get_id().'"');
+    //$q = $this->_db->exec('UPDATE comment SET text = "'.$comment->get_text()'" WHERE id = "'.$comment->get_id().'"');
     
-    // Exécution de la requête.
-    $q->execute();
       
   }
 

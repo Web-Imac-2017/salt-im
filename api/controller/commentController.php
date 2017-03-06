@@ -1,10 +1,10 @@
 <?php
 
-require "Publication.php";
+require_once "Publication.php";
 
-require "Comment.php";
+//require_once "Comment.php";
 
-require "CommentsManager.php";
+require_once "CommentsManager.php";
 
 class commentController  {
     
@@ -30,6 +30,15 @@ class commentController  {
         echo $json;
     }
     
+    public function commentsFromPost() {
+        include "connect.php";
+        $manager = new CommentsManager($db);
+        $id = $this->id;
+        $comments = $manager->getCommentsFromPost($id);
+        $json = json_encode($this->jsonSerializeArray($comments));
+        echo $json;
+    }
+    
     public function set_id($id) {
         $this->id = $id; 
     }
@@ -41,10 +50,25 @@ class commentController  {
     public function jsonSerialize(Comment $comment) {
         // Represent your object using a nested array or stdClass,
         $data = array(
-            'text' => utf8_encode($comm->get_text()),
-            'date' => utf8_encode($comm->get_date()),
-            'user_id' => utf8_encode($comm->get_user_id())
+            'text' => utf8_encode($comment->get_text()),
+            'date' => utf8_encode($comment->get_date()),
+            'user_id' => utf8_encode($comment->get_user_id())
         );
+        // in the way you want it arranged in your API
+        return $data;
+    }
+    
+    public function jsonSerializeArray(array $comments) {
+        // Represent your object using a nested array or stdClass,
+        $data = [];
+        for($i=0; $i<count($comments); $i++) {
+                $c = array(
+                    'text' => utf8_encode($comments[$i]->get_text()),
+                    'date' => utf8_encode($comments[$i]->get_date()),
+                    'user_id' => utf8_encode($comments[$i]->get_user_id())
+                );
+                $data[] = $c;
+        }
         // in the way you want it arranged in your API
         return $data;
     }
