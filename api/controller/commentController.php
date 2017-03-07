@@ -1,9 +1,7 @@
 <?php
 
 require_once "Publication.php";
-
 //require_once "Comment.php";
-
 require_once "CommentsManager.php";
 
 class commentController  {
