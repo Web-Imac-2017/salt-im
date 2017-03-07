@@ -48,7 +48,7 @@ class CommentsManager {
     $publication_id = $q->fetch(PDO::FETCH_ASSOC);
       
     // Récupère les infos de la publication
-    $q = $this->_db->query('SELECT id, texte, user_id, date FROM publication WHERE id = "'.$publication_id.'"');
+    $q = $this->_db->query('SELECT id, text, user_id, date FROM publication WHERE id = "'.$publication_id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     
     $comment->set_text($donnees['text']);
