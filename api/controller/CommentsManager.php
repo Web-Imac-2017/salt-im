@@ -11,7 +11,7 @@ class CommentsManager {
   public function add(Comment $comment)
   {
     $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.$comment->get_date().'", "'.$comment->get_user_id().'")');
-    $publication_id = mysql_insert_id();
+    $publication_id = $this->_db->lastInsertId();
 
     $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$comment->get_related_publication_id().'", "'.$publication_id.'")');
       

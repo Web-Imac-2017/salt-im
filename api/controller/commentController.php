@@ -28,6 +28,19 @@ class commentController  {
         echo $json;
     }
     
+    public function add() {
+        include "connect.php";
+        $manager = new CommentsManager($db);
+        $comment = new Comment($_POST);
+        try {
+            $manager->add($comment);
+            echo "Le commentaire a bien été ajouté.";
+        } catch(Exception $e) {
+            echo "Oops le commentaire n'a pas pu être envoyé : " . $e->getMessage();
+        }
+        
+    }
+    
     public function commentsFromPost() {
         include "connect.php";
         $manager = new CommentsManager($db);

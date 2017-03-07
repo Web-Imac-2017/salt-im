@@ -40,7 +40,7 @@ class postController  {
             echo "Le message a bien été envoyé !";
         }
         catch(Exception $e) {
-            echo "Oops le post n'a pas pu être envoyé: " . $e->getMessage();
+            echo "Oops le post n'a pas pu être envoyé : " . $e->getMessage();
         }
     }
     
@@ -49,8 +49,13 @@ class postController  {
         $manager = new SubjectsManager($db);
         $id = $this->id;
         $subject = $manager->get($id);
-        $manager->delete($subject);
-        echo "Le fichier a été supprimé.";
+        try {
+            $manager->delete($subject);
+            echo "Le fichier a été supprimé.";
+        } catch(Exception $e) {
+            echo "Oops le post n'a pas pu être supprimé : " . $e->getMessage(); 
+        }
+        
     }
     
     public function set_id($id) {

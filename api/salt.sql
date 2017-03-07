@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 07 Mars 2017 à 16:47
+-- Généré le :  Mar 07 Mars 2017 à 18:32
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -54,16 +54,16 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `related_publication_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `related_publication_id` (`related_publication_id`),
-  UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `related_publication_id` (`related_publication_id`),
+  KEY `publication_id` (`publication_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `comment`
 --
 
 INSERT INTO `comment` (`id`, `related_publication_id`, `publication_id`) VALUES
-(1, 1, 3);
+(1, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `publication`
@@ -129,7 +129,13 @@ INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 (4, 'p', '2017-01-01', 1),
 (5, 'p', '2017-01-01', 1),
 (6, 'p', '2017-01-01', 1),
-(7, 'p', '2017-01-01', 1);
+(7, 'p', '2017-01-01', 1),
+(8, 'Waah ton post c''est de la grosse merde gros', '2017-07-03', 1),
+(9, 'Waah ton post c''est de la grosse merde gros', '2017-07-03', 1),
+(10, 'Waah ton post c''est de la grosse merde gros', '2017-07-03', 1),
+(11, 'Waah ton post c''est de la grosse merde gros', '2017-07-03', 1),
+(12, 'T''es tellement peu salÃ© gros mÃªme l''eau est plus Ã©picÃ©e ', '2017-07-03', 1),
+(13, 'T''es tellement peu salÃ© gros mÃªme l''eau est plus Ã©picÃ©e ', '2017-07-03', 1);
 
 -- --------------------------------------------------------
 
@@ -161,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `stat` (
   `related_element_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `related_element_id` (`related_element_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `stat`
@@ -173,7 +179,22 @@ INSERT INTO `stat` (`id`, `name`, `value`, `related_element_id`) VALUES
 (5, 'humour', 0, 6),
 (6, 'sel', 0, 7),
 (7, 'poivre', 0, 7),
-(8, 'humour', 0, 7);
+(8, 'humour', 0, 7),
+(9, 'sel', 0, 8),
+(10, 'poivre', 0, 8),
+(11, 'humour', 0, 8),
+(12, 'sel', 0, 9),
+(13, 'poivre', 0, 9),
+(14, 'humour', 0, 9),
+(15, 'sel', 0, 10),
+(16, 'poivre', 0, 10),
+(17, 'humour', 0, 10),
+(18, 'sel', 0, 11),
+(19, 'poivre', 0, 11),
+(20, 'humour', 0, 11),
+(21, 'sel', 0, 13),
+(22, 'poivre', 0, 13),
+(23, 'humour', 0, 13);
 
 -- --------------------------------------------------------
 
@@ -190,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `subject`
@@ -201,7 +222,11 @@ INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
 (3, 'u', 'u', 'u', 4),
 (4, 'u', 'u', 'u', 5),
 (5, 'u', 'u', 'u', 6),
-(6, 'u', 'u', 'u', 7);
+(6, 'u', 'u', 'u', 7),
+(7, '', '', '', 8),
+(8, '', '', '', 9),
+(9, '', '', '', 10),
+(10, '', '', '', 11);
 
 -- --------------------------------------------------------
 
@@ -247,13 +272,6 @@ INSERT INTO `user` (`id`, `mail`, `username`, `password`, `avatar`, `birthDate`,
 --
 -- Contraintes pour les tables exportées
 --
-
---
--- Contraintes pour la table `comment`
---
-ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`related_publication_id`) REFERENCES `publication` (`id`),
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 --
 -- Contraintes pour la table `help`
