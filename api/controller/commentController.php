@@ -84,6 +84,27 @@ class commentController  {
         return $data;
     }
     
+    public function jsonSerializeArray2(array $comments) {
+        // Represent your object using a nested array or stdClass,
+        $data = [];
+        $c_array = [];
+        for($i=0; $i<count($comments); $i++) {
+                $c = array(
+                    'text' => utf8_encode($comments[$i][0]->get_text()),
+                    'date' => utf8_encode($comments[$i][0]->get_date()),
+                    'user_id' => utf8_encode($comments[$i][0]->get_user_id())
+                );
+                $c_array[] = $c;
+                if($comments[$i][1] != NULL) {
+                    for($j=0; $j<count($comments[$i][1]); $j++) {
+                        
+                    }
+                }
+        }
+        // in the way you want it arranged in your API
+        return $data;
+    }
+    
     // Hydrate
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {

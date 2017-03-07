@@ -80,12 +80,30 @@ class CommentsManager {
     $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-    {
+    { 
       $comments[] = $this->get($donnees['id']);
     }
 
     return $comments;
   }
+    
+    public function getAllCommentsFromPost($id) {
+        $comments = [];
+        $comment = [];
+    
+    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    { 
+      $comment[] = $this->get($donnees['id']);
+      $comment[] = $this->getCommentsFromPost($donnees['id']);
+      $comments[] = $comment;
+    }
+
+    return $comments;
+    
+        
+    }
     
   public function getStat(Comment $comment) {
     $stats = [];
