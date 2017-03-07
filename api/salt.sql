@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 07 Mars 2017 à 11:46
+-- Généré le :  Mar 07 Mars 2017 à 11:54
 -- Version du serveur :  10.1.8-MariaDB
 -- Version de PHP :  5.5.30
 
@@ -81,7 +81,7 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`id`, `link`, `type`, `publication_id`) VALUES
-(1, 'https://vgy.me/yqYylA.jpg', 'image', 1);
+(1, 'https://vgy.me/yqYylA.jpg', 'img', 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,8 @@ CREATE TABLE `publication` (
 --
 
 INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
-(1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1);
+(1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1),
+(2, 'd', '2017-03-01', 1);
 
 -- --------------------------------------------------------
 
@@ -147,7 +148,7 @@ CREATE TABLE `subject` (
 --
 
 INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
-(1, 'Il prend une photo Skyblog pour la mettre sur son LinkedIn', 'Trop lol', 'subject', 1);
+(1, 'gg', 'g', 'g', 1);
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,7 @@ ALTER TABLE `media`
 --
 ALTER TABLE `publication`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `rel_tag_publication`
@@ -287,7 +288,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT pour la table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `rel_tag_publication`
 --
@@ -302,7 +303,7 @@ ALTER TABLE `stat`
 -- AUTO_INCREMENT pour la table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `tag`
 --
