@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 07 Mars 2017 à 11:54
--- Version du serveur :  10.1.8-MariaDB
--- Version de PHP :  5.5.30
+-- Généré le :  Mar 07 Mars 2017 à 12:05
+-- Version du serveur :  10.1.21-MariaDB
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -51,6 +51,13 @@ CREATE TABLE `comment` (
   `related_publication_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `comment`
+--
+
+INSERT INTO `comment` (`id`, `related_publication_id`, `publication_id`) VALUES
+(1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,8 @@ CREATE TABLE `publication` (
 
 INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 (1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1),
-(2, 'd', '2017-03-01', 1);
+(2, 'd', '2017-03-01', 1),
+(3, 'ton post m\'a donné la malaria', '2017-03-06', 1);
 
 -- --------------------------------------------------------
 
@@ -273,7 +281,7 @@ ALTER TABLE `badge`
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `help`
 --
@@ -288,7 +296,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT pour la table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `rel_tag_publication`
 --
