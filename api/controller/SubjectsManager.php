@@ -10,7 +10,8 @@ class SubjectsManager {
   public function add(Subject $subject)
   {      
     $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$subject->get_text().'", "'.$subject->get_date().'", "'.$subject->get_user_id().'")');
-    $publication_id = mysql_insert_id();
+    $publication_id = $this->_db->lastInsertId();
+      var_dump($publication_id);
       
     $this->_db->exec('INSERT INTO subject(title, flair, type, publication_id) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'", "'.$publication_id.'")');
       
