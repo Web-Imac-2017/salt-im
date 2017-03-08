@@ -18,7 +18,7 @@ import Filter from '../../../components/Filter/Filter.js'
 //     "author":"Thomas Lerouô",
 //     "tags":["boisson","mere"]
 // }
-
+*/
 const dataComments = [
   {
     "user":"Jean Yves",
@@ -63,38 +63,38 @@ const dataComments = [
 //     "tags":["boisson","mere"]
 // }
 
-let dataPost = {}
-const loadData = () => {
-    fetch('http://localhost:8888/salt-im/api/p/1')
-    .then(function(response) {
-      dataPost = response.text();
-      return dataPost;
-    })
-    .then(function(data) {
-        dataPost = data;
-    })
-}
+// let dataPost = {}
+// const loadData = () => {
+//     fetch('http://localhost:8888/salt-im/api/p/1')
+//     .then(function(response) {
+//       dataPost = response.text();
+//       return dataPost;
+//     })
+//     .then(function(data) {
+//         dataPost = data;
+//     })
+// }
 
-loadData();
+// loadData();
 
 
-export const PostView = (props:dataPost) => {
-    console.log(props)
-    return(
-          <div className="post">
-            <PostData data={dataPost}/>
+// export const PostView = (props:dataPost) => {
+//     console.log(props)
+//     return(
+//           <div className="post">
+//             <PostData data={dataPost}/>
 
-            <div className="post__commentBlock center">
-                <p className="tagview__titleAll">Commentaires</p>
-                <Filter/>
-                <ListComment data={dataComments}/>
-            </div>
+//             <div className="post__commentBlock center">
+//                 <p className="tagview__titleAll">Commentaires</p>
+//                 <Filter/>
+//                 <ListComment data={dataComments}/>
+//             </div>
 
-          </div>
-    )
-}
+//           </div>
+//     )
+// }
 
-export default PostView*/
+// export default PostView
 
 
 import React, { Component } from 'react';
@@ -116,14 +116,14 @@ class PostView extends Component {
 
   componentDidMount() {
     let self=this;
-      fetch('http://localhost:8888/salt-im/api/p/'+self.props.params.postId)
-      .then(function(response) {
-        let dataPost = response.json();
-        return dataPost;
-      })
-      .then(function(data) {
-        self.setState({postdata:data});
-      })
+    fetch('http://localhost:8888/salt-im/api/p/'+self.props.params.postId)
+    .then(function(response) {
+      let dataPost = response.json();
+      return dataPost;
+    })
+    .then(function(data) {
+      self.setState({postdata:data});
+    })
   }
 
   render() {
@@ -135,8 +135,8 @@ class PostView extends Component {
         <div className="post__commentBlock center">
             <p className="tagview__titleAll">Commentaires</p>
             <Filter/>
+            <ListComment id={this.state.postdata.id}/>
         </div>
-
       </div>
     );
   }

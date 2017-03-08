@@ -4,7 +4,7 @@ import './Comment.scss'
 import ListAnswer from '../ListAnswer/ListAnswer.js'
 
 export const Comment = (props) => {
-    
+
     const backgroundUrlStyle = {
         backgroundImage: "url("+props.data.userPic+")"
     }
@@ -41,7 +41,7 @@ export const Comment = (props) => {
             <div className="comment__right">
                 <h1 className="comment__right__username">{props.data.user}</h1>
                 <h2 className="comment__right__date">{props.data.date}</h2>
-                <p className="comment__right__message">{props.data.message}</p>
+                <p className="comment__right__message">{props.data.text}</p>
             </div>
         </div>
     )
