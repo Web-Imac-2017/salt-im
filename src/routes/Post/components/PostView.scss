@@ -64,7 +64,7 @@ $valTop:50px;
         font-weight: bolder;
 
         @include mobile {
-            right: 20px;
+            right: 20px !important;
         }
 
         &:after {

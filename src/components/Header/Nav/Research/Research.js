@@ -2,7 +2,7 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 
 const toggleSearch = (props) => {
-    props.changeSearch(props);
+    props.changeSearch();
 }
 
 export const Research = (props) => (
