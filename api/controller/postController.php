@@ -66,6 +66,14 @@ class postController  {
         return $this->id; 
     }
     
+    public function help($type) {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $subject = $manager->get_help($id);
+        $json = json_encode($this->jsonSerialize($subject));
+        echo $json;
+    }
+
     public function jsonSerialize(Subject $subject) {
         // Represent your object using a nested array or stdClass,
         $data = array(

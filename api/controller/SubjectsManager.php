@@ -102,6 +102,32 @@ class SubjectsManager {
     
   }
 
+  public function get_help($type)
+  {
+    // Exécute une requête de type SELECT récupérant les posts dont le type est HELP
+    $type = (int) $type;
+
+    // récupère les subjects dont le type est HELP
+    $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE type = "'.$type.'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    $subject = new Subject($donnees);
+
+    // Récupère l'id de la publication associée  
+    $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$id.'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    
+    // Récupère les données de la publication  
+    $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+      
+    // Rajoute les infos manquantes de subject
+    $subject->set_text($donnees['text']);
+    $subject->set_date($donnees['date']);
+    $subject->set_user_id($donnees['user_id']);
+      
+    return $subject;
+  }
+
   public function setDb(PDO $db)
   {
     $this->_db = $db;
