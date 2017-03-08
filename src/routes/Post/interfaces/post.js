@@ -3,9 +3,8 @@
 //import ../../Tag/interfaces/tag.js
 
 export type PostObject = {  
-  id: number,
-  title: string,
-  description: string,
+  id: ?number,
+  title: string
   /*tags: Array<TagObject>*/
 }
 

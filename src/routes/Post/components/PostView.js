@@ -7,7 +7,7 @@ import ListComment from '../../../components/ListComment/ListComment.js'
 import type { PostObject } from '../interfaces/post'
 
 type Props = {  
-  post: ?PostObject,
+  post: PostObject,
   fetchPost: Function
 }
 
@@ -62,18 +62,17 @@ const dataComments = [
 
 export const PostView = (props: Props) => {
     
-    console.log(props.fetchPost)
-    
+    console.log(props)
+    console.log(props.quentinptitcon)
+
     return(
-        <div className="post">
-    
-        </div>
+        <div className="post"></div>
     )
 }
 
 PostView.propTypes = {  
-  post: React.PropTypes.object,
-  fetchPost: React.PropTypes.func.isRequired,
+  quentinptitcon: React.PropTypes.object,
+  fetchPost: React.PropTypes.func.isRequired
 }
 
 export default PostView

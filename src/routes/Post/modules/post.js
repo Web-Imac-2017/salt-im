@@ -29,6 +29,11 @@ export function recievePost (value: string): Action {
   }
 }
 
+const dataPost = {
+    "title":"Super titre putaclic sa mère"
+}
+
+
 export const fetchPost = (): Function => {  
   return (dispatch: Function): Promise => {
     dispatch(requestPost())
@@ -36,7 +41,6 @@ export const fetchPost = (): Function => {
     return fetch('https://api.github.com/zen')
       .then(data => data.text())
       .then(text => dispatch(recievePost(text)))
-
   }
 }
 
@@ -60,7 +64,8 @@ const POST_ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 
-const initialState: PostStateObject = { fetching: false, current: null, posts: [] }  
+const initialState: PostStateObject = { fetching: false, current: null, posts: [] } 
+ 
 export default function postReducer (state: PostStateObject = initialState, action: Action): PostStateObject {  
   const handler = POST_ACTION_HANDLERS[action.type]
 
