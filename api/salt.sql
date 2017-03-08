@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 08 Mars 2017 à 15:09
+-- Généré le :  Mer 08 Mars 2017 à 15:34
 -- Version du serveur :  10.1.8-MariaDB
 -- Version de PHP :  5.5.30
 
@@ -92,7 +92,14 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`id`, `link`, `type`, `publication_id`) VALUES
-(1, 'https://vgy.me/yqYylA.jpg', 'img', 4);
+(1, 'https://vgy.me/yqYylA.jpg', 'img', 4),
+(2, 'https://vgy.me/wpqzlR.jpg', 'img', 3),
+(3, 'https://s2.qwant.com/thumbr/0x0/4/4/353a77e3db0d10f9fda552c9d05314/b_1_q_0_p_0.jpg?u=http%3A%2F%2Fmedias.unifrance.org%2Fmedias%2F127%2F20%2F5247%2Fformat_page%2Frrrrrrr.jpg&q=0&b=1&p=0&a=1', 'img', 2),
+(4, 'http://www.supercartoons.net/images/cartoons/cat-and-dupli-cat.jpg', 'img', 1),
+(5, 'https://vgy.me/GU5ViF.png', 'img', 10),
+(6, 'https://vgy.me/z11cX5.png', 'img', 7),
+(7, 'https://vgy.me/GmueTO.jpg', 'img', 9),
+(8, 'https://youtu.be/Nar9q5G_nm8', 'video', 5);
 
 -- --------------------------------------------------------
 
@@ -341,7 +348,7 @@ ALTER TABLE `help`
 -- AUTO_INCREMENT pour la table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `publication`
 --
