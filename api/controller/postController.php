@@ -55,7 +55,7 @@ class postController  {
         $subject = $manager->get($id);
         try {
             $manager->delete($subject);
-            echo "Le post a été supprimé.";
+            echo "Le fichier a été supprimé.";
         } catch(Exception $e) {
             echo "Oops le post n'a pas pu être supprimé : " . $e->getMessage(); 
         }
