@@ -60,18 +60,19 @@ const dataComments = [
 */
 
 
-export const PostView = (props: Props) => {
-    
-    console.log(props)
-    console.log(props.quentinptitcon)
+export const PostView = (props: Props) => (
 
-    return(
-        <div className="post"></div>
-    )
-}
+        <div>
+         <h2 className="post">{props.post ? props.post.value : ''}</h2>
+          <button className='btn btn-default' onClick={props.fetchPost}>
+        Fetch a wisdom
+      </button>
+        </div>
+    
+)
 
 PostView.propTypes = {  
-  quentinptitcon: React.PropTypes.object,
+  post: React.PropTypes.object,
   fetchPost: React.PropTypes.func.isRequired
 }
 

@@ -11,8 +11,9 @@ type Props = {
   saveCurrentZen: Function
 }
 
-export const Zen = (props: Props) => (  
-  <div>
+export const Zen = (props: Props) => { 
+  console.log()
+  return(<div>
     <div>
       <h2 className={classes.zenHeader}>
         {props.zen ? props.zen.value : ''}
@@ -40,8 +41,8 @@ export const Zen = (props: Props) => (
       </div>
       : null
     }
-  </div>
-)
+  </div>)
+}
 
 Zen.propTypes = {  
   zen: React.PropTypes.object,
