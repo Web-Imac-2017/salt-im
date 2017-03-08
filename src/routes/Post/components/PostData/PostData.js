@@ -21,6 +21,10 @@ export const PostData = (props) => {
             break;
     }
 
+    let help = (<div/>);
+    if(props.data.type == "u")
+        help = (<div className="help">This man needs help</div>);
+
     return(
       <div className="postdata">
         <div className="postdata__top">
