@@ -81,7 +81,7 @@ class SubjectsManager {
     $id = (int) $id;
       
     // Récupère le subject
-    $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'" AND type = "subject"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     $subject = new Subject($donnees);
       

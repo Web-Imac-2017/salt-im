@@ -25,9 +25,13 @@ class postController  {
         include "connect.php";
         $manager = new SubjectsManager($db);
         $id = $this->id;
-        $subject = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($subject));
-        echo $json;
+        if($manager->get($id) != null) {
+            $subject = $manager->get($id);
+            $json = json_encode($this->jsonSerialize($subject));
+            echo $json;
+        } else {
+            echo "aie aie aie on a pas pu récupérer le post";
+        }
     }
     
     public function add() {

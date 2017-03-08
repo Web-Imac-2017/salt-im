@@ -21,5 +21,4 @@ $router->addRule('p/comment/:id', array('controller' => 'comment', 'action' => '
 $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' => 'add'));
 
 $router->load();
-
 ?>

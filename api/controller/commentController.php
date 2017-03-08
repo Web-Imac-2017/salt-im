@@ -45,7 +45,7 @@ class commentController  {
         include "connect.php";
         $manager = new CommentsManager($db);
         $id = $this->id;
-        $comments = $manager->getCommentsFromPost($id);
+        $comments = $manager->getAllCommentsFromPost($id);
         $json = json_encode($this->jsonSerializeArray($comments));
         echo $json;
     }
