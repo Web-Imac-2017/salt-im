@@ -11,7 +11,7 @@ class CommentsManager {
   public function add(Comment $comment)
   {
     $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.$comment->get_date().'", "'.$comment->get_user_id().'")');
-    $publication_id = mysql_insert_id();
+    $publication_id = $this->_db->lastInsertId();
 
     $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$comment->get_related_publication_id().'", "'.$publication_id.'")');
       
@@ -24,13 +24,14 @@ class CommentsManager {
 
   public function delete(Comment $comment)
   {
-    $publication_id = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.comment->get_id().'")');
-    
-    $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id.'"');
-      
-    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id.'"');
+    $result = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.$comment->get_id().'")');
+    $publication_id = $result->fetch(PDO::FETCH_ASSOC);
       
     $this->_db->exec('DELETE FROM comment WHERE id = "'.$comment->get_id().'"');
+      
+    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
+    
+    $this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
   }
 
   public function get($id)
@@ -38,10 +39,24 @@ class CommentsManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Subject.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, text, date FROM comment WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT id FROM comment WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    return new Comment($donnees);
+    $comment = new Comment($donnees);
+
+    // Récupère la publication constituée par ce commentaire
+    $q = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.$id.'"');
+    $publication_id = $q->fetch(PDO::FETCH_ASSOC);
+      
+    // Récupère les infos de la publication
+    $q = $this->_db->query('SELECT id, text, user_id, date FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    
+    $comment->set_text($donnees['text']);
+    $comment->set_user_id($donnees['user_id']);
+    $comment->set_date($donnees['date']);
+      
+    return $comment; // retourne l'objet comment spécifié en id
   }
 
   public function getList()
@@ -58,6 +73,37 @@ class CommentsManager {
 
     return $comments;
   }
+    
+  public function getCommentsFromPost($id) {
+    $comments = [];
+
+    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    { 
+      $comments[] = $this->get($donnees['id']);
+    }
+
+    return $comments;
+  }
+    
+    public function getAllCommentsFromPost($id) {
+        $comments = [];
+        $comment = [];
+    
+    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    { 
+      $comment[] = $this->get($donnees['id']);
+      $comment[] = $this->getCommentsFromPost($donnees['id']);
+      $comments[] = $comment;
+    }
+
+    return $comments;
+    
+        
+    }
     
   public function getStat(Comment $comment) {
     $stats = [];
@@ -88,10 +134,9 @@ class CommentsManager {
   public function update(Comment $comment)
   {
     // Prépare une requête de type UPDATE.
-    $q = $this->_db->prepare('UPDATE comment SET text = "'.$comment->get_text()'", date = "'.$comment->get_date().'" WHERE id = "'.$comment->get_id().'"');
+    //$q = $this->_db->prepare('UPDATE comment SET text = "'.$comment->get_text()'", date = "'.$comment->get_date().'" WHERE id = "'.$comment->get_id().'"');
+    //$q = $this->_db->exec('UPDATE comment SET text = "'.$comment->get_text()'" WHERE id = "'.$comment->get_id().'"');
     
-    // Exécution de la requête.
-    $q->execute();
       
   }
 

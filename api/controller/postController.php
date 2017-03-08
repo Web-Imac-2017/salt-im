@@ -30,6 +30,34 @@ class postController  {
         echo $json;
     }
     
+    public function add() {
+        include "connect.php";
+        echo "add";
+        $manager = new SubjectsManager($db);
+        $subject = new Subject($_POST);
+        try {
+            $manager->add($subject);
+            echo "Le message a bien été envoyé !";
+        }
+        catch(Exception $e) {
+            echo "Oops le post n'a pas pu être envoyé : " . $e->getMessage();
+        }
+    }
+    
+    public function remove() {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $id = $this->id;
+        $subject = $manager->get($id);
+        try {
+            $manager->delete($subject);
+            echo "Le fichier a été supprimé.";
+        } catch(Exception $e) {
+            echo "Oops le post n'a pas pu être supprimé : " . $e->getMessage(); 
+        }
+        
+    }
+    
     public function set_id($id) {
         $this->id = $id; 
     }
