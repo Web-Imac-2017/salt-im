@@ -14,11 +14,11 @@ class SubjectsManager {
       
     $this->_db->exec('INSERT INTO subject(title, flair, type, publication_id) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'", "'.$publication_id.'")');
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("sel", "0", "'.$publication_id.'")');
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("0", "0", "'.$publication_id.'")');
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("poivre", "0", "'.$publication_id.'")'); 
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$publication_id.'")'); 
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("humour", "0", "'.$publication_id.'")'); 
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$publication_id.'")'); 
     
   }
 
