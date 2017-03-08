@@ -25,9 +25,13 @@ class postController  {
         include "connect.php";
         $manager = new SubjectsManager($db);
         $id = $this->id;
-        $subject = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($subject));
-        echo $json;
+        if($manager->get($id) != null) {
+            $subject = $manager->get($id);
+            $json = json_encode($this->jsonSerialize($subject));
+            echo $json;
+        } else {
+            echo "aie aie aie on a pas pu récupérer le post";
+        }
     }
     
     public function add() {
@@ -51,7 +55,7 @@ class postController  {
         $subject = $manager->get($id);
         try {
             $manager->delete($subject);
-            echo "Le post a été supprimé.";
+            echo "Le fichier a été supprimé.";
         } catch(Exception $e) {
             echo "Oops le post n'a pas pu être supprimé : " . $e->getMessage(); 
         }

@@ -88,22 +88,59 @@ class CommentsManager {
   }
     
     public function getAllCommentsFromPost($id) {
-        $comments = [];
-        $comment = [];
-    
+    $comments = [];
+    var_dump($id);
+
     $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     { 
-      $comment[] = $this->get($donnees['id']);
-      $comment[] = $this->getCommentsFromPost($donnees['id']);
-      $comments[] = $comment;
+      $comments[] = $this->get($donnees['id']);
+      $result = $this->cherche($donnees['id']);
+      
+      while ($result != null) {
+        $comments[] = $this->get($result);
+        $result = $this->cherche($result);
+      }
     }
 
     return $comments;
+  }
     
+    public function cherche($id) {
+      // Crée un objet $c comment qui correspond à la première ligne du tableau
+      $c = $this->get($id);
+      
+      // Fait une requête pour récupérer l'id de la publication liée au comment $c
+      $q = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.$id.'"');
+      $result = $q->fetch(PDO::FETCH_ASSOC); 
         
+      // Fait une requête pour voir s'il y a des comments qui répondent à cet id
+      $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$result['publication_id'].'"');
+      $id_3 = $q->fetch(PDO::FETCH_ASSOC);
+        
+      if($id_3 != false){
+          return $id_3['id'];
+      }
     }
+    
+//    public function getAllCommentsFromPost($id) {
+//        $comments = [];
+//        $comment = [];
+//    
+//    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
+//
+//    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+//    { 
+//      $comment[] = $this->get($donnees['id']);
+//      $comment[] = $this->getCommentsFromPost($donnees['id']);
+//      $comments[] = $comment;
+//    }
+//
+//    return $comments;
+//    
+//        
+//    }
     
   public function getStat(Comment $comment) {
     $stats = [];
