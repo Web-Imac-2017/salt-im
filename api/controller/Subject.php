@@ -1,18 +1,6 @@
 <?php
 
 class Subject extends Publication {
-
-    /* PUBLICATION
-    id :        int
-    title :     titre de la publication, texte brut
-    flair :     texte indiquant un statut particulier de la publication
-                            edit
-                            fermé
-                            ... autre
-    type :      texte : post (contribution)
-                        help (demande d'aide)
-    */
-
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $title;

@@ -1,12 +1,6 @@
 <?php
 
 class Tag {
-
-    /* TAG
-    id :        int
-    name :      nom du tag
-    */
-
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $name;

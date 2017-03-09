@@ -1,22 +1,6 @@
 <?php
 
 class Badge {
-
-    /* BADGE
-    id :        int
-    cond :      score minimum pour obtenir un badge
-    name :      texte brut pouvant prendre les valeurs suivantes
-                                                Beurre doux
-                                                Demi-sel
-                                                La Baleine
-                                                Morue
-                                                Saumure
-                                                Mer Morte
-                                                Hypertension artérielle
-    icon :      texte sous forme de lien html vers une image
-    */
-
-
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $cond;
