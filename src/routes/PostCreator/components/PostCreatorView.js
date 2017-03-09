@@ -31,20 +31,23 @@ export default  class PostCreatorView extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let payload = {
-            "title":this.state.title,
-            "text":this.state.description,
-            "date":Date.now()
+            title:this.state.title,
+            text:this.state.description,
+            date:Date.now(),
+            user_id:1,
         }
         let data = new FormData();
         data.append( "json", JSON.stringify( payload ) );
 
-        fetch("http://localhost:8888/salt-im/api/p/post/add/1",
+        fetch("http://localhost:8888/salt-im/api/p/post/add/90",
         {
-            method: "POST",
-            body: data
+            method: "post",
+            body: data,
         })
-        .then(function(res){ console.log(res); return res.json(); })
-        .then(function(data){ console.log(data); alert( JSON.stringify( data ) ) })
+        .then((res) => {
+            console.log(res)
+            return res;
+        }).then((data) => {console.log(data)})
     }
 
     render() {
