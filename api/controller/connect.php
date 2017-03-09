@@ -2,7 +2,7 @@
 //Connexion à la base -------------------------
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 
 try {
     $db = new PDO("mysql:host=$servername;dbname=salt", $username, $password);

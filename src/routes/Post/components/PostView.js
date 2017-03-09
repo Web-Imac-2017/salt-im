@@ -115,14 +115,16 @@ class PostView extends Component {
   }
 
   componentDidMount() {
-    let self=this;
-    fetch('http://localhost:8888/salt-im/api/p/'+self.props.params.postId)
+    
+    const myInit = {method: 'GET', mode: 'no-cors', guard: 'request-no-cors'};
+
+    fetch('http://localhost:8888/salt-im/api/p/'+this.props.params.postId, myInit)
     .then(function(response) {
       let dataPost = response.json();
       return dataPost;
     })
     .then(function(data) {
-      self.setState({postdata:data});
+      this.setState({postdata:data});
     })
   }
 

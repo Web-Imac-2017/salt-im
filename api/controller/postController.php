@@ -26,7 +26,7 @@ class postController  {
         $manager = new SubjectsManager($db);
         $id = $this->id;
         $subject = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($subject));
+        $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     
