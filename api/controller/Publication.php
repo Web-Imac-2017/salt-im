@@ -1,5 +1,13 @@
 <?php
 
+    /* PUBLICATION
+    id :        int
+    text :      texte brut quelconque
+    date :      date de type date
+    user_id :   int correspond à l'id de l'user ayant posté la publication
+    */
+
+
 abstract class Publication {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;

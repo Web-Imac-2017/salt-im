@@ -1,8 +1,7 @@
 <?php
 
-require "Stat.php";
-
-require "StatsManager.php";
+require_once "Stat.php";
+require_once "StatsManager.php";
 
 class statController  {
     

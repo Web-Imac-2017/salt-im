@@ -19,6 +19,7 @@ $router->addRule('p/post/remove/:id', array('controller' => 'post', 'action' => 
 $router->addRule('comment/:id', array('controller' => 'comment', 'action' => 'index'));
 $router->addRule('p/comment/:id', array('controller' => 'comment', 'action' => 'commentsFromPost'));
 $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' => 'add'));
+$router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
 
 $router->load();
 
