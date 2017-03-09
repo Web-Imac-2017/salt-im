@@ -71,11 +71,11 @@ export const HomeView = () => (
     <p className="tagview__titleTrends">Tags tendances</p>
 
     <ListTagColumn data={dataTags}/>
-
-    <p className="tagview__titleTrends">Posts les plus salés</p>
-    <Filter/>
-
-    <ListPost data={dataListPost}/>
+    <div className="tagview__section">
+      <p className="tagview__titleTrends">Posts les plus salés</p>
+      <Filter/>
+      <ListPost data={dataListPost}/>
+    </div>
   </div>
 )
 

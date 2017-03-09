@@ -19,7 +19,7 @@ class ListComment extends Component {
           return response.json();
         })
         .then(function(data) {
-
+            self.props.getNbComments(data.length);
             self.setState({commentData:data});
         })
     }

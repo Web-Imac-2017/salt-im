@@ -2,7 +2,7 @@
 //Connexion à la base -------------------------
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 
 try {
     $db = new PDO("mysql:host=$servername;dbname=salt", $username, $password);
@@ -14,5 +14,3 @@ catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
 }
-
-//-------------------------------------------

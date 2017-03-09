@@ -1,0 +1,15 @@
+.select {
+    position:absolute;
+    right:0;
+    top:0;
+    display:flex;
+    align-items: baseline;
+
+    &__text {
+        flex:1;
+    }
+
+    &__input {
+        flex:1;
+    }
+}
