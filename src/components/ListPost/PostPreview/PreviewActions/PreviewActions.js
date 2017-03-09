@@ -2,12 +2,12 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import './PreviewActions.scss'
 
-export const PreviewActions = () => (
+export const PreviewActions = (props) => (
     <div className="preview__actions">
         <div className="preview__action">
             <div className="preview__action__icon icon icon--comment"/>
             <div className="preview__action__value">
-                25
+                {props.nbComment}
             </div>
         </div>
         <div className="preview__action">

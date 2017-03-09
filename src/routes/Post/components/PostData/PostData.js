@@ -6,18 +6,19 @@ import LinkData from './LinkData/LinkData.js'
 
 export const PostData = (props) => {
     let nodeData;
+    console.log(props.data);
     switch(props.data.type) {
         case "video":
-            nodeData = (<VideoData data={props.data}/>);
+            nodeData = (<VideoData data={props.data} nbComment={props.nbComment}/>);
             break;
         case "image":
-            nodeData =(<PicData data={props.data}/>)
+            nodeData =(<PicData data={props.data} nbComment={props.nbComment}/>)
             break;
         case "link":
-            nodeData = (<LinkData data={props.data}/>);
+            nodeData = (<LinkData data={props.data} nbComment={props.nbComment}/>);
             break;
         default:
-            nodeData = (<TextData data={props.data}/>);
+            nodeData = (<TextData data={props.data} nbComment={props.nbComment}/>);
             break;
     }
 

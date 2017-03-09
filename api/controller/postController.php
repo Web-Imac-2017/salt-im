@@ -7,20 +7,20 @@ require "Subject.php";
 require "SubjectsManager.php";
 
 class postController  {
-    
+
     private $id;
-    
+
     public static function getInstance(array $donnees)
     {
         if (!isset(self::$instance))
             self::$instance = new postController($donnees);
         return self::$instance;
     }
-    
+
     public function __construct(array $donnees) {
         return $this->hydrate($donnees);
     }
-    
+
     public function index() {
         include "connect.php";
         $manager = new SubjectsManager($db);
@@ -29,7 +29,7 @@ class postController  {
         $json = json_encode($this->jsonSerialize($subject));
         echo $json;
     }
-    
+
     public function add() {
         include "connect.php";
         echo "add";
@@ -43,7 +43,7 @@ class postController  {
             echo "Oops le post n'a pas pu être envoyé : " . $e->getMessage();
         }
     }
-    
+
     public function remove() {
         include "connect.php";
         $manager = new SubjectsManager($db);
@@ -53,19 +53,19 @@ class postController  {
             $manager->delete($subject);
             echo "Le post a été supprimé.";
         } catch(Exception $e) {
-            echo "Oops le post n'a pas pu être supprimé : " . $e->getMessage(); 
+            echo "Oops le post n'a pas pu être supprimé : " . $e->getMessage();
         }
-        
+
     }
-    
+
     public function set_id($id) {
-        $this->id = $id; 
+        $this->id = $id;
     }
-    
+
     public function get_id() {
-        return $this->id; 
+        return $this->id;
     }
-    
+
     public function jsonSerialize(Subject $subject) {
         // Represent your object using a nested array or stdClass,
         $data = array(
@@ -80,20 +80,20 @@ class postController  {
         // in the way you want it arranged in your API
         return $data;
     }
-    
+
     // Hydrate
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut
             $method = 'set_'. ucfirst($key);
-            
+
             // Si le setter correspondant existe :
             if(method_exists($this, $method)) {
                 // On appelle le setter
                 $this->$method($value);
             }
         }
-    }   
+    }
 }
 
 ?>

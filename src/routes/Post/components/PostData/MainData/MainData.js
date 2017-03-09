@@ -15,7 +15,7 @@ export const MainData = (props) => {
             <div className="data__title">{props.data.title}</div>
             <div className="data__description">{props.data.text}</div>
             {dataLink}
-            <PreviewActions data={props.data}/>
+            <PreviewActions data={props.data} nbComment={props.nbComment}/>
         </div>
     )
 }

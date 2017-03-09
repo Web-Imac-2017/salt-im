@@ -79,6 +79,7 @@ class PostView extends Component {
 
     this.state = {
         postdata:{},
+        nbComment:0,
     };
   }
 
@@ -94,14 +95,20 @@ class PostView extends Component {
     })
   }
 
+  handleNbComments(nb) {
+    this.setState({
+      nbComment:nb
+    })
+  }
+
   render() {
     return (
       <div className="post">
-        <PostData data={this.state.postdata}/>
+        <PostData data={this.state.postdata} nbComment={this.state.nbComment}/>
         <div className="post__commentBlock center">
             <p className="tagview__titleAll">Commentaires</p>
             <Filter/>
-            <ListComment id={this.state.postdata.id}/>
+            <ListComment getNbComments={this.handleNbComments.bind(this)} id={this.state.postdata.id}/>
         </div>
       </div>
     );

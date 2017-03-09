@@ -19,7 +19,7 @@ export const VideoData = (props) => {
                 </div>
             </div>
             <div className="videodata__right flex-7">
-                <MainData data={props.data}/>
+                <MainData data={props.data} nbComment={this.props.nbComment}/>
             </div>
         </div>
     )
