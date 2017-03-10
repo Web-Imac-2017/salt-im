@@ -6,7 +6,7 @@ import Research from './Nav/Research/Research.js'
 import Account from './Nav/Account/Account.js'
 import BigSearch from './BigSearch/BigSearch.js';
 
-class Header extends Component {
+export default class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -43,8 +43,8 @@ class Header extends Component {
 
         <div className="header__right">
 
-          <Link to="/create/post"><div className="addPostBtn">Ajouter un post</div></Link>
-          <Link to="/create/post"><div className="addPostBtn--mobile"><div className="addPostBtn__text">+</div></div></Link>
+          <Link to="/post/create"><div className="addPostBtn">Ajouter un post</div></Link>
+          <Link to="/post/create"><div className="addPostBtn--mobile"><div className="addPostBtn__text">+</div></div></Link>
 
           <Research changeSearch={this.handleChangeBigSearch.bind(this)}/>
 
@@ -52,10 +52,9 @@ class Header extends Component {
 
           <Account/>
         </div>
+        
         <BigSearch isOpen={this.state.isOpen} />
       </div>
     );
   }
 }
-
-export default Header;

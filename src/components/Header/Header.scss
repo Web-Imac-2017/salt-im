@@ -88,6 +88,10 @@
 		align-items: center;
 		align-content: center;
 
+		//allow space-between in firefox / IE
+		margin-right: 0;
+		margin-left: auto;
+
 		.addPostBtn{
 			width: 150px;
 			padding: 5px;

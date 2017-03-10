@@ -6,9 +6,7 @@ const toggleSearch = (props) => {
 }
 
 export const Research = (props) => (
-  <div onClick={toggleSearch.bind(this, props)}>
-    <div className="searchBtn"></div>
-  </div>
+  <div className="searchBtn" onClick={toggleSearch.bind(this, props)}></div>
 )
 
 export default Research
