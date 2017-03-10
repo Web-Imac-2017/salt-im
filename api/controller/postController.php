@@ -31,6 +31,7 @@ class postController  {
     }
 
     public function add() {
+        echo "Le message a bien été envoyé !";
         include "connect.php";
         echo "add";
         $manager = new SubjectsManager($db);
