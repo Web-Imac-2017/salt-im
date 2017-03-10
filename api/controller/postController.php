@@ -31,14 +31,11 @@ class postController  {
     }
 
     public function add() {
-        echo "Le message a bien été envoyé !";
         include "connect.php";
         echo "add";
         $manager = new SubjectsManager($db);
         $subject = new Subject($_POST);
-        echo "Le message a bien été envoyé !";
         try {
-            echo "Le message a bien été envoyé !";
             $manager->add($subject);
             echo "Le message a bien été envoyé !";
         }
