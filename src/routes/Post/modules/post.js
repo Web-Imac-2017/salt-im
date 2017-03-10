@@ -29,16 +29,11 @@ export function recievePost (value: string): Action {
   }
 }
 
-const dataPost = {
-    "title":"Super titre putaclic sa mère"
-}
-
-
 export const fetchPost = (): Function => {  
   return (dispatch: Function): Promise => {
     dispatch(requestPost())
 
-    return fetch('https://api.github.com/zen')
+    return fetch('https://jsonplaceholder.typicode.com/')
       .then(data => data.text())
       .then(text => dispatch(recievePost(text)))
   }
