@@ -1,6 +1,13 @@
 <?php
 
 class Comment extends Publication {
+
+    /* COMMENTS
+    id :                        int
+    related_publication_id :    id de la publication à laquelle répond le commentaire
+    publication_id :            id de la publication avec le contenu du commentaire
+    */
+
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $related_publication_id;

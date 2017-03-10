@@ -16,6 +16,20 @@ class ListComment extends Component {
         let self = this;
         fetch('http://localhost:8888/salt-im/api/p/comment/'+nextProps.id)
         .then(function(response) {
+            console.log("dofkof")
+          return JSON.stringify(response);
+        })
+        .then(function(data) {
+            self.props.getNbComments(data.length);
+            self.setState({commentData:data});
+        })
+    }
+
+    componentDidMount() {
+        let self = this;
+        fetch('http://localhost:8888/salt-im/api/p/comment/1')
+        .then(function(response) {
+            console.log("dofkof")
           return response.json();
         })
         .then(function(data) {
