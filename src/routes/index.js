@@ -24,12 +24,12 @@ const tagsRoute = {
 }
 
 let CreatePostRoute = {
-  path: 'create/post',
+  path: 'post/create',
   indexRoute: PostCreator
 }
 
 let CreateTagRoute = {
-  path: 'create/tag',
+  path: 'tag/create',
   indexRoute: TagCreator
 }
 const tagRoute = {
@@ -57,10 +57,10 @@ export const createRoutes = (store) => ({
   component   : CoreLayout,
   indexRoute  : Home,
   childRoutes : [
-    postRoute,
-    tagsRoute,
     CreatePostRoute,
     CreateTagRoute,
+    postRoute,
+    tagsRoute,
     tagRoute,
     profileRoute,
     authentificationRoute,

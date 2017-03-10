@@ -1,16 +1,3 @@
-// import React from 'react'
-// import { IndexLink, Link } from 'react-router'
-// import './BigSearch.scss'
-
-// export const BigSearch = () => (
-//   <div className="bigsearch">
-//     bigsearch
-//   </div>
-// )
-
-// export default BigSearch
-
-
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './BigSearch.scss'

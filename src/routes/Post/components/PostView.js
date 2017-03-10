@@ -19,10 +19,13 @@ export default class PostView extends Component {
   componentDidMount() {
 
     const myInit = {method: 'POST'};
-
+    
     fetch('http://localhost/salt-im/api/p/'+this.props.params.postId, myInit)
       .then((response) => response.json())
-      .then((object) => {this.setState({postdata: object})})
+      .then((object) => { 
+        console.log(object) 
+        this.setState({postdata: object})
+      })
   }
 
   handleNbComments(nb) {
