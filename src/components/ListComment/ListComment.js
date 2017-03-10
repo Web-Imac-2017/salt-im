@@ -3,7 +3,7 @@ import Comment from './Comment/Comment.js'
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class ListComment extends Component {
+export default class ListComment extends Component {
     constructor(props) {
       super(props);
 
@@ -41,5 +41,3 @@ class ListComment extends Component {
         );
     }
 }
-
-export default ListComment;

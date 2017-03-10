@@ -24,7 +24,7 @@ class BigSearch extends Component {
     return (
       <div className={classes}>
         <form>
-            <input type="text" value="Search"/>
+            <input type="text" placeholder="Search"/>
         </form>
       </div>
     );

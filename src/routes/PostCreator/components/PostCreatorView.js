@@ -30,30 +30,31 @@ export default  class PostCreatorView extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        let payload = {
-            "title":this.state.title,
-            "text":this.state.description,
-            "date":Date.now()
-        }
-        let data = new FormData();
-        data.append( "json", JSON.stringify( payload ) );
+        let self = this;
 
-        fetch("http://localhost:8888/salt-im/api/p/post/add/1",
+        fetch("http://localhost:8888/salt-im/api/p/post/add/90",
         {
-            method: "POST",
-            body: data
+            method: "post",
+            body: new FormData(self.refs.form),
         })
-        .then(function(res){ console.log(res); return res.json(); })
-        .then(function(data){ console.log(data); alert( JSON.stringify( data ) ) })
+        .then((res) => {
+            console.log(res)
+            return res;
+        }).then((data) => {console.log(data)})
     }
 
     render() {
         let self  =this;
-        console.log(this.state.title)
+
+        let d = new Date();
+        let iso_date_string = d.toISOString();
+        // produces "2014-12-15T19:42:27.100Z"
+        let locale_date_string = d.toLocaleDateString();
+
         return (
             <div className="postcreator center">
               <Link to="/posts" className="goback">Retour aux posts</Link>
-              <form className="form" onSubmit={this.handleSubmit.bind(this)}>
+              <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
                   <div className="form__header">Nouveau post</div>
                   <div className="form__input">
                     <label for="title">Titre
@@ -65,9 +66,9 @@ export default  class PostCreatorView extends Component {
                     </label>
                   </div>
                   <div className="form__input">
-                    <label for="description">Description du post
+                    <label for="text">Description du post
                         <input
-                            type="text" name="description" id="description" placeholder="Décris tes propos"
+                            type="text" name="text" id="text" placeholder="Décris tes propos"
                             onChange={this.handleChangeDescription.bind(this)}
                             required="required"
                         />
@@ -86,6 +87,8 @@ export default  class PostCreatorView extends Component {
                       <div className="form__title">image du post</div>
                       <input type="file"/>
                   </div>
+                  <input type="hidden" value={locale_date_string} name="date" />
+                  <input type="hidden" value={57} name="user_id" />
                   <input type="submit" value="Ajouter un post"/>
               </form>
             </div>

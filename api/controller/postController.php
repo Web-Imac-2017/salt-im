@@ -25,9 +25,13 @@ class postController  {
         include "connect.php";
         $manager = new SubjectsManager($db);
         $id = $this->id;
-        $subject = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
-        echo $json;
+        if($manager->get($id) != null) {
+            $subject = $manager->get($id);
+            $json = json_encode($this->jsonSerialize($subject));
+            echo $json;
+        } else {
+            echo "aie aie aie on a pas pu récupérer le post";
+        }
     }
     
     public function add() {
@@ -66,6 +70,14 @@ class postController  {
         return $this->id; 
     }
     
+    public function help($type) {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $subject = $manager->get_help($id);
+        $json = json_encode($this->jsonSerialize($subject));
+        echo $json;
+    }
+
     public function jsonSerialize(Subject $subject) {
         // Represent your object using a nested array or stdClass,
         $data = array(

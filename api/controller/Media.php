@@ -1,6 +1,14 @@
 <?php
 if(!class_exists('Media')) {
     class Media {
+
+        /* MEDIA
+        id :                int
+        link :              lien html renvoyant vers un media img/video
+        type :              type de media img/video
+        publication_id :    id de la publication à laquelle le media est rattaché
+        */
+
         // Ligne à multiplier selon le nombre d'attributs
         private $id;
         private $link;
