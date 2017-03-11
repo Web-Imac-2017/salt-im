@@ -27,7 +27,7 @@ class postController  {
         $id = $this->id;
         if($manager->get($id) != null) {
             $subject = $manager->get($id);
-            $json = json_encode($this->jsonSerialize($subject));
+            $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         } else {
             echo "aie aie aie on a pas pu récupérer le post";
