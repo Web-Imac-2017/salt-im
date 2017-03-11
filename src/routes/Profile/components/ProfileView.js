@@ -31,7 +31,6 @@ export default class ProfileView extends Component {
                 this.loadFavs();
             });
 
-
     }
 
     loadFavs() {

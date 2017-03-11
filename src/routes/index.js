@@ -40,7 +40,7 @@ const tagRoute = {
 }
 
 const profileRoute = {
-  path: 'profile',
+  path: 'profile/:userId',
   indexRoute: Profile
 }
 
@@ -54,9 +54,8 @@ const signupRoute = {
   indexRoute: Signup
 }
 
-
-const profileUpdateView = {
-  path: '/u/me',
+const profileUpdate = {
+  path: '/profile/:userId/update/',
   indexRoute: ProfileUpdateView
 }
 
@@ -75,10 +74,10 @@ export const createRoutes = (store) => ({
     postRoute,
     tagsRoute,
     tagRoute,
+    profileUpdate,
     profileRoute,
     authentificationRoute,
     signupRoute,
-    profileUpdateView,
     page404Route
   ]
 })
