@@ -46,11 +46,9 @@ class commentController  {
         include "connect.php";
         $manager = new CommentsManager($db);
         $id = $this->id;
-        $comments = $manager->getAllCommentsFromPost($id);
-        $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
         $order = $this->order;
-        $comments = $manager->getAllCommentsFromPost($id, $order);
-        $json = json_encode($this->jsonSerializeArray($comments));
+        $comments = $manager->getAllCommentsFromPost($id);
+        $json = json_encode($this->sortByOrder($this->jsonSerializeArray($comments), $order), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     
@@ -75,8 +73,7 @@ class commentController  {
         $data = array(
             'text' => utf8_encode($comment->get_text()),
             'date' => utf8_encode($comment->get_date()),
-            'user_id' => utf8_encode($comment->get_user_id()),
-            'media_id' => utf8_encode($comment->get_media_id())
+            'user_id' => utf8_encode($comment->get_user_id())
         );
         // in the way you want it arranged in your API
         return $data;
@@ -95,6 +92,34 @@ class commentController  {
         }
         // in the way you want it arranged in your API
         return $data;
+    }
+    
+    public function sortByOrder(array $comments, $order) {
+        if ($order == "date") {
+            foreach ($comments as $key => $row) {
+                $date[$key] = $row['date'];
+            }
+            array_multisort($date, SORT_ASC, $comments); 
+            
+        } else if ($order == 0) {
+            foreach ($comments as $key => $row) {
+                $sel[$key] = $row['sel'];
+            }
+            array_multisort($date, SORT_ASC, $comments);
+            
+        } else if ($order == 1) {
+            foreach ($comments as $key => $row) {
+                $poivre[$key] = $row['poivre'];
+            }
+            array_multisort($date, SORT_ASC, $comments); 
+            
+        } else if ($order == 2) {
+            foreach ($comments as $key => $row) {
+                $humour[$key] = $row['humour'];
+            }
+            array_multisort($date, SORT_ASC, $comments); 
+        }
+        return $comments;
     }
     
     // Hydrate

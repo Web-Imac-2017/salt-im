@@ -10,6 +10,8 @@ class Tag {
     // Ligne à multiplier selon le nombre d'attributs
     private $id;
     private $name;
+    private $img_url;
+    private $description;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -31,6 +33,22 @@ class Tag {
     
     public function set_name($name) {
         $this->name = $name;      
+    }
+    
+    public function get_img_url() {
+        return $this->img_url;
+    }
+    
+    public function set_img_url($img_url) {
+        $this->img_url = $img_url;      
+    }
+    
+    public function get_description() {
+        return $this->description;
+    }
+    
+    public function set_description($description) {
+        $this->description = $description;      
     }
 
     // Hydrate

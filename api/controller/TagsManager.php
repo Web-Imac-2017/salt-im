@@ -41,7 +41,7 @@ class TagsManager {
     // Retourne la liste de tous les tags.
     $tags = [];
 
-    $q = $this->_db->query('SELECT id, name FROM tag ORDER BY id');
+    $q = $this->_db->query('SELECT id, name, img_url, description FROM tag ORDER BY id');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
@@ -58,12 +58,12 @@ class TagsManager {
     $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
       
     // On a récupéré les ids des publications ayant le tag précisé
-      for($i=0; $row = $q->fetch(); $i++){
+      for($i=0; $row = $q->fetch(); $i++) {
         $subject_id_array[] = $row['id'];
       }
     // Il faut récupérer les subjects correspondant aux ids
       
-    for($i=0; count($subject_id_array); i++) {
+    for($i=0; count($subject_id_array); $i++) {
         $q = $this->_db->query('SELECT * FROM subject WHERE id = "'.$subject_id_array[$i].'"');
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
@@ -86,7 +86,7 @@ class TagsManager {
       }
     // Il faut récupérer les subjects correspondant aux ids
       
-    for($i=0; count($comment_id_array); i++) {
+    for($i=0; count($comment_id_array); $i++) {
         $q = $this->_db->query('SELECT * FROM subject WHERE id = "'.$comment_id_array[$i].'"');
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
