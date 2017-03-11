@@ -1,30 +1,4 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
---
--- Client :  127.0.0.1
--- Généré le :  Ven 10 Mars 2017 à 10:16
--- Version du serveur :  5.7.9
--- Version de PHP :  5.6.16
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données :  `salt`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `badge`
---
+﻿
 
 DROP TABLE IF EXISTS `badge`;
 CREATE TABLE IF NOT EXISTS `badge` (
@@ -35,9 +9,6 @@ CREATE TABLE IF NOT EXISTS `badge` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `badge`
---
 
 INSERT INTO `badge` (`id`, `cond`, `name`, `icon`) VALUES
 (1, 0, 'Beurre doux', 'fpenr'),
@@ -48,11 +19,7 @@ INSERT INTO `badge` (`id`, `cond`, `name`, `icon`) VALUES
 (6, 10000, 'Mer Morte', 'arf'),
 (7, 25000, 'Hypertension artérielle', 'zrgeg');
 
--- --------------------------------------------------------
 
---
--- Structure de la table `comment`
---
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
@@ -64,20 +31,13 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `comment`
---
+
 
 INSERT INTO `comment` (`id`, `related_publication_id`, `publication_id`) VALUES
 (1, 1, 13),
 (2, 13, 15),
 (3, 15, 16);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `help`
---
 
 DROP TABLE IF EXISTS `help`;
 CREATE TABLE IF NOT EXISTS `help` (
@@ -87,11 +47,7 @@ CREATE TABLE IF NOT EXISTS `help` (
   UNIQUE KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Structure de la table `media`
---
 
 DROP TABLE IF EXISTS `media`;
 CREATE TABLE IF NOT EXISTS `media` (
@@ -103,9 +59,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   UNIQUE KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `media`
---
+
 
 INSERT INTO `media` (`id`, `link`, `type`, `publication_id`) VALUES
 (1, 'https://vgy.me/yqYylA.jpg', 'img', 1),
@@ -114,11 +68,7 @@ INSERT INTO `media` (`id`, `link`, `type`, `publication_id`) VALUES
 (4, 'https://vgy.me/O7McN9.jpg', 'img', 4),
 (5, 'https://vgy.me/iCyAfm.jpg', 'img', 5);
 
--- --------------------------------------------------------
 
---
--- Structure de la table `publication`
---
 
 DROP TABLE IF EXISTS `publication`;
 CREATE TABLE IF NOT EXISTS `publication` (
@@ -130,9 +80,6 @@ CREATE TABLE IF NOT EXISTS `publication` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `publication`
---
 
 INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 (1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1),
@@ -152,11 +99,7 @@ INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 (15, 'Ceci est un commentaire de commentaire', '2017-03-09', 1),
 (16, 'Ceci est un commentaire de commentaire de commentaire', '2017-06-12', 1);
 
--- --------------------------------------------------------
 
---
--- Structure de la table `rel_tag_publication`
---
 
 DROP TABLE IF EXISTS `rel_tag_publication`;
 CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
@@ -168,11 +111,7 @@ CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
   UNIQUE KEY `tag_id` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Structure de la table `stat`
---
 
 DROP TABLE IF EXISTS `stat`;
 CREATE TABLE IF NOT EXISTS `stat` (
@@ -183,11 +122,7 @@ CREATE TABLE IF NOT EXISTS `stat` (
   `related_element_type` int(11) NOT NULL COMMENT '0 = subject, 1 = user'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='0 = sel, 1 = poivre, 2 = humour';
 
--- --------------------------------------------------------
 
---
--- Structure de la table `subject`
---
 
 DROP TABLE IF EXISTS `subject`;
 CREATE TABLE IF NOT EXISTS `subject` (
@@ -200,9 +135,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
   UNIQUE KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `subject`
---
+
 
 INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
 (1, 'Un p''tit café salé ?', '', 'post', 1),
@@ -216,11 +149,7 @@ INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
 (9, 'Aluminium', '', 'post', 10),
 (10, 'Julien Rousset est sur Tinder !', 'fermé', 'post', 11);
 
--- --------------------------------------------------------
 
---
--- Structure de la table `tag`
---
 
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
@@ -229,9 +158,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `tag`
---
+
 
 INSERT INTO `tag` (`id`, `name`) VALUES
 (1, 'Esipe vs IMAC'),
@@ -245,11 +172,7 @@ INSERT INTO `tag` (`id`, `name`) VALUES
 (9, 'Flavie'),
 (10, 'Malaise TV');
 
--- --------------------------------------------------------
 
---
--- Structure de la table `user`
---
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
@@ -266,9 +189,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `badge_id` (`badge_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `user`
---
+
 
 INSERT INTO `user` (`id`, `mail`, `username`, `password`, `avatar`, `birthDate`, `rank`, `signupDate`, `badge_id`) VALUES
 (1, 'jc@gmail.com', 'JC', 'zef54fe6sf6e', 'https://vgy.me/fxOyCd.jpg', '1956-07-05', 0, '2017-03-01', 1),
@@ -278,6 +199,3 @@ INSERT INTO `user` (`id`, `mail`, `username`, `password`, `avatar`, `birthDate`,
 (5, 'flaive_lacus@laposte.net', 'demon_de_sel', 'cerebos', 'https://vgy.me/BYI9cR.jpg', '1996-05-05', 10, '2017-03-02', 7),
 (6, 'aleqs@nd.ru', 'Aleqsandr', 'vvvaves', 'https://vgy.me/SX0a5T.jpg', '1995-12-22', 2, '2017-03-07', 3);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

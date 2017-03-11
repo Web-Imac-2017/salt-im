@@ -5,15 +5,18 @@ import Tag from '../Tag/Tag.js'
 
 
 export const ListTagColumn = (props) => {
-    const tagsNode = props.data.map( (elmt,i) => (
+    let nodeData;
+    console.log(props.data);
+
+    /*const tagsNode = props.data.map( (elmt,i) => (
         <Tag key={i} data={elmt}/>
-    ))
+    ))*/
 
     return (
       <div className="tagsColumn">
         
         <div className="tagsColumn__list">
-            {tagsNode}
+            {nodeData}
         </div>
 
      </div>
