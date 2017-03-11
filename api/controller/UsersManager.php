@@ -15,7 +15,8 @@ public function getDb() {
 
   public function add(User $user) {
     // Préparation de la requête 
-    $q = $this->_db->prepare('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$user->get_password().'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "'.$user->get_rank().'", "'.$user->get_signupDate().'")');
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$user->get_text().'", "'.$user->get_date().'", "'.$comment->get_user_id().'")');
+    $publication_id = $this->_db->lastInsertId();
       
     // Exécution de la requête.
       var_dump($q);
@@ -25,7 +26,11 @@ public function getDb() {
 
   public function delete(User $user) {
     // Exécute une requête de type DELETE.
-      $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
+    $result = $this->_db->query('SELECT publication_id FROM user WHERE id = "'.$user->get_id().'")');
+    $publication_id = $result->fetch(PDO::FETCH_ASSOC);
+    $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
+    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
+    //Ici on veut enlever les stats pas les publications liées ???
   }
 
   public function get($id)
@@ -39,6 +44,42 @@ public function getDb() {
     return new User($donnees);
   }
 
+
+  public function getStat(User $user) {
+    $stats = [];
+    
+    $q = $this->_db->query('SELECT * FROM stat WHERE related_element_id = "'.$user->get_id().'"');
+      
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $stats[] = new Stat($donnees);
+    }
+
+    return $stats;
+}
+
+public function getSubjects(User $user) {
+    $subject_id_array = [];
+    $subjects = [];
+      
+    $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
+      
+    // On a récupéré les ids des publications ayant le tag précisé
+      for($i=0; $row = $q->fetch(); $i++){
+        $subject_id_array[] = $row['id'];
+      }
+    // Il faut récupérer les subjects correspondant aux ids
+      
+    for($i=0; count($subject_id_array); i++) {
+        $q = $this->_db->query('SELECT * FROM subject WHERE id = "'.$subject_id_array[$i].'"');
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $subjects[] = new Subject($donnees);
+        }
+    }    
+
+    return $subjects;
+  }
   public function getList()
   {
     // Retourne la liste de tous les users.
