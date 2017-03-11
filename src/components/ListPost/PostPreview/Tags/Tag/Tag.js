@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {Link} from 'react-router'
 import './Tag.scss'
 
-export const Tags = (props) => (
-    <div className="preview__tag">
-        #{props.data}
-    </div>
-)
-
-export default Tags
+export default class Tag extends Component {
+    render() {
+        let url = "/tag/"+this.props.data.toLowerCase();
+        return(
+                <Link to={url} className="preview__tag">
+                    #{this.props.data}
+                </Link>
+        )
+    }
+}
