@@ -15,7 +15,8 @@ public function getDb() {
 
   public function add(User $user) {
     // Préparation de la requête 
-    $q = $this->_db->prepare('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$user->get_password().'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "'.$user->get_rank().'", "'.$user->get_signupDate().'")');
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$user->get_text().'", "'.$user->get_date().'", "'.$comment->get_user_id().'")');
+    $publication_id = $this->_db->lastInsertId();
       
     // Exécution de la requête.
       var_dump($q);
@@ -30,7 +31,6 @@ public function getDb() {
     $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
     $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
     //Ici on veut enlever les stats pas les publications liées ???
-    //$this->_db->exec('DELETE FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
   }
 
   public function get($id)
