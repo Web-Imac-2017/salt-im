@@ -7,6 +7,7 @@ require_once "CommentsManager.php";
 class commentController  {
     
     private $id;
+    private $order;
     
     public static function getInstance(array $donnees)
     {
@@ -24,7 +25,7 @@ class commentController  {
         $manager = new CommentsManager($db);
         $id = $this->id;
         $comment = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($comment));
+        $json = json_encode($this->jsonSerialize($comment), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     
@@ -46,6 +47,9 @@ class commentController  {
         $manager = new CommentsManager($db);
         $id = $this->id;
         $comments = $manager->getAllCommentsFromPost($id);
+        $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
+        $order = $this->order;
+        $comments = $manager->getAllCommentsFromPost($id, $order);
         $json = json_encode($this->jsonSerializeArray($comments));
         echo $json;
     }
@@ -58,12 +62,21 @@ class commentController  {
         return $this->id; 
     }
     
+    public function set_order($order) {
+        $this->order = $order; 
+    }
+    
+    public function get_order() {
+        return $this->order; 
+    }
+    
     public function jsonSerialize(Comment $comment) {
         // Represent your object using a nested array or stdClass,
         $data = array(
             'text' => utf8_encode($comment->get_text()),
             'date' => utf8_encode($comment->get_date()),
-            'user_id' => utf8_encode($comment->get_user_id())
+            'user_id' => utf8_encode($comment->get_user_id()),
+            'media_id' => utf8_encode($comment->get_media_id())
         );
         // in the way you want it arranged in your API
         return $data;
