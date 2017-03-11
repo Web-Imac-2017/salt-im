@@ -1,11 +1,10 @@
 <?php
-require_once 'controller/connect.php';
+require_once 'controller\connect.php';
 //a créer. 
 
-$error = [];
 if($user->is_loggedin()!="")
 {
-    $user->redirect('/');
+    $user->redirect('home.php');
 }
 
 if(isset($_POST['btn-signup']))
@@ -13,48 +12,41 @@ if(isset($_POST['btn-signup']))
    $uname = trim($_POST['txt_uname']);
    $umail = trim($_POST['txt_umail']);
    $upass = trim($_POST['txt_upass']); 
-
  
    if($uname=="") {
-      $error['user'] = "provide username !"; 
-   }
-
-   else if(strlen($uname) < 3 && strlen($uname) > 20 ){
-      $error['password'] = "Password must be atleast 6 characters"; 
+      $error[] = "provide username !"; 
    }
    else if($umail=="") {
-      $error['id'] = "provide email id !"; 
+      $error[] = "provide email id !"; 
    }
    else if(!filter_var($umail, FILTER_VALIDATE_EMAIL)) {
-      $error['email'] = 'Please enter a valid email address !';
+      $error[] = 'Please enter a valid email address !';
    }
    else if($upass=="") {
-      $error['empty_password'] = "provide password !";
+      $error[] = "provide password !";
    }
-   else if(strlen($upass) < 6 && strlen($upass) > 128 ){
-      $error['password_length'] = "Password must be between 6 and 128 characters"; 
+   else if(strlen($upass) < 6){
+      $error[] = "Password must be atleast 6 characters"; 
    }
    else
    {
       try
       {
-         $stmt = $DB_con->prepare("SELECT username,useremail FROM user WHERE username=:uname OR useremail=:umail");
+         $stmt = $DB_con->prepare("SELECT user_name,user_email FROM users WHERE user_name=:uname OR user_email=:umail");
          $stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
          $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
-         if($row['username']==$uname) {
-            $error['username_taken'] = "sorry username already taken !";
+         if($row['user_name']==$uname) {
+            $error[] = "sorry username already taken !";
          }
-         else if($row['useremail']==$umail) {
-            $error['email_taken'] = "sorry email id already taken !";
+         else if($row['user_email']==$umail) {
+            $error[] = "sorry email id already taken !";
          }
          else
          {
-            if(empty($error)) 
+            if($user->register($fname,$lname,$uname,$umail,$upass)) 
             {
-                include 'connect.php'
-                $req = $pdo->prepare("INSERT INTO user SET username = ?, password = ?, mail = ?, ");
-                $req->execute
+                $user->redirect('sign-up.php?joined');
             }
          }
      }
