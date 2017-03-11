@@ -14,10 +14,9 @@ export default class ListComment extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("id "+nextProps.id)
         return;
         if(this.state.repeat == true){
-            fetch('http://localhost:8888/salt-im/api/p/comment/'+nextProps.id)
+            fetch('http://localhost/salt-im/api/p/comment/'+nextProps.id)
                 .then((response) => response.json())
                 .then((data) => {
                     this.props.getNbComments(data.length);
