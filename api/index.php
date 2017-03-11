@@ -20,7 +20,12 @@ $router->addRule('comment/:id', array('controller' => 'comment', 'action' => 'in
 $router->addRule('p/comment/:id/:order', array('controller' => 'comment', 'action' => 'commentsFromPost'));
 $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' => 'add'));
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
-$router->addRule('u/register', array('controller' => 'user', 'action' => 'register'));
+$router->addRule('u/signup', array('controller' => 'user', 'action' => 'signup'));
+$router->addRule('u/signout', array('controller' => 'user', 'action' => 'signout'));
+$router->addRule('u/login', array('controller' => 'user', 'action' => 'login'));
+$router->addRule('u/logout', array('controller' => 'user', 'action' => 'logout'));
+$router->addRule('u/name/:id', array('controller' => 'user', 'action' => 'name'));
+$router->addRule('u/:id', array('controller' => 'user', 'action' => 'index'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 
