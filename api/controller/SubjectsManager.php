@@ -81,7 +81,7 @@ class SubjectsManager {
     $id = (int) $id;
       
     // Récupère le subject
-    $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'" AND type = "subject"');
+    $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'" AND type = "post"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     $subject = new Subject($donnees);
       
@@ -90,18 +90,18 @@ class SubjectsManager {
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     
     // Récupère les données de la publication  
-    $q = $this->_db->query('SELECT id, text, date, user_id, media_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
+    $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     // Récupère l'id du media de la publication
     $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
       
     // Rajoute les infos manquantes de subject
     $subject->set_text($donnees['text']);
     $subject->set_date($donnees['date']);
     $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees['media_id']);
+    $subject->set_media_id($donnees_media['media_id']);
       
     return $subject;
     
@@ -121,18 +121,18 @@ class SubjectsManager {
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     
     // Récupère les données de la publication  
-    $q = $this->_db->query('SELECT id, text, date, user_id, media_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
+    $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     // Récupère l'id du media de la publication 
     $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
       
     // Rajoute les infos manquantes de subject
     $subject->set_text($donnees['text']);
     $subject->set_date($donnees['date']);
     $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees['media_id']);
+    $subject->set_media_id($donnees_media['media_id']);
       
     return $subject;
   }
@@ -150,18 +150,18 @@ public function sort_date(){
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     
     // Récupère les données de la publication  
-    $q = $this->_db->query('SELECT id, text, date, user_id, media_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
+    $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     // Récupère l'id du media de la publication
     $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
       
     // Rajoute les infos manquantes de subject
     $subject->set_text($donnees['text']);
     $subject->set_date($donnees['date']);
     $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees['media_id']);
+    $subject->set_media_id($donnees_media['media_id']);
       
     return $subject;
 }
