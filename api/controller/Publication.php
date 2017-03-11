@@ -13,6 +13,9 @@ abstract class Publication {
     private $id;
     private $text;
     private $date;
+    private $sel;
+    private $poivre;
+    private $humour;
     private $user_id;
     private $media_id;
     

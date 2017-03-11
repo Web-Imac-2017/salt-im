@@ -7,7 +7,7 @@ class SubjectsManager {
     $this->setDb($db);
   }
 
-  public function add(Subject $subject)
+  public function add(Subject $subject, $tags)
   {      
     $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$subject->get_text().'", "'.date("Y-m-d H:i:s").'", "'.$subject->get_user_id().'")');
     $publication_id = $this->_db->lastInsertId();
@@ -19,6 +19,8 @@ class SubjectsManager {
     $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$publication_id.'")'); 
       
     $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$publication_id.'")'); 
+      
+    $this->addTags($publication_id, $tags);
     
   }
 
@@ -139,6 +141,14 @@ class SubjectsManager {
       
     return $subject;
   }
+    
+    public function addTags($id, $tags) {
+        for($i=0; count($tags); $i++) {
+            $q = $this->_db->query('SELECT id FROM tag WHERE name = "'.$tags[$i].'"');
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            $this->_db->exec('INSERT INTO rel_tag_publication(publication_id, tag_id) VALUES("'.$id.'", "'.$donnees['id'].'"');
+        }
+    }
 
 public function sort_date(){
   // Exécute une requête de type SELECT avec les posts triés par date

@@ -93,7 +93,7 @@ class CommentsManager {
     return $comments;
   }
     
-    public function getAllCommentsFromPost($id, $order) {
+    public function getAllCommentsFromPost($id) {
     $comments = [];
 
     $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
@@ -108,13 +108,6 @@ class CommentsManager {
         $result = $this->cherche($result);
       }
     }
-        
-    // Tri le tableau en fonction de la date
-        foreach ($comments as $key => $row) {
-            $date[$key] = $row['date'];
-        }
-        array_multisort($date, SORT_DESC, $comments);
-
     return $comments;
   }
     
@@ -178,6 +171,14 @@ class CommentsManager {
 
     return $comments;
 }
+    
+    public function addTags($id, $tags) {
+        for($i=0; count($tags); $i++) {
+            $q = $this->_db->query('SELECT id FROM tag WHERE name = "'.$tags[$i].'"');
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            $this->_db->exec('INSERT INTO rel_tag_publication(publication_id, tag_id) VALUES("'.$id.'", "'.$donnees['id'].'"');
+        }
+    }
 
   public function update(Comment $comment)
   {
