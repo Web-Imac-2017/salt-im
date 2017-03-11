@@ -8,7 +8,7 @@ export default class Page404View extends Component {
     return(
       <div className="error404">
         <div className="error404__background"/>
-        <div className="error404__text">T'as pas trouver la page t'es une Moby Dick</div>
+        <div className="error404__text">T'as pas trouvé la page t'es une Moby Dick</div>
       </div>
     )
   }
