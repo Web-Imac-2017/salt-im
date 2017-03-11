@@ -7,6 +7,7 @@ require_once "CommentsManager.php";
 class commentController  {
     
     private $id;
+    private $order;
     
     public static function getInstance(array $donnees)
     {
@@ -47,6 +48,9 @@ class commentController  {
         $id = $this->id;
         $comments = $manager->getAllCommentsFromPost($id);
         $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
+        $order = $this->order;
+        $comments = $manager->getAllCommentsFromPost($id, $order);
+        $json = json_encode($this->jsonSerializeArray($comments));
         echo $json;
     }
     
@@ -56,6 +60,14 @@ class commentController  {
     
     public function get_id() {
         return $this->id; 
+    }
+    
+    public function set_order($order) {
+        $this->order = $order; 
+    }
+    
+    public function get_order() {
+        return $this->order; 
     }
     
     public function jsonSerialize(Comment $comment) {
