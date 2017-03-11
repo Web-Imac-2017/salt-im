@@ -10,7 +10,7 @@ class CommentsManager {
 
   public function add(Comment $comment)
   {
-    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.$comment->get_date().'", "'.$comment->get_user_id().'")');
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.date("Y-m-d H:i:s").'", "'.$comment->get_user_id().'")');
     $publication_id = $this->_db->lastInsertId();
 
     $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$comment->get_related_publication_id().'", "'.$publication_id.'")');
@@ -51,10 +51,16 @@ class CommentsManager {
     // Récupère les infos de la publication
     $q = $this->_db->query('SELECT id, text, user_id, date FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    // Récupère l'id du media lié
+    $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
+    $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
     
     $comment->set_text($donnees['text']);
     $comment->set_user_id($donnees['user_id']);
     $comment->set_date($donnees['date']);
+    $comment->set_media_id($donnees_media['id']);
+
       
     return $comment; // retourne l'objet comment spécifié en id
   }
@@ -87,9 +93,8 @@ class CommentsManager {
     return $comments;
   }
     
-    public function getAllCommentsFromPost($id) {
+    public function getAllCommentsFromPost($id, $order) {
     $comments = [];
-    var_dump($id);
 
     $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
 
@@ -103,6 +108,12 @@ class CommentsManager {
         $result = $this->cherche($result);
       }
     }
+        
+    // Tri le tableau en fonction de la date
+        foreach ($comments as $key => $row) {
+            $date[$key] = $row['date'];
+        }
+        array_multisort($date, SORT_DESC, $comments);
 
     return $comments;
   }
