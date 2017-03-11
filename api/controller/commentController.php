@@ -24,7 +24,7 @@ class commentController  {
         $manager = new CommentsManager($db);
         $id = $this->id;
         $comment = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($comment));
+        $json = json_encode($this->jsonSerialize($comment), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     
@@ -46,7 +46,7 @@ class commentController  {
         $manager = new CommentsManager($db);
         $id = $this->id;
         $comments = $manager->getAllCommentsFromPost($id);
-        $json = json_encode($this->jsonSerializeArray($comments));
+        $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     
