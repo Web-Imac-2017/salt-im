@@ -14,7 +14,6 @@ export default class ListComment extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("id "+nextProps.id)
         return;
         if(this.state.repeat == true){
             fetch('http://localhost/salt-im/api/p/comment/'+nextProps.id)
@@ -30,9 +29,11 @@ export default class ListComment extends Component {
         let commentsNode = (<div>Personne n est salé ici.</div>)
 
         if(!this.props.data){
-            commentsNode = this.state.commentData.map((elmt,i) => {
-                return (<Comment key={i} data={elmt}/>)
-            })
+            if(this.state.commentData.length) {
+                commentsNode = this.state.commentData.map((elmt,i) => {
+                    return (<Comment key={i} data={elmt}/>)
+                })
+            }
         } else {
             commentsNode = this.props.data.map((elmt,i) => {
                 return (<Comment key={i} data={elmt}/>)

@@ -5,29 +5,30 @@ require_once "Publication.php";
 require_once "CommentsManager.php";
 
 class commentController  {
-
+    
     private $id;
-
+    private $order;
+    
     public static function getInstance(array $donnees)
     {
         if (!isset(self::$instance))
             self::$instance = new commentController($donnees);
         return self::$instance;
     }
-
+    
     public function __construct(array $donnees) {
         return $this->hydrate($donnees);
     }
-
+    
     public function index() {
         include "connect.php";
         $manager = new CommentsManager($db);
         $id = $this->id;
         $comment = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($comment));
+        $json = json_encode($this->jsonSerialize($comment), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
-
+    
     public function add() {
         include "connect.php";
         $manager = new CommentsManager($db);
@@ -38,37 +39,49 @@ class commentController  {
         } catch(Exception $e) {
             echo "Oops le commentaire n'a pas pu être envoyé : " . $e->getMessage();
         }
-
+        
     }
-
+    
     public function commentsFromPost() {
         include "connect.php";
         $manager = new CommentsManager($db);
         $id = $this->id;
         $comments = $manager->getAllCommentsFromPost($id);
+        $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
+        $order = $this->order;
+        $comments = $manager->getAllCommentsFromPost($id, $order);
         $json = json_encode($this->jsonSerializeArray($comments));
         echo $json;
     }
-
+    
     public function set_id($id) {
-        $this->id = $id;
+        $this->id = $id; 
     }
-
+    
     public function get_id() {
-        return $this->id;
+        return $this->id; 
     }
-
+    
+    public function set_order($order) {
+        $this->order = $order; 
+    }
+    
+    public function get_order() {
+        return $this->order; 
+    }
+    
     public function jsonSerialize(Comment $comment) {
         // Represent your object using a nested array or stdClass,
         $data = array(
             'text' => utf8_encode($comment->get_text()),
             'date' => utf8_encode($comment->get_date()),
-            'user_id' => utf8_encode($comment->get_user_id())
+            'user_id' => utf8_encode($comment->get_user_id()),
+            'media_id' => utf8_encode($comment->get_media_id())
         );
         // in the way you want it arranged in your API
         return $data;
     }
-
+    
     public function jsonSerializeArray(array $comments) {
         // Represent your object using a nested array or stdClass,
         $data = [];
@@ -83,20 +96,20 @@ class commentController  {
         // in the way you want it arranged in your API
         return $data;
     }
-
+    
     // Hydrate
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut
             $method = 'set_'. ucfirst($key);
-
+            
             // Si le setter correspondant existe :
             if(method_exists($this, $method)) {
                 // On appelle le setter
                 $this->$method($value);
             }
         }
-    }
+    }   
 }
 
 ?>
