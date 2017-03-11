@@ -165,6 +165,14 @@ class CommentsManager {
 
     return $comments;
 }
+    
+    public function addTags($id, $tags) {
+        for($i=0; count($tags); $i++) {
+            $q = $this->_db->query('SELECT id FROM tag WHERE name = "'.$tags[$i].'"');
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            $this->_db->exec('INSERT INTO rel_tag_publication(publication_id, tag_id) VALUES("'.$id.'", "'.$donnees['id'].'"');
+        }
+    }
 
   public function update(Comment $comment)
   {

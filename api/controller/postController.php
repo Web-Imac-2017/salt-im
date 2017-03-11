@@ -40,7 +40,7 @@ class postController  {
         $manager = new SubjectsManager($db);
         $subject = new Subject($_POST);
         try {
-            $manager->add($subject);
+            $manager->add($subject, $_POST['tags']);
             echo "Le message a bien été envoyé !";
         }
         catch(Exception $e) {

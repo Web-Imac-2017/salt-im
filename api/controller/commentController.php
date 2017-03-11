@@ -94,11 +94,31 @@ class commentController  {
         return $data;
     }
     
-    public function sortDate(array $comments) {
-        foreach ($comments as $key => $row) {
-            $date[$key] = $row['date'];
+    public function sortByOrder(array $comments, $order) {
+        if ($order == "date") {
+            foreach ($comments as $key => $row) {
+                $date[$key] = $row['date'];
+            }
+            array_multisort($date, SORT_ASC, $comments); 
+            
+        } else if ($order == 0) {
+            foreach ($comments as $key => $row) {
+                $sel[$key] = $row['sel'];
+            }
+            array_multisort($date, SORT_ASC, $comments);
+            
+        } else if ($order == 1) {
+            foreach ($comments as $key => $row) {
+                $poivre[$key] = $row['poivre'];
+            }
+            array_multisort($date, SORT_ASC, $comments); 
+            
+        } else if ($order == 2) {
+            foreach ($comments as $key => $row) {
+                $humour[$key] = $row['humour'];
+            }
+            array_multisort($date, SORT_ASC, $comments); 
         }
-        array_multisort($date, SORT_ASC, $comments);
         return $comments;
     }
     
