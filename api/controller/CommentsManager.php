@@ -87,7 +87,7 @@ class CommentsManager {
     return $comments;
   }
     
-    public function getAllCommentsFromPost($id, $order) {
+    public function getAllCommentsFromPost($id) {
     $comments = [];
 
     $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
@@ -102,13 +102,6 @@ class CommentsManager {
         $result = $this->cherche($result);
       }
     }
-        
-    // Tri le tableau en fonction de la date
-        foreach ($comments as $key => $row) {
-            $date[$key] = $row['date'];
-        }
-        array_multisort($date, SORT_DESC, $comments);
-
     return $comments;
   }
     

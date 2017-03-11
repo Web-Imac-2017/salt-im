@@ -47,8 +47,8 @@ class commentController  {
         $manager = new CommentsManager($db);
         $id = $this->id;
         $order = $this->order;
-        $comments = $manager->getAllCommentsFromPost($id, $order);
-        $json = json_encode($this->jsonSerializeArray($comments));
+        $comments = $manager->getAllCommentsFromPost($id);
+        $json = json_encode($this->sortDate($this->jsonSerializeArray($comments)), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     
@@ -92,6 +92,14 @@ class commentController  {
         }
         // in the way you want it arranged in your API
         return $data;
+    }
+    
+    public function sortDate(array $comments) {
+        foreach ($comments as $key => $row) {
+            $date[$key] = $row['date'];
+        }
+        array_multisort($date, SORT_ASC, $comments);
+        return $comments;
     }
     
     // Hydrate
