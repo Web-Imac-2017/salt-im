@@ -4,12 +4,14 @@ import './Filter.scss'
 
 export const Filter = () => (
     <div className="select">
-        <div className="select__text">Filtré par : </div>
-        <select className="select__input">
-          <option>Taux de sel</option>
-          <option>Taux de poivre</option>
-          <option>Date</option>
-        </select>
+        <span className="select__text">Filtrer par</span>
+        <div className="select__wrap">
+	        <select className="select__input">
+	          <option className="select__input__active">taux de sel</option>
+	          <option className="select__input__inactive">taux de poivre</option>
+	          <option className="select__input__inactive">date</option>
+	        </select>
+        </div>
     </div>
 )
 
