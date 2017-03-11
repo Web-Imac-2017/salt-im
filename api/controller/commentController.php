@@ -48,7 +48,7 @@ class commentController  {
         $id = $this->id;
         $order = $this->order;
         $comments = $manager->getAllCommentsFromPost($id);
-        $json = json_encode($this->sortDate($this->jsonSerializeArray($comments)), JSON_UNESCAPED_UNICODE);
+        $json = json_encode($this->sortByOrder($this->jsonSerializeArray($comments), $order), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     

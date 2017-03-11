@@ -1,10 +1,14 @@
 <?php
 
-require "Publication.php";
+require_once "Publication.php";
 
-require "Subject.php";
+require_once "Subject.php";
 
-require "SubjectsManager.php";
+require_once "SubjectsManager.php";
+
+require_once "TagsManager.php";
+
+//require_once "Tag.php";
 
 class postController  {
     
@@ -30,7 +34,23 @@ class postController  {
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         } else {
-            echo "aie aie aie on a pas pu récupérer le post";
+            echo "Aie aie aie on a pas pu récupérer le post.";
+        }
+    }
+    
+    public function getFromTags() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        $tags = [];
+        for ($i=0; count($_POST['tag']); $i++) {
+            $tags[] = $_POST['tag'][$i];
+        }
+        if($manager->get($id) != null) {
+            $subject = $manager->get($id);
+            $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
+            echo $json;
+        } else {
+            echo "On dirait qu'il n'y a pas de posts associés à ces tags. RT si c'est triste.";
         }
     }
     

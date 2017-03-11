@@ -20,6 +20,8 @@ $router->addRule('comment/:id', array('controller' => 'comment', 'action' => 'in
 $router->addRule('p/comment/:id/:order', array('controller' => 'comment', 'action' => 'commentsFromPost'));
 $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' => 'add'));
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
+$router->addRule('u/register', array('controller' => 'user', 'action' => 'register'));
+$router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 
 $router->load();
 
