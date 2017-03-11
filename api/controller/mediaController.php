@@ -24,7 +24,7 @@ class mediaController  {
         $manager = new MediasManager($db);
         $id = $this->id;
         $media = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($media), JSON_UNESCAPED_UNICODE);
+        $json = json_encode($this->jsonSerialize($media));
         echo $json;
     }
     

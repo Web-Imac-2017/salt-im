@@ -22,6 +22,7 @@ $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' =>
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('u/register', array('controller' => 'user', 'action' => 'register'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
+$router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 
 $router->load();
 

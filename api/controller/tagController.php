@@ -1,16 +1,17 @@
 <?php
 
-require_once "Stat.php";
-require_once "StatsManager.php";
+require_once "TagsManager.php";
 
-class statController  {
+require_once "Tag.php";
+
+class tagController  {
     
     private $id;
     
     public static function getInstance(array $donnees)
     {
         if (!isset(self::$instance))
-            self::$instance = new statController($donnees);
+            self::$instance = new tagController($donnees);
         return self::$instance;
     }
     
@@ -20,29 +21,20 @@ class statController  {
     
     public function index() {
         include "connect.php";
-        $manager = new StatsManager($db);
-        $id = $this->id;
-        $stat = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($stat));
-        echo $json;
+        $manager = new TagsManager($db);
+        $tags = $manager->getList();
+        
     }
     
-    public function set_id($id) {
-        $this->id = $id; 
-    }
-    
-    public function get_id() {
-        return $this->id; 
-    }
-    
-    public function jsonSerialize(Stat $stat) {
+    public function jsonSerializeArray(array $tags) {
         // Represent your object using a nested array or stdClass,
-        $data = array(
-            'id' => utf8_encode($stat->get_id()),
-            'name' => utf8_encode($stat->get_namelink()),
-            'value' => utf8_encode($stat->get_value()),
-            'related_element_id' => utf8_encode($stat->get_related_element_id()),
-        );
+        $data = [];
+        for($i=0; $i<count($tags); $i++) {
+                $c = array(
+                    'name' => utf8_encode($tags[$i]->get_text())
+                );
+                $data[] = $c;
+        }
         // in the way you want it arranged in your API
         return $data;
     }
