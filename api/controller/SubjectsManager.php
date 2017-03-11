@@ -101,7 +101,7 @@ class SubjectsManager {
     $subject->set_text($donnees['text']);
     $subject->set_date($donnees['date']);
     $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees_media['media_id']);
+    $subject->set_media_id($donnees_media['id']);
       
     return $subject;
     
@@ -132,7 +132,7 @@ class SubjectsManager {
     $subject->set_text($donnees['text']);
     $subject->set_date($donnees['date']);
     $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees_media['media_id']);
+    $subject->set_media_id($donnees_media['id']);
       
     return $subject;
   }
@@ -161,7 +161,7 @@ public function sort_date(){
     $subject->set_text($donnees['text']);
     $subject->set_date($donnees['date']);
     $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees_media['media_id']);
+    $subject->set_media_id($donnees_media['id']);
       
     return $subject;
 }

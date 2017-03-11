@@ -57,8 +57,8 @@ abstract class Publication {
     }
 
     // Getter media_id
-    public function get_media_id($media_id){
-        $this->media_id = $media_id;
+    public function get_media_id(){
+        return $this->media_id;
     }
 
     // Setter media_id
