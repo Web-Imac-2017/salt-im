@@ -1,10 +1,10 @@
 <?php
-require_once 'controller\connect.php';
+require_once 'controller/connect.php';
 //a créer. 
 
 if($user->is_loggedin()!="")
 {
-    $user->redirect('home.php');
+    $user->redirect('/');
 }
 
 if(isset($_POST['btn-signup']))
@@ -16,6 +16,10 @@ if(isset($_POST['btn-signup']))
    if($uname=="") {
       $error[] = "provide username !"; 
    }
+
+   else if(strlen($uname) < 3 && strlen($uname) > 20 ){
+      $error[] = "Password must be atleast 6 characters"; 
+   }
    else if($umail=="") {
       $error[] = "provide email id !"; 
    }
@@ -25,21 +29,21 @@ if(isset($_POST['btn-signup']))
    else if($upass=="") {
       $error[] = "provide password !";
    }
-   else if(strlen($upass) < 6){
+   else if(strlen($upass) < 6 && strlen($upass) > 128 ){
       $error[] = "Password must be atleast 6 characters"; 
    }
    else
    {
       try
       {
-         $stmt = $DB_con->prepare("SELECT user_name,user_email FROM users WHERE user_name=:uname OR user_email=:umail");
+         $stmt = $DB_con->prepare("SELECT username,useremail FROM user WHERE username=:uname OR useremail=:umail");
          $stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
          $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
-         if($row['user_name']==$uname) {
+         if($row['username']==$uname) {
             $error[] = "sorry username already taken !";
          }
-         else if($row['user_email']==$umail) {
+         else if($row['useremail']==$umail) {
             $error[] = "sorry email id already taken !";
          }
          else

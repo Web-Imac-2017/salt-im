@@ -15,7 +15,7 @@ public function getDb() {
 
   public function add(User $user) {
     // Préparation de la requête 
-    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$user->get_text().'", "'.$user->get_date().'", "'.$comment->get_user_id().'")');
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$user->get_text().'", "'.$user->get_date().'", "'.$user->get_user_id().'")');
     $publication_id = $this->_db->lastInsertId();
       
     // Exécution de la requête.
@@ -30,7 +30,6 @@ public function getDb() {
     $publication_id = $result->fetch(PDO::FETCH_ASSOC);
     $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
     $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
-    //Ici on veut enlever les stats pas les publications liées ???
   }
 
   public function get($id)
