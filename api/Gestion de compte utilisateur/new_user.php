@@ -5,7 +5,7 @@
 $pass_hache = sha1('gz' . $_POST['pass']);
 
 // Insertion
-$req = $pdo->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id) VALUES(:pseudo, :pass, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())');
+$req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id) VALUES(:pseudo, :pass, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())');
 
 $req->execute(array(
     'pseudo' => $username,
@@ -13,8 +13,8 @@ $req->execute(array(
     'email' => $mail,
     'avatar' => $avatar,
     'birthDate' => $birthDate,
-    'rank' => '0',
-    'badge' =>'0'));
+    'rank' => $rank,
+    'badge' => $badge_id));
 
 $resultat = $req->fetch();
 

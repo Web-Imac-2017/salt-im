@@ -14,12 +14,30 @@ public function getDb() {
 }
 
   public function add(User $user) {
+<<<<<<< HEAD
+    // Préparation de la requête 
+    $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$user->get_text().'", "'.$user->get_date().'", "'.$user->get_user_id().'")');
+    $publication_id = $this->_db->lastInsertId();
+      
+    // Exécution de la requête.
+      var_dump($q);
+    $q->execute();
+=======
     
+>>>>>>> 278d345974fb044e9955740855f603a65c0927bf
       
   }
 
   public function delete(User $user) {
+<<<<<<< HEAD
+    // Exécute une requête de type DELETE.
+    $result = $this->_db->query('SELECT publication_id FROM user WHERE id = "'.$user->get_id().'")');
+    $publication_id = $result->fetch(PDO::FETCH_ASSOC);
+    $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
+    $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
+=======
     
+>>>>>>> 278d345974fb044e9955740855f603a65c0927bf
   }
 
   public function get($id)

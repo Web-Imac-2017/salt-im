@@ -2,7 +2,6 @@
 require_once 'controller/connect.php';
 //a créer. 
 
-$error = [];
 if($user->is_loggedin()!="")
 {
     $user->redirect('/');
@@ -13,26 +12,25 @@ if(isset($_POST['btn-signup']))
    $uname = trim($_POST['txt_uname']);
    $umail = trim($_POST['txt_umail']);
    $upass = trim($_POST['txt_upass']); 
-
  
    if($uname=="") {
-      $error['user'] = "provide username !"; 
+      $error[] = "provide username !"; 
    }
 
    else if(strlen($uname) < 3 && strlen($uname) > 20 ){
-      $error['password'] = "Password must be atleast 6 characters"; 
+      $error[] = "Password must be atleast 6 characters"; 
    }
    else if($umail=="") {
-      $error['id'] = "provide email id !"; 
+      $error[] = "provide email id !"; 
    }
    else if(!filter_var($umail, FILTER_VALIDATE_EMAIL)) {
-      $error['email'] = 'Please enter a valid email address !';
+      $error[] = 'Please enter a valid email address !';
    }
    else if($upass=="") {
-      $error['empty_password'] = "provide password !";
+      $error[] = "provide password !";
    }
    else if(strlen($upass) < 6 && strlen($upass) > 128 ){
-      $error['password_length'] = "Password must be between 6 and 128 characters"; 
+      $error[] = "Password must be atleast 6 characters"; 
    }
    else
    {
@@ -43,18 +41,16 @@ if(isset($_POST['btn-signup']))
          $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
          if($row['username']==$uname) {
-            $error['username_taken'] = "sorry username already taken !";
+            $error[] = "sorry username already taken !";
          }
          else if($row['useremail']==$umail) {
-            $error['email_taken'] = "sorry email id already taken !";
+            $error[] = "sorry email id already taken !";
          }
          else
          {
-            if(empty($error)) 
+            if($user->register($fname,$lname,$uname,$umail,$upass)) 
             {
-                include 'connect.php'
-                $req = $pdo->prepare("INSERT INTO user SET username = ?, password = ?, mail = ?, ");
-                $req->execute
+                $user->redirect('sign-up.php?joined');
             }
          }
      }
