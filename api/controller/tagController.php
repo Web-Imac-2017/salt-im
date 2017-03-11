@@ -33,7 +33,9 @@ class tagController {
         $data = [];
         for($i=0; $i<count($tags); $i++) {
                 $c = array(
-                    'name' => utf8_encode($tags[$i]->get_name())
+                    'name' => utf8_encode($tags[$i]->get_name()),
+                    'img_url' => utf8_encode($tags[$i]->get_img_url()),
+                    'description' => utf8_encode($tags[$i]->get_description())
                 );
                 $data[] = $c;
         }

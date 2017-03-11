@@ -41,7 +41,7 @@ class TagsManager {
     // Retourne la liste de tous les tags.
     $tags = [];
 
-    $q = $this->_db->query('SELECT id, name FROM tag ORDER BY id');
+    $q = $this->_db->query('SELECT id, name, img_url, description FROM tag ORDER BY id');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
