@@ -30,7 +30,7 @@ class postController  {
             $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
             echo $json;
         } else {
-            echo "aie aie aie on a pas pu récupérer le post";
+            echo "aie aie aie on n'a pas pu récupérer le post";
         }
     }
     
