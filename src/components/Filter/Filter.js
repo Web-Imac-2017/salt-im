@@ -7,9 +7,9 @@ export const Filter = () => (
         <span className="select__text">Filtrer par</span>
         <div className="select__wrap">
 	        <select className="select__input">
-	          <option className="select__input__active">taux de sel</option>
-	          <option className="select__input__inactive">taux de poivre</option>
-	          <option className="select__input__inactive">date</option>
+	          <option>taux de sel</option>
+	          <option>taux de poivre</option>
+	          <option>date</option>
 	        </select>
         </div>
     </div>

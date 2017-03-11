@@ -1,14 +1,17 @@
+@import '../../styles/core.scss';
+
 .select {
     position:absolute;
     right:0;
     top:0;
     display:flex;
     align-items: baseline;
+    margin-top: 8px;&²
 
 
     &__text {
         flex:1;
-        font-family : Karla,sans-serif;
+        font-family : $karla;
         font-size : 1.4em;
         display: inline-block;
     }
@@ -43,4 +46,11 @@
         }
     }
 }
+
+.select__text {
+        flex:1;
+        font-family : $karla;
+        font-size : 1.4em;
+        display: inline-block;
+    }
 

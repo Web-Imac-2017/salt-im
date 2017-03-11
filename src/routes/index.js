@@ -9,6 +9,7 @@ import Tag from './Tag'
 import Profile from './Profile'
 import Authentification from './Authentification'
 import Signup from './Signup'
+import ProfileUpdateView from './ProfileUpdate'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -52,6 +53,11 @@ const signupRoute = {
   indexRoute: Signup
 }
 
+const profileUpdateView = {
+  path: '/u/me',
+  indexRoute: ProfileUpdateView
+}
+
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
@@ -64,7 +70,8 @@ export const createRoutes = (store) => ({
     tagRoute,
     profileRoute,
     authentificationRoute,
-    signupRoute
+    signupRoute,
+    profileUpdateView
   ]
 })
 

@@ -65,7 +65,6 @@ const dataTags = [
 export const HomeView = () => (
 
   <div className="home center">
-    <h1 className="home__title">Salty</h1>
 
     <SearchBar/>
 
@@ -73,7 +72,7 @@ export const HomeView = () => (
 
     <ListTagColumn data={dataTags}/>
     <div className="tagview__section">
-      <p className="tagview__titleTrends">Posts les plus salés</p>
+      <p className="tagview__titleTrends">Les salés du jour</p>
       <Filter/>
       <ListPost data={dataListPost}/>
     </div>
