@@ -6,13 +6,19 @@ import InputTextarea from '../../../components/InputTextarea/InputTextarea.js'
 
 export const ProfileUpdateView = () => (
   <div className="postcreator center">
-    <Link to="/posts" className="goback">Retour aux posts</Link>
+    <Link to="/posts" className="goback">Retour au profil</Link>
     <form className="form">
-        <div className="form__header">Inscription</div>
-        <InputText title="Nom d'utilisateur" idInput="title" placeholder="Nom d'utilisateur"/>
-        <InputText title="E-Mail" idInput="mail" placeholder="votrenom@monfai.net"/>
-        <InputText title="Mot de passe" idInput="tags" placeholder="Des tags séparés par des virgules"/>
-        <input type="submit" value="Inscription"/>
+        <div className="form__header">Mise à jour des informations de votre profil</div>
+        <InputText title="Nouveau nom d'utilisateur" idInput="title" placeholder="Nom d'utilisateur"/>
+        <h1> Nouvel avatar </h1>
+        <div className="form__input form__input--side flex">
+            <input type="file"/>
+        </div>
+        <InputText title="Nouvel e-mail" idInput="mail" placeholder="votrenom@monfai.net"/>
+        <InputText title="Ancien mot de passe" idInput="tags" placeholder=""/>
+        <InputText title="Nouveau mot de passe" idInput="tags" placeholder=""/>
+        <input type="submit" value="Mettre à jour"/>
+
     </form>
 
   </div>
