@@ -90,7 +90,6 @@ class postController  {
             'user_id' => utf8_encode($subject->get_user_id()),
             'media_id' => utf8_encode($subject->get_media_id())
         );
-        var_dump($subject->get_media_id());
         // in the way you want it arranged in your API
         return $data;
     }

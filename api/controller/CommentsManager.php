@@ -51,10 +51,16 @@ class CommentsManager {
     // Récupère les infos de la publication
     $q = $this->_db->query('SELECT id, text, user_id, date FROM publication WHERE id = "'.$publication_id['publication_id'].'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    // Récupère l'id du media lié
+    $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
+    $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
     
     $comment->set_text($donnees['text']);
     $comment->set_user_id($donnees['user_id']);
     $comment->set_date($donnees['date']);
+    $comment->set_media_id($donnees_media['id']);
+
       
     return $comment; // retourne l'objet comment spécifié en id
   }
