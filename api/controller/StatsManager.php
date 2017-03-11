@@ -48,6 +48,40 @@ class StatsManager {
     return $stats;
   }
 
+  public function getStatPost($id)
+  {
+    // Retourne les 3 stats d'un post
+    $stats = [];
+
+    $q = $this->_db->query('SELECT name, value FROM stat
+      WHERE related_element_type = "0"
+      AND related_element_id = "'.$id.'"');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $stats[] = new Stat($donnees);
+    }
+
+    return $stats;
+  }
+
+  public function getStatUser($id)
+  {
+    // Retourne les 3 stats d'un post
+    $stats = [];
+
+    $q = $this->_db->query('SELECT name, value FROM stat
+      WHERE related_element_type = "1"
+      AND related_element_id = "'.$id.'"');
+
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $stats[] = new Stat($donnees);
+    }
+
+    return $stats;
+  }
+
   public function update(Stat $stat)
   {
     // Prépare une requête de type UPDATE.
