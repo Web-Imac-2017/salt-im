@@ -19,14 +19,17 @@ class TagsManager {
   public function delete(Tag $tag)
   {
     // Exécute une requête de type DELETE.
+      $result = $this->_db->query('SELECT publication_id FROM tag WHERE id = "'.$tag->get_id().'")');
       $this->_db->exec('DELETE FROM tag WHERE id = "'.$tag->get_id().'"');
+      $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$publication_id['publication_id'].'"');
+
   }
 
   public function get($id)
   {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet tag.
     $id = (int) $id;
-
+    $publication_id = $result->fetch(PDO::FETCH_ASSOC);
     $q = $this->_db->query('SELECT id, name FROM tag WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
