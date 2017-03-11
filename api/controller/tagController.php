@@ -2,9 +2,9 @@
 
 require_once "TagsManager.php";
 
-require_once "Tag.php";
+//require_once "Tag.php";
 
-class tagController  {
+class tagController {
     
     private $id;
     
@@ -23,6 +23,8 @@ class tagController  {
         include "connect.php";
         $manager = new TagsManager($db);
         $tags = $manager->getList();
+        $json = json_encode($this->jsonSerializeArray($tags),JSON_UNESCAPED_UNICODE);
+        echo $json;
         
     }
     
@@ -31,7 +33,7 @@ class tagController  {
         $data = [];
         for($i=0; $i<count($tags); $i++) {
                 $c = array(
-                    'name' => utf8_encode($tags[$i]->get_text())
+                    'name' => utf8_encode($tags[$i]->get_name())
                 );
                 $data[] = $c;
         }

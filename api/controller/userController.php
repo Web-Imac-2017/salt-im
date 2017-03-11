@@ -1,19 +1,17 @@
 <?php
 
-require "Publication.php";
+require_once "User.php";
 
-require "Subject.php";
+require_once "UsersManager.php";
 
-require "SubjectsManager.php";
-
-class postController  {
+class userController  {
     
     private $id;
     
     public static function getInstance(array $donnees)
     {
         if (!isset(self::$instance))
-            self::$instance = new postController($donnees);
+            self::$instance = new userController($donnees);
         return self::$instance;
     }
     
