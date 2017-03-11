@@ -97,3 +97,28 @@
         background-image: url("./assets/salty.svg");
     }
 }
+
+.icon--salt {
+    background : url(./assets/salty.png);
+    width: 15px;
+    height:15px;
+    background-size:cover;
+    background-position:center;
+
+}
+
+.icon--pepper {
+    background : url(./assets/poivre.png);   
+    width: 15px;
+    height:15px;
+    background-size:cover;
+    background-position:center; 
+}
+
+.icon--lol {
+    background : url(./assets/lol.png); 
+    width: 15px;
+    height:15px;
+    background-size:cover;
+    background-position:center;   
+}

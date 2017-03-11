@@ -22,9 +22,9 @@ export const PreviewActions = (props) => (
 
             <div className="preview__action__reactions">
                 <div className="preview__action__reactionwrapper">
-                    <div className="preview__action__reaction">Wow</div>
-                    <div className="preview__action__reaction">Grr</div>
-                    <div className="preview__action__reaction">XPTDR</div>
+                    <div className="preview__action__reaction icon--salt" ></div>
+                    <div className="preview__action__reaction icon--pepper"></div>
+                    <div className="preview__action__reaction icon--lol"   ></div>
                 </div>
                 <div className="preview__action__arrow"/>
             </div>

@@ -15,7 +15,13 @@ export const SignupView = () => (
         <input type="submit" value="Inscription"/>
     </form>
 
+
+
   </div>
 )
 
 export default SignupView
+
+
+    /* Regex : username : /.{3,20}/
+               password : /.{6,}/  */
