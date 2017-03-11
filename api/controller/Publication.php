@@ -17,6 +17,7 @@ abstract class Publication {
     private $poivre;
     private $humour;
     private $user_id;
+    private $media_id;
     
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -56,6 +57,16 @@ abstract class Publication {
     // Setter user id
     public function set_user_id($user_id) {
         $this->user_id = $user_id;      
+    }
+
+    // Getter media_id
+    public function get_media_id(){
+        return $this->media_id;
+    }
+
+    // Setter media_id
+    public function set_media_id($media_id) {
+        $this->media_id = $media_id;      
     }
 
     // Hydrate

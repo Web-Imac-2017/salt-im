@@ -23,7 +23,7 @@ class statController  {
         $manager = new StatsManager($db);
         $id = $this->id;
         $stat = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($stat));
+        $json = json_encode($this->jsonSerialize($stat), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
     

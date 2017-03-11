@@ -31,6 +31,7 @@ class postController  {
         $id = $this->id;
         if($manager->get($id) != null) {
             $subject = $manager->get($id);
+            $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         } else {
@@ -94,7 +95,7 @@ class postController  {
         include "connect.php";
         $manager = new SubjectsManager($db);
         $subject = $manager->get_help($id);
-        $json = json_encode($this->jsonSerialize($subject));
+        $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
 
@@ -107,7 +108,8 @@ class postController  {
             'type' => utf8_encode($subject->get_type()),
             'text' => utf8_encode($subject->get_text()),
             'date' => utf8_encode($subject->get_date()),
-            'user_id' => utf8_encode($subject->get_user_id())
+            'user_id' => utf8_encode($subject->get_user_id()),
+            'media_id' => utf8_encode($subject->get_media_id())
         );
         // in the way you want it arranged in your API
         return $data;
