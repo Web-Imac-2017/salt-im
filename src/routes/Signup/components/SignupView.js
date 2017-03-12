@@ -1,26 +1,105 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router'
 
 import InputText from '../../../components/InputText/InputText.js'
 import InputTextarea from '../../../components/InputTextarea/InputTextarea.js'
 
-export const SignupView = () => (
-  <div className="postcreator center">
-    <form className="form">
-        <div className="form__header">Inscription</div>
-        <InputText title="Nom d'utilisateur" idInput="title" placeholder="Nom d'utilisateur"/>
-        <InputText title="E-Mail" idInput="mail" placeholder="votrenom@monfai.net"/>
-        <InputText title="Mot de passe" idInput="tags" placeholder="Des tags séparés par des virgules"/>
-        <input type="submit" value="Inscription"/>
-    </form>
+export default class SignupView extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      mail:"",
+      pseudo:"",
+      password:"",
+      isPseudoGood:"not",
+      isPasswordGood:"not"
+    };
+  }
 
+  handleChangeMail(event) {
+      this.setState({mail: event.target.value});
+  }
 
-  </div>
-)
+  handleChangePseudo(event) {
+      this.setState({pseudo: event.target.value});
+      this.checkPseudo(event.target.value);
+  }
 
-export default SignupView
+  handleChangePassword(event) {
+      this.setState({password: event.target.value});
+      this.checkPassword(event.target.value);
+  }
+
+  checkPassword(password) {
+    setTimeout(() => {
+      let resultat = /^(?=.{3,128}$)(?!.*[_.]{2})[a-zA-Z0-9._]/.test(password);
+      this.setState({
+        isPasswordGood:resultat
+      })
+    },800)
+  }
+
+  checkPseudo(pseudo) {
+    setTimeout(() => {
+      let resultat = /^(?=.{3,20}$)(?!.*[_.]{2})[a-zA-Z0-9._]/.test(pseudo);
+      this.setState({
+        isPseudoGood:resultat
+      })
+    },800)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if(this.state.isPasswordGood == true && this.state.isPseudoGood == true) {
+      // fetch("http://localhost:8888/salt-im/api/p/post/add/90",
+      // {
+      //     method: "post",
+      //     body: new FormData(this.refs.form),
+      // })
+      // .then((res) => {
+      //     return res;
+      // }).then((data) => {console.log(data)})
+    }
+  }
+
+  render() {
+    let passwordClass = "", pseudoClass = ""
+    if(this.state.isPasswordGood==false)
+      passwordClass="error";
+    if(this.state.isPseudoGood == false)
+      pseudoClass="error";
+    return (
+      <div className="postcreator center">
+        <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
+            <div className="form__header">Inscription</div>
+            <div className="form__input">
+                <label for="mail">Mail
+                  <input type="text" required={true} name="mail" id="mail" placeholder="Insérez votre mail"
+                    onChange={this.handleChangeMail.bind(this)}/>
+                </label>
+            </div>
+            <div className="form__input">
+                <label for="pseudo">Pseudo
+                  <input className={pseudoClass} type="text" required={true} name="pseudo" id="pseudo" placeholder="Votre pseudo (8 à 20 caractères)"
+                    onChange={this.handleChangePseudo.bind(this)}/>
+                </label>
+            </div>
+            <div className="form__input">
+                <label for="password">Mot de passe
+                <input className={passwordClass} type="password" required={true} name="password" id="password" placeholder="Mot de passe"
+                  onChange={this.handleChangePassword .bind(this)}/>
+                </label>
+            </div>
+            <input type="submit" value="Créer votre compte"/>
+        </form>
+      </div>
+    )
+  }
+
+}
 
 
     /* Regex : username : /.{3,20}/
+              ^(?=.{3,20}$)(?!.*[_.]{2})[a-zA-Z0-9._]
                password : /.{6,}/  */
