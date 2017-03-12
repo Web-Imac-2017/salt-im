@@ -9,12 +9,20 @@ export default class PostData extends Component {
       super(props);
 
       this.state = {
-        dataPost:{},
-        dataMedia:{}
+        dataMedia:{},
+        dataUser:{}
       };
     }
 
-    checkType(data) {
+    loadUser(id) {
+        // fetch('http://localhost:8888/salt-im/api/u/name/'+id)
+        //   .then((response) => response.json())
+        //   .then((object) => {
+        //     this.setState({dataUser: "ok"})
+        //   })
+        this.setState({
+            dataUser:"Jean le PHP"
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -22,25 +30,28 @@ export default class PostData extends Component {
 
         fetch('http://localhost:8888/salt-im/api/media/'+nextProps.data.media_id)
           .then((response) => response.json())
-          .then((object) => { this.setState({dataMedia: object})})
+          .then((object) => {
+            this.setState({dataMedia: object})
+            this.loadUser(nextProps.data.user_id);
+          })
     }
     render() {
         let nodeData;
         if(!this.state.dataMedia)
-            nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} nbComment={this.props.nbComment}/>);
+            nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
         else {
             switch(this.state.dataMedia.type) {
                 case "video":
-                    nodeData = (<VideoData data={this.props.data} dataMedia={this.state.dataMedia} nbComment={this.props.nbComment}/>);
+                    nodeData = (<VideoData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
                     break;
                 case "img":
-                    nodeData =(<PicData data={this.props.data} dataMedia={this.state.dataMedia} nbComment={this.props.nbComment}/>)
+                    nodeData =(<PicData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>)
                     break;
                 case "link":
-                    nodeData = (<LinkData data={this.props.data} dataMedia={this.state.dataMedia} nbComment={this.props.nbComment}/>);
+                    nodeData = (<LinkData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
                     break;
                 default:
-                    nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} nbComment={this.props.nbComment}/>);
+                    nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
                     break;
             }
         }
