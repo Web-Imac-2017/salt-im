@@ -1,71 +1,48 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Link } from 'react-router';
 import './TagView.scss'
 import ListTagColumn from '../../../components/ListTag/column/ListTagColumn.js'
 import ListTagLine from '../../../components/ListTag/line/ListTagLine.js'
+import TagData from './TagData/TagData.js'
 
-const dataTags = [
-  {
-    "title":"Nasa",
+/*
+ "title":"Nasa",
     "picUrl":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
     "link":"/tag/nasa"
-  },
-  {
-    "title":"Harsh Noise",
-    "picUrl":"https://www.residentadvisor.net/images/features/2015/merzbow-conversation-light.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"Daft punk",
-    "picUrl":"http://pitchfork.com/features/cover-story/reader/daft-punk/images/s9-0v2.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"South Park",
-    "picUrl":"http://www.ecranlarge.com/uploads/image/000/945/south-park-caitlin-jenner-945289.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"Esipe vs Imac",
-    "picUrl":"https://upload.wikimedia.org/wikipedia/fr/4/43/Universit%C3%A9_de_Marne-la-Vall%C3%A9e,_B%C3%A2timent_Copernic,_Champs-sur-Marne,_France.jpg",
-    "link":"/tag/nasa"
-  },
-    {
-    "title":"Nasa",
-    "picUrl":"http://www.geekqc.ca/wp-content/uploads/2016/11/maxresdefault-8.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"Harsh Noise",
-    "picUrl":"https://www.residentadvisor.net/images/features/2015/merzbow-conversation-light.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"Daft punk",
-    "picUrl":"http://pitchfork.com/features/cover-story/reader/daft-punk/images/s9-0v2.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"South Park",
-    "picUrl":"http://www.ecranlarge.com/uploads/image/000/945/south-park-caitlin-jenner-945289.jpg",
-    "link":"/tag/nasa"
-  },
-  {
-    "title":"Esipe vs Imac",
-    "picUrl":"https://upload.wikimedia.org/wikipedia/fr/4/43/Universit%C3%A9_de_Marne-la-Vall%C3%A9e,_B%C3%A2timent_Copernic,_Champs-sur-Marne,_France.jpg",
-    "link":"/tag/nasa"
+*/
+export default class TagView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tagdata:{},
+      size: "small"
+    };
   }
-]
 
-const size = "small";
+  componentDidMount() {
 
-export const TagView = () => (
+    const myInit = {method: 'POST'};
+    
+    //fetch('http://localhost/salt-im/api/p/'+this.props.params.tagId, myInit)
+    fetch('http://www.json-generator.com/api/json/get/ctAJIBmiUO?indent=2', myInit)
+    .then((response) => response.json())
+    .then((object) => { this.setState({tagdata: object})})
+  }
 
-  <div className="tagview">
-    <p className="tagview__titleTrends">Tags tendances</p>
-    <ListTagColumn data={dataTags}/>
-    <p className="tagview__titleAll">Retrouvez tous les tags</p>
-    <ListTagLine data={dataTags} size={size}/>
-  </div>
-)
+  render() {
+    
+    return (
+      <div className="tagview">
+      <p className="tagview__titleTrends">Tags tendances</p>
+      <ListTagColumn data={this.state.tagdata } />
+      
+      <p className="tagview__titleAll">Retrouvez tous les tags</p>
+      <ListTagLine data={this.state.tagdata} size={this.state.size}/>
 
-export default TagView
+      </div>
+    );
+  }
+}
+
+

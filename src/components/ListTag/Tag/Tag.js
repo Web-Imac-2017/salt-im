@@ -17,6 +17,19 @@ export const Tag = (props) => {
             </div>
         )
     }
+
+    else if(props.solo && props.data[0] != undefined){
+        return(
+            <div className="tag">
+                <div className="tag__title tag--chevron">
+                <h1 className="tagSingle__title"> > {props.data[0].title}</h1>
+                <p className="tagSingle__description">{props.data[0].description}</p>
+                </div>
+
+            </div>
+        )
+    }
+
     return(
         <div className="tag">
 

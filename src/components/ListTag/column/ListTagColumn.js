@@ -5,19 +5,27 @@ import Tag from '../Tag/Tag.js'
 
 
 export const ListTagColumn = (props) => {
-    const tagsNode = props.data.map( (elmt,i) => (
-        <Tag key={i} data={elmt}/>
-    ))
+    if(props.data.map != undefined  ){
+        let tagsNode = props.data.map( (elmt,i) => (
+            <Tag key={i} data={elmt}/>
+            ))
 
-    return (
-      <div className="tagsColumn">
-        
-        <div className="tagsColumn__list">
-            {tagsNode}
-        </div>
+            return (
+                <div className="tagsColumn">        
+                <div className="tagsColumn__list">
+                    {tagsNode}
+                </div>
+                </div>
+            )
+    }
 
-     </div>
-    )
+   else
+    {
+        return (
+            <div>Chargement des tags</div>
+        )
+
+    }
 }
 
-export default ListTagColumn
+    export default ListTagColumn
