@@ -28,6 +28,20 @@ class tagController {
         
     }
     
+    public function add() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        $tag = new Tag($_POST);
+        try {
+            $manager->add($tag);
+            echo "Le tag a bien été envoyé !";
+        }
+        catch(Exception $e) {
+            echo "Oops le tag n'a pas pu être envoyé : " . $e->getMessage();
+        }
+        
+    }
+    
     public function jsonSerializeArray(array $tags) {
         // Represent your object using a nested array or stdClass,
         $data = [];
