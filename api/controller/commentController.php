@@ -52,6 +52,15 @@ class commentController  {
         echo $json;
     }
     
+    public function commentsFromPostDefault() {
+        include "connect.php";
+        $manager = new CommentsManager($db);
+        $id = $this->id;
+        $comments = $manager->getAllCommentsFromPost($id);
+        $json = json_encode($this->sortByOrder($this->jsonSerializeArray($comments), 'date'), JSON_UNESCAPED_UNICODE);
+        echo $json;
+    }
+    
     public function set_id($id) {
         $this->id = $id; 
     }
