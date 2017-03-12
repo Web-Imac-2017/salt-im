@@ -24,13 +24,12 @@ export default class PostData extends Component {
 
     componentWillReceiveProps(nextProps) {
         const myInit = {method: 'POST'};
-
+        console.log(nextProps.data)
         fetch('http://localhost:8888/salt-im/api/media/'+nextProps.data.media_id)
           .then((response) => response.json())
           .then((object) => {
-            console.log(object)
             this.setState({dataMedia: object})
-            //this.loadUser(nextProps.data.user_id);
+            // this.loadUser(nextProps.data.user_id);
           })
     }
     render() {
