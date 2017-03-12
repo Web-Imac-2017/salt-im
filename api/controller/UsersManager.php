@@ -99,10 +99,12 @@ public function getSubjects(User $user) {
 
    }
  
-   public function update(User $user)
+   public function update(User $user, $id)
    {
+       
+     $pass_hache = sha1('gz'.$user->get_password());
      // Prépare une requête de type UPDATE.
-     $q = $this->_db->prepare('UPDATE user SET mail = "'.$user->get_mail().'", username = "'.$user->get_username().'", password = "'.$user->get_password().'", avatar = "'.$user->get_avatar().'", birthDate = "'.$user->get_birthDate().'", rank = "'.$user->get_rank().'", signupDate = "'.$user->get_signupDate().'" WHERE id = "'.$user->get_id().'"');
+     $q = $this->_db->prepare('UPDATE user SET mail = "'.$user->get_mail().'", username = "'.$user->get_username().'", password = "'.$pass_hache.'", avatar = "'.$user->get_avatar().'", birthDate = "'.$user->get_birthDate().'", rank = "'.$user->get_rank().'" WHERE id = "'.$id.'"');
      
      // Exécution de la requête.
      $q->execute();

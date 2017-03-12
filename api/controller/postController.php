@@ -83,6 +83,16 @@ class postController  {
         
     }
     
+    public function postFromUser() {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $id = $this->id;
+        $subjects = $manager->getFromUser($id);
+        $json = json_encode($this->jsonSerializeArray($subjects), JSON_UNESCAPED_UNICODE);
+        echo $json;
+        
+    }
+    
     public function set_id($id) {
         $this->id = $id; 
     }
@@ -111,6 +121,21 @@ class postController  {
             'user_id' => utf8_encode($subject->get_user_id()),
             'media_id' => utf8_encode($subject->get_media_id())
         );
+        // in the way you want it arranged in your API
+        return $data;
+    }
+    
+    public function jsonSerializeArray(array $comments) {
+        // Represent your object using a nested array or stdClass,
+        $data = [];
+        for($i=0; $i<count($comments); $i++) {
+                $c = array(
+                    'text' => utf8_encode($comments[$i]->get_text()),
+                    'date' => utf8_encode($comments[$i]->get_date()),
+                    'user_id' => utf8_encode($comments[$i]->get_user_id())
+                );
+                $data[] = $c;
+        }
         // in the way you want it arranged in your API
         return $data;
     }

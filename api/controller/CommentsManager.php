@@ -122,6 +122,24 @@ class CommentsManager {
       }
     }
     
+    public function commentFromUser($id) {
+        $comments = [];
+
+        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = '.$id);
+
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+          $q = $this->_db->query('SELECT id FROM comment WHERE publication_id = '.$donnees['id']);
+          $ids = $q->fetch(PDO::FETCH_ASSOC);
+            if($ids != false) {
+                $comments[] = $this->get($ids['id']);  
+            }
+                  
+        }
+
+        return $comments;
+    }
+    
 //    public function getAllCommentsFromPost($id) {
 //        $comments = [];
 //        $comment = [];
