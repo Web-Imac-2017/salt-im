@@ -48,6 +48,10 @@
         border:0px;
         padding:20px;
         font-size: 1.125em;
+
+        &.error {
+            border:1px solid red;
+        }
     }
 
     input[type="submit"] {
@@ -88,4 +92,8 @@
 
 .tagcreator {
     padding:15px;
+}
+
+*:focus {
+    outline:none;
 }
