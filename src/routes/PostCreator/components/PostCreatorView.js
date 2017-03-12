@@ -38,7 +38,6 @@ export default  class PostCreatorView extends Component {
             body: new FormData(self.refs.form),
         })
         .then((res) => {
-            console.log(res)
             return res;
         }).then((data) => {console.log(data)})
     }

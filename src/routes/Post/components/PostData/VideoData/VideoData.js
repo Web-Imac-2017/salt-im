@@ -1,28 +1,27 @@
-import React from 'react'
+import React, {Component} from 'react'
 import MainData from '../MainData/MainData.js'
 
-function youtube_parser(url){
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    return (match&&match[7].length==11)? match[7] : false;
-}
+export default class VideoData extends Component {
 
-export const VideoData = (props) => {
-    let ytUrl = youtube_parser(props.data.url)
-    console.log(ytUrl)
+    youtube_parser(url){
+        let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        let match = url.match(regExp);
+        return (match&&match[7].length==11)? match[7] : false;
+    }
 
-    return(
-        <div className="videodata flex">
-            <div className="videodata__left flex-3">
-                <div className="iframeWrapper">
-                    <iframe src={"https://www.youtube.com/embed/"+ytUrl+"?ecver=2"} width="480" height="360" frameborder="0" allowfullscreen></iframe>
+    render() {
+        let ytUrl = this.youtube_parser(this.props.dataMedia.link);
+        return(
+            <div className="videodata flex">
+                <div className="videodata__left flex-3">
+                    <div className="iframeWrapper">
+                        <iframe src={"https://www.youtube.com/embed/"+ytUrl+"?ecver=2"} width="480" height="360" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div className="videodata__right flex-7">
+                    <MainData data={this.props.data} dataUser={this.props.dataUser} nbComment={this.props.nbComment}/>
                 </div>
             </div>
-            <div className="videodata__right flex-7">
-                <MainData data={props.data} nbComment={this.props.nbComment}/>
-            </div>
-        </div>
-    )
+        )
+    }
 }
-
-export default VideoData
