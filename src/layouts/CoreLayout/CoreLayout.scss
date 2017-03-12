@@ -23,6 +23,17 @@
     transform:translateY(100vh);
     transition:0.7s;
 
+    .stop {
+        max-height: 400px;
+        margin: 0 auto;
+        width: auto;
+        display: block;
+    }
+
+    .error-text {
+        color:red;
+    }
+
     .form, form {
         margin:0 !important;
     }

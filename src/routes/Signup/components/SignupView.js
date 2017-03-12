@@ -88,7 +88,7 @@ export default class SignupView extends Component {
             <div className="form__input">
                 <label for="password">Mot de passe
                 <input className={passwordClass} type="password" required={true} name="password" id="password" placeholder="Mot de passe"
-                  onChange={this.handleChangePassword .bind(this)}/>
+                  onChange={this.handleChangePassword.bind(this)}/>
                 </label>
             </div>
             <input type="submit" value="Créer votre compte"/>
