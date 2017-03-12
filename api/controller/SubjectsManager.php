@@ -133,6 +133,21 @@ class SubjectsManager {
     return $subject;
   }
     
+    public function getFromUser($id) {
+        $subjects = [];
+
+        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = '.$id);
+
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+          $q = $this->_db->query('SELECT id FROM subject WHERE publication_id = '.$donnees['id']);
+          $ids = $q->fetch(PDO::FETCH_ASSOC);
+          $subjects[] = $this->get($ids['id']);          
+        }
+
+        return $subjects;
+    }
+    
     public function addTags($id, $tags) {
         for($i=0; count($tags); $i++) {
             $q = $this->_db->query('SELECT id FROM tag WHERE name = "'.$tags[$i].'"');
