@@ -3,10 +3,20 @@ import MainData from '../MainData/MainData.js'
 import './PicData.scss'
 
 export default class PicData extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        isModalActive:false,
+      };
+    }
+
+
     handleLoad() {
         let width = this.refs.pic.offsetWidth
         this.refs.pic.style.height = width + "px";
     }
+
     render() {
         if(!this.props.data)
             return (<div/>)

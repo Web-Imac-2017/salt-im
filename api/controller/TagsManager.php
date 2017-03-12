@@ -10,7 +10,7 @@ class TagsManager {
   public function add(Tag $tag)
   {
     // Préparation de la requête d'insertion.
-    $q = $this->_db->prepare('INSERT INTO tag(name) VALUES("'.$tag->get_name().'")');
+    $q = $this->_db->prepare('INSERT INTO tag(name, img_url, description) VALUES("'.$tag->get_name().'", "'.$tag->get_img_url().'", "'.$tag->get_description().'")');
       
     // Exécution de la requête.
     $q->execute();
