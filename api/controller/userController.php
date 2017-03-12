@@ -34,7 +34,7 @@ class userController  {
         $manager = new UsersManager($db);
         $user = new User($_POST);
         try {
-            $manager->add($comment);
+            $manager->add($user);
             echo "L'utilisateur a bien été ajouté.";
         } catch(Exception $e) {
             echo "Oops l'utilisateur n'a pas pu être envoyé : " . $e->getMessage();
