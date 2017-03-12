@@ -20,7 +20,7 @@ export default class ProfileView extends Component {
 
     componentDidMount() {
         // Call for user data.
-        fetch('http://www.json-generator.com/api/json/get/cppbngIJiW?indent=2')
+        fetch('http://localhost/salt-im/api/u/' + this.props.params.userId)
             .then( (response) => response.json())
             .then( (data) => {this.setState({dataUser:data})});
 
@@ -68,7 +68,7 @@ export default class ProfileView extends Component {
 
     render() {
         let backgroundUrlStyle = {
-            backgroundImage: "url("+this.state.dataUser.picUrl+")"
+            backgroundImage: "url("+this.state.dataUser.avatar+")"
         }
 
         let classes = "modal ";
@@ -106,8 +106,8 @@ export default class ProfileView extends Component {
 
                     <div className="profile__header__pic" style={backgroundUrlStyle}></div>
                     <div className="profile__header__infos">
-                        <h1 className="profile__header__infos__pseudo">{this.state.dataUser.pseudo}</h1>
-                        <h2 className="profile__header__infos__email">{this.state.dataUser.email}</h2>
+                        <h1 className="profile__header__infos__pseudo">{this.state.dataUser.username}</h1>
+                        <h2 className="profile__header__infos__email">{this.state.dataUser.mail}</h2>
                         <h2 className="profile__header__infos__rank">{this.state.dataUser.rank}</h2>
                     </div>
                     <button className="profile__header__updateBtn" onClick={this.toggleModal.bind(this)}>modifier mon profil</button>
