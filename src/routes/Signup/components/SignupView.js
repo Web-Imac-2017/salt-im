@@ -6,7 +6,6 @@ import InputTextarea from '../../../components/InputTextarea/InputTextarea.js'
 
 export const SignupView = () => (
   <div className="postcreator center">
-    <Link to="/posts" className="goback">Retour aux posts</Link>
     <form className="form">
         <div className="form__header">Inscription</div>
         <InputText title="Nom d'utilisateur" idInput="title" placeholder="Nom d'utilisateur"/>

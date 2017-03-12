@@ -1,14 +1,50 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { IndexLink, Link } from 'react-router'
 import Pic from "./Pic/Pic.js"
 import Pseudo from "./Pseudo/Pseudo.js"
+import AuthentificationView from "../../../../routes/Authentification/components/AuthentificationView.js";
 
-export const Account = () => (
-  <div className="user">
-    <Pseudo/>
-    <Pic/>
-  </div>
-)
+export default class Account extends Component{
+    constructor(props) {
+      super(props);
 
-export default Account
+      this.state = {
+        isLogged:false,
+        isActive:false,
+      };
+    }
+
+    toggleModal() {
+        if(this.state.isActive)
+            this.setState({isActive:false})
+        else
+            this.setState({isActive:true})
+    }
+
+    render() {
+        if(!this.state.isLogged) {
+            let classes = "modal ";
+            if(this.state.isActive) classes+="modal--active"
+            return (
+                <div className="accountWrapper">
+                    <div style={{cursor:"pointer"}} onClick={this.toggleModal.bind(this)}>
+                        Authentification
+                    </div>
+                    <div className={classes}>
+                        <div className="modal__filter" onClick={this.toggleModal.bind(this)}/>
+                        <div className="modal__wrapper">
+                            <AuthentificationView/>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        return (
+            <div className="user">
+              <Pseudo/>
+              <Pic/>
+            </div>
+        )
+    }
+}
 
