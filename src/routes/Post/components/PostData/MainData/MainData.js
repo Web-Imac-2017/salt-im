@@ -13,9 +13,11 @@ export default class MainData extends Component {
             return (<div/>)
         }
 
+
+        console.log(this.props.data);
         return(
             <div className="data">
-                <div className="data__author">{this.props.data.date} par {this.props.data.author}</div>
+                <div className="data__author">{this.props.data.date} par {this.props.dataUser}</div>
                 <div className="data__title">{this.props.data.title}</div>
                 <div className="data__description">{this.props.data.text}</div>
                 {dataLink}

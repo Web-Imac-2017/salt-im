@@ -25,7 +25,7 @@ export default class PreviewShare extends Component {
         if(this.props.isActive)
             classes += "previewshare--active";
 
-        let url = "https://wwww.google.com";
+        let url = "http://localhost:3000/post/"+this.props.data.id;
         return(
             <div className={classes}>
                 <div className="previewshare__filter" onClick={this.toggleClose.bind(this)}/>

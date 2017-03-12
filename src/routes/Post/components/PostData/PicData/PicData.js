@@ -16,7 +16,7 @@ export default class PicData extends Component {
                     <img style={{display:"none"}} src={this.props.dataMedia.link} onLoad={this.handleLoad.bind(this)}/>
                 </div>
                 <div className="picdata__right flex-7">
-                    <MainData data={this.props.data} nbComment={this.props.nbComment}/>
+                    <MainData data={this.props.data} dataUser={this.props.dataUser} nbComment={this.props.nbComment}/>
                 </div>
             </div>
         )

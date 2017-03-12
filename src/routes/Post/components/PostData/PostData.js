@@ -10,19 +10,16 @@ export default class PostData extends Component {
 
       this.state = {
         dataMedia:{},
-        dataUser:{}
+        dataUser:""
       };
     }
 
     loadUser(id) {
-        // fetch('http://localhost:8888/salt-im/api/u/name/'+id)
-        //   .then((response) => response.json())
-        //   .then((object) => {
-        //     this.setState({dataUser: "ok"})
-        //   })
-        this.setState({
-            dataUser:"Jean le PHP"
-        })
+        fetch('http://localhost:8888/salt-im/api/u/name/'+id)
+          .then((response) => response.json())
+          .then((object) => {
+            this.setState({dataUser: object})
+          })
     }
 
     componentWillReceiveProps(nextProps) {

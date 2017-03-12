@@ -14,7 +14,6 @@ export default class PreviewActions extends Component {
     }
 
     toggleShare() {
-        console.log("toggle")
         if(this.state.isShareActive)
             this.setState({isShareActive:false});
         else
@@ -49,7 +48,7 @@ export default class PreviewActions extends Component {
                         <div className="preview__action__arrow"/>
                     </div>
                 </div>
-                <PreviewShare isActive={this.state.isShareActive} closeShare={this.toggleShare.bind(this)}/>
+                <PreviewShare data={this.props.data} isActive={this.state.isShareActive} closeShare={this.toggleShare.bind(this)}/>
             </div>
         )
     }
