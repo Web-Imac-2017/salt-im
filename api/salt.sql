@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 12 Mars 2017 à 14:45
+-- Généré le :  Dim 12 Mars 2017 à 17:56
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `badge` (
   `name` tinytext NOT NULL,
   `icon` tinytext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `badge`
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `media`
@@ -152,12 +152,23 @@ CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
 
 DROP TABLE IF EXISTS `stat`;
 CREATE TABLE IF NOT EXISTS `stat` (
-  `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` tinytext NOT NULL,
   `value` int(11) NOT NULL,
-  `relaled_element_id` int(11) NOT NULL,
-  `related_element_type` int(11) NOT NULL COMMENT '0 = subject, 1 = user'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='0 = sel, 1 = poivre, 2 = humour';
+  `related_element_type` tinyint(4) NOT NULL,
+  `related_element_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `related_element_id` (`related_element_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `stat`
+--
+
+INSERT INTO `stat` (`id`, `name`, `value`, `related_element_type`, `related_element_id`) VALUES
+(1, '0', 0, 1, 2),
+(2, '1', 0, 1, 2),
+(3, '2', 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -232,24 +243,25 @@ INSERT INTO `tag` (`id`, `name`, `img_url`, `description`) VALUES
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mail` tinytext NOT NULL,
   `username` tinytext NOT NULL,
   `password` text NOT NULL,
+  `mail` tinytext NOT NULL,
   `avatar` text NOT NULL,
   `birthDate` date NOT NULL,
   `rank` int(11) NOT NULL,
   `signupDate` date NOT NULL,
   `badge_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `badge_id` (`badge_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `badge_id` (`badge_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `mail`, `username`, `password`, `avatar`, `birthDate`, `rank`, `signupDate`, `badge_id`) VALUES
-(1, 'jc@gmail.com', 'JC', 'zef54fe6sf6e', 'jc.jpg', '1956-07-05', 0, '2017-03-01', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `mail`, `avatar`, `birthDate`, `rank`, `signupDate`, `badge_id`) VALUES
+(1, 'DaphnÃ©', '958c588b2075b4294ded151fd458188e99ceb734', 'daphnegm.rose@gmail.com', 'daphne.jpg', '1996-12-31', 0, '2017-03-12', 1),
+(2, 'DaphnÃ©', '958c588b2075b4294ded151fd458188e99ceb734', 'daphnegm.rose@gmail.com', 'daphne.jpg', '1996-12-31', 0, '2017-03-12', 1);
 
 --
 -- Contraintes pour les tables exportées
@@ -267,6 +279,13 @@ ALTER TABLE `media`
 ALTER TABLE `rel_tag_publication`
   ADD CONSTRAINT `rel_tag_publication_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`),
   ADD CONSTRAINT `rel_tag_publication_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
+
+--
+-- Contraintes pour la table `stat`
+--
+ALTER TABLE `stat`
+  ADD CONSTRAINT `stat_ibfk_1` FOREIGN KEY (`related_element_id`) REFERENCES `publication` (`id`),
+  ADD CONSTRAINT `stat_ibfk_2` FOREIGN KEY (`related_element_id`) REFERENCES `user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

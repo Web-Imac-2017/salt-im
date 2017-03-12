@@ -16,14 +16,14 @@ class UsersManager {
       
     $pass_hache = sha1('gz'.$user->get_password());
       
-    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "0")');
+    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1")');
     $user_id = $this->_db->lastInsertId();
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("0", "0", "'.$user_id.'")');
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_type, related_element_id) VALUES("0", "0", "1", "'.$user_id.'")');
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$user_id.'")'); 
+    $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("1", "0", "1", "'.$user_id.'")'); 
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$user_id.'")'); 
+    $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("2", "0", "1", "'.$user_id.'")'); 
       
   }
   public function delete(User $user) {

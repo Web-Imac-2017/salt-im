@@ -9,9 +9,8 @@ import Filter from '../../../components/Filter/Filter.js'
 const dataListPost = [
     {
         "id":0,
-
-        "type":"link",
-        "url":"http://internetactu.blog.lemonde.fr/2017/02/19/apres-lintelligence-artificielle-lintelligence-etendue/",
+        "type":"video",
+        "url":"https://www.youtube.com/watch?v=NgWC5oEuyjU",
         "title":"Super title putaclic",
         "description":"Sa darrone ils boivent du sprite sa mère",
         "salt":19,
@@ -22,7 +21,7 @@ const dataListPost = [
     },
     {
         "id":1,
-        "type":"image",
+        "type":"img",
         "url":"http://vignette3.wikia.nocookie.net/logopedia/images/f/f5/Sprite_logo2.jpg/revision/latest?cb=20140618132523",
         "title":"Super title putaclic sa mère",
         "description":"Sa darrone ils boivent du sprite sa mère",

@@ -52,14 +52,14 @@ export default class SignupView extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.state.isPasswordGood == true && this.state.isPseudoGood == true) {
-      // fetch("http://localhost:8888/salt-im/api/p/post/add/90",
-      // {
-      //     method: "post",
-      //     body: new FormData(this.refs.form),
-      // })
-      // .then((res) => {
-      //     return res;
-      // }).then((data) => {console.log(data)})
+      fetch("http://localhost:8888/salt-im/api/u/signup/1",
+      {
+          method: "post",
+          body: new FormData(this.refs.form),
+      })
+      .then((res) => {
+          return res.text();
+      }).then((data) => {console.log(data)})
     }
   }
 
@@ -80,8 +80,8 @@ export default class SignupView extends Component {
                 </label>
             </div>
             <div className="form__input">
-                <label for="pseudo">Pseudo
-                  <input className={pseudoClass} type="text" required={true} name="pseudo" id="pseudo" placeholder="Votre pseudo (8 à 20 caractères)"
+                <label for="username">Pseudo
+                  <input className={pseudoClass} type="text" required={true} name="username" id="username" placeholder="Votre pseudo (8 à 20 caractères)"
                     onChange={this.handleChangePseudo.bind(this)}/>
                 </label>
             </div>

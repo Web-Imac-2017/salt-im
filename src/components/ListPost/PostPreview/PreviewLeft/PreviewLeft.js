@@ -1,28 +1,35 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { IndexLink, Link } from 'react-router'
 import './PreviewLeft.scss'
 
-export const PreviewLeft = (props) => {
-
-    let picUrl = "https://yt3.ggpht.com/-r-NV4YMr0Gc/AAAAAAAAAAI/AAAAAAAAAAA/sCZE_m9wXoU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"
-
-    switch(props.data.type){
-        case "image":
-            picUrl = props.data.url;
-            break;
-        default:
-            break;
+export default class PreviewLeft extends Component {
+    youtube_parser(url){
+        let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        let match = url.match(regExp);
+        return (match&&match[7].length==11)? match[7] : false;
     }
 
-    let divStyle = {
+    render() {
+        let picUrl = "/defaults/video.svg"
+
+        switch(this.props.data.type){
+            case "img":
+                picUrl = this.props.data.url;
+                break;
+            case "video":
+                picUrl = "https://img.youtube.com/vi/"+this.youtube_parser(this.props.data.url)+"/0.jpg" || "/default/video.svg";
+                break;
+            default:
+                break;
+        }
+
+        let divStyle = {
             backgroundImage: 'url(' + picUrl + ')'
+        }
+
+        return(
+            <div className="preview__background" style={divStyle}/>
+        )
     }
-
-    return(
-        <div className="preview__background" style={divStyle}/>
-    )
-
 }
-
-export default PreviewLeft
 
