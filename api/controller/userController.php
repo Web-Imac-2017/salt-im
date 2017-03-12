@@ -68,6 +68,18 @@ class userController  {
         echo($json);
     }
     
+    public function update() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        $id = $this->id;
+        $user = new User($_POST);
+        $manager->update($user, $id);
+        
+        
+        $json = json_encode(utf8_encode($user->get_username()), JSON_UNESCAPED_UNICODE);
+        echo($json);
+    }
+    
     public function get_id() {
         return $this->id;
     }

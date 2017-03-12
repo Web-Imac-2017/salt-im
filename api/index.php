@@ -26,6 +26,7 @@ $router->addRule('u/signout', array('controller' => 'user', 'action' => 'signout
 $router->addRule('u/login', array('controller' => 'user', 'action' => 'login'));
 $router->addRule('u/logout', array('controller' => 'user', 'action' => 'logout'));
 $router->addRule('u/name/:id', array('controller' => 'user', 'action' => 'name'));
+$router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
 $router->addRule('u/:id', array('controller' => 'user', 'action' => 'index'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
