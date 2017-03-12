@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './ProfileView.scss'
 import ListPost from '../../../components/ListPost/ListPost.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
+import ProfileUpdateView from '../../ProfileUpdate/components/ProfileUpdateView.js'
 
 export default class ProfileView extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class ProfileView extends Component {
         dataFav:{},
         dataComment:{},
         itemActive:"posts",
+        isActive:false
       };
     }
 
@@ -57,12 +59,25 @@ export default class ProfileView extends Component {
         })
     }
 
+    toggleModal() {
+        if(this.state.isActive)
+            this.setState({isActive:false})
+        else
+            this.setState({isActive:true})
+    }
+
     render() {
         let backgroundUrlStyle = {
             backgroundImage: "url("+this.state.dataUser.picUrl+")"
         }
 
+        let classes = "modal ";
+        
+        if(this.state.isActive) 
+            classes += "modal--active"
+
         let dataItem = (<div/>);
+
         switch(this.state.itemActive) {
             case "posts" :
                 dataItem = (<ListPost title="Posts tendances" data={this.state.dataPost} />);
@@ -79,6 +94,14 @@ export default class ProfileView extends Component {
 
         return (
               <div className="profile center">
+
+                <div className={classes}>
+                    <div className="modal__filter" onClick={this.toggleModal.bind(this)}/>
+                    <div className="modal__wrapper">
+                        <ProfileUpdateView/>
+                    </div>
+                </div>
+
                 <div className="profile__header">
 
                     <div className="profile__header__pic" style={backgroundUrlStyle}></div>
@@ -87,7 +110,7 @@ export default class ProfileView extends Component {
                         <h2 className="profile__header__infos__email">{this.state.dataUser.email}</h2>
                         <h2 className="profile__header__infos__rank">{this.state.dataUser.rank}</h2>
                     </div>
-                    <button className="profile__header__updateBtn">modifier mon profil</button>
+                    <button className="profile__header__updateBtn" onClick={this.toggleModal.bind(this)}>modifier mon profil</button>
 
                 </div>
 
