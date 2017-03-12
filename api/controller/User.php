@@ -10,6 +10,7 @@ class User {
     private $birthDate;
     private $rank;
     private $signupDate;
+    private $badge_id;
     
     // Hydrate
     public function hydrate(array $donnees) {
@@ -93,6 +94,14 @@ class User {
     
     public function set_signupDate($signupDate) {
         $this->signupDate = $signupDate;      
+    }
+    
+    public function get_badge_id() {
+        return $this->badge_id;
+    }
+    
+    public function set_badge_id($badge_id) {
+        $this->badge_id = $badge_id;      
     }
 }
 

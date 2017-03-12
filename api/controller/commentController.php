@@ -110,19 +110,19 @@ class commentController  {
             }
             array_multisort($date, SORT_ASC, $comments); 
             
-        } else if ($order == 0) {
+        } else if ($order == 1) {
             foreach ($comments as $key => $row) {
                 $sel[$key] = $row['sel'];
             }
             array_multisort($date, SORT_ASC, $comments);
             
-        } else if ($order == 1) {
+        } else if ($order == 2) {
             foreach ($comments as $key => $row) {
                 $poivre[$key] = $row['poivre'];
             }
             array_multisort($date, SORT_ASC, $comments); 
             
-        } else if ($order == 2) {
+        } else if ($order == 3) {
             foreach ($comments as $key => $row) {
                 $humour[$key] = $row['humour'];
             }
