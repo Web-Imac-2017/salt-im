@@ -63,9 +63,9 @@ class commentController  {
     
     public function commentFromUser() {
         include "connect.php";
-        $manager = new CommentManager($db);
+        $manager = new CommentsManager($db);
         $id = $this->id;
-        $comments = $manager->getFromUser($id);
+        $comments = $manager->commentFromUser($id);
         $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
         echo $json;
         

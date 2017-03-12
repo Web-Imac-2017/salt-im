@@ -85,7 +85,7 @@ class postController  {
     
     public function postFromUser() {
         include "connect.php";
-        $manager = new SubjectManager($db);
+        $manager = new SubjectsManager($db);
         $id = $this->id;
         $subjects = $manager->getFromUser($id);
         $json = json_encode($this->jsonSerializeArray($subjects), JSON_UNESCAPED_UNICODE);

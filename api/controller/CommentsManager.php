@@ -122,7 +122,7 @@ class CommentsManager {
       }
     }
     
-    public function getFromUser($id) {
+    public function commentFromUser($id) {
         $comments = [];
 
         $q = $this->_db->query('SELECT id FROM publication WHERE user_id = '.$id);
@@ -131,7 +131,10 @@ class CommentsManager {
         {
           $q = $this->_db->query('SELECT id FROM comment WHERE publication_id = '.$donnees['id']);
           $ids = $q->fetch(PDO::FETCH_ASSOC);
-          $comments[] = $this->get($ids['id']);          
+            if($ids != false) {
+                $comments[] = $this->get($ids['id']);  
+            }
+                  
         }
 
         return $comments;
