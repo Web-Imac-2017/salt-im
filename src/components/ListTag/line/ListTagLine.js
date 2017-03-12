@@ -3,19 +3,27 @@ import './ListTagLine.scss'
 import Tag from '../Tag/Tag.js'
 
 export const ListTagLine = (props) => {
-    /*const tagsNode = props.data.map( (elmt,i) => (
-        <Tag key={i} data={elmt} size={props.size}/>
-    ))*/
-     let nodeData;
-    console.log(props.data);
+        console.log(props)
+    if(props.data.map != undefined  ){
+        let tagsNode = props.data.map( (elmt,i) => (
+            <Tag key={i} data={elmt} size={props.size}/>
+            ))
 
-    return (
-        <div className="tagsLine">
+            return (
+            <div className="tagsLine">
             <div className="tagsLine__list">
-                {nodeData}
+            {tagsNode}
             </div>
-        </div>
-    )
-}
+            </div>)
+        }
 
-export default ListTagLine
+        else
+        {
+            return (
+            <div>Chargement des tags</div>
+            )
+
+        }
+    }
+
+    export default ListTagLine

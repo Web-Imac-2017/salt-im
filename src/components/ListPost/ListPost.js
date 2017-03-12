@@ -4,17 +4,13 @@ import PostPreview from './PostPreview/PostPreview.js'
 
 export const ListPost = (props) => {
 
-    let postsNode = props.data.map( (elmt,i) => (
-        <PostPreview key={i} data={elmt}/>
-    ))
+    
+            return(
+                <div className="listpost">
+                    Chargement des tags
+                </div>
+            )
+        
+    }
 
-    return (
-        <div className="listpost">
-          <div className="listpost__postwrapper">
-            {postsNode}
-          </div>
-        </div>
-    )
-}
-
-export default ListPost
+    export default ListPost

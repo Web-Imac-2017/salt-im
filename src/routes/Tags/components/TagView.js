@@ -24,7 +24,8 @@ export default class TagView extends Component {
 
     const myInit = {method: 'POST'};
     
-    fetch('http://localhost/salt-im/api/p/'+this.props.params.tagId, myInit)
+    //fetch('http://localhost/salt-im/api/p/'+this.props.params.tagId, myInit)
+    fetch('http://www.json-generator.com/api/json/get/ctAJIBmiUO?indent=2', myInit)
     .then((response) => response.json())
     .then((object) => { this.setState({tagdata: object})})
   }
@@ -34,7 +35,7 @@ export default class TagView extends Component {
     return (
       <div className="tagview">
       <p className="tagview__titleTrends">Tags tendances</p>
-      <ListTagColumn data={this.state.tagdata}/>
+      <ListTagColumn data={this.state.tagdata } />
       
       <p className="tagview__titleAll">Retrouvez tous les tags</p>
       <ListTagLine data={this.state.tagdata} size={this.state.size}/>
