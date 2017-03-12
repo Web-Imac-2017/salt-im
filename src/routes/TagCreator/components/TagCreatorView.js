@@ -90,7 +90,7 @@ export default class TagCreatorView extends Component{
                     </div>
                   <input type="hidden" value={locale_date_string} name="date" />
                   <input type="hidden" value={57} name="user_id" />
-                  <input type="submit" value="Ajouter un post"/>
+                  <input type="submit" value="Ajouter un tag"/>
                 </form>
             </div>
             )
