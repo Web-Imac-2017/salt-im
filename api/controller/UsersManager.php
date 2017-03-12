@@ -13,14 +13,17 @@ class UsersManager {
     
   public function add(User $user) {
     // Préparation de la requête 
-    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$user->get_password().'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "0")');
-    $publication_id = $this->_db->lastInsertId();
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("0", "0", "'.$publication_id.'")');
+    $pass_hache = sha1('gz'.$user->get_password());
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$publication_id.'")'); 
+    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "0")');
+    $user_id = $this->_db->lastInsertId();
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$publication_id.'")'); 
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("0", "0", "'.$user_id.'")');
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$user_id.'")'); 
+      
+    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$user_id.'")'); 
       
   }
   public function delete(User $user) {
@@ -104,6 +107,8 @@ public function getSubjects(User $user) {
      // Exécution de la requête.
      $q->execute();
    }
+    
+    
  
    public function setDb(PDO $db)
    {
