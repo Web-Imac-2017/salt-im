@@ -1,6 +1,7 @@
 <?php
 
 $user_id = $_GET['id'];
+session_start(oid)
 $token = $_GET['token'];
 require 'connect.php';
 $req = $pdo->prepare('SELECT * FROM user WHERE id = ?');
