@@ -109,6 +109,23 @@
      return $subject;
 
    }
+     
+     public function postFromUser($id) {
+        $subjects = [];
+
+        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = '.$id);
+
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+          $q2 = $this->_db->query('SELECT id FROM subject WHERE publication_id = '.$donnees['id']);
+          $ids = $q2->fetch(PDO::FETCH_ASSOC);
+            if($ids != false && $this->get($ids['id']) != null) {
+                $subjects[] = $this->get($ids['id']);  
+            }
+                  
+        }
+         return $subjects;
+     }
 
   public function get_help()
    {
@@ -168,6 +185,7 @@ public function sort_date(){
 
     return $subject;
 }
+    
 
    public function setDb(PDO $db)
    {

@@ -87,7 +87,7 @@ class postController  {
         include "connect.php";
         $manager = new SubjectsManager($db);
         $id = $this->id;
-        $subjects = $manager->getFromUser($id);
+        $subjects = $manager->postFromUser($id);
         $json = json_encode($this->jsonSerializeArray($subjects), JSON_UNESCAPED_UNICODE);
         echo $json;
         
@@ -125,14 +125,19 @@ class postController  {
         return $data;
     }
     
-    public function jsonSerializeArray(array $comments) {
+    public function jsonSerializeArray(array $subjects) {
         // Represent your object using a nested array or stdClass,
         $data = [];
-        for($i=0; $i<count($comments); $i++) {
+        for($i=0; $i<count($subjects); $i++) {
                 $c = array(
-                    'text' => utf8_encode($comments[$i]->get_text()),
-                    'date' => utf8_encode($comments[$i]->get_date()),
-                    'user_id' => utf8_encode($comments[$i]->get_user_id())
+                    'id' => utf8_encode($subjects[$i]->get_id()),
+                    'title' => utf8_encode($subjects[$i]->get_title()),
+                    'flair' => utf8_encode($subjects[$i]->get_flair()),
+                    'type' => utf8_encode($subjects[$i]->get_type()),
+                    'text' => utf8_encode($subjects[$i]->get_text()),
+                    'date' => utf8_encode($subjects[$i]->get_date()),
+                    'user_id' => utf8_encode($subjects[$i]->get_user_id()),
+                    'media_id' => utf8_encode($subjects[$i]->get_media_id())
                 );
                 $data[] = $c;
         }
