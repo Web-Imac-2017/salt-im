@@ -15,7 +15,7 @@ class UsersManager {
     // Préparation de la requête 
     $pass_hache = sha1('gz'.$user->get_password());
       
-    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1")');
+    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id, token) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1", "0")');
     $user_id = $this->_db->lastInsertId();
       
     $this->_db->exec('INSERT INTO stat(name, value, related_element_type, related_element_id) VALUES("0", "0", "1", "'.$user_id.'")');
@@ -27,7 +27,6 @@ class UsersManager {
     session_start();
     $_SESSION['id'] = $user->get_id();
     $_SESSION['pseudo'] = $user->get_username();
-    return $_SESSION;
   }
     
   public function delete(User $user) {
@@ -43,8 +42,11 @@ class UsersManager {
 
     $q = $this->_db->query('SELECT id, mail, username, password, avatar, birthDate, rank, signupDate FROM user WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-    return new User($donnees);
+    if($donnees != false) {
+        return new User($donnees);
+    } else {
+        return false;
+    } 
   }
 
 
@@ -200,10 +202,13 @@ public function getSubjects(User $user) {
     }
     
     public function login($data) {
-          $stmt = $this->db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['mail'].'" LIMIT 1');
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
+          $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
           $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
           if($stmt->rowCount() > 0) {
-             if(password_verify($data['password'], $userRow['password'])) {
+             if(sha1('gz'.$data['password']) == $userRow['password']) {
                 $_SESSION['user_session'] = $userRow['id'];
                 return true;
              }
@@ -212,33 +217,30 @@ public function getSubjects(User $user) {
              }
           }
        }
-   }
 
-function reconnect_from_cookie(){
+public function reconnect_from_cookie($cookie, $session){
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
-    if(isset($_COOKIE['remember']) && !isset($_SESSION['auth']) ){
-        if(!isset($this->_db)){
-            global $pdo;
-        }
-        $remember_token = $_COOKIE['remember'];
+    if(isset($cookie['remember']) && !isset($session['auth']) ){
+        $remember_token = $cookie['remember'];
         $parts = explode('==', $remember_token);
         $user_id = $parts[0];
-        $req = $pdo->prepare('SELECT * FROM user WHERE id = ?');
-        $req->execute([$user_id]);
-        $user = $req->fetch();
+        $user = $this->get($user_id);
         if($user){
-            $expected = $user_id . '==' . $user->remember_token . sha1($user_id . '');
+            $expected = $user_id . '==' . $user->get_token() . sha1($user_id . '');
             if($expected == $remember_token){
                 session_start();
-                $_SESSION['auth'] = $user;
+                $session['auth'] = $user;
                 setcookie('remember', $remember_token, time() + 60 * 60 * 24 * 365);
+                return true;
             } else{
                 setcookie('remember', null, -1);
+                return false;
             }
         }else{
             setcookie('remember', null, -1);
+            return false;
         }
     }
 }
