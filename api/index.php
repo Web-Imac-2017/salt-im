@@ -13,6 +13,7 @@ $router->setDefaultControllerAction('accueil','index');
 $router->setErrorControllerAction('error', 'alert');
 
 $router->addRule('media/:id', array('controller' => 'media', 'action' => 'index'));
+$router->addRule('media/:id/img', array('controller' => 'media', 'action' => 'img'));
 $router->addRule('p/post/add/:id', array('controller' => 'post', 'action' => 'add'));
 $router->addRule('p/:id', array('controller' => 'post', 'action' => 'index'));
 $router->addRule('p/post/remove/:id', array('controller' => 'post', 'action' => 'remove'));
@@ -33,6 +34,10 @@ $router->addRule('u/:id', array('controller' => 'user', 'action' => 'index'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'add'));
+$router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
+$router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
+$router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
+$router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
 $router->load();
 

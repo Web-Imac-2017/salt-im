@@ -26,7 +26,6 @@ class userController  {
         $user = $manager->get($id);
         $json = json_encode($this->jsonSerialize($user), JSON_UNESCAPED_UNICODE);
         echo($json);
-        
     }
     
     public function signup() {

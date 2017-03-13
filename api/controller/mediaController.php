@@ -28,6 +28,14 @@ class mediaController  {
         echo $json;
     }
     
+    public function img() {
+        include "connect.php";
+        $manager = new MediasManager($db);
+        $id = $this->id;
+        $media = $manager->get($id);
+        $manager->img($media, $_FILES);
+    }
+    
     public function set_id($id) {
         $this->id = $id; 
     }

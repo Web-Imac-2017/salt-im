@@ -25,7 +25,6 @@ class tagController {
         $tags = $manager->getList();
         $json = json_encode($this->jsonSerializeArray($tags),JSON_UNESCAPED_UNICODE);
         echo $json;
-        
     }
     
     public function add() {
@@ -40,6 +39,14 @@ class tagController {
             echo "Oops le tag n'a pas pu être envoyé : " . $e->getMessage();
         }
         
+    }
+    
+    public function img() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        $id = $this->id;
+        $tag = $manager->get($id);
+        $manager->img($tag, $_FILES);
     }
     
     public function jsonSerializeArray(array $tags) {

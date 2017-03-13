@@ -28,6 +28,7 @@ require_once "controller/mediaController.php";
 require_once "controller/commentController.php";
 require_once "controller/tagController.php";
 require_once "controller/userController.php";
+require_once "controller/statController.php";
 
 class Router
 {
