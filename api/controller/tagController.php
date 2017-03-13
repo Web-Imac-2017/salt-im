@@ -25,7 +25,6 @@ class tagController {
         $tags = $manager->getList();
         $json = json_encode($this->jsonSerializeArray($tags),JSON_UNESCAPED_UNICODE);
         echo $json;
-        
     }
     
     public function add() {
