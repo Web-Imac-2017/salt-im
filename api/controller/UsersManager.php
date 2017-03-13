@@ -204,7 +204,7 @@ public function getSubjects(User $user) {
           $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
           if($stmt->rowCount() > 0) {
              if(password_verify($data['password'], $userRow['password'])) {
-                $_SESSION['user_session'] = $userRow['user_id'];
+                $_SESSION['user_session'] = $userRow['id'];
                 return true;
              }
              else {
@@ -213,6 +213,35 @@ public function getSubjects(User $user) {
           }
        }
    }
+
+function reconnect_from_cookie(){
+    if(session_status() == PHP_SESSION_NONE){
+        session_start();
+    }
+    if(isset($_COOKIE['remember']) && !isset($_SESSION['auth']) ){
+        if(!isset($this->_db)){
+            global $pdo;
+        }
+        $remember_token = $_COOKIE['remember'];
+        $parts = explode('==', $remember_token);
+        $user_id = $parts[0];
+        $req = $pdo->prepare('SELECT * FROM user WHERE id = ?');
+        $req->execute([$user_id]);
+        $user = $req->fetch();
+        if($user){
+            $expected = $user_id . '==' . $user->remember_token . sha1($user_id . '');
+            if($expected == $remember_token){
+                session_start();
+                $_SESSION['auth'] = $user;
+                setcookie('remember', $remember_token, time() + 60 * 60 * 24 * 365);
+            } else{
+                setcookie('remember', null, -1);
+            }
+        }else{
+            setcookie('remember', null, -1);
+        }
+    }
+}
     
     
  
