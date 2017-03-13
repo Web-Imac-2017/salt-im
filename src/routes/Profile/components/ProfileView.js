@@ -25,7 +25,7 @@ export default class ProfileView extends Component {
             .then( (data) => {this.setState({dataUser:data})});
 
         // Call for posts data by default.
-        fetch('http://www.json-generator.com/api/json/get/bMNOSXbUte?indent=2')
+        fetch('http://localhost/salt-im/api/p/u/' + this.props.params.userId)
             .then( (response) => response.json())
             .then( (data) => {
                 this.setState({dataPost:data})
@@ -42,7 +42,7 @@ export default class ProfileView extends Component {
     }
 
     loadComments() {
-        fetch('http://www.json-generator.com/api/json/get/bMNOSXbUte?indent=2')
+        fetch('http://localhost/salt-im/api/comment/u/' + this.props.params.userId)
             .then( (response) => response.json())
             .then( (data) => {this.setState({dataComment:data})});
     }
@@ -116,9 +116,9 @@ export default class ProfileView extends Component {
 
                 <div className="profile__nav">
                 <ul className="profile__nav__list">
-                    <li className="profile__nav__list__item profile__nav__list--active" onClick={()=>{this.setState({itemActive:"posts"})}}>Posts (3)</li>
-                    <li className="profile__nav__list__item" onClick={this.handleCommentClick.bind(this)}>Commentaires (530)</li>
-                    <li className="profile__nav__list__item" onClick={this.handleFavsClick.bind(this)}>Favoris (11)</li>
+                    <li className="profile__nav__list__item profile__nav__list--active" onClick={()=>{this.setState({itemActive:"posts"})}}>Posts ({this.state.dataPost.length})</li>
+                    <li className="profile__nav__list__item" onClick={this.handleCommentClick.bind(this)}>Commentaires ({this.state.dataComment.length})</li>
+                    <li className="profile__nav__list__item" onClick={this.handleFavsClick.bind(this)}>Favoris ({this.state.dataFav.length})</li>
                 </ul>
                 </div>
 
