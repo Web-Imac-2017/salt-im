@@ -52,9 +52,34 @@ if(isset($_POST['btn-signup']))
          {
             if(empty($error)) 
             {
-                include 'connect.php'
-                $req = $pdo->prepare("INSERT INTO user SET username = ?, password = ?, mail = ?, avatar = 'default_avatar.png', birthdate = '21/12/2012', rank = 0, signupDate= date('l \t\h\e jS')");
-                $req->execute()
+                $pass_hache = sha1('gz' . $_POST['pass']);
+
+                  // Insertion dans la DB
+                  $req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id, confirmation_token) VALUES(:pseudo, :pass_hache, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())');
+
+                  $token  = str_random(60); //la fonction est dans function
+                  $req->execute(array(
+                  'pseudo' => $username,
+                  'pass' => $password,
+                  'email' => $mail,
+                  'avatar' => $avatar,
+                  'birthDate' => $birthDate,
+                  'rank' => $rank,
+                  'badge' => $badge_id));
+
+                  $resultat = $req->fetch();
+
+if (!$resultat)
+{
+    echo 'Mauvais identifiant ou mot de passe !';
+}
+else
+{
+    session_start();
+    $_SESSION['id'] = $resultat['id'];
+    $_SESSION['pseudo'] = $username;
+    echo 'Vous êtes connecté !';
+}
             }
          }
      }

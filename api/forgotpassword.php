@@ -13,7 +13,7 @@ if(isset($_POST['btn-submit']))
 {
  $email = $_POST['email'];
  
- $stmt = $user->runQuery("SELECT id FROM user WHERE maill= email LIMIT 1"); //limit the number of row returned by SELECT
+ $stmt = $user->runQuery("SELECT id FROM user WHERE mail == email LIMIT 1"); //limit the number of row returned by SELECT
  $stmt->execute(array("email"=>$email));
  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
  if($stmt->rowCount() == 1)
@@ -21,7 +21,7 @@ if(isset($_POST['btn-submit']))
   $id = base64_encode($row['id']);
   $code = md5(uniqid(rand()));
   
-  $stmt = $user->runQuery("UPDATE user SET tokenCode=token WHERE mail= email");
+  $stmt = $user->runQuery("UPDATE user SET tokenCode=token WHERE mail ==email");
   $stmt->execute(array("token"=>$code,"email"=>$email));
   
   $message= "
