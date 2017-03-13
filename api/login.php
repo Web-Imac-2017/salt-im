@@ -2,7 +2,7 @@
 <?php
 require_once 'connect.php';
 
-if($user->is_loggedin()!="")
+if($user->is_logged_in()!="")
 {
  $user->redirect('/');
 }
@@ -13,7 +13,7 @@ if(isset($_POST['btn-login']))
  $umail = $_POST['mail'];
  $upassword = $_POST['password'];
   
- if($user->login($uname,$umail,$upassword))
+ if($user->is_logged_in($uname,$umail,$upassword))
  {
   $user->redirect('/');
  }
