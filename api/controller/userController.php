@@ -33,8 +33,9 @@ class userController  {
         $manager = new UsersManager($db);
         $user = new User($_POST);
         try {
-            $manager->add($user);
+            $session = $manager->add($user);
             echo "L'utilisateur a bien été ajouté.";
+            echo($session);
         } catch(Exception $e) {
             echo "Oops l'utilisateur n'a pas pu être envoyé : " . $e->getMessage();
         }
@@ -55,7 +56,7 @@ class userController  {
     public function logout() {
         include "connect.php";
         $manager = new UsersManager($db);
-        $manager->logout($_POST);
+        $manager->logout();
     }
     
     public function name() {

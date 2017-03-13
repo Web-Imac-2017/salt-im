@@ -22,8 +22,7 @@ if (!$resultat)
 {
     echo 'Mauvais identifiant ou mot de passe !';
 }
-else
-{
+else {
     session_start();
     $_SESSION['id'] = $resultat['id'];
     $_SESSION['pseudo'] = $username;
