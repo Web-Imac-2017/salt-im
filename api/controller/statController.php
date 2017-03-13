@@ -1,6 +1,6 @@
 <?php
 
-require_once "Stat.php";
+/*require_once "Stat.php";*/
 require_once "StatsManager.php";
 
 class statController  {
@@ -26,6 +26,24 @@ class statController  {
         $json = json_encode($this->jsonSerialize($stat));
         echo $json;
     }
+
+    public function getStatPost() {
+        include "connect.php";
+        $manager = new StatsManager($db);
+        $id = $this->id;
+        $stat = $manager->getStatPost($id);
+        $json = json_encode($this->jsonSerializeArray($stat));
+        echo $json;
+    }
+    
+    public function getStatUser() {
+        include "connect.php";
+        $manager = new StatsManager($db);
+        $id = $this->id;
+        $stat = $manager->getStatUser($id);
+        $json = json_encode($this->jsonSerializeArray($stat));
+        echo $json;
+    }
     
     public function set_id($id) {
         $this->id = $id; 
@@ -39,10 +57,24 @@ class statController  {
         // Represent your object using a nested array or stdClass,
         $data = array(
             'id' => utf8_encode($stat->get_id()),
-            'name' => utf8_encode($stat->get_namelink()),
-            'value' => utf8_encode($stat->get_value()),
-            'related_element_id' => utf8_encode($stat->get_related_element_id()),
+            'name' => utf8_encode($stat->get_name()),
+            'value' => utf8_encode($stat->get_value())
         );
+        // in the way you want it arranged in your API
+        return $data;
+    }
+
+    public function jsonSerializeArray(array $stat) {
+        // Represent your object using a nested array or stdClass,
+        $data = [];
+        for($i=0; $i<count($stat); $i++) {
+                $c = array(
+                    'id' => utf8_encode($stat[$i]->get_id()),
+                    'name' => utf8_encode($stat[$i]->get_name()),
+                    'value' => utf8_encode($stat[$i]->get_value())
+                );
+                $data[] = $c;
+        }
         // in the way you want it arranged in your API
         return $data;
     }

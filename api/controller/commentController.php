@@ -120,21 +120,21 @@ class commentController  {
             }
             array_multisort($date, SORT_ASC, $comments); 
             
-        } else if ($order == 1) {
+        } else if ($order == "sel") {
             foreach ($comments as $key => $row) {
-                $sel[$key] = $row['sel'];
+                $sel[$key] = $row['0'];
             }
             array_multisort($date, SORT_ASC, $comments);
             
-        } else if ($order == 2) {
+        } else if ($order == "poivre") {
             foreach ($comments as $key => $row) {
-                $poivre[$key] = $row['poivre'];
+                $poivre[$key] = $row['1'];
             }
             array_multisort($date, SORT_ASC, $comments); 
             
-        } else if ($order == 3) {
+        } else if ($order == "humour") {
             foreach ($comments as $key => $row) {
-                $humour[$key] = $row['humour'];
+                $humour[$key] = $row['2'];
             }
             array_multisort($date, SORT_ASC, $comments); 
         }
