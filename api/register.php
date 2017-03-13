@@ -1,5 +1,6 @@
 <?php
 require_once 'controller/connect.php';
+include 'function.php'
 //a créer. 
 
 $error = [];
@@ -52,20 +53,20 @@ if(isset($_POST['btn-signup']))
          {
             if(empty($error)) 
             {
-                $pass_hache = sha1('gz' . $_POST['pass']);
+                $pass_hache = sha1('gz' . $_POST['password']);
 
                   // Insertion dans la DB
-                  $req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id, confirmation_token) VALUES(:pseudo, :pass_hache, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())');
+                  $req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id, token) VALUES(:pseudo, :pass_hache, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())', ':token' );
 
                   $token  = str_random(60); //la fonction est dans function
                   $req->execute(array(
                   'pseudo' => $username,
                   'pass' => $password,
                   'email' => $mail,
-                  'avatar' => $avatar,
+                  'avatar' => 'default_avatar.png',
                   'birthDate' => $birthDate,
-                  'rank' => $rank,
-                  'badge' => $badge_id));
+                  'rank' => '0',
+                  'badge' => '1'));
 
                   $resultat = $req->fetch();
 
