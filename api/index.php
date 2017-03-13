@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 //echo 'Index <br>';
 
@@ -10,7 +10,7 @@ $router->setPath('controller/');
 // Si aucun controller n'est spécifié on appèlera accueilController et sa méthode index()
 $router->setDefaultControllerAction('accueil','index');
 // En cas d'url invalid on appèlera le controller errorController et sa méthode alert()
-$router->setErrorControllerAction('error', 'alert'); 
+$router->setErrorControllerAction('error', 'alert');
 
 $router->addRule('media/:id', array('controller' => 'media', 'action' => 'index'));
 $router->addRule('p/post/add/:id', array('controller' => 'post', 'action' => 'add'));
@@ -35,6 +35,8 @@ $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
+$router->addRule('p/stat/:id', array('controller' => 'stat', 'action' => 'getStatPost'));
+$router->addRule('u/stat/:id', array('controller' => 'stat', 'action' => 'getStatUser'));
 
 $router->load();
 
