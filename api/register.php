@@ -39,14 +39,14 @@ if(isset($_POST['btn-signup']))
    {
       try
       {
-         $stmt = $DB_con->prepare("SELECT username,useremail FROM user WHERE username=:uname OR useremail=:umail");
+         $stmt = $DB_con->prepare("SELECT username,mail FROM user WHERE username=:uname OR mail=:umail");
          $stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
          $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
          if($row['username']==$uname) {
             $error['username_taken'] = "sorry username already taken !";
          }
-         else if($row['useremail']==$umail) {
+         else if($row['mail']==$umail) {
             $error['email_taken'] = "sorry email id already taken !";
          }
          else
@@ -54,17 +54,18 @@ if(isset($_POST['btn-signup']))
             if(empty($error)) 
             {
                 $pass_hache = sha1('gz' . $_POST['password']);
+                $default_birthDate = new DateTime(('21-12-2012', new DateTimeZone('Paris/Europe'));
 
                   // Insertion dans la DB
-                  $req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id, token) VALUES(:pseudo, :pass_hache, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())', ':token' );
+                  $req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id, token) VALUES(:pseudo, :pass_hache, :email, :avatar, :birthDate, :rank, :badge,  CURDATE(), :token)' );
 
                   $token  = str_random(60); //la fonction est dans function
                   $req->execute(array(
                   'pseudo' => $username,
-                  'pass' => $password,
+                  'pass_hache' => $password,
                   'email' => $mail,
                   'avatar' => 'default_avatar.png',
-                  'birthDate' => $birthDate,
+                  'birthDate' => $default_birthDate,
                   'rank' => '0',
                   'badge' => '1'));
 
