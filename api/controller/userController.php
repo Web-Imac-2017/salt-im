@@ -61,13 +61,13 @@ class userController {
         }
         if($isloggedin != true) {
             $isloggedin = $manager->login($_POST);
+        }
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
             } else {
                 echo "L'utilisateur n'est pas connecté.";
             }
         }
-    }
     
     public function logout() {
         include "connect.php";
