@@ -68,14 +68,32 @@ class userController  {
         echo($json);
     }
     
+    /* **** A L'INTENTION DU FRONT **** */
+    /* le formulaire pour envoyer l'avatar doit être sous cette forme */
+    /* <!-- Le type d'encodage des données, enctype, DOIT être spécifié comme ce qui suit -->
+<form enctype="multipart/form-data" action="api/u/1/avatar" method="post">
+  <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
+  <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+  <!-- Le nom de l'élément input détermine le nom dans le tableau $_FILES -->
+  Envoyez ce fichier : <input name="userfile" type="file" />
+  <input type="submit" value="Envoyer le fichier" />
+</form> */
+    /* MERCI */
+    
+    public function avatar() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        $id = $this->id;
+        $user = $manager->get($id);
+        $manager->avatar($user, $_FILES);
+    }
+    
     public function update() {
         include "connect.php";
         $manager = new UsersManager($db);
         $id = $this->id;
         $user = new User($_POST);
-        $manager->update($user, $id);
-        
-        
+        $manager->update($user, $id);        
         $json = json_encode(utf8_encode($user->get_username()), JSON_UNESCAPED_UNICODE);
         echo($json);
     }
