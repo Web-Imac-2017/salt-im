@@ -10,5 +10,7 @@ function logged_only(){
     }
 }
 
+//implémenté
+
 
 ?>
