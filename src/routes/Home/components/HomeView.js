@@ -1,37 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './HomeView.scss'
 import '../../Tags/components/TagView.scss'
 import ListPost from '../../../components/ListPost/ListPost.js'
 import SearchBar from '../../../components/SearchBar/SearchBar.js'
 import ListTagColumn from '../../../components/ListTag/column/ListTagColumn.js'
 import Filter from '../../../components/Filter/Filter.js'
-
-const dataListPost = [
-    {
-        "id":0,
-        "type":"video",
-        "url":"https://www.youtube.com/watch?v=NgWC5oEuyjU",
-        "title":"Super title putaclic",
-        "description":"Sa darrone ils boivent du sprite sa mère",
-        "salt":19,
-        "pepper":20,
-        "tags":["boisson","mere","buzz"],
-        "date":"12 jan. 2017",
-        "author":"Thomas Lerouô"
-    },
-    {
-        "id":1,
-        "type":"img",
-        "url":"http://vignette3.wikia.nocookie.net/logopedia/images/f/f5/Sprite_logo2.jpg/revision/latest?cb=20140618132523",
-        "title":"Super title putaclic sa mère",
-        "description":"Sa darrone ils boivent du sprite sa mère",
-        "salt":18,
-        "pepper":20,
-        "tags":["boisson","mere"],
-        "date":"12 jan. 2017",
-        "author":"Thomas Lerouô"
-    }
-]
 
 const dataTags = [
   {
@@ -61,23 +34,35 @@ const dataTags = [
   }
 ]
 
-export const HomeView = () => (
+export default class HomeView extends Component {
+  constructor(props) {
+    super(props);
 
-  <div className="home center">
+    this.state = {
+      dataListPost:{},
+    };
+  }
 
-    <SearchBar/>
+  componentDidMount() {
+    fetch("http://www.json-generator.com/api/json/get/bSmxnPKrma?indent=2")
+      .then((response) => response.json())
+      .then((data) =>{this.setState({dataListPost:data})})
+  }
 
-    <p className="tagview__titleTrends">Tags tendances</p>
-
-    <ListTagColumn data={dataTags}/>
-    <div className="tagview__section">
-      <div className="home__titles">
-        <p className="tagview__titleTrends">Les salés du jour</p>
-        <Filter/>
+  render() {
+    return(
+      <div className="home center">
+        <SearchBar/>
+        <p className="tagview__titleTrends">Tags tendances</p>
+        <ListTagColumn data={dataTags}/>
+        <div className="tagview__section">
+          <div className="home__titles">
+            <p className="tagview__titleTrends">Les salés du jour</p>
+            <Filter/>
+          </div>
+          <ListPost data={this.state.dataListPost}/>
+        </div>
       </div>
-      <ListPost data={dataListPost}/>
-    </div>
-  </div>
-)
-
-export default HomeView
+    )
+  }
+}

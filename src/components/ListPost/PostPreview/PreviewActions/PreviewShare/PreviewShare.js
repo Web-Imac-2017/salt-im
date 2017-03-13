@@ -24,13 +24,14 @@ export default class PreviewShare extends Component {
         let classes = "previewshare ";
         if(this.props.isActive)
             classes += "previewshare--active";
-
-        let url = "http://localhost:3000/post/"+this.props.data.id;
+        let url = "http://localhost:3000/post/"
+        if(this.props.data)
+            url = "http://localhost:3000/post/"+this.props.data.id;
         return(
             <div className={classes}>
                 <div className="previewshare__filter" onClick={this.toggleClose.bind(this)}/>
+                <img src="/close.svg" className="bigger__close" onClick={this.toggleClose.bind(this)}/>
                 <div className="previewshare__wrapper">
-                    <div className="previewshare__close" onClick={this.toggleClose.bind(this)}>close</div>
                     <div className="previewshare__title">Partager cette article sur :</div>
 
                     <div className="previewshare__buttons">

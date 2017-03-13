@@ -29,7 +29,7 @@ export default class PostData extends Component {
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataMedia: object})
-            // this.loadUser(nextProps.data.user_id);
+            this.loadUser(nextProps.data.user_id);
           })
     }
     render() {

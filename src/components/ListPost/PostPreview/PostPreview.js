@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { IndexLink, Link } from 'react-router'
 import './PostPreview.scss'
 import Tags from './Tags/Tags.js'
@@ -6,29 +6,71 @@ import PreviewLeft from './PreviewLeft/PreviewLeft.js'
 import PreviewActions from './PreviewActions/PreviewActions.js'
 import Wave from './Wave/Wave.js'
 
-export const PostPreview = (props) => {
-    return(
-        <div className="preview">
-            <div className="preview__left">
-                <PreviewLeft data={props.data}/>
-            </div>
-            <div className="preview__right">
-                <div className="preview__content">
-                    <div className="preview__title">{props.data.title}</div>
-                    <Tags data={props.data.tags}/>
-                    <div className="preview__description">{props.data.description}</div>
-                    <PreviewActions data={props.data}/>
-                    <div className="preview__infos">
-                        <div className="preview__author">{props.data.author}</div>
-                        <div className="preview__date">le {props.data.date}</div>
-                    </div>
+export default class PostPreview extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        dataUser:"",
+        dataMedia:"",
+      };
+    }
+
+    loadUser(id) {
+        fetch('http://localhost:8888/salt-im/api/u/name/'+id)
+          .then((response) => response.json())
+          .then((object) => {
+            this.setState({dataUser: object})
+          })
+    }
+
+    loadMedia(id) {
+        fetch('http://localhost:8888/salt-im/api/media/'+id)
+          .then((response) => response.json())
+          .then((object) => {
+            this.setState({dataMedia: object})
+            this.loadUser(this.props.data.user_id);
+          })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.loadUser(nextProps.data.user_id);
+    }
+
+    componentDidMount() {
+        if(this.props.data)
+            this.loadMedia(this.props.data.media_id);
+    }
+
+    render() {
+        return(
+            <div className="preview">
+                <div className="preview__left">
+                    <PreviewLeft data={this.state.dataMedia} id={this.props.data.id}/>
                 </div>
-                <Wave data={props.data}/>
+                <div className="preview__right">
+                    <div className="preview__content">
+                        <div className="preview__title">{this.props.data.title}</div>
+
+
+
+
+                        <div className="preview__description">{this.props.data.text}</div>
+                        <PreviewActions data={this.props.data}/>
+                        <div className="preview__infos">
+                            <div className="preview__author">{this.state.dataUser}</div>
+                            <div className="preview__date">le {this.props.data.date}</div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 
 }
 
-export default PostPreview
 
+//<Tags data={props.data.tags}/>
+//

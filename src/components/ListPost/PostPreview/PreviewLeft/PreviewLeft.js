@@ -12,23 +12,28 @@ export default class PreviewLeft extends Component {
     render() {
         let picUrl = "/defaults/video.svg"
 
-        switch(this.props.data.type){
-            case "img":
-                picUrl = this.props.data.url;
-                break;
-            case "video":
-                picUrl = "https://img.youtube.com/vi/"+this.youtube_parser(this.props.data.url)+"/0.jpg" || "/default/video.svg";
-                break;
-            default:
-                break;
+        if(this.props.data){
+            switch(this.props.data.type){
+                case "img":
+                    picUrl = this.props.data.link;
+                    break;
+                case "video":
+                    picUrl = "https://img.youtube.com/vi/"+this.youtube_parser(this.props.data.link)+"/0.jpg" || "/default/video.svg";
+                    break;
+                default:
+                    break;
+            }
         }
 
         let divStyle = {
             backgroundImage: 'url(' + picUrl + ')'
         }
 
+        let urlToPost = "/post/"+this.props.id;
+
+
         return(
-            <div className="preview__background" style={divStyle}/>
+            <Link to={urlToPost} className="preview__background" style={divStyle}/>
         )
     }
 }
