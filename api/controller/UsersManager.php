@@ -200,7 +200,7 @@ public function getSubjects(User $user) {
     }
         
     function is_logged_in() {
-        if(isset($_SESSION['login'] && $_SESSION['login'] != '')) {
+        if(isset($_SESSION['login']) && !empty($_SESSION['login'])) {
            return true;
         } else {
            false;
