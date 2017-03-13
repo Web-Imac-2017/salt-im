@@ -129,9 +129,9 @@ class CommentsManager {
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-          $q = $this->_db->query('SELECT id FROM comment WHERE publication_id = '.$donnees['id']);
-          $ids = $q->fetch(PDO::FETCH_ASSOC);
-            if($ids != false) {
+          $q2 = $this->_db->query('SELECT id FROM comment WHERE publication_id = '.$donnees['id']);
+          $ids = $q2->fetch(PDO::FETCH_ASSOC);
+            if($ids != false && $this->get($ids['id']) != null) {
                 $comments[] = $this->get($ids['id']);  
             }
                   
@@ -139,24 +139,6 @@ class CommentsManager {
 
         return $comments;
     }
-    
-//    public function getAllCommentsFromPost($id) {
-//        $comments = [];
-//        $comment = [];
-//    
-//    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
-//
-//    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-//    { 
-//      $comment[] = $this->get($donnees['id']);
-//      $comment[] = $this->getCommentsFromPost($donnees['id']);
-//      $comments[] = $comment;
-//    }
-//
-//    return $comments;
-//    
-//        
-//    }
     
   public function getStat(Comment $comment) {
     $stats = [];

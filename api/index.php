@@ -30,9 +30,11 @@ $router->addRule('u/logout', array('controller' => 'user', 'action' => 'logout')
 $router->addRule('u/name/:id', array('controller' => 'user', 'action' => 'name'));
 $router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
 $router->addRule('u/:id', array('controller' => 'user', 'action' => 'index'));
+$router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avatar'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'));
+$router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 
 $router->load();
 

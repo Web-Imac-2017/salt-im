@@ -42,6 +42,14 @@ class tagController {
         
     }
     
+    public function img() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        $id = $this->id;
+        $tag = $manager->get($id);
+        $manager->img($tag, $_FILES);
+    }
+    
     public function jsonSerializeArray(array $tags) {
         // Represent your object using a nested array or stdClass,
         $data = [];
