@@ -55,10 +55,12 @@ class StatsManager {
     $q = $this->_db->query('SELECT name, value FROM stat
       WHERE related_element_type = "0"
       AND related_element_id = "'.$id.'"');
+
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $stats[] = new Stat($donnees);
     }
+
     return $stats;
   }
   

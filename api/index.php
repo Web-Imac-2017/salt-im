@@ -35,8 +35,8 @@ $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
-$router->addRule('p/stat/:id', array('controller' => 'stat', 'action' => 'getStatPost'));
-$router->addRule('u/stat/:id', array('controller' => 'stat', 'action' => 'getStatUser'));
+$router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
+$router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
 
 $router->load();
 
