@@ -38,6 +38,7 @@ $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'))
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
+$router->addRule('u/isloggedin', array('controller' => 'user', 'action' => 'isloggedin'));
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
 $router->load();

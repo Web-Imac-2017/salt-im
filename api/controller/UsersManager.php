@@ -198,14 +198,21 @@ public function getSubjects(User $user) {
             exit();
         }
     }
-        
-    function is_logged_in() {
-        if(isset($_SESSION['login']) && !empty($_SESSION['login'])) {
-           return true;
-        } else {
-           false;
-        }
-    }
+    
+    public function login($data) {
+          $stmt = $this->db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['mail'].'" LIMIT 1');
+          $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+          if($stmt->rowCount() > 0) {
+             if(password_verify($data['password'], $userRow['password'])) {
+                $_SESSION['user_session'] = $userRow['user_id'];
+                return true;
+             }
+             else {
+                return false;
+             }
+          }
+       }
+   }
     
     
  

@@ -50,7 +50,8 @@ class userController  {
     public function login() {
         include "connect.php";
         $manager = new UsersManager($db);
-        $manager->login($_POST);
+        $isloggedin = $manager->login($_POST);
+        echo($isloggedin);
     }
     
     public function logout() {
