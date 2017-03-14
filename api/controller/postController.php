@@ -61,8 +61,9 @@ class postController  {
         $manager = new SubjectsManager($db);
         $subject = new Subject($_POST);
         try {
-            $manager->add($subject, $_POST['tags']);
-            echo "Le message a bien été envoyé !";
+            $subject = $manager->add($subject, $_POST['tags']);
+            $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
+            echo $json;
         }
         catch(Exception $e) {
             echo "Oops le post n'a pas pu être envoyé : " . $e->getMessage();
