@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import MainData from '../MainData/MainData.js'
+import utils from '../../../../../../public/utils.js';
 
 export default class VideoData extends Component {
 
@@ -17,14 +18,8 @@ export default class VideoData extends Component {
             this.setState({isModalActive:true})
     }
 
-    youtube_parser(url){
-        let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-        let match = url.match(regExp);
-        return (match&&match[7].length==11)? match[7] : false;
-    }
-
     render() {
-        let ytUrl = this.youtube_parser(this.props.dataMedia.link);
+        let ytUrl = utils.youtube_parser(this.props.dataMedia.link);
         let picUrl = "https://img.youtube.com/vi/"+ytUrl+"/0.jpg" || "/default/video.svg";
         let classes = 'bigger';
 
@@ -42,7 +37,7 @@ export default class VideoData extends Component {
                     <img src="/close.svg" className="bigger__close" />
                     <div className="bigger__wrapper">
                         <div className="iframeWrapper">
-                            <iframe src={"https://www.youtube.com/embed/"+ytUrl+"?ecver=2"} width="480" height="360" frameborder="0" allowfullscreen></iframe>
+                            <iframe src={"https://www.youtube.com/embed/"+ytUrl+"?ecver=2"} width="480" height="360" frameborder="0" allowFullScreen></iframe>
                         </div>
                     </div>
                 </div>

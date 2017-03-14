@@ -205,3 +205,13 @@ iframe {
     }
   }
 }
+
+.success {
+  display:none;
+
+  &--active {
+    color:#2ecc71;
+    font-family: $karla;
+    display:block;
+  }
+}
