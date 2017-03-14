@@ -26,7 +26,7 @@ $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' =>
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('u/signup/:id', array('controller' => 'user', 'action' => 'signup'));
 $router->addRule('u/signout', array('controller' => 'user', 'action' => 'signout'));
-$router->addRule('u/login', array('controller' => 'user', 'action' => 'login'));
+$router->addRule('u/login/:id', array('controller' => 'user', 'action' => 'login'));
 $router->addRule('u/logout', array('controller' => 'user', 'action' => 'logout'));
 $router->addRule('u/name/:id', array('controller' => 'user', 'action' => 'name'));
 $router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
