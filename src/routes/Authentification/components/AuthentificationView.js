@@ -46,8 +46,21 @@ export default class AuthentificationView extends Component {
                       </label>
                   </div>
                   <div className="form__input">
+                      <label for="email">Email
+                        <input type="text" required={true} name="pseudo" id="email" placeholder="Votre email"
+                          onChange={(event)=>{this.handleChangePseudo.bind(this)}}/>
+                      </label>
+                  </div>
+
+                  <div className="form__input">
                       <label for="password">Mot de passe
-                      <input type="password" required={true} name="password" id="password" placeholder="Mot de passe"
+                      <input type="password" required={true} name="password" id="password" placeholder="Votre mot de passe"
+                        onChange={this.handleChangePassword.bind(this)}/>
+                      </label>
+                  </div>
+                  <div className="form__input">
+                      <label for="password">Confirmation de votre mot de passe
+                      <input type="password" required={true} name="password" id="password" placeholder="Votre mot de passe"
                         onChange={this.handleChangePassword.bind(this)}/>
                       </label>
                   </div>
