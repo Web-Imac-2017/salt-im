@@ -21,6 +21,8 @@ $router->addRule('comment/get/:id', array('controller' => 'comment', 'action' =>
 $router->addRule('p/comment/:id/:order', array('controller' => 'comment', 'action' => 'commentsFromPost'));
 $router->addRule('p/comment/:id', array('controller' => 'comment', 'action' => 'commentsFromPostDefault'));
 $router->addRule('p/u/:id', array('controller' => 'post', 'action' => 'postFromUser'));
+$router->addRule('/p/:id/stat/up', array('controller' => 'stat', 'action' => 'upVote'));
+$router->addRule('/p/:id/stat/cancel', array('controller' => 'stat', 'action' => 'cancelVote'));
 $router->addRule('comment/u/:id', array('controller' => 'comment', 'action' => 'commentFromUser'));
 $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' => 'add'));
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
