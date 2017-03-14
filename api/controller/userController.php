@@ -21,7 +21,6 @@ class userController {
     
     public function index() {
         include "connect.php";
-        echo 'index';
         $manager = new UsersManager($db);
         $id = $this->id;
         $user = $manager->get($id);
@@ -56,9 +55,7 @@ class userController {
         include "connect.php";
         $manager = new UsersManager($db);
         $isloggedin = false;
-        if(isset($_SESSION)) {
-            $isloggedin = $manager->reconnect_from_cookie($_COOKIE, $_SESSION);
-        }
+        
         if($isloggedin != true) {
             $isloggedin = $manager->login($_POST);
         }
@@ -68,6 +65,17 @@ class userController {
                 echo "L'utilisateur n'est pas connecté.";
             }
         }
+    
+    public function autologin() {
+        if(isset($_COOKIE)) {
+            $isloggedin = $manager->reconnect_from_cookie($_COOKIE, $_SESSION);
+        }
+        if($isloggedin == true) {
+                echo "L'utilisateur est connecté.";
+            } else {
+                echo "L'utilisateur n'est pas connecté.";
+        }
+    }
     
     public function logout() {
         include "connect.php";
@@ -82,6 +90,32 @@ class userController {
         $user = $manager->get($id);
         $json = json_encode(utf8_encode($user->get_username()), JSON_UNESCAPED_UNICODE);
         echo($json);
+    }
+    
+    public function who_is_logged_in() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        if(isset($_SESSION)) {
+            $user = $manager->who_is_logged_in($_SESSION);
+            if ($user == false) {
+                echo "Aucun utilisateur ne correspond à cette session";
+            } else {
+                $json = json_encode(utf8_encode($user->get_id()), JSON_UNESCAPED_UNICODE);
+            echo($json);
+            }
+        } else {
+            echo "Il n'y a pas de session";
+        }
+        
+    }
+    
+    public function is_logged() {
+        include "connect.php";
+        $id = $this->id;
+        $manager = new UsersManager($db);
+        $user = $manager->get($id);
+        $answer = is_logged_in($user, $_SESSION);
+        echo($answer);
     }
     
     /* **** A L'INTENTION DU FRONT **** */
