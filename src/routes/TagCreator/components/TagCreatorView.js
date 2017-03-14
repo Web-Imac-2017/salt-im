@@ -86,7 +86,7 @@ export default class TagCreatorView extends Component{
 
                     <div className="form__input form__input--side flex">
                     <div className="form__title">Image du tag</div>
-                    <input type="file" name="img" ref="file"/>
+                    <input type="file" name="userfile" ref="file"/>
                     </div>
                   <input type="hidden" value={locale_date_string} name="date" />
                   <input type="submit" value="Ajouter un tag"/>
