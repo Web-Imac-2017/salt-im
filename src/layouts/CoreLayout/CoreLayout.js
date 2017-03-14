@@ -1,21 +1,34 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
-export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
-    <Header />
-    <div className='core-layout__viewport'>
-      {children}
-    </div>
-    <Footer />
-  </div>
-)
+// u/session
+
+
+export default class CoreLayout extends Component {
+    componentDidMount() {
+        console.log("did mount")
+        fetch("http://localhost:8888/salt-im/api/p/u/session")
+            .then((data) => data.text())
+            .then((data) => {console.log(data)})
+    }
+
+    render() {
+        console.log("render layout")
+        return (
+            <div className='container text-center'>
+              <Header />
+              <div className='core-layout__viewport'>
+                {this.props.children}
+              </div>
+              <Footer />
+            </div>
+        )
+    }
+}
 
 CoreLayout.propTypes = {
   children : React.PropTypes.element.isRequired
 }
-
-export default CoreLayout

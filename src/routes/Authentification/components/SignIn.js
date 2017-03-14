@@ -25,7 +25,7 @@ export default class SignIn extends Component {
 
   handleSubmit(event) {
       event.preventDefault();
-      fetch("http://localhost:8888/salt-im/api/u/login",
+      fetch("http://localhost:8888/salt-im/api/u/login/1",
         {
             method: "post",
             body: new FormData(this.refs.form),
@@ -35,9 +35,6 @@ export default class SignIn extends Component {
         }).then((data) => {
           console.log(data);
         })
-      // this.setState({
-      //     nbFail:this.state.nbFail+1
-      // })
   }
 
   render() {

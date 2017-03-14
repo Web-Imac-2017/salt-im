@@ -45,12 +45,12 @@ class statController  {
         $vote = $manager->hasVoted($id, $name);
     }
 
-    public function voteStatus($id) {
+    public function voteStatus() {
         include "connect.php";
         $manager = new StatsManager($db);
         $id = $this->id;
         $status = $manager->voteStatus($id);
-        $json = json_encode($this->jsonSerializeArray($status));
+        $json = json_encode($status);
         echo $json;
     }
     

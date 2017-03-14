@@ -61,7 +61,7 @@ export default class SignupView extends Component {
     handleSubmit(e) {
         e.preventDefault();
         if(this.state.isPasswordGood == true && this.state.isPseudoGood == true && this.state.passwordConf) {
-            fetch("http://localhost:8888/salt-im/api/u/signup/",
+            fetch("http://localhost:8888/salt-im/api/u/signup/1",
                   {
                       method: "post",
                       body: new FormData(this.refs.form),
@@ -71,7 +71,7 @@ export default class SignupView extends Component {
                     return res.text();
                 })
 
-                .then((data) => { browserHistory.push('/') })
+                // .then((data) => { browserHistory.push('/') })
         }
     }
 
