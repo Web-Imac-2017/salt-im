@@ -72,7 +72,7 @@ export default class SignupView extends Component {
     return (
       <div className="postcreator center">
         <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
-            <div className="form__header">Inscription</div>
+            <div className="form__header">Si vous n'êtes pas inscrit, c'est le moment de le faire !</div>
             <div className="form__input">
                 <label for="mail">Mail
                   <input type="text" required={true} name="mail" id="mail" placeholder="Insérez votre mail"

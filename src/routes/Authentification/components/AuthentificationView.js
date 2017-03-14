@@ -11,7 +11,9 @@ export default class AuthentificationView extends Component {
     render() {
         return(
             <div className="postcreator center">
+
               <SignIn/>
+
               <SignupView/>
 
             </div>

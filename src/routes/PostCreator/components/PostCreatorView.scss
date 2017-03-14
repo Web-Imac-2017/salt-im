@@ -2,6 +2,10 @@
 
 $valTop:50px;
 
+.postcreator{
+    margin-top: 50px;
+}
+
 .postdata {
     position:relative;
     &__top {
@@ -43,8 +47,4 @@ $valTop:50px;
             background:black;
         }
     }
-}
-
-.postcreator {
-    padding:15px;
 }

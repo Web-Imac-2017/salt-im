@@ -51,7 +51,7 @@ export default  class PostCreatorView extends Component {
           isSubmitDisabled:true,
         })
 
-        fetch("http://localhost:8888/salt-im/api/p/post/add/90",
+        fetch("http://localhost/salt-im/api/p/post/add/90",
         {
             method: "post",
             body: new FormData(self.refs.form),
@@ -87,13 +87,12 @@ export default  class PostCreatorView extends Component {
 
         return (
             <div className="postcreator center">
-              <Link to="/posts" className="goback">Retour aux posts</Link>
               <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
                   <div className="form__header">Nouveau post</div>
                   <div className="form__input">
                     <label for="title">Titre
                         <input
-                            type="text" name="title" id="title" placeholder="Un true bien salé"
+                            type="text" name="title" id="title" placeholder="Un truc bien salé"
                             onChange={this.handleChangeTitle.bind(this)}
                             required="required"
                         />
@@ -137,7 +136,7 @@ export default  class PostCreatorView extends Component {
                   <input type="hidden" value="post" name="type"/>
                   <input type="hidden" value={this.state.type} name="type"/>
                   <input type="submit" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
-                  <div className={classSuccess}>Le post a bien été envoyé</div>
+                  <div className={classSuccess}>Le post a bien été créé</div>
               </form>
             </div>
         )
