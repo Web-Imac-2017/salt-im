@@ -118,7 +118,7 @@ class StatsManager {
 
       // récupérer l'auteur de la publication
       $q2 = $this->_db->query('SELECT user_id FROM publication WHERE id = "'.$id.'"');
-      $donnees = $q2->fetch(PDO::FETCH_ASSOC);
+      $donnees[] = $q2->fetch(PDO::FETCH_ASSOC);
       $user_manager = new UsersManager($this->_db);
       $user = $user_manager->get($donnees['user_id']);
       
