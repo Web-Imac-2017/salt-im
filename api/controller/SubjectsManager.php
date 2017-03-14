@@ -117,7 +117,7 @@
      public function postFromUser($id) {
         $subjects = [];
 
-        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = '.$id);
+        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = "'.$id'"');
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
