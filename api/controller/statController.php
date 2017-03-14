@@ -6,6 +6,7 @@ require_once "StatsManager.php";
 class statController  {
     
     private $id;
+    private $name;
     
     public static function getInstance(array $donnees)
     {
@@ -44,6 +45,14 @@ class statController  {
         $json = json_encode($this->jsonSerializeArray($stat));
         echo $json;
     }
+
+    public function upVote() {
+        include "connect.php";
+        $manager = new StatsManager($db);
+        $id = $this->id;
+        $name = $this->name;
+        $stat = $manager->upVote($id, $name);
+    }
     
     public function set_id($id) {
         $this->id = $id; 
@@ -51,6 +60,14 @@ class statController  {
     
     public function get_id() {
         return $this->id; 
+    }
+
+    public function set_name($name) {
+        $this->name = $name; 
+    }
+    
+    public function get_name() {
+        return $this->name; 
     }
     
     public function jsonSerialize(Stat $stat) {
