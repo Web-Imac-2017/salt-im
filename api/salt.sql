@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 13 Mars 2017 à 12:10
+-- Généré le :  Mar 14 Mars 2017 à 18:33
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -149,7 +149,10 @@ CREATE TABLE `stat` (
 INSERT INTO `stat` (`id`, `name`, `value`, `related_element_type`, `related_element_id`) VALUES
 (1, '0', 0, 1, 2),
 (2, '1', 0, 1, 2),
-(3, '2', 0, 1, 2);
+(3, '2', 0, 1, 2),
+(4, '0', 10, 0, 1),
+(5, '1', 150, 0, 1),
+(6, '2', 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -239,6 +242,19 @@ INSERT INTO `user` (`id`, `username`, `password`, `mail`, `avatar`, `birthDate`,
 (3, 'petitecolierdelu', 'f3bbbd66a63d4bf1747940578ec3d0103530e21d', 'bonjour@mail.com', 'lu.jpg', '2000-03-08', 0, '2017-03-13', 1, 'T8wfHN8C6Yy8q4Ex4ZgiT1ON11395fV1M9MQfvkw56171K01v3v3y8S5L41o'),
 (4, 'Miguel', 'f3bbbd66a63d4bf1747940578ec3d0103530e21d', 'buenos@dias.es', 'hola.jpg', '1999-03-01', 0, '2017-03-01', 1, '6M1bPF3Ge961NnmV5qr11ku9w0ByK59Q66Z0As7Aq9xD8aoPjl968v1H43wl');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `vote`
+--
+
+CREATE TABLE `vote` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `publication_id` int(11) NOT NULL,
+  `name` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Index pour les tables exportées
 --
@@ -307,6 +323,14 @@ ALTER TABLE `user`
   ADD KEY `badge_id` (`badge_id`);
 
 --
+-- Index pour la table `vote`
+--
+ALTER TABLE `vote`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -339,7 +363,7 @@ ALTER TABLE `rel_tag_publication`
 -- AUTO_INCREMENT pour la table `stat`
 --
 ALTER TABLE `stat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `subject`
 --
@@ -355,6 +379,11 @@ ALTER TABLE `tag`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `vote`
+--
+ALTER TABLE `vote`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
@@ -378,6 +407,13 @@ ALTER TABLE `rel_tag_publication`
 ALTER TABLE `stat`
   ADD CONSTRAINT `stat_ibfk_1` FOREIGN KEY (`related_element_id`) REFERENCES `publication` (`id`),
   ADD CONSTRAINT `stat_ibfk_2` FOREIGN KEY (`related_element_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `vote`
+--
+ALTER TABLE `vote`
+  ADD CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

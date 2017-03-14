@@ -78,6 +78,76 @@ class StatsManager {
     return $stats;
   }
 
+  public function hasVoted($id, $name)
+  {
+    $q = $this->_db->query('SELECT user_id FROM vote
+      WHERE publication_id = "'.$id.'"
+      AND name = "'.$name.'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    if ($donnees != NULL) {
+      // alors il a déjà voté
+      return true;
+    } else return false;
+  }
+
+  public function voteStatus($id)
+  {
+    $status[];
+    for ($i = 0; $i <= 2; $i++) {
+      status[$i] = hasVoted($id, $i);
+    }
+    return $status;
+  }
+
+  public function upVote($id, $name) // $id de la publication, $name de la stat
+  {
+    if (hasVoted($id, $name)) {
+      return true; // l'user a déjà voté sur cette stat
+    }
+    else {
+      // update les stats de la publication
+      $q1 = $this->_db->prepare('UPDATE stat SET value = value+1
+        WHERE related_element_id = "'.$id.'"
+        AND related_element_type = "0"
+        AND name = "'.$name.'"');
+
+      // récupérer l'auteur de la publication
+      $q2 = $this->_db->query('SELECT user_id FROM publication WHERE id = "'.$id.'"');
+      $donnees = $q2->fetch(PDO::FETCH_ASSOC);
+      $user = $donnees->get($donnees['user_id']);
+      
+      // update les stats de l'auteur
+      $q3 = $this->_db->prepare('UPDATE stat SET value = value+1
+        WHERE related_element_id = "'.$name.'"
+        AND name = "'.$name.'"');
+
+      $q1->execute();
+      $q2->execute();
+      $q3->execute();
+    }
+  }
+
+  public function cancelVote($id, $name)
+  {
+    $q1 = $this->_db->prepare('UPDATE stat SET value = value-1
+      WHERE related_element_id = "'.$id.'"
+      AND related_element_type = "0"
+      AND name = "'.$name.'"');
+
+    $q2 = $this->_db->query('SELECT user_id FROM publication WHERE id = "'.$id.'"');
+    $donnees = $q2->fetch(PDO::FETCH_ASSOC);
+    $user = $donnees->get($donnees['user_id']);
+    
+    $q3 = $this->_db->prepare('UPDATE stat SET value = value-1
+      WHERE related_element_id = "'.$name.'"
+      AND name = "'.$name.'"');
+
+    $q1->execute();
+    $q2->execute();
+    $q3->execute();
+  }
+
   public function update(Stat $stat)
   {
     // Prépare une requête de type UPDATE.
