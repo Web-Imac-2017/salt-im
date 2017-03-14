@@ -1,4 +1,8 @@
 <?php
+
+require_once "UsersManager.php";
+require_once "User.php";
+
 class StatsManager {
   private $_db; // Instance de PDO.
 
@@ -87,23 +91,23 @@ class StatsManager {
 
     if ($donnees != NULL) {
       // alors il a déjà voté
-      return true;
-    } else return false;
+      return 1;
+    } else return 0;
   }
 
   public function voteStatus($id)
   {
-    $status[];
+    $status = [];
     for ($i = 0; $i <= 2; $i++) {
-      status[$i] = hasVoted($id, $i);
+      $status[$i] = $this->hasVoted($id, $i);
     }
     return $status;
   }
 
   public function upVote($id, $name) // $id de la publication, $name de la stat
   {
-    if (hasVoted($id, $name)) {
-      return true; // l'user a déjà voté sur cette stat
+    if ($this->hasVoted($id, $name)) {
+      return false; // l'user a déjà voté sur cette stat
     }
     else {
       // update les stats de la publication
@@ -115,16 +119,20 @@ class StatsManager {
       // récupérer l'auteur de la publication
       $q2 = $this->_db->query('SELECT user_id FROM publication WHERE id = "'.$id.'"');
       $donnees = $q2->fetch(PDO::FETCH_ASSOC);
-      $user = $donnees->get($donnees['user_id']);
+      $user_manager = new UsersManager($this->_db);
+      $user = $user_manager->get($donnees['user_id']);
       
       // update les stats de l'auteur
       $q3 = $this->_db->prepare('UPDATE stat SET value = value+1
         WHERE related_element_id = "'.$name.'"
         AND name = "'.$name.'"');
 
+      // change la table vote
+
       $q1->execute();
       $q2->execute();
       $q3->execute();
+      return true;
     }
   }
 
