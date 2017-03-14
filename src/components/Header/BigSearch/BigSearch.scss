@@ -24,3 +24,70 @@
         display: block;
     }
 }
+
+.results {
+    display:none;
+
+    &--open {
+        display:flex;
+        width:100vw;
+        height:42vh;
+        position:absolute;
+        top:8em;
+        left:0;
+        background:linear-gradient(90deg,#4e71ba,#3d9bae);
+
+    }
+
+    &--posts {
+        display:flex;
+        flex:1;
+        content:"caca";
+        height: 100%;
+        width:50%;
+    }
+
+    &__fetch {
+        width: 33%;
+    }
+
+    &__wrapper {
+        padding-left: 25px;
+        padding-right: 25px;
+        width:100%;
+
+        ul {
+            list-style-type:none;
+            margin-left: -40px;
+        }
+
+        li:before {
+            content:'> ';
+        }
+
+        li:hover {
+            cursor:pointer;
+            text-decoration:underline;
+        }
+    }
+
+    &__seeall {
+        flex: 1;
+        font-size: 1.4em;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    &__seeall:after {
+        content:' >';
+    }
+
+    &__titleline {
+
+        &__title {
+            flex:1;
+        }
+
+    }
+}
+
