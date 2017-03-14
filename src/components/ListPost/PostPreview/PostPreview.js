@@ -13,6 +13,7 @@ export default class PostPreview extends Component {
       this.state = {
         dataUser:"",
         dataMedia:"",
+        dataStat:{}
       };
     }
 
@@ -32,6 +33,16 @@ export default class PostPreview extends Component {
             this.loadUser(this.props.data.user_id);
           })
     }
+
+    loadStat(id) {
+        fetch('http://localhost:8888/salt-im/api/p/'+id+'/stat/')
+          .then((response) => response.json())
+          .then((object) => {
+            this.setState({dataStat: object})
+          })
+    }
+    
+
 
     componentWillReceiveProps(nextProps) {
         this.loadUser(nextProps.data.user_id);
@@ -56,7 +67,7 @@ export default class PostPreview extends Component {
 
 
                         <div className="preview__description">{this.props.data.text}</div>
-                        <PreviewActions data={this.props.data}/>
+                        <PreviewActions data={this.props.data} stat={this.state.dataStats}/>
                         <div className="preview__infos">
                             <div className="preview__author">{this.state.dataUser}</div>
                             <div className="preview__date">le {this.props.data.date}</div>

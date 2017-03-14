@@ -21,6 +21,7 @@ export default class PreviewActions extends Component {
     }
 
     render() {
+        console.log(this.props)
         return(
             <div className="preview__actions">
                 <div className="preview__action">
