@@ -128,7 +128,7 @@ export default  class PostCreatorView extends Component {
 
                   <div className="form__input form__input--side flex">
                       <div className="form__title">image du post</div>
-                      <input type="file"/>
+                      <input type="file" name=""/>
                   </div>
 
                   <input type="hidden" value={locale_date_string} name="date" />
