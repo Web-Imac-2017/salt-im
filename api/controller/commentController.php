@@ -31,15 +31,28 @@ class commentController  {
     
     public function add() {
         include "connect.php";
+        $id = $this->id;
         $manager = new CommentsManager($db);
         $comment = new Comment($_POST);
         try {
-            $manager->add($comment);
+            $manager->add($comment, $id);
             echo "Le commentaire a bien été ajouté.";
         } catch(Exception $e) {
             echo "Oops le commentaire n'a pas pu être envoyé : " . $e->getMessage();
         }
-        
+    }
+    
+    public function addToComment() {
+        include "connect.php";
+        $id = $this->id;
+        $manager = new CommentsManager($db);
+        $comment = new Comment($_POST);
+        try {
+            $manager->addToComment($comment, $id);
+            echo "Le commentaire a bien été ajouté.";
+        } catch(Exception $e) {
+            echo "Oops le commentaire n'a pas pu être envoyé : " . $e->getMessage();
+        }
     }
     
     public function commentsFromPost() {
