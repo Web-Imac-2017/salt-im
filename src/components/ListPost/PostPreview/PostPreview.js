@@ -13,24 +13,25 @@ export default class PostPreview extends Component {
       this.state = {
         dataUser:"",
         dataMedia:"",
+        score:this.props.state,
       };
     }
 
     loadUser(id) {
         fetch('http://localhost:8888/salt-im/api/u/name/'+id)
-          .then((response) => response.json())
-          .then((object) => {
-            this.setState({dataUser: object})
-          })
+            .then((response) => response.json())
+            .then((object) => {
+              this.setState({dataUser: object})
+            })
     }
 
     loadMedia(id) {
         fetch('http://localhost:8888/salt-im/api/media/'+id)
-          .then((response) => response.json())
-          .then((object) => {
-            this.setState({dataMedia: object})
-            this.loadUser(this.props.data.user_id);
-          })
+            .then((response) => response.json())
+            .then((object) => {
+              this.setState({dataMedia: object})
+              this.loadUser(this.props.data.user_id);
+            })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -38,8 +39,13 @@ export default class PostPreview extends Component {
     }
 
     componentDidMount() {
-        if(this.props.data)
+        if(this.props.data){
             this.loadMedia(this.props.data.media_id);
+        }
+    }
+
+    handleMax(val) {
+        this.props.handleMax(val);
     }
 
     render() {
@@ -51,10 +57,6 @@ export default class PostPreview extends Component {
                 <div className="preview__right">
                     <div className="preview__content">
                         <div className="preview__title">{this.props.data.title}</div>
-
-
-
-
                         <div className="preview__description">{this.props.data.text}</div>
                         <PreviewActions data={this.props.data}/>
                         <div className="preview__infos">
@@ -63,7 +65,7 @@ export default class PostPreview extends Component {
                         </div>
                     </div>
 
-
+                    <Wave data={this.props.data} state={this.state.score} handleMax={this.handleMax.bind(this)} maxValue={this.props.maxValue}/>
                 </div>
             </div>
         )
