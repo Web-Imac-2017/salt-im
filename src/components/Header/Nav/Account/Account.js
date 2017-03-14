@@ -28,7 +28,7 @@ export default class Account extends Component{
             return (
                 <div className="accountWrapper">
                     <div style={{cursor:"pointer"}} onClick={this.toggleModal.bind(this)}>
-                        Authentification
+                       Connexion
                     </div>
                     <div className={classes}>
                         <div className="modal__filter" onClick={this.toggleModal.bind(this)}/>

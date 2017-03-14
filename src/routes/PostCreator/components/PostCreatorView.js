@@ -58,7 +58,7 @@ export default  class PostCreatorView extends Component {
                   <div className="form__input">
                     <label for="title">Titre
                         <input
-                            type="text" name="title" id="title" placeholder="Un true bien salé"
+                            type="text" name="title" id="title" placeholder="Un truc bien salé"
                             onChange={this.handleChangeTitle.bind(this)}
                             required="required"
                         />

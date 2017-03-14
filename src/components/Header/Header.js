@@ -47,11 +47,9 @@ export default class Header extends Component {
 
           <Research changeSearch={this.handleChangeBigSearch.bind(this)}/>
 
-          <div className="saveBtn"></div>
-
           <Account/>
         </div>
-        
+
         <BigSearch isOpen={this.state.isOpen} />
       </div>
     );
