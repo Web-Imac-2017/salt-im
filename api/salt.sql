@@ -1,11 +1,11 @@
 ﻿-- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 14 Mars 2017 à 21:45
--- Version du serveur :  5.7.9
--- Version de PHP :  5.6.16
+-- Généré le :  Mar 14 Mars 2017 à 18:33
+-- Version du serveur :  10.1.21-MariaDB
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,14 +26,12 @@ SET time_zone = "+00:00";
 -- Structure de la table `badge`
 --
 
-DROP TABLE IF EXISTS `badge`;
-CREATE TABLE IF NOT EXISTS `badge` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `badge` (
+  `id` int(11) NOT NULL,
   `cond` int(11) NOT NULL,
   `name` tinytext NOT NULL,
-  `icon` tinytext NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `icon` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `badge`
@@ -48,15 +46,11 @@ INSERT INTO `badge` (`id`, `cond`, `name`, `icon`) VALUES
 -- Structure de la table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
   `related_publication_id` int(11) NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `related_publication_id` (`related_publication_id`),
-  KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `comment`
@@ -73,15 +67,12 @@ INSERT INTO `comment` (`id`, `related_publication_id`, `publication_id`) VALUES
 -- Structure de la table `media`
 --
 
-DROP TABLE IF EXISTS `media`;
-CREATE TABLE IF NOT EXISTS `media` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `media` (
+  `id` int(11) NOT NULL,
   `link` text NOT NULL,
   `type` tinytext NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `media`
@@ -96,15 +87,12 @@ INSERT INTO `media` (`id`, `link`, `type`, `publication_id`) VALUES
 -- Structure de la table `publication`
 --
 
-DROP TABLE IF EXISTS `publication`;
-CREATE TABLE IF NOT EXISTS `publication` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `publication` (
+  `id` int(11) NOT NULL,
   `text` text NOT NULL,
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `publication`
@@ -113,18 +101,18 @@ CREATE TABLE IF NOT EXISTS `publication` (
 INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 (1, 'Jeune emo en quête de reconnaissance sociale, Alexandre a décidé de faire valoir son art sur des réseaux plus mainstream', '2017-03-02', 1),
 (2, 'Ceci est un commentaire', '2017-03-01', 2),
-(3, 'Ta mère est tellement laide que j''ai pas de chute à cette blague', '2017-03-06', 3),
+(3, 'Ta mère est tellement laide que j\'ai pas de chute à cette blague', '2017-03-06', 3),
 (4, 'Ce commentaire répond à un commentaire', '2017-01-01', 2),
 (5, 'Sans commentaire', '2017-01-01', 1),
-(6, 'J''voudrais qu''il m''appelle Madame Bip, mais commentaire ?', '2017-01-01', 1),
-(7, 'Bonjour, j''ai besoin d''aide parce que j''ai pas de répartie (signé mflouze)', '2017-01-01', 1),
-(8, 'Waah ton post c''est de la grosse merde gros', '2017-07-03', 3),
-(9, 'Waah ton post c''est VRAIMENT de la grosse merde gros', '2017-07-03', 3),
+(6, 'J\'voudrais qu\'il m\'appelle Madame Bip, mais commentaire ?', '2017-01-01', 1),
+(7, 'Bonjour, j\'ai besoin d\'aide parce que j\'ai pas de répartie (signé mflouze)', '2017-01-01', 1),
+(8, 'Waah ton post c\'est de la grosse merde gros', '2017-07-03', 3),
+(9, 'Waah ton post c\'est VRAIMENT de la grosse merde gros', '2017-07-03', 3),
 (10, 'On dirait une blague de Bessol', '2017-07-03', 1),
 (11, 'Nan mais je rêve ???', '2017-07-03', 5),
-(12, 'T''es tellement peu salé gros même l''eau est plus épicée ', '2017-07-03', 5),
-(13, 'Moi ça m''excite', '2017-07-03', 4),
-(14, 'T''as cru que t''avais du style dans ton peau de pêche bleu ??? Haaaan salooooope', '2017-03-08', 6),
+(12, 'T\'es tellement peu salé gros même l\'eau est plus épicée ', '2017-07-03', 5),
+(13, 'Moi ça m\'excite', '2017-07-03', 4),
+(14, 'T\'as cru que t\'avais du style dans ton peau de pêche bleu ??? Haaaan salooooope', '2017-03-08', 6),
 (15, 'Ceci est un commentaire de commentaire', '2017-03-09', 1),
 (16, 'Ceci est un commentaire de commentaire de commentaire', '2017-06-12', 1);
 
@@ -134,14 +122,10 @@ INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 -- Structure de la table `rel_tag_publication`
 --
 
-DROP TABLE IF EXISTS `rel_tag_publication`;
-CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `rel_tag_publication` (
+  `id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `publication_id` (`publication_id`),
-  UNIQUE KEY `tag_id` (`tag_id`)
+  `tag_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -150,17 +134,13 @@ CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
 -- Structure de la table `stat`
 --
 
-DROP TABLE IF EXISTS `stat`;
-CREATE TABLE IF NOT EXISTS `stat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stat` (
+  `id` int(11) NOT NULL,
   `name` tinytext NOT NULL,
   `value` int(11) NOT NULL,
   `related_element_type` tinyint(4) NOT NULL,
-  `related_element_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `related_element_id` (`related_element_id`),
-  KEY `related_element_id_2` (`related_element_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `related_element_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `stat`
@@ -180,29 +160,26 @@ INSERT INTO `stat` (`id`, `name`, `value`, `related_element_type`, `related_elem
 -- Structure de la table `subject`
 --
 
-DROP TABLE IF EXISTS `subject`;
-CREATE TABLE IF NOT EXISTS `subject` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subject` (
+  `id` int(11) NOT NULL,
   `title` tinytext NOT NULL,
   `flair` tinytext NOT NULL,
   `type` tinytext NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `subject`
 --
 
 INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
-(1, 'Un p''tit café salé ?', '', 'post', 1),
+(1, 'Un p\'tit café salé ?', '', 'post', 1),
 (2, 'Vous connaissez ma femme ?', 'edit', 'post', 13),
 (3, 'Il boit du Sprite sa mère', '', 'post', 4),
 (4, 'Le salage de Carthage par les Romains', '', 'post', 5),
 (5, 'Salt is best, put Cerebos to the test', 'fermé', 'help', 6),
 (6, 'Coucou Matthieu, ceci est un titre', 'edit', 'help', 7),
-(7, 'Aidez-moi, j''suis coincée !', '', 'help', 8),
+(7, 'Aidez-moi, j\'suis coincée !', '', 'help', 8),
 (8, 'Bouhou, il est triste', '', 'help', 9),
 (9, 'Aluminium', '', 'post', 10),
 (10, 'Julien Rousset est sur Tinder !', 'fermé', 'post', 11);
@@ -213,25 +190,23 @@ INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
 -- Structure de la table `tag`
 --
 
-DROP TABLE IF EXISTS `tag`;
-CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL,
   `name` tinytext NOT NULL,
   `img_url` text NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `tag`
 --
 
 INSERT INTO `tag` (`id`, `name`, `img_url`, `description`) VALUES
-(1, 'Esipe vs IMAC', 'esipevsimag.jpg', 'L''éternel combat entre ceux qui font de la mécanique et de la maçonnerie et ceux qui dessinent.'),
+(1, 'Esipe vs IMAC', 'esipevsimag.jpg', 'L\'éternel combat entre ceux qui font de la mécanique et de la maçonnerie et ceux qui dessinent.'),
 (2, 'Marais salant', 'maraissalnt.jpg', 'La fleur de sel des posts.'),
-(3, 'Amour', 'amour.jpg', 'What is love? Baby don''t hurt, don''t hurt me, no more.'),
-(4, 'Potes', 'potes.jpg', 'Quoi de plus affectueux que d''afficher publiquement ses potes sur Internet et de les exposer à une magnifique tempête de sel ? Rien.'),
-(5, 'Sexe', 'sexe.jpg', 'N''oubliez pas de rajouter un peu de sel sur vos saucisses ou vos moules.'),
+(3, 'Amour', 'amour.jpg', 'What is love? Baby don\'t hurt, don\'t hurt me, no more.'),
+(4, 'Potes', 'potes.jpg', 'Quoi de plus affectueux que d\'afficher publiquement ses potes sur Internet et de les exposer à une magnifique tempête de sel ? Rien.'),
+(5, 'Sexe', 'sexe.jpg', 'N\'oubliez pas de rajouter un peu de sel sur vos saucisses ou vos moules.'),
 (6, 'Twitter', 'twitter.jpg', 'Le saint patron.'),
 (7, 'Facebook', 'facebook.jpg', 'Bref.'),
 (8, 'IMAC 1', 'imac1.jpg', 'Un concentré de NaCl.'),
@@ -244,9 +219,8 @@ INSERT INTO `tag` (`id`, `name`, `img_url`, `description`) VALUES
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
   `username` tinytext NOT NULL,
   `password` text NOT NULL,
   `mail` tinytext NOT NULL,
@@ -255,10 +229,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `rank` int(11) NOT NULL,
   `signupDate` date NOT NULL,
   `badge_id` int(11) NOT NULL,
-  `token` tinytext NOT NULL COMMENT '60 random chars',
-  PRIMARY KEY (`id`),
-  KEY `badge_id` (`badge_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `token` tinytext NOT NULL COMMENT '60 random chars'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `user`
@@ -276,17 +248,142 @@ INSERT INTO `user` (`id`, `username`, `password`, `mail`, `avatar`, `birthDate`,
 -- Structure de la table `vote`
 --
 
-DROP TABLE IF EXISTS `vote`;
-CREATE TABLE IF NOT EXISTS `vote` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vote` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `publication_id` (`publication_id`)
+  `name` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `badge`
+--
+ALTER TABLE `badge`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `related_publication_id` (`related_publication_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+--
+-- Index pour la table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `publication_id` (`publication_id`);
+
+--
+-- Index pour la table `publication`
+--
+ALTER TABLE `publication`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `rel_tag_publication`
+--
+ALTER TABLE `rel_tag_publication`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `publication_id` (`publication_id`),
+  ADD UNIQUE KEY `tag_id` (`tag_id`);
+
+--
+-- Index pour la table `stat`
+--
+ALTER TABLE `stat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `related_element_id` (`related_element_id`);
+
+--
+-- Index pour la table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `publication_id` (`publication_id`);
+
+--
+-- Index pour la table `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `badge_id` (`badge_id`);
+
+--
+-- Index pour la table `vote`
+--
+ALTER TABLE `vote`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `badge`
+--
+ALTER TABLE `badge`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `media`
+--
+ALTER TABLE `media`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `publication`
+--
+ALTER TABLE `publication`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT pour la table `rel_tag_publication`
+--
+ALTER TABLE `rel_tag_publication`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `stat`
+--
+ALTER TABLE `stat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `vote`
+--
+ALTER TABLE `vote`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --

@@ -43,12 +43,23 @@ class postController  {
         include "connect.php";
         $manager = new TagsManager($db);
         $tags = [];
+        $subjects = [];
         for ($i=0; count($_POST['tag']); $i++) {
-            $tags[] = $_POST['tag'][$i];
+            $tag = $manager->getFromName($_POST['tag'][$i]);
+            if($tag == false) {
+                $tag_insert = new Tag(array(
+                    "name" => $_POST['tag'][$i],
+                    "img_url" => "",
+                    "description" => ""
+                ));
+                $manager->add($tag_insert);
+                $tag = $tag_insert;
+            }
+            $tags[] = $tag;            
         }
-        if($manager->get($id) != null) {
-            $subject = $manager->get($id);
-            $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
+        $subjects = $manager->getSubjectsManyTags($tags);
+        if($subjects != null) {
+            $json = json_encode($this->jsonSerializeArray($subjects),JSON_UNESCAPED_UNICODE);
             echo $json;
         } else {
             echo "On dirait qu'il n'y a pas de posts associés à ces tags. RT si c'est triste.";

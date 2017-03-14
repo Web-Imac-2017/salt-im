@@ -27,13 +27,21 @@ class TagsManager {
 
   public function get($id)
   {
-    // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet tag.
-    $id = (int) $id;
-    $publication_id = $result->fetch(PDO::FETCH_ASSOC);
-    $q = $this->_db->query('SELECT id, name FROM tag WHERE id = "'.$id.'"');
+    $q = $this->_db->query('SELECT * FROM tag WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return new Tag($donnees);
+  }
+    
+  public function getFromName($name)
+  {
+    $q = $this->_db->query('SELECT * FROM tag WHERE name = "'.$name.'"');
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    if($donnees == null) {
+        return false;
+    } else {
+        return new Tag($donnees);
+    }      
   }
 
   public function getList()
@@ -55,7 +63,35 @@ class TagsManager {
     $subject_id_array = [];
     $subjects = [];
       
-    $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
+    $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag->get_id().'"');
+      
+    // On a récupéré les ids des publications ayant le tag précisé
+      for($i=0; $row = $q->fetch(); $i++) {
+        $subject_id_array[] = $row['id'];
+      }
+    // Il faut récupérer les subjects correspondant aux ids
+      
+    for($i=0; count($subject_id_array); $i++) {
+        $q = $this->_db->query('SELECT * FROM subject WHERE id = "'.$subject_id_array[$i].'"');
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $subjects[] = new Subject($donnees);
+        }
+    }    
+
+    return $subjects;
+  }
+    
+  public function getSubjectsManyTags(array $tags) {
+    $subject_id_array = [];
+    $subjects = [];
+    $cond = 'WHERE rel_tag_publication.tag_id = "'.$tags[0]->get_id().'"';
+      
+    for($i=1; count($tags); $i++) {
+        $cond = $cond.' AND rel_tag_publication.tag_id = "'.$tags[$i]->get_id().'"';
+    }
+      
+    $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id '.$cond);
       
     // On a récupéré les ids des publications ayant le tag précisé
       for($i=0; $row = $q->fetch(); $i++) {
