@@ -13,6 +13,7 @@ export default class AuthentificationView extends Component {
             <div className="postcreator center">
               <SignIn/>
               <SignupView/>
+
             </div>
         )
     }

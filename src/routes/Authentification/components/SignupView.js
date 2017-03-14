@@ -91,6 +91,12 @@ export default class SignupView extends Component {
                   onChange={this.handleChangePassword.bind(this)}/>
                 </label>
             </div>
+            <div className="form__input">
+                <label for="password">Mot de passe
+                <input className={passwordClass} type="password" required={true} name="passwordconfirmation" id="password" placeholder="Mot de passe"
+                  />
+                </label>
+            </div>
             <input type="submit" value="Créer votre compte"/>
         </form>
       </div>
