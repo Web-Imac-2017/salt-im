@@ -4,6 +4,16 @@ require_once 'User.php';
 require_once 'UsersManager.php';
 $user = new User();
 
+
+
+function is_logged_in () {
+    if(isset($_SESSION['login'] && $_SESSION['login'] != '') {
+       return true;
+    } else {
+       false;
+    }
+}
+
 if($user->is_logged_in()!="")
 {
  $user->redirect('/'); //faut modifier là je sais pas ou on redirige 
@@ -21,7 +31,7 @@ if(isset($_POST['btn-submit']))
   $id = base64_encode($row['id']);
   $code = md5(uniqid(rand()));
   
-  $stmt = $user->runQuery("UPDATE user SET tokenCode=token WHERE mail ==email");
+  $stmt = $user->runQuery("UPDATE user SET token= :token WHERE mail == :email");
   $stmt->execute(array("token"=>$code,"email"=>$email));
   
   $message= "
@@ -30,7 +40,7 @@ if(isset($_POST['btn-submit']))
        Go changer ton mot de passe. Si c'est pas toi met un stop.
       
        <br /><br />
-       <a href='http://www.onapasdenomdedomaine.com/resetpass.php?id=$id&code=$code'>cliquez bandes de salopes</a>
+       <a href='http://www.onapasdenomdedomaine.com/resetpassword.php?id=$id&code=$code'>cliquez bandes de salopes</a>
        <br /><br />
        :)
        ";

@@ -4,7 +4,7 @@
 
 require_once "UsersManager.php";
 
-class userController  {
+class userController {
     
     private $id;
     
@@ -21,11 +21,14 @@ class userController  {
     
     public function index() {
         include "connect.php";
+        echo 'index';
         $manager = new UsersManager($db);
         $id = $this->id;
         $user = $manager->get($id);
-        $json = json_encode($this->jsonSerialize($user), JSON_UNESCAPED_UNICODE);
-        echo($json);
+        if($user != false) {
+            $json = json_encode($this->jsonSerialize($user), JSON_UNESCAPED_UNICODE);
+            echo($json);
+        }
         
     }
     
@@ -34,8 +37,10 @@ class userController  {
         $manager = new UsersManager($db);
         $user = new User($_POST);
         try {
-            $manager->add($user);
-            echo "L'utilisateur a bien été ajouté.";
+            if($manager->get($user->get_id()) == null) {
+                $manager->add($user);
+                echo "L'utilisateur a bien été ajouté.";
+            }
         } catch(Exception $e) {
             echo "Oops l'utilisateur n'a pas pu être envoyé : " . $e->getMessage();
         }
@@ -50,13 +55,24 @@ class userController  {
     public function login() {
         include "connect.php";
         $manager = new UsersManager($db);
-        $manager->login($_POST);
-    }
+        $isloggedin = false;
+        if(isset($_SESSION)) {
+            $isloggedin = $manager->reconnect_from_cookie($_COOKIE, $_SESSION);
+        }
+        if($isloggedin != true) {
+            $isloggedin = $manager->login($_POST);
+        }
+            if($isloggedin == true) {
+                echo "L'utilisateur est connecté.";
+            } else {
+                echo "L'utilisateur n'est pas connecté.";
+            }
+        }
     
     public function logout() {
         include "connect.php";
         $manager = new UsersManager($db);
-        $manager->logout($_POST);
+        $manager->logout();
     }
     
     public function name() {

@@ -11,6 +11,7 @@ class User {
     private $rank;
     private $signupDate;
     private $badge_id;
+    private $token;
     
     // Hydrate
     public function hydrate(array $donnees) {
@@ -102,6 +103,14 @@ class User {
     
     public function set_badge_id($badge_id) {
         $this->badge_id = $badge_id;      
+    }
+    
+    public function get_token() {
+        return $this->token;
+    }
+    
+    public function set_token($token) {
+        $this->token = $token;      
     }
 }
 

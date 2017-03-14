@@ -13,10 +13,9 @@ class UsersManager {
     
   public function add(User $user) {
     // Préparation de la requête 
-      
     $pass_hache = sha1('gz'.$user->get_password());
       
-    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1")');
+    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id, token) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1", "'.$this->createToken($user->get_username()).'")');
     $user_id = $this->_db->lastInsertId();
       
     $this->_db->exec('INSERT INTO stat(name, value, related_element_type, related_element_id) VALUES("0", "0", "1", "'.$user_id.'")');
@@ -25,7 +24,11 @@ class UsersManager {
       
     $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("2", "0", "1", "'.$user_id.'")'); 
       
+    session_start();
+    $_SESSION['id'] = $user->get_id();
+    $_SESSION['pseudo'] = $user->get_username();
   }
+    
   public function delete(User $user) {
     // Exécute une requête de type DELETE.
     $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$user->get_id().'"');
@@ -39,8 +42,11 @@ class UsersManager {
 
     $q = $this->_db->query('SELECT id, mail, username, password, avatar, birthDate, rank, signupDate FROM user WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-    return new User($donnees);
+    if($donnees != false) {
+        return new User($donnees);
+    } else {
+        return false;
+    } 
   }
 
 
@@ -110,6 +116,11 @@ public function getSubjects(User $user) {
      $q->execute();
    }
     
+    public function logout() {
+        $_SESSION = array();
+        session_destroy();
+    }
+    
     public function avatar(User $user, $data) {
         
         try {
@@ -177,6 +188,85 @@ public function getSubjects(User $user) {
 
             echo $e->getMessage();
 
+        }
+    }
+    
+    public function logged_only() {
+        if(session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(!isset($_SESSION['auth'])) {
+            $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
+            exit();
+        }
+    }
+    
+    public function login($data) {
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
+          $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
+          $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+          if($stmt->rowCount() > 0) {
+             if(sha1('gz'.$data['password']) == $userRow['password']) {
+                $_SESSION['user_session'] = $userRow['token'];
+                $_SESSION['login'] = array(
+                    'username' => utf8_encode($data['username'])
+                );
+                return true;
+             }
+             else {
+                return false;
+             }
+          }
+       }
+    
+    public function createToken($data) {
+    $tokenGeneric = "saltyh0rse";
+
+    /* Encoding token */
+    $token = hash('sha256', $tokenGeneric.$data);
+
+    return $token;
+}
+
+public function reconnect_from_cookie($cookie, $session){
+    if(session_status() == PHP_SESSION_NONE){
+        session_start();
+    }
+    if(isset($cookie['user_session']) && !isset($session['login']) ){
+        $remember_token = $cookie['user_session'];
+        $stmt = $this->_db->query('SELECT id FROM user WHERE username = "'.$cookie['login']['username'].'" LIMIT 1');
+        $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $this->get($userRow['id']);
+        if($user) {
+            $expected = $user->get_token();
+            if($expected == $remember_token){
+                session_start();
+                $_SESSION['login'] = array(
+                    'username' => utf8_encode($user->get_username())
+                );
+                setcookie('user_session', $remember_token, time() + 60 * 60 * 24 * 365);
+                return true;
+            } else{
+                setcookie('user_session', null, -1);
+                return false;
+            }
+        }else{
+            setcookie('user_session', null, -1);
+            return false;
+        }
+    }
+}
+
+    
+    public function is_logged_in(User $user, $session) {
+        if(isset($session['login']) && $session['login'] == true) {
+           if($session['user_session'] == $user->get_token()) {
+                return true;
+           }
+        } else {
+           false;
         }
     }
     

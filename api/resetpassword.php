@@ -21,7 +21,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
  {
   if(isset($_POST['btn-reset-pass']))
   {
-   $pass = $_POST['pass'];
+   $pass = $_POST['password'];
    $confirm_pass = $_POST['confirm-pass'];
    
    if($confirm_pass!==$pass)

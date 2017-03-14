@@ -162,6 +162,7 @@
 
      return $subject;
    }
+     
 
 public function sort_date(){
   // Exécute une requête de type SELECT avec les posts triés par date
