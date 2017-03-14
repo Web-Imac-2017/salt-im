@@ -223,9 +223,10 @@ public function getSubjects(User $user) {
     
     public function createToken($data) {
     $tokenGeneric = "saltyh0rse";
+    $random_var = rand();
 
     /* Encoding token */
-    $token = hash('sha256', $tokenGeneric.$data);
+    $token = hash('sha256', $tokenGeneric.$data.$random_var);
 
     return $token;
 }

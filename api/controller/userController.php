@@ -21,7 +21,6 @@ class userController {
     
     public function index() {
         include "connect.php";
-        echo 'index';
         $manager = new UsersManager($db);
         $id = $this->id;
         $user = $manager->get($id);
