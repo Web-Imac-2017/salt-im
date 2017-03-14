@@ -93,9 +93,9 @@ class StatsManager {
 
   public function voteStatus($id)
   {
-    $status[];
+    $status;
     for ($i = 0; $i <= 2; $i++) {
-      status[$i] = hasVoted($id, $i);
+      $status[$i] = hasVoted($id, $i);
     }
     return $status;
   }
