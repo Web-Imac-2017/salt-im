@@ -112,7 +112,7 @@ class postController  {
     public function search_title() {
         include "connect.php";
         $manager = new SubjectsManager($db);
-        $subject = $manager->search_title($_POST);
+        $subject = $manager->search_title();
         $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
     }
 

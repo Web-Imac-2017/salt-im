@@ -197,17 +197,24 @@ public function search_title()
    {
      // Retourne la liste de tous les subjects dont le titre contient une chaîne passée en paramètres
      $subjects = [];
-
+     //$search = $_POST(['search']);
+     $search = "julien";
      //$q = $this->_db->query('SELECT * FROM subject WHERE title LIKE "%'.$title.'%"');
      // test requête avec prepare
-     $q = $this->_db->prepare('SELECT * FROM subject WHERE title LIKE ?');
-     $q->execute(array("%".$_POST['title']."%"));
+     
+     /*$q = $this->_db->prepare('SELECT * FROM subject WHERE title LIKE %?%');
+     $q->execute(array($search));*/
+     
+     $q = $this->_db->prepare("SELECT id, title FROM subject WHERE title LIKE :title");
+     $q->bindValue('title', $search, PDO::PARAM_STR);
+     $q->execute();
+
 
      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
      {
        $subjects[] = new Subject($donnees);
      }
-
+     
      return $subjects;
    }
     

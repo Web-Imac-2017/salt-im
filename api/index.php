@@ -12,6 +12,7 @@ $router->setDefaultControllerAction('accueil','index');
 // En cas d'url invalid on appèlera le controller errorController et sa méthode alert()
 $router->setErrorControllerAction('error', 'alert');
 
+// SUR MA ROUTE OUIHIHI Y A EU DU MOUV OUIHIHI
 $router->addRule('media/:id', array('controller' => 'media', 'action' => 'index'));
 $router->addRule('media/:id/img', array('controller' => 'media', 'action' => 'img'));
 $router->addRule('p/post/add/:id', array('controller' => 'post', 'action' => 'add'));
@@ -35,10 +36,12 @@ $router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avat
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'));
-$router->addRule('search/p/:string', array('controller' => 'post', 'action' => 'search_title'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
+// route de recherche qui marche pas
+$router->addRule('search/p/:string', array('controller' => 'post', 'action' => 'search_title'));
+
 
 $router->load();
 
