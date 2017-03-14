@@ -36,6 +36,23 @@ class statController  {
         $json = json_encode($this->jsonSerializeArray($stat));
         echo $json;
     }
+
+    public function hasVoted() {
+        include "connect.php";
+        $manager = new StatsManager($db);
+        $id = $this->id;
+        $name = $this->name;
+        $vote = $manager->hasVoted($id, $name);
+    }
+
+    public function voteStatus($id) {
+        include "connect.php";
+        $manager = new StatsManager($db);
+        $id = $this->id;
+        $status = $manager->voteStatus($id);
+        $json = json_encode($this->jsonSerializeArray($status));
+        echo $json;
+    }
     
     public function getStatUser() {
         include "connect.php";

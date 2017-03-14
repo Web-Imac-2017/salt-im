@@ -7,8 +7,7 @@ class MediasManager {
     $this->setDb($db);
   }
 
-  public function add(Media $media)
-  {
+  public function add(Media $media) {
     // Préparation de la requête d'insertion.
     $q = $this->_db->prepare('INSERT INTO media(link, type, publication_id) VALUES("'.$media->get_link().'", "'.$media->get_type().'","'.$media->get_publication_id().'")');
       
