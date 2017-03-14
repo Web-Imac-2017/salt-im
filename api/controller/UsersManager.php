@@ -68,7 +68,6 @@ public function getSubjects(User $user) {
     $subjects = [];
       
     $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
-    $q = $this->_db->query('SELECT id FROM publication WHERE user_id = AND ');
         
     // On a récupéré les ids des publications ayant le tag précisé
       for($i=0; $row = $q->fetch(); $i++){
@@ -247,6 +246,7 @@ public function reconnect_from_cookie($cookie, $session){
                 $_SESSION['login'] = array(
                     'username' => utf8_encode($user->get_username())
                 );
+                $_SESSION['user_session'] = $remember_token;
                 setcookie('user_session', $remember_token, time() + 60 * 60 * 24 * 365);
                 return true;
             } else{
@@ -260,9 +260,20 @@ public function reconnect_from_cookie($cookie, $session){
     }
 }
 
+    public function who_is_logged_in($session) {
+        $stmt = $this->_db->query('SELECT id FROM user WHERE token = "'.$session['user_session'].'" LIMIT 1');
+        $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($userRow != null) {
+            $user = $this->get($userRow['id']);
+            return $user;
+        } else {
+            return false;
+        }
+        
+    }
     
     public function is_logged_in(User $user, $session) {
-        if(isset($session['login']) && $session['login'] == true) {
+        if(isset($session['login'])) {
            if($session['user_session'] == $user->get_token()) {
                 return true;
            }
