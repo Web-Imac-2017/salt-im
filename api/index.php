@@ -35,6 +35,7 @@ $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
+$router->addRule('search/p/:string', array('controller' => 'post', 'action' => 'search_title'));
 
 $router->load();
 

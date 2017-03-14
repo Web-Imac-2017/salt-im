@@ -7,6 +7,12 @@
      $this->setDb($db);
    }
 
+      public function setDb(PDO $db)
+   {
+     $this->_db = $db;
+   }
+ 
+
    public function add(Subject $subject)
    {
      $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$subject->get_text().'", "'.date("Y-m-d H:i:s").'", "'.$subject->get_user_id().'")');
@@ -185,10 +191,23 @@ public function sort_date(){
 
     return $subject;
 }
-    
 
-   public function setDb(PDO $db)
+public function search_title()
    {
-     $this->_db = $db;
+     // Retourne la liste de tous les subjects dont le titre contient une chaîne passée en paramètres
+     $subjects = [];
+
+     //$q = $this->_db->query('SELECT * FROM subject WHERE title LIKE "%'.$title.'%"');
+     // test requête avec prepare
+     $q = $this->_db->prepare('SELECT * FROM subject WHERE title LIKE ?');
+     $q->execute(array("%".$_POST['title']."%"));
+
+     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+     {
+       $subjects[] = new Subject($donnees);
+     }
+
+     return $subjects;
    }
+    
  }

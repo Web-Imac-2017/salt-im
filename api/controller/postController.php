@@ -101,12 +101,19 @@ class postController  {
         return $this->id; 
     }
     
-    public function help($type) {
+    public function help() {
         include "connect.php";
         $manager = new SubjectsManager($db);
-        $subject = $manager->get_help($id);
-        $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
+        $subject = $manager->get_help();
+        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
+    }
+
+    public function search_title() {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $subject = $manager->search_title($_POST);
+        $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
     }
 
     public function jsonSerialize(Subject $subject) {
