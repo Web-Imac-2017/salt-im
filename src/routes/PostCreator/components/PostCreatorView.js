@@ -51,7 +51,7 @@ export default  class PostCreatorView extends Component {
           isSubmitDisabled:true,
         })
 
-        fetch("http://localhost/salt-im/api/p/post/add/90",
+        fetch("http://localhost:8888/salt-im/api/p/post/add",
         {
             method: "post",
             body: new FormData(self.refs.form),

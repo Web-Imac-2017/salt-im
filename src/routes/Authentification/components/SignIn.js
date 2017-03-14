@@ -25,9 +25,19 @@ export default class SignIn extends Component {
 
   handleSubmit(event) {
       event.preventDefault();
-      this.setState({
-          nbFail:this.state.nbFail+1
-      })
+      fetch("http://localhost:8888/salt-im/api/u/login",
+        {
+            method: "post",
+            body: new FormData(this.refs.form),
+        })
+        .then((res) => {
+            return res.text();
+        }).then((data) => {
+          console.log(data);
+        })
+      // this.setState({
+      //     nbFail:this.state.nbFail+1
+      // })
   }
 
   render() {
@@ -41,7 +51,7 @@ export default class SignIn extends Component {
             <div className="form__header">Connexion</div>
             <div className="form__input">
                 <label for="pseudo">Pseudo
-                  <input type="text" required={true} name="pseudo" id="pseudo" placeholder="Votre pseudo (8 à 20 caractères)"
+                  <input type="text" required={true} name="username" id="pseudo" placeholder="Votre pseudo (8 à 20 caractères)"
                     onChange={(event)=>{this.handleChangePseudo.bind(this)}}/>
                 </label>
             </div>

@@ -14,7 +14,8 @@ export default class SignupView extends Component {
             pseudo:"",
             password:"",
             isPseudoGood:"not",
-            isPasswordGood:"not"
+            isPasswordGood:"not",
+            passwordConf:false,
         };
     }
 
@@ -30,6 +31,13 @@ export default class SignupView extends Component {
     handleChangePassword(event) {
         this.setState({password: event.target.value});
         this.checkPassword(event.target.value);
+    }
+
+    handleChangePasswordConfirmation(event) {
+        if(this.state.password == event.target.value)
+            this.setState({passwordConf:true})
+        else
+            this.setState({passwordConf:false})
     }
 
     checkPassword(password) {
@@ -52,8 +60,8 @@ export default class SignupView extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        if(this.state.isPasswordGood == true && this.state.isPseudoGood == true) {
-            fetch("http://localhost/salt-im/api/u/signup/18",
+        if(this.state.isPasswordGood == true && this.state.isPseudoGood == true && this.state.passwordConf) {
+            fetch("http://localhost:8888/salt-im/api/u/signup/",
                   {
                       method: "post",
                       body: new FormData(this.refs.form),
@@ -63,7 +71,7 @@ export default class SignupView extends Component {
                     return res.text();
                 })
 
-                .then((data) => { browserHistory.push('/') }) 
+                .then((data) => { browserHistory.push('/') })
         }
     }
 
@@ -96,9 +104,9 @@ export default class SignupView extends Component {
                         </label>
                     </div>
                     <div className="form__input">
-                        <label for="password">Confirmation du mot de passe
-                            <input className={passwordClass} type="password" required={true} name="passwordconfirmation" id="password" placeholder="Mot de passe"
-                            />
+                        <label for="passwordconfirmation">Confirmation du mot de passe
+                            <input ref="passconfirm" className={passwordClass} type="password" required={true} name="passwordconfirmation" id="passconfirm" placeholder="Mot de passe"
+                            onChange={this.handleChangePasswordConfirmation.bind(this)}/>
                         </label>
                     </div>
                     <input type="submit" value="Créer votre compte"/>

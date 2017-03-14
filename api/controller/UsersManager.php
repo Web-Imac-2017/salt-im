@@ -5,36 +5,36 @@ class UsersManager {
   {
     $this->setDb($db);
   }
-    
-    
+
+
   public function getDb() {
         return $this->_db;
     }
-    
+
   public function add(User $user) {
-    // Préparation de la requête 
+    // Préparation de la requête
     $pass_hache = sha1('gz'.$user->get_password());
-      
+
     $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id, token) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1", "'.$this->createToken($user->get_username()).'")');
     $user_id = $this->_db->lastInsertId();
-      
+
     $this->_db->exec('INSERT INTO stat(name, value, related_element_type, related_element_id) VALUES("0", "0", "1", "'.$user_id.'")');
-      
-    $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("1", "0", "1", "'.$user_id.'")'); 
-      
-    $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("2", "0", "1", "'.$user_id.'")'); 
-      
+
+    $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("1", "0", "1", "'.$user_id.'")');
+
+    $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("2", "0", "1", "'.$user_id.'")');
+
     session_start();
     $_SESSION['id'] = $user->get_id();
     $_SESSION['pseudo'] = $user->get_username();
   }
-    
+
   public function delete(User $user) {
     // Exécute une requête de type DELETE.
     $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$user->get_id().'"');
     $this->_db->exec('DELETE FROM user WHERE id = '.$user->get_id());
   }
- 
+
    public function get($id)
    {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet User.
@@ -46,15 +46,15 @@ class UsersManager {
         return new User($donnees);
     } else {
         return false;
-    } 
+    }
   }
 
 
   public function getStat(User $user) {
     $stats = [];
-     
+
     $q = $this->_db->query('SELECT * FROM stat WHERE related_element_id = "'.$user->get_id().'"');
-      
+
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
    {
       $stats[] = new Stat($donnees);
@@ -66,14 +66,14 @@ class UsersManager {
 public function getSubjects(User $user) {
     $subject_id_array = [];
     $subjects = [];
-      
+
     $q = $this->_db->query('SELECT id FROM publication JOIN rel_tag_publication ON publication.id = rel_tag_publication.publication_id WHERE rel_tag_publication.tag_id = "'.$tag_id.'"');
-        
+
     // On a récupéré les ids des publications ayant le tag précisé
       for($i=0; $row = $q->fetch(); $i++){
         $subject_id_array[] = $row['id'];
       }
-    
+
    // Il faut récupérer les subjects correspondant aux ids
     for($i=0; count($subject_id_array); $i++) {
         $q = $this->_db->query('SELECT * FROM subject WHERE id = "'.$subject_id_array[$i].'"');
@@ -81,7 +81,7 @@ public function getSubjects(User $user) {
         {
             $subjects[] = new Subject($donnees);
         }
-    }    
+    }
 
     return $subjects;
   }
@@ -103,27 +103,27 @@ public function getSubjects(User $user) {
     return $users;
 
    }
- 
+
    public function update(User $user, $id)
    {
-       
+
      $pass_hache = sha1('gz'.$user->get_password());
      // Prépare une requête de type UPDATE.
      $q = $this->_db->prepare('UPDATE user SET mail = "'.$user->get_mail().'", username = "'.$user->get_username().'", password = "'.$pass_hache.'", avatar = "'.$user->get_avatar().'", birthDate = "'.$user->get_birthDate().'", rank = "'.$user->get_rank().'" WHERE id = "'.$id.'"');
-     
+
      // Exécution de la requête.
      $q->execute();
    }
-    
+
     public function logout() {
         $_SESSION = array();
         session_destroy();
     }
-    
+
     public function avatar(User $user, $data) {
-        
+
         try {
-    
+
             // Undefined | Multiple Files | $_FILES Corruption Attack
             // If this request falls under any of them, treat it invalid.
             if (
@@ -146,7 +146,7 @@ public function getSubjects(User $user) {
                     throw new RuntimeException('Unknown errors.');
             }
 
-            // You should also check filesize here. 
+            // You should also check filesize here.
             if ($_FILES['userfile']['size'] > 2000000) {
                 throw new RuntimeException('Exceeded filesize limit.');
             }
@@ -189,7 +189,7 @@ public function getSubjects(User $user) {
 
         }
     }
-    
+
     public function logged_only() {
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -199,7 +199,7 @@ public function getSubjects(User $user) {
             exit();
         }
     }
-    
+
     public function login($data) {
         if(session_status() == PHP_SESSION_NONE){
             session_start();
@@ -219,7 +219,7 @@ public function getSubjects(User $user) {
              }
           }
        }
-    
+
     public function createToken($data) {
     $tokenGeneric = "saltyh0rse";
     $random_var = rand();
@@ -269,9 +269,9 @@ public function reconnect_from_cookie($cookie, $session){
         } else {
             return false;
         }
-        
+
     }
-    
+
     public function is_logged_in(User $user, $session) {
         if(isset($session['login'])) {
            if($session['user_session'] == $user->get_token()) {
@@ -281,13 +281,13 @@ public function reconnect_from_cookie($cookie, $session){
            false;
         }
     }
-    
-    
- 
+
+
+
    public function setDb(PDO $db)
    {
      $this->_db = $db;
    }
-    
+
 }
 
