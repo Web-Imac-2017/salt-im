@@ -8,7 +8,7 @@ require_once "SubjectsManager.php";
 
 require_once "TagsManager.php";
 
-//require_once "Tag.php";
+require_once "Tag.php";
 
 class postController  {
     
@@ -80,7 +80,7 @@ class postController  {
                     'name' => $tag_names[$i],
                     'img_url' => '',
                     'description' => ''
-                ))
+                ));
                 $tag_ids[] = $tagmanager->add($tag);
             } else {
                 $tag_ids[] = $tag->get_id();
