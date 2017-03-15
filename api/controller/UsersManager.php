@@ -40,7 +40,7 @@ class UsersManager {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet User.
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, mail, username, password, avatar, birthDate, rank, signupDate FROM user WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, mail, username, password, avatar, birthDate, rank, signupDate FROM user WHERE id = "'.$id.'"');
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     if($donnees != false) {
         return new User($donnees);

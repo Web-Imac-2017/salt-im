@@ -1,2 +1,31 @@
 @import '../../styles/core.scss';
 
+.listComment {
+    .listAnswer {
+        margin-left: 50px;
+
+        .listAnswer {
+            margin-left: 0;
+        }
+    }
+}
+
+.gocomment {
+    display:block;
+    width:100%;
+
+    textarea {
+        width:100%;
+        margin-top: 5px;
+        resize:none;
+    }
+
+    input {
+        color:white;
+        font-family:$karla;
+        border:0;
+        background: -webkit-linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
+        background: linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
+        margin-bottom:50px;
+    }
+}
