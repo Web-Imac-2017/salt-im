@@ -123,7 +123,7 @@
      public function postFromUser($id) {
         $subjects = [];
 
-        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = "'.$id'"');
+        $q = $this->_db->query('SELECT id FROM publication WHERE user_id = "'.$id.'"');
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
@@ -168,58 +168,65 @@
    }
      
 
-public function sort_date(){
-  // Exécute une requête de type SELECT avec les posts triés par date
+  public function sort_date(){
+    // Exécute une requête de type SELECT avec les posts triés par date
 
-  // récupère les subjects dont le type est POST et triés par date
-    $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE type = "post" ORDER BY "date" DESC');
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    $subject = new Subject($donnees);
+    // récupère les subjects dont le type est POST et triés par date
+      $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE type = "post" ORDER BY "date" DESC');
+      $donnees = $q->fetch(PDO::FETCH_ASSOC);
+      $subject = new Subject($donnees);
 
-    // Récupère l'id de la publication associée
-    $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$id.'"');
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+      // Récupère l'id de la publication associée
+      $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$id.'"');
+      $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    // Récupère les données de la publication
-    $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
-    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+      // Récupère les données de la publication
+      $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
+      $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    // Récupère l'id du media de la publication
-    $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
-    $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
+      // Récupère l'id du media de la publication
+      $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
+      $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
 
-    // Rajoute les infos manquantes de subject
-    $subject->set_text($donnees['text']);
-    $subject->set_date($donnees['date']);
-    $subject->set_user_id($donnees['user_id']);
-    $subject->set_media_id($donnees_media['id']);
+      // Rajoute les infos manquantes de subject
+      $subject->set_text($donnees['text']);
+      $subject->set_date($donnees['date']);
+      $subject->set_user_id($donnees['user_id']);
+      $subject->set_media_id($donnees_media['id']);
 
-    return $subject;
+      return $subject;
+  }
+
+  public function search_title($search)
+  {
+      // Retourne la liste de tous les subjects dont le titre contient une chaîne passée en paramètres
+      $subjects = [];
+      //$search = $_POST(['search']);
+      /*$search = "julien";*/
+      //$q = $this->_db->query('SELECT * FROM subject WHERE title LIKE "%'.$title.'%"');
+      // test requête avec prepare
+      
+      /*$q = $this->_db->prepare('SELECT * FROM subject WHERE title LIKE %?%');
+      $q->execute(array($search));*/
+      /*$q = $this->_db->prepare("SELECT id, title FROM subject WHERE title LIKE :title");*/
+
+      /*    $q->bindValue('title', $search, PDO::PARAM_STR);
+      $q->execute();
+
+
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+          $subjects[] = new Subject($donnees);
+      }*/
+      
+      $q = $this->_db->prepare('SELECT publication_id, title FROM subject
+          WHERE title LIKE "%'.$search.'%"');
+
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+          $subjects[] = new Subject($donnees);
+          echo "je rentre dans le while";
+      }
+      echo $search;
+      return $subjects;
+  }
 }
-
-public function search_title()
-   {
-     // Retourne la liste de tous les subjects dont le titre contient une chaîne passée en paramètres
-     $subjects = [];
-     //$search = $_POST(['search']);
-     $search = "julien";
-     //$q = $this->_db->query('SELECT * FROM subject WHERE title LIKE "%'.$title.'%"');
-     // test requête avec prepare
-     
-     /*$q = $this->_db->prepare('SELECT * FROM subject WHERE title LIKE %?%');
-     $q->execute(array($search));*/
-     
-     $q = $this->_db->prepare("SELECT id, title FROM subject WHERE title LIKE :title");
-     $q->bindValue('title', $search, PDO::PARAM_STR);
-     $q->execute();
-
-
-     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-     {
-       $subjects[] = new Subject($donnees);
-     }
-     
-     return $subjects;
-   }
-    
- }
