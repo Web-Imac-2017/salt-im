@@ -51,13 +51,14 @@ $router->addRule('u/get/:id', array('controller' => 'user', 'action' => 'index')
 $router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avatar'));
 $router->addRule('u/islogged/:id', array('controller' => 'user', 'action' => 'islogged'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
+$router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
 
 //tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 
-$router->addRule('u/session', array('controller' => 'user', 'action' => 'who'));
+
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
