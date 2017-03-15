@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 15 Mars 2017 à 13:52
+-- Généré le :  Mer 15 Mars 2017 à 17:03
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `publication`
@@ -126,7 +126,8 @@ INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 (13, 'Moi ça m''excite', '2017-07-03', 4),
 (14, 'T''as cru que t''avais du style dans ton peau de pêche bleu ??? Haaaan salooooope', '2017-03-08', 6),
 (15, 'Ceci est un commentaire de commentaire', '2017-03-09', 1),
-(16, 'Ceci est un commentaire de commentaire de commentaire', '2017-06-12', 1);
+(16, 'Ceci est un commentaire de commentaire de commentaire', '2017-06-12', 1),
+(17, 'a', '2017-03-15', 1);
 
 -- --------------------------------------------------------
 
@@ -152,14 +153,14 @@ CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
 
 DROP TABLE IF EXISTS `stat`;
 CREATE TABLE IF NOT EXISTS `stat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` int(11) NOT NULL,
   `value` int(11) NOT NULL,
-  `related_publication_id` int(11) NOT NULL,
-  `related_user_id` int(11) NOT NULL,
+  `related_user_id` int(11) DEFAULT NULL,
+  `related_publication_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `related_publication_id` (`related_publication_id`),
-  KEY `related_user_id` (`related_user_id`)
+  KEY `related_user_id` (`related_user_id`),
+  KEY `related_publication_id` (`related_publication_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `publication_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `subject`
@@ -193,7 +194,8 @@ INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
 (7, 'Aidez-moi, j''suis coincée !', '', 'help', 8),
 (8, 'Bouhou, il est triste', '', 'help', 9),
 (9, 'Aluminium', '', 'post', 10),
-(10, 'Julien Rousset est sur Tinder !', 'fermé', 'post', 11);
+(10, 'Julien Rousset est sur Tinder !', 'fermé', 'post', 11),
+(11, 'a', 'a', 'post', 17);
 
 -- --------------------------------------------------------
 
@@ -291,6 +293,13 @@ ALTER TABLE `media`
 ALTER TABLE `rel_tag_publication`
   ADD CONSTRAINT `rel_tag_publication_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`),
   ADD CONSTRAINT `rel_tag_publication_ibfk_2` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`id`);
+
+--
+-- Contraintes pour la table `stat`
+--
+ALTER TABLE `stat`
+  ADD CONSTRAINT `stat_ibfk_1` FOREIGN KEY (`related_user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `stat_ibfk_2` FOREIGN KEY (`related_publication_id`) REFERENCES `publication` (`id`);
 
 --
 -- Contraintes pour la table `vote`
