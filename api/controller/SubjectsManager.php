@@ -201,12 +201,12 @@
   {
       // liste des sujets
       $subjects = [];
+      $fetchedSubjects = [];
 
-      // test
-      $search = "salé tinder";
+      $searchClean = preg_replace('!\s+!', ' ', $search);
       
       // tableau des mots recherchés
-      $searchTab = explode(" ", $search);
+      $searchTab = explode(" ", $searchClean);
       print_r($searchTab);
 
       // taille du tableau (nombre de mots)
@@ -214,14 +214,17 @@
       print_r($searchSize);
 
       // pour chaque mot, effectuer une recherche
-      for ($i = 0; $i <= $searchSize; $i++) {
-        $q = $this->_db->query('SELECT id FROM subject
-          WHERE title LIKE "%'.$searchTab[$i].'%"');
+      for ($i = 0; $i < $searchSize; $i++) {
+          $q = $this->_db->query('SELECT id FROM subject
+            WHERE title LIKE "%'.$searchTab[$i].'%"');
 
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-            $subjects[] = $this->get($donnees['id']);
-            echo "je rentre dans le while<br />";
-        }
+          while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+              $currentSubject = $this->get($donnees['id']);
+              if (!in_array($currentSubject, $fetchedSubjects)) {
+                $subjects[] = $currentSubject;
+                $fetchedSubjects[] = $currentSubject;
+              }
+          }
       }
       
       echo $search;
