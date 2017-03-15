@@ -13,7 +13,6 @@ require_once "TagsManager.php";
 class postController  {
     
     private $id;
-    private $search;
     
     public static function getInstance(array $donnees)
     {
@@ -69,11 +68,29 @@ class postController  {
     
     public function add() {
         include "connect.php";
-        echo "add";
         $manager = new SubjectsManager($db);
+        $tagmanager = new TagsManager($db);
         $subject = new Subject($_POST);
+        $tag_names = explode(',', $_POST['tags']);
+        $tag_ids = [];
+        for($i=0; $i<count($tag_names); $i++) {
+            $tag = $tagmanager->getFromName($tag_names[$i]);
+            if ($tag == null || $tag == false) {
+                $tag = new Tag(array(
+                    'name' => $tag_names[$i],
+                    'img_url' => '',
+                    'description' => ''
+                ))
+                $tag_ids[] = $tagmanager->add($tag);
+            } else {
+                $tag_ids[] = $tag->get_id();
+            }
+        }
         try {
-            $subject = $manager->add($subject, $_POST['tags']);
+            $subject = $manager->add($subject);
+            for($i=0; $i<count($tag_ids); $i++) {
+                $tagmanager->addTagToPost($tag_ids[$i], $subject->get_id());
+            }
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         }
@@ -113,14 +130,6 @@ class postController  {
     public function get_id() {
         return $this->id; 
     }
-
-    public function set_search($search) {
-        $this->search = $search; 
-    }
-    
-    public function get_search() {
-        return $this->search; 
-    }
     
     public function help() {
         include "connect.php";
@@ -133,9 +142,13 @@ class postController  {
     public function search_title() {
         include "connect.php";
         $manager = new SubjectsManager($db);
-        $search = $this->search;
-        $subject = $manager->search_title($search);
-        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+        if (!isset($_POST['search']))
+            echo "Please provide keywords";
+        else {
+            $subject = $manager->search_title($_POST['search']);
+            $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+            echo $json;
+        }
     }
 
     public function jsonSerialize(Subject $subject) {

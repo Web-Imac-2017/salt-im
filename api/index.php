@@ -25,8 +25,8 @@ $router->addRule('p/post/remove/:id', array('controller' => 'post', 'action' => 
 $router->addRule('p/comment/:id/:order', array('controller' => 'comment', 'action' => 'commentsFromPost'));
 $router->addRule('p/comment/:id', array('controller' => 'comment', 'action' => 'commentsFromPostDefault'));
 $router->addRule('p/u/:id', array('controller' => 'post', 'action' => 'postFromUser'));
-$router->addRule('p/:id/stat/up', array('controller' => 'stat', 'action' => 'upVote'));
-$router->addRule('p/:id/stat/cancel', array('controller' => 'stat', 'action' => 'cancelVote'));
+$router->addRule('p/:id/stat/up/:name', array('controller' => 'stat', 'action' => 'upVote'));
+$router->addRule('p/:id/stat/cancel/:name', array('controller' => 'stat', 'action' => 'cancelVote'));
 $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'voteStatus'));
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
@@ -51,12 +51,14 @@ $router->addRule('u/get/:id', array('controller' => 'user', 'action' => 'index')
 $router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avatar'));
 $router->addRule('u/islogged/:id', array('controller' => 'user', 'action' => 'islogged'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
-$router->addRule('u/session', array('controller' => 'user', 'action' => 'who_is_logged_in'));
 
 //tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
+
+$router->addRule('u/session', array('controller' => 'user', 'action' => 'who'));
+
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
 // route de recherche qui marche pas
