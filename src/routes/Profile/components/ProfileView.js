@@ -15,6 +15,8 @@ export default class ProfileView extends Component {
         dataPost:{},
         dataFav:{},
         dataComment:{},
+        dataBadge:{},
+        badgeUser:{},
         itemActive:"posts",
         isActive:false
       };
@@ -33,7 +35,11 @@ export default class ProfileView extends Component {
                 this.setState({dataPost:data})
                 this.loadComments();
                 this.loadFavs();
+                this.loadBadges();
             });
+
+                           
+
 
     }
 
@@ -41,6 +47,15 @@ export default class ProfileView extends Component {
         fetch('http://www.json-generator.com/api/json/get/bMNOSXbUte?indent=2')
             .then( (response) => response.json())
             .then( (data) => {this.setState({dataFav:data})});
+    }
+
+    loadBadges() {
+        fetch('http://www.json-generator.com/api/json/get/bXHxxUeQAy?indent=2')
+            .then( (response) => response.json())
+            .then( (data) => {
+                this.setState({dataBadge:data})
+                 this.getBadge();
+            });
     }
 
     loadComments() {
@@ -68,6 +83,24 @@ export default class ProfileView extends Component {
             this.setState({isActive:true})
     }
 
+
+    getBadge(){ 
+        if(!this.state.dataBadge)
+            return;
+
+        for(let i = 0; i < this.state.dataBadge.length; i++){
+            let rank = parseInt(this.state.dataUser.rank);
+            let cond = this.state.dataBadge[i].cond;
+            console.log(rank+'>'+cond);
+                if(rank  >= cond ){
+                    console.log('ok');
+                    this.state.badgeUser = this.state.dataBadge[i];
+                }
+         }
+       
+        return;
+    }
+
     render() {
         let backgroundUrlStyle = {
             backgroundImage: "url("+this.state.dataUser.avatar+")"
@@ -79,6 +112,8 @@ export default class ProfileView extends Component {
             classes += "modal--active"
 
         let dataItem = (<div/>);
+
+
 
         switch(this.state.itemActive) {
             case "posts" :
@@ -111,6 +146,8 @@ export default class ProfileView extends Component {
                         <h1 className="profile__header__infos__pseudo">{this.state.dataUser.username}</h1>
                         <h2 className="profile__header__infos__email">{this.state.dataUser.mail}</h2>
                         <h2 className="profile__header__infos__rank">{this.state.dataUser.rank}</h2>
+                        <h2 className="profile__header__infos__rank">{this.state.badgeUser.name}</h2>
+                        <img src={this.state.badgeUser.icon}/>
                     </div>
                     {this.props.dataUser ? (
                         <button className="profile__header__updateBtn" onClick={this.toggleModal.bind(this)}>modifier mon profil</button>

@@ -136,6 +136,7 @@ class commentController  {
         $pack = [];
         for($i=0; $i<count($comments); $i++) {
                 $c = array(
+                    'id' => utf8_encode($comments[$i][0]->get_id()),
                     'text' => utf8_encode($comments[$i][0]->get_text()),
                     'date' => utf8_encode($comments[$i][0]->get_date()),
                     'user_id' => utf8_encode($comments[$i][0]->get_user_id())
