@@ -27,7 +27,7 @@ export default class CoreLayout extends Component {
     componentWillMount() {
         setTimeout(() => {
             this.loadUser();
-        },5000)
+        },0)
     }
 
     render() {

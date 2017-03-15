@@ -94,9 +94,9 @@ export default class PreviewActions extends Component {
                     {this.props.dataUser ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
-                                <div className="preview__action__reaction icon--salt" ></div>
-                                <div className="preview__action__reaction icon--pepper"></div>
-                                <div className="preview__action__reaction icon--lol"   ></div>
+                                <div className="preview__action__reaction icones icon--salt" ></div>
+                                <div className="preview__action__reaction icones icon--pepper"></div>
+                                <div className="preview__action__reaction icones icon--lol"   ></div>
                             </div>
                             <div className="preview__action__arrow"/>
                         </div>

@@ -1,3 +1,5 @@
+$sizeIcon : 50px;
+
 .preview__action {
     margin-right: 40px;
 
@@ -58,6 +60,7 @@
         -webkit-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
         -moz-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
         box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
+        width: 240px;
     }
 
     &__arrow {
@@ -70,6 +73,7 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+        z-index:1;
     }
 }
 
@@ -99,26 +103,39 @@
 }
 
 .icon--salt {
-    background : url(./assets/salty.png);
-    width: 15px;
-    height:15px;
-    background-size:cover;
-    background-position:center;
+    background : url(./assets/salt.svg);
 
+    &:hover{
+        background : url(./assets/salt-selected.svg);
+    }
 }
 
 .icon--pepper {
-    background : url(./assets/poivre.png);   
-    width: 15px;
-    height:15px;
-    background-size:cover;
-    background-position:center; 
+    background : url(./assets/pepper.svg);
+
+    &:hover{
+        background : url(./assets/pepper-selected.svg);
+    }
 }
 
 .icon--lol {
-    background : url(./assets/lol.png); 
-    width: 15px;
-    height:15px;
-    background-size:cover;
-    background-position:center;   
+    background : url(./assets/fireworks.svg); 
+
+    &:hover{
+        background : url(./assets/fireworks-selected.svg);
+    } 
 }
+
+.icones {
+    width: $sizeIcon;
+    height:$sizeIcon;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    z-index:250;
+
+    &:hover{
+        background-repeat:no-repeat;
+        background-position:50%;
+    }
+}
+    
