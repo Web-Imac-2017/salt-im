@@ -22,10 +22,11 @@ export default class PreviewActions extends Component {
 
     statMax(){
         var param = this.props.stats;
-
         var maxIndex = 0;
         for(var i = 1; i < param.length; i++){
-            if(param[i].value > param[maxIndex].value){
+            var val = parseInt(param[i].value);
+            var max = parseInt(param[maxIndex].value);
+            if( val > max){
                 maxIndex = i;
             }
         }
@@ -46,10 +47,11 @@ export default class PreviewActions extends Component {
 
     statMaxId(){
         var param = this.props.stats;
-
         var maxIndex = 0;
         for(var i = 1; i < param.length; i++){
-            if(param[i].value > param[maxIndex].value){
+            var val = parseInt(param[i].value);
+            var max = parseInt(param[maxIndex].value);
+            if(val > max){
                 maxIndex = i;
             }
         }
@@ -59,13 +61,29 @@ export default class PreviewActions extends Component {
     }
 
     statValue(){
+        
+        if(this.props.stats){
+                var i = this.statMaxId();
+                if(this.props.stats[i]){
+                    return this.props.stats[i].value;            
+                }
+                else{
+                    return "no_data";
+                }
+        }
+        else{
+            return "no data";      
+        }
 
-        if(this.props.stats.length){
-            var i = this.statMaxId();
+    }
+
+    statValueId(i){
+      
+        if(this.props.stats[i]){
             return this.props.stats[i].value;
         }
         else{
-            return "no_data";
+            return "";
         }
 
     }
@@ -92,8 +110,11 @@ export default class PreviewActions extends Component {
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
                                 <div className="preview__action__reaction icon--salt" ></div>
+                                {this.statValueId(0)}
                                 <div className="preview__action__reaction icon--pepper"></div>
+                                {this.statValueId(1)}
                                 <div className="preview__action__reaction icon--lol"   ></div>
+                                {this.statValueId(2)}
                             </div>
                             <div className="preview__action__arrow"/>
                         </div>

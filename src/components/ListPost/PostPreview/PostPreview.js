@@ -61,7 +61,6 @@ export default class PostPreview extends Component {
     }
 
     render() {
-        console.log(this.props)
         return(
             <div className="preview">
                 <div className="preview__left">

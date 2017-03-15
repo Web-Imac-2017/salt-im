@@ -17,7 +17,7 @@ export default class CoreLayout extends Component {
     }
 
     loadUser(){
-        fetch("http://localhost:8888/salt-im/api/u/islogged/2")
+        fetch("http://localhost/salt-im/api/u/islogged/2")
             .then((data) => {return data.text()})
             .then((data) => {
                 this.setState({dataUser:data,})
