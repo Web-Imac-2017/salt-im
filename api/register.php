@@ -13,8 +13,7 @@ if(isset($_POST['btn-signup']))
 {
   $uname = trim($_POST['txt_uname']);
   $umail = trim($_POST['txt_umail']);
-  $upass = trim($_POST['txt_upass']);
-  $upass_confirm = trim($_POST['txt_upass_confirm']);
+  $upass = trim($_POST['txt_upass']); 
 
   /* Vérifications des données saisies par l'utilisateur car il peut outrepasser les restrictions du front et tout casser */
   
@@ -23,7 +22,7 @@ if(isset($_POST['btn-signup']))
     $error['username_empty'] = "Provide a username"; 
   }
 
-<<<<<<< HEAD
+
    else if(strlen($uname) < 3 && strlen($uname) > 20 ){
       $error['username_length'] = "Username must be atleast 6 characters"; 
    }
@@ -91,17 +90,12 @@ if(isset($_POST['btn-signup']))
 
   // mail invalide
   else if(!filter_var($umail, FILTER_VALIDATE_EMAIL)) {
-    $error['email_invalid'] = "Please enter a valid email address";
+    $error['email_invalid'] = "Please enter a valid email address !";
   }
 
   // pass non fourni
   else if($upass=="") {
-    $error['password_empty'] = "Provide a password";
-  }
-
-  // pass et pass de confirmation différents
-  else if($upass != $upass_confirm) {
-    $error['password_different'] = "Passwords do not match";
+    $error['password_empty'] = "Provide a password !";
   }
 
   // pass trop long / trop court

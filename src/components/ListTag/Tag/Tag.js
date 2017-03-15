@@ -21,11 +21,11 @@ export const Tag = (props) => {
     else if(props.solo && props.data[0] != undefined){
         return(
             <div className="tag">
-                <div className="tag__title tag--chevron">
+
+                <div className="tag__title">
                 <h1 className="tagSingle__title"> > {props.data[0].title}</h1>
                 <p className="tagSingle__description">{props.data[0].description}</p>
                 </div>
-
             </div>
         )
     }

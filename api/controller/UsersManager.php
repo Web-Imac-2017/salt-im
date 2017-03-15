@@ -15,7 +15,7 @@ class UsersManager {
     // Préparation de la requête 
     $pass_hache = sha1('gz'.$user->get_password());
       
-    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1")');
+    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id, token) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1", "'.$this->createToken($user->get_username()).'")');
     $user_id = $this->_db->lastInsertId();
       
     $this->_db->exec('INSERT INTO stat(name, value, related_element_type, related_element_id) VALUES("0", "0", "1", "'.$user_id.'")');
@@ -24,7 +24,11 @@ class UsersManager {
       
     $this->_db->exec('INSERT INTO stat(name, value,  related_element_type, related_element_id) VALUES("2", "0", "1", "'.$user_id.'")'); 
       
+    session_start();
+    $_SESSION['id'] = $user->get_id();
+    $_SESSION['pseudo'] = $user->get_username();
   }
+    
   public function delete(User $user) {
     // Exécute une requête de type DELETE.
     $this->_db->exec('DELETE FROM stat WHERE related_element_id = "'.$user->get_id().'"');
@@ -38,8 +42,11 @@ class UsersManager {
 
     $q = $this->_db->query('SELECT id, mail, username, password, avatar, birthDate, rank, signupDate FROM user WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-    return new User($donnees);
+    if($donnees != false) {
+        return new User($donnees);
+    } else {
+        return false;
+    } 
   }
 
 
@@ -109,114 +116,9 @@ public function getSubjects(User $user) {
      $q->execute();
    }
     
-    public function register($data) {
-        $error = [];
-        
-        if($this->is_loggedin()!="")
-        {
-          $this->redirect('/');
-        }
-
-        if($_POST != null) {
-          $username = trim($_POST['username']);
-          $password = trim($_POST['password']);
-          $mail = trim($_POST['mail']); 
-          $birthDate = trim($_POST['birthDate']);
-
-          /* Vérifications des données saisies par l'utilisateur car il peut outrepasser les restrictions du front et tout casser */
-
-          // username non fourni
-          if(!isset($username)) {
-            $error['username_empty'] = "Provide a username"; 
-          }
-
-          // username trop long / trop court
-          else if(strlen($username) < 3 && strlen($username) > 20 ){
-            $error['username_length'] = "Username must be at between 6 and 20 characters"; 
-          }
-
-          // username contient des caractères interdits
-          else if (preg_match("^[0-9A-Za-z_]+$", $username) == 0) {
-            $error['username_invalid'] = "Invalid characters in the username";
-          }
-
-          // mail non fourni
-          else if(!isset($mail)) {
-            $error['email_empty'] = "Provide an email"; 
-          }
-
-          // mail invalide
-          else if(!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $error['email_invalid'] = "Please enter a valid email address !";
-          }
-
-          // pass non fourni
-          else if(!isset($password)) {
-            $error['password_empty'] = "Provide a password !";
-          }
-
-          // pass trop long / trop court
-          else if(strlen($password) < 6 && strlen($password) > 128 ){
-            $error['password_length'] = "Password must be between 6 and 128 characters"; 
-          }
-        }
-
-        else
-        {
-          try
-          {
-            $stmt = $this->_db->prepare('SELECT username, mail FROM user WHERE username =  OR mail = ');
-            $stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
-              
-            $stmt
-            $row=$stmt->fetch(PDO::FETCH_ASSOC);
-
-            if($row['username']==$uname) {
-              $error['username_taken'] = "sorry username already taken !";
-            }
-            else if($row['useremail']==$umail) {
-              $error['email_taken'] = "sorry email id already taken !";
-            }
-            else
-            {
-              if(empty($error)) 
-              {
-                $pass_hache = sha1('gz' . $_POST['password']);
-                // Insertion dans la DB
-                $req = $bdd->prepare('INSERT INTO user(username, password, mail, avatar, birthDate, rank, singupDate, badge_id, token) VALUES(:pseudo, :pass_hache, :email, :avatar, :birthDate, :rank, :badge,  CURDATE())', ':token' );
-
-                $token  = str_random(60); //la fonction est dans function
-                $req->execute(array(
-                  'pseudo' => $username,
-                  'pass' => $password,
-                  'email' => $mail,
-                  'avatar' => 'default_avatar.png',
-                  'birthDate' => $birthDate,
-                  'rank' => '0',
-                  'badge' => '1'));
-
-                $resultat = $req->fetch();
-
-                if (!$resultat)
-                {
-                  echo 'Mauvais identifiant ou mot de passe !';
-                }
-                else
-                {
-                  session_start();
-                  $_SESSION['id'] = $resultat['id'];
-                  $_SESSION['pseudo'] = $username;
-                  echo 'Vous êtes connecté !';
-                }
-              }
-            }
-              }
-              catch(PDOException $e)
-              {
-                echo $e->getMessage();
-              }
-}
-
+    public function logout() {
+        $_SESSION = array();
+        session_destroy();
     }
     
     public function avatar(User $user, $data) {
@@ -296,10 +198,76 @@ public function getSubjects(User $user) {
         if(!isset($_SESSION['auth'])) {
             $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
             exit();
-    } 
-        
-    public function is_loggedin() {
-        
+        }
+    }
+    
+    public function login($data) {
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
+          $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
+          $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+          if($stmt->rowCount() > 0) {
+             if(sha1('gz'.$data['password']) == $userRow['password']) {
+                $_SESSION['user_session'] = $userRow['token'];
+                $_SESSION['login'] = array(
+                    'username' => utf8_encode($data['username'])
+                );
+                return true;
+             }
+             else {
+                return false;
+             }
+          }
+       }
+    
+    public function createToken($data) {
+    $tokenGeneric = "saltyh0rse";
+
+    /* Encoding token */
+    $token = hash('sha256', $tokenGeneric.$data);
+
+    return $token;
+}
+
+public function reconnect_from_cookie($cookie, $session){
+    if(session_status() == PHP_SESSION_NONE){
+        session_start();
+    }
+    if(isset($cookie['user_session']) && !isset($session['login']) ){
+        $remember_token = $cookie['user_session'];
+        $stmt = $this->_db->query('SELECT id FROM user WHERE username = "'.$cookie['login']['username'].'" LIMIT 1');
+        $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $this->get($userRow['id']);
+        if($user) {
+            $expected = $user->get_token();
+            if($expected == $remember_token){
+                session_start();
+                $_SESSION['login'] = array(
+                    'username' => utf8_encode($user->get_username())
+                );
+                setcookie('user_session', $remember_token, time() + 60 * 60 * 24 * 365);
+                return true;
+            } else{
+                setcookie('user_session', null, -1);
+                return false;
+            }
+        }else{
+            setcookie('user_session', null, -1);
+            return false;
+        }
+    }
+}
+
+    
+    public function is_logged_in(User $user, $session) {
+        if(isset($session['login']) && $session['login'] == true) {
+           if($session['user_session'] == $user->get_token()) {
+                return true;
+           }
+        } else {
+           false;
+        }
     }
     
     
