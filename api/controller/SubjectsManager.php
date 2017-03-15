@@ -199,33 +199,34 @@
 
   public function search_title($search)
   {
-      // Retourne la liste de tous les subjects dont le titre contient une chaîne passée en paramètres
+      // liste des sujets
       $subjects = [];
-      //$search = $_POST(['search']);
-      /*$search = "julien";*/
-      //$q = $this->_db->query('SELECT * FROM subject WHERE title LIKE "%'.$title.'%"');
-      // test requête avec prepare
+      $fetchedSubjects = [];
+
+      $searchClean = preg_replace('!\s+!', ' ', $search);
       
-      /*$q = $this->_db->prepare('SELECT * FROM subject WHERE title LIKE %?%');
-      $q->execute(array($search));*/
-      /*$q = $this->_db->prepare("SELECT id, title FROM subject WHERE title LIKE :title");*/
+      // tableau des mots recherchés
+      $searchTab = explode(" ", $searchClean);
+      print_r($searchTab);
 
-      /*    $q->bindValue('title', $search, PDO::PARAM_STR);
-      $q->execute();
+      // taille du tableau (nombre de mots)
+      $searchSize = count($searchTab);
+      print_r($searchSize);
 
+      // pour chaque mot, effectuer une recherche
+      for ($i = 0; $i < $searchSize; $i++) {
+          $q = $this->_db->query('SELECT id FROM subject
+            WHERE title LIKE "%'.$searchTab[$i].'%"');
 
-      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-      {
-          $subjects[] = new Subject($donnees);
-      }*/
-      
-      $q = $this->_db->prepare('SELECT publication_id, title FROM subject
-          WHERE title LIKE "%'.$search.'%"');
-
-      while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-          $subjects[] = new Subject($donnees);
-          echo "je rentre dans le while";
+          while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+              $currentSubject = $this->get($donnees['id']);
+              if (!in_array($currentSubject, $fetchedSubjects)) {
+                $subjects[] = $currentSubject;
+                $fetchedSubjects[] = $currentSubject;
+              }
+          }
       }
+      
       echo $search;
       return $subjects;
   }
