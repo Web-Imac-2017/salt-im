@@ -62,27 +62,28 @@ export default  class PostCreatorView extends Component {
             }).then((data) => {
                 let datap = "success";
                 if(datap == "success")
-                    this.launchFetchImage();
-            })
-    }
-
-    launchFetchImage(response) {
-
-        fetch("http://localhost/salt-im/api/media/" + response.id + "/img",
-              {
-                  method: "post",
-                  body: new FormData(self.refs.formB),
-              })
-            .then((res) => {
-                return res.text();
-            })
-            .then((data) => {
-                let datap = "success";
-                if(datap == "success")
                     this.launchSuccessCreation();
+                    /* this.launchFetchImage();*/
             })
-
     }
+
+    /* launchFetchImage(response) {
+
+     *     fetch("http://localhost/salt-im/api/media/" + response.id + "/img",
+     *           {
+     *               method: "post",
+     *               body: new FormData(self.refs.formB),
+     *           })
+     *         .then((res) => {
+     *             return res.text();
+     *         })
+     *         .then((data) => {
+     *             let datap = "success";
+     *             if(datap == "success")
+     *                 this.launchSuccessCreation();
+     *         })
+
+     * }*/
 
     launchSuccessCreation() {
         this.setState({
