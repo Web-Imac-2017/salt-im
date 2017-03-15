@@ -72,7 +72,7 @@ class postController  {
         $manager = new SubjectsManager($db);
         $subject = new Subject($_POST);
         try {
-            $subject = $manager->add($subject, $_POST['tags']);
+            $subject = $manager->add($subject);
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         }
