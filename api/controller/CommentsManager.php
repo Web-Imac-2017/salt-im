@@ -128,7 +128,7 @@ class CommentsManager {
     
     
     
-  public function getAllCommentsFromPost($id) {
+  public function getAllCommentsFromPost($id, $order) {
     $comments = [];
     $pack = [];
       
@@ -145,7 +145,7 @@ class CommentsManager {
       // $orignal = comment NIVEAU 1
       $original = $this->get($donnees['id']);
       $pack[] = $original;
-      $answers = $this->getAllCommentsFromComment($donnees['id']);
+      $answers = $this->getAllCommentsFromComment($donnees['id'], $order);
       $pack[] = $answers;
       $comments[] = $pack;
       $pack = null;
@@ -154,23 +154,36 @@ class CommentsManager {
     return $comments;
   }
     
-  public function getAllCommentsFromComment($id) {
+  public function getAllCommentsFromComment($id, $order) {
       $comments = [];
       $pack = [];
       
       // Fait une requête pour récupérer l'id de la publication liée au comment original
       $q = $this->_db->query('SELECT publication_id FROM comment WHERE id = "'.$id.'" LIMIT 1');
       $result = $q->fetch(PDO::FETCH_ASSOC); 
-      $o_id = $result['publication_id'];
+      $o_id = $result['publication_id'];  
+      
+      // Tri
+      if ($order == "date") {
+          $orderby = ' ORDER BY publication.date';     
+      } else if ($order == "sel") {
+           
+            
+      } else if ($order == "poivre") {
+           
+          
+      } else if ($order == "humour") {
+            
+      }
       
       // Sélectionne les id des comments qui correspondent
-      $q2 = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$o_id.'"');
+      $q2 = $this->_db->query('SELECT comment.id FROM publication INNER JOIN comment ON comment.publication_id = publication.id WHERE comment.related_publication_id = "'.$o_id.'"'.$orderby);
       
       // Pour chaque id de comment récupérée
       while ($result = $q2->fetch(PDO::FETCH_ASSOC)) {
           // On récupère le comment
           $original = $this->get($result['id']);
-          $answers = $this->getAllCommentsFromComment($result['id']);
+          $answers = $this->getAllCommentsFromComment($result['id'], $order);
           $pack[] = $original;
           $pack[] = $answers;
           $comments[] = $pack;
@@ -193,7 +206,6 @@ class CommentsManager {
       // Fait une requête pour voir s'il y a des comments qui répondent à cet id
       $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$result['publication_id'].'"');
       $id_3 = $q->fetch(PDO::FETCH_ASSOC);
-      var_dump($id_3);
         
       if($id_3 != false){
           return $id_3['id'];
