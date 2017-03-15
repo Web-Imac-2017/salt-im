@@ -12,8 +12,33 @@ var utils = {
     },
 
     video_parser(url) {
-        let endURL = this.youtube_parser(url) || this.daily_parser(url);
-        console.log(endURL);
+        let endURL = this.youtube_parser(url);
+        if(!endURL){
+            endURL = this.daily_parser(url);
+            if(!endURL)
+                return {"type":"link","id":null}
+            else
+                return
+                    return {"dl":"yt","id":endURL};
+        }
+        else
+            return {"type":"yt","id":endURL};
+    },
+
+    checkImg(val) {
+        let regExp = /\.(gif|jpg|jpeg|png)$/i;
+        let match = val.match(regExp);
+        return (match)? match[1] : false;
+
+    },
+
+    getTypeData(val) {
+        let type = this.video_parser(val).type;
+        if(type == "link") {
+            type = this.checkImg(val);
+        }
+
+        return type;
     }
 
 }

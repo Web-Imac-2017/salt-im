@@ -8,7 +8,6 @@ import TagCreator from './TagCreator'
 import Tag from './Tag'
 import Profile from './Profile'
 import Authentification from './Authentification'
-import Signup from './Signup'
 import Page404 from './Page404'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -48,11 +47,6 @@ const authentificationRoute = {
   indexRoute: Authentification
 }
 
-const signupRoute = {
-  path: 'signup',
-  indexRoute: Signup
-}
-
 const page404Route = {
   path: '404',
   indexRoute: Page404
@@ -70,7 +64,6 @@ export const createRoutes = (store) => ({
     tagRoute,
     profileRoute,
     authentificationRoute,
-    signupRoute,
     page404Route
   ]
 })

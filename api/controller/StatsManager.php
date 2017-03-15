@@ -11,7 +11,7 @@ class StatsManager {
   {
     // Préparation de la requête d'insertion.
     $q = $this->_db->prepare('INSERT INTO stat(name, value) VALUES("'.$stat->get_name().'", "'.$stat->get_value().'")');
-    
+
     // Exécution de la requête.
     $q->execute();
   }
@@ -63,7 +63,7 @@ class StatsManager {
 
     return $stats;
   }
-  
+
   public function getStatUser($id)
   {
     // Retourne les 3 stats d'un post
@@ -82,7 +82,7 @@ class StatsManager {
   {
     // Prépare une requête de type UPDATE.
     $q = $this->_db->prepare('UPDATE stat SET name = "'.$stat->get_name().'", value = "'.$stat->get_value().'" WHERE id = "'.$stat->get_id().'"');
-      
+
     // Exécution de la requête.
     $q->execute();
   }

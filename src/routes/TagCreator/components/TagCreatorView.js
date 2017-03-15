@@ -39,6 +39,8 @@ export default class TagCreatorView extends Component{
         event.preventDefault();
         let self = this;
 
+        console.log(this.refs.file);
+
         fetch("http://localhost:8888/salt-im/api/tag/add/",
         {
             method: "post",
@@ -84,7 +86,7 @@ export default class TagCreatorView extends Component{
 
                     <div className="form__input form__input--side flex">
                     <div className="form__title">Image du tag</div>
-                    <input type="file"/>
+                    <input type="file" name="userfile" ref="file"/>
                     </div>
                   <input type="hidden" value={locale_date_string} name="date" />
                   <input type="submit" value="Ajouter un tag"/>

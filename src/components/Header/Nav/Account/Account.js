@@ -6,45 +6,28 @@ import AuthentificationView from "../../../../routes/Authentification/components
 
 export default class Account extends Component{
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-        isLogged:false,
-        isActive:false,
-      };
-    }
-
-    toggleModal() {
-        if(this.state.isActive)
-            this.setState({isActive:false})
-        else
-            this.setState({isActive:true})
+        this.state = {
+            isLogged:false,
+        };
     }
 
     render() {
         if(!this.state.isLogged) {
-            let classes = "modal ";
-            if(this.state.isActive) classes+="modal--active"
             return (
                 <div className="accountWrapper">
-                    <div style={{cursor:"pointer"}} onClick={this.toggleModal.bind(this)}>
-                       Connexion
-                    </div>
-                    <div className={classes}>
-                        <div className="modal__filter" onClick={this.toggleModal.bind(this)}/>
-                        <div className="modal__wrapper">
-                            <AuthentificationView/>
-                        </div>
-                    </div>
+                    <Link style={{cursor:"pointer"}} to="/auth">
+                        Authentification
+                    </Link>
                 </div>
             )
         }
         return (
             <div className="user">
-              <Pseudo/>
-              <Pic/>
+                <Pseudo/>
+                <Pic/>
             </div>
         )
     }
 }
-

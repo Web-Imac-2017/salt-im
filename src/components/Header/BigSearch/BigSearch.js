@@ -38,7 +38,7 @@ class BigSearch extends Component {
       <div>
         <div className={classes}>
           <form>
-              <input type="text" onChange={this.handleChangeSearch.bind(this)} placeholder="Search"/>
+              <input type="text" name="search" onChange={this.handleChangeSearch.bind(this)} placeholder="Search"/>
           </form>
         </div>
 
@@ -81,7 +81,7 @@ class BigSearch extends Component {
             <div className="results__wrapper">
               <div className="results__titleline">
                 <h1 className='results__titleline__title'> Vicos </h1>
-                
+
               </div>
                 <ul>
                   <li>manger des pates</li>
@@ -92,7 +92,7 @@ class BigSearch extends Component {
 
                 <span className="results__seeall"> Voir tout </span>
             </div>
-          </div>          
+          </div>
 
         </div>
       </div>
