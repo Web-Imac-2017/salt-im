@@ -159,6 +159,7 @@ class userController {
     public function jsonSerialize(User $user) {
         // Represent your object using a nested array or stdClass,
         $data = array(
+            'id' => utf8_encode($user->get_id()),
             'mail' => utf8_encode($user->get_mail()),
             'username' => utf8_encode($user->get_username()),
             'avatar' => utf8_encode($user->get_avatar()),
