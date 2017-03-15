@@ -60,6 +60,9 @@ export default class TagCreatorView extends Component{
         // produces "2014-12-15T19:42:27.100Z"
         let locale_date_string = d.toLocaleDateString();
 
+        if(!this.props.dataUser)
+          return(<Redirection/>)
+
         return (
             <div className="creator tagcreator center">
                 <Link to="/tags" className="goback">Retour aux tags</Link>

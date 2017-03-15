@@ -21,6 +21,7 @@ export default class PreviewActions extends Component {
     }
 
     render() {
+
         return(
             <div className="preview__actions">
                 <div className="preview__action">
@@ -38,15 +39,16 @@ export default class PreviewActions extends Component {
                 <div className="preview__action preview__action--salty">
                     <div className="preview__action__icon icon icon--salty"/>
                     <div className="preview__action__value">66%</div>
-
-                    <div className="preview__action__reactions">
-                        <div className="preview__action__reactionwrapper">
-                            <div className="preview__action__reaction icon--salt" ></div>
-                            <div className="preview__action__reaction icon--pepper"></div>
-                            <div className="preview__action__reaction icon--lol"   ></div>
+                    {this.props.dataUser ? (
+                        <div className="preview__action__reactions">
+                            <div className="preview__action__reactionwrapper">
+                                <div className="preview__action__reaction icon--salt" ></div>
+                                <div className="preview__action__reaction icon--pepper"></div>
+                                <div className="preview__action__reaction icon--lol"   ></div>
+                            </div>
+                            <div className="preview__action__arrow"/>
                         </div>
-                        <div className="preview__action__arrow"/>
-                    </div>
+                    ):(<div/>)}
                 </div>
                 <PreviewShare data={this.props.data} isActive={this.state.isShareActive} closeShare={this.toggleShare.bind(this)}/>
             </div>

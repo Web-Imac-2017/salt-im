@@ -58,7 +58,7 @@ export default class PostPreview extends Component {
                     <div className="preview__content">
                         <div className="preview__title">{this.props.data.title}</div>
                         <div className="preview__description">{this.props.data.text}</div>
-                        <PreviewActions data={this.props.data}/>
+                        <PreviewActions data={this.props.data} dataUser={this.props.dataUser}/>
                         <div className="preview__infos">
                             <div className="preview__author">{this.state.dataUser}</div>
                             <div className="preview__date">le {this.props.data.date}</div>

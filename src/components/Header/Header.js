@@ -23,6 +23,15 @@ export default class Header extends Component {
   }
 
   render() {
+    let addPostContent = (
+      <div>
+        <Link to="/post/create"><div className="addPostBtn">Ajouter un post</div></Link>
+        <Link to="/post/create"><div className="addPostBtn--mobile"><div className="addPostBtn__text">+</div></div></Link>
+      </div>
+    )
+
+    if(!this.props.dataUser)
+      addPostContent=(<div/>)
     return (
       <div className="header">
         <div className="header__left">
@@ -41,13 +50,10 @@ export default class Header extends Component {
         </div>
 
         <div className="header__right">
-
-          <Link to="/post/create"><div className="addPostBtn">Ajouter un post</div></Link>
-          <Link to="/post/create"><div className="addPostBtn--mobile"><div className="addPostBtn__text">+</div></div></Link>
-
+          {addPostContent}
           <Research changeSearch={this.handleChangeBigSearch.bind(this)}/>
 
-          <Account/>
+          <Account dataUser={this.props.dataUser}/>
         </div>
 
         <BigSearch isOpen={this.state.isOpen} />
