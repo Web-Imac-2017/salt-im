@@ -21,11 +21,11 @@
      $this->_db->exec('INSERT INTO subject(title, flair, type, publication_id) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'", "'.$publication_id.'")');
      $subject_id = $this->_db->lastInsertId();
 
-     $this->_db->exec('INSERT INTO stat(name, value, related_user_id) VALUES("0", "0", "'.$publication_id.'")');
+     $this->_db->exec('INSERT INTO stat(name, value, related_publication_id) VALUES("0", "0", "'.$publication_id.'")');
 
-     $this->_db->exec('INSERT INTO stat(name, value, related_user_id) VALUES("1", "0", "'.$publication_id.'")');
+     $this->_db->exec('INSERT INTO stat(name, value, related_publication_id) VALUES("1", "0", "'.$publication_id.'")');
 
-     $this->_db->exec('INSERT INTO stat(name, value, related_user_id) VALUES("2", "0", "'.$publication_id.'")');
+     $this->_db->exec('INSERT INTO stat(name, value, related_publication_id) VALUES("2", "0", "'.$publication_id.'")');
        
        $subject2 = $this->get($subject_id);
        return $subject2;
