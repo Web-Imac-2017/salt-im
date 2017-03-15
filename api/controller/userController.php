@@ -95,7 +95,6 @@ class userController {
     public function who() {
         include "connect.php";
         $manager = new UsersManager($db);
-        echo "hey";
         if(isset($_SESSION)) {
             $user = $manager->who_is_logged_in($_SESSION);
             if ($user == false || $user == null) {
