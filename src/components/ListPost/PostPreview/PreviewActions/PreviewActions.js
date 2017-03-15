@@ -10,6 +10,7 @@ export default class PreviewActions extends Component {
 
       this.state = {
         isShareActive:false,
+        iconIsClicked:false,
       };
     }
 
@@ -20,14 +21,17 @@ export default class PreviewActions extends Component {
             this.setState({isShareActive:true});
     }
 
-    statMax(){
+    statMax=()=>{
         var param = this.props.stats;
         if(!param)
             return;
 
+
         var maxIndex = 0;
         for(var i = 1; i < param.length; i++){
-            if(param[i].value > param[maxIndex].value){
+            var val = parseInt(param[i].value);
+            var max = parseInt(param[maxIndex].value);
+            if( val > max){
                 maxIndex = i;
             }
         }
@@ -46,14 +50,21 @@ export default class PreviewActions extends Component {
 
     }
 
-    statMaxId(){
+    clicked = () => {
+        this.setState({IconIsClicked:true});
+    }
+
+    statMaxId=()=>{
         var param = this.props.stats;
+
         if(!param)
             return;
 
         var maxIndex = 0;
         for(var i = 1; i < param.length; i++){
-            if(param[i].value > param[maxIndex].value){
+            var val = parseInt(param[i].value);
+            var max = parseInt(param[maxIndex].value);
+            if(val > max){
                 maxIndex = i;
             }
         }
@@ -62,18 +73,41 @@ export default class PreviewActions extends Component {
 
     }
 
-    statValue = () => {
-        if(this.props.stats.length){
-            var i = this.statMaxId();
-            return this.props.stats[i].value;
+    statValue=()=>{
+        
+        if(this.props.stats){
+                var i = this.statMaxId();
+                if(this.props.stats[i]){
+                    return this.props.stats[i].value;            
+                }
+                else{
+                    return "no_data";
+                }
         }
         else{
-            return "no_data";
+            return "no data";      
         }
 
     }
 
+    statValueId=(i)=>{
+      
+        if(this.props.stats[i]){
+            return this.props.stats[i].value;
+        }
+        else{
+            return "";
+        }
+
+
+
+    }
+
     render() {
+
+        let iconClass = "preview__action__reaction icones";
+        this.state.IconIsClicked ? iconClass+=" circle-animation" : "";
+
         return(
             <div className="preview__actions">
                 <div className="preview__action">
@@ -94,9 +128,12 @@ export default class PreviewActions extends Component {
                     {this.props.dataUser ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
-                                <div className="preview__action__reaction icon--salt" ></div>
-                                <div className="preview__action__reaction icon--pepper"></div>
-                                <div className="preview__action__reaction icon--lol"   ></div>
+                                <div onClick={this.clicked} className={iconClass}></div>
+                                {this.statValueId(0)}
+                                <div onClick={this.clicked} className={iconClass}></div>
+                                {this.statValueId(1)}
+                                <div onClick={this.clicked} className={iconClass}></div>
+                                 {this.statValueId(2)}
                             </div>
                             <div className="preview__action__arrow"/>
                         </div>
