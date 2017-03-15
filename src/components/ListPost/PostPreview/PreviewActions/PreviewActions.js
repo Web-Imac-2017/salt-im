@@ -22,6 +22,8 @@ export default class PreviewActions extends Component {
 
     statMax(){
         var param = this.props.stats;
+        if(!param)
+            return;
 
         var maxIndex = 0;
         for(var i = 1; i < param.length; i++){
@@ -46,6 +48,8 @@ export default class PreviewActions extends Component {
 
     statMaxId(){
         var param = this.props.stats;
+        if(!param)
+            return;
 
         var maxIndex = 0;
         for(var i = 1; i < param.length; i++){
@@ -58,8 +62,7 @@ export default class PreviewActions extends Component {
 
     }
 
-    statValue(){
-
+    statValue = () => {
         if(this.props.stats.length){
             var i = this.statMaxId();
             return this.props.stats[i].value;
@@ -87,7 +90,7 @@ export default class PreviewActions extends Component {
                 </div>
                 <div className="preview__action preview__action--salty">
                     <div className={'preview__action__icon icon icon--'+this.statMax()}/>
-                    <div className="preview__action__value">{this.statValue()}</div>
+                    <div className="preview__action__value">{this.statValue}</div>
                     {this.props.dataUser ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">

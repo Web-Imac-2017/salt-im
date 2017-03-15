@@ -5,6 +5,8 @@ import './TagCreatorView.scss'
 import InputText from '../../../components/InputText/InputText.js'
 import InputTextarea from '../../../components/InputTextarea/InputTextarea.js'
 
+import utils from '../../../../public/utils.js'
+
 export default class TagCreatorView extends Component{
     constructor(props){
         super(props);
@@ -41,7 +43,7 @@ export default class TagCreatorView extends Component{
 
         console.log(this.refs.file);
 
-        fetch("http://localhost:8888/salt-im/api/tag/add/",
+        fetch(utils.getFetchUrl()+"/tag/add/",
         {
             method: "post",
             body: new FormData(self.refs.form),

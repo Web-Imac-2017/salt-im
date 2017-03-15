@@ -6,6 +6,8 @@ import PostData from './PostData/PostData.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
 import Filter from '../../../components/Filter/Filter.js'
 
+import utils from '../../../../public/utils.js'
+
 export default class PostView extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ export default class PostView extends Component {
 
     const myInit = {method: 'POST'};
 
-    fetch('http://localhost:8888/salt-im/api/p/'+this.props.params.postId, myInit)
+    fetch(utils.getFetchUrl()+'/p/'+this.props.params.postId, myInit)
       .then((response) => response.json())
       .then((object) => { this.setState({postdata: object})})
   }
@@ -32,7 +34,7 @@ export default class PostView extends Component {
   render() {
     return (
       <div className="post">
-        <PostData data={this.state.postdata} nbComment={this.state.nbComment}/>
+        <PostData data={this.state.postdata} nbComment={this.state.nbComment} dataUser={this.props.dataUser}/>
         <div className="post__commentBlock center">
             <p className="tagview__titleAll">Commentaires</p>
             <Filter/>

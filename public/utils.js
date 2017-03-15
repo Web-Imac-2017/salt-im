@@ -39,6 +39,10 @@ var utils = {
         }
 
         return type;
+    },
+
+    getFetchUrl() {
+        return "http://localhost:8888/salt-im/api/"
     }
 
 }
