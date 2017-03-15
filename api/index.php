@@ -12,6 +12,7 @@ $router->setDefaultControllerAction('accueil','index');
 // En cas d'url invalid on appèlera le controller errorController et sa méthode alert()
 $router->setErrorControllerAction('error', 'alert');
 
+// SUR MA ROUTE OUIHIHI Y A EU DU MOUV OUIHIHI
 $router->addRule('media/:id', array('controller' => 'media', 'action' => 'index'));
 $router->addRule('media/:id/img', array('controller' => 'media', 'action' => 'img'));
 $router->addRule('p/post/add/:id', array('controller' => 'post', 'action' => 'add'));
@@ -47,6 +48,10 @@ $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getSta
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
 $router->addRule('u/session', array('controller' => 'user', 'action' => 'who_is_logged_in'));
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
+
+// route de recherche qui marche pas
+$router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
+
 
 $router->load();
 

@@ -13,6 +13,7 @@ require_once "TagsManager.php";
 class postController  {
     
     private $id;
+    private $search;
     
     public static function getInstance(array $donnees)
     {
@@ -112,13 +113,29 @@ class postController  {
     public function get_id() {
         return $this->id; 
     }
+
+    public function set_search($search) {
+        $this->search = $search; 
+    }
     
-    public function help($type) {
+    public function get_search() {
+        return $this->search; 
+    }
+    
+    public function help() {
         include "connect.php";
         $manager = new SubjectsManager($db);
-        $subject = $manager->get_help($id);
-        $json = json_encode($this->jsonSerialize($subject), JSON_UNESCAPED_UNICODE);
+        $subject = $manager->get_help();
+        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
+    }
+
+    public function search_title() {
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        $search = $this->search;
+        $subject = $manager->search_title($search);
+        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
     }
 
     public function jsonSerialize(Subject $subject) {
