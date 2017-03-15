@@ -44,7 +44,7 @@ $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'))
 $router->addRule('tag/add', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
-$router->addRule('u/session', array('controller' => 'user', 'action' => 'who_is_logged_in'));
+$router->addRule('u/session', array('controller' => 'user', 'action' => 'who'));
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 // route de recherche qui marche pas
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
