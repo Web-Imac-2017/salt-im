@@ -14,7 +14,7 @@ $sizeIcon : 50px;
 
     &__reactions {
         pointer-events:none;
-        opacity: 0;
+        opacity: 1;
         position:absolute;
         display:flex;
         top:0;
@@ -102,30 +102,6 @@ $sizeIcon : 50px;
     }
 }
 
-.icon--salt {
-    background : url(./assets/salt.svg);
-
-    &:hover{
-        background : url(./assets/salt-selected.svg);
-    }
-}
-
-.icon--pepper {
-    background : url(./assets/pepper.svg);
-
-    &:hover{
-        background : url(./assets/pepper-selected.svg);
-    }
-}
-
-.icon--lol {
-    background : url(./assets/fireworks.svg); 
-
-    &:hover{
-        background : url(./assets/fireworks-selected.svg);
-    } 
-}
-
 .icones {
     width: $sizeIcon;
     height:$sizeIcon;
@@ -133,9 +109,62 @@ $sizeIcon : 50px;
     background-repeat: no-repeat;
     z-index:250;
 
-    &:hover{
-        background-repeat:no-repeat;
-        background-position:50%;
+
+
+    &:after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 150px;
+        background: hsla(0,0%,100%,0);
+        position: absolute;
+        display: block;
+        border: #000;
+        border-width: 1px;
+        border-style: solid;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%); 
+        transform-origin: 50% 50%;
+    }
+
+    &:nth-child(1) {
+        background : no-repeat url(./assets/salt.svg) 50%;
+
+        &:hover{
+            background : no-repeat url(./assets/salt-selected.svg) 50%;
+        }
+    }
+
+    &:nth-child(2) {
+        background : no-repeat url(./assets/pepper.svg) 50%;
+
+        &:hover{
+            background : no-repeat url(./assets/pepper-selected.svg) 50%;
+        }
+    }
+
+    &:nth-child(3) {
+        background : no-repeat url(./assets/fireworks.svg) 50%;
+
+        &:hover{
+            background : no-repeat url(./assets/fireworks-selected.svg) 50%;
+        }
+    }    
+}
+
+.circle-animation {
+    &:after{
+        animation: pop ease forwards 0.5s;    
     }
 }
-    
+
+@keyframes pop {
+    from {
+        transform :scale(0)
+    }
+
+    to {
+        transform :scale(5)       
+    }
+}

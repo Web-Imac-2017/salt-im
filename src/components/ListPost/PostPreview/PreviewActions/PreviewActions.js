@@ -10,6 +10,7 @@ export default class PreviewActions extends Component {
 
       this.state = {
         isShareActive:false,
+        iconIsClicked:false,
       };
     }
 
@@ -46,6 +47,10 @@ export default class PreviewActions extends Component {
 
     }
 
+    clicked = () => {
+        this.setState({IconIsClicked:true});
+    }
+
     statMaxId(){
         var param = this.props.stats;
         if(!param)
@@ -71,9 +76,15 @@ export default class PreviewActions extends Component {
             return "no_data";
         }
 
+
+
     }
 
     render() {
+
+        let iconClass = "preview__action__reaction icones";
+        this.state.IconIsClicked ? iconClass+=" circle-animation" : "";
+
         return(
             <div className="preview__actions">
                 <div className="preview__action">
@@ -94,9 +105,9 @@ export default class PreviewActions extends Component {
                     {this.props.dataUser ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
-                                <div className="preview__action__reaction icones icon--salt" ></div>
-                                <div className="preview__action__reaction icones icon--pepper"></div>
-                                <div className="preview__action__reaction icones icon--lol"   ></div>
+                                <div onClick={this.clicked} className={iconClass}></div>
+                                <div onClick={this.clicked} className={iconClass}></div>
+                                <div onClick={this.clicked} className={iconClass}></div>
                             </div>
                             <div className="preview__action__arrow"/>
                         </div>
