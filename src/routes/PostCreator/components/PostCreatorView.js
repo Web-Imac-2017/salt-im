@@ -9,26 +9,26 @@ import utils from "../../../../public/utils.js";
 
 export default  class PostCreatorView extends Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-        title:"",
-        description:"",
-        tags:"",
-        isSuccess:false,
-        isSubmitDisabled:false,
-        link:"",
-        type:"",
-      };
+        this.state = {
+            title:"",
+            description:"",
+            tags:"",
+            isSuccess:false,
+            isSubmitDisabled:false,
+            link:"",
+            type:"",
+        };
     }
 
     handleChangeLink(event) {
-      this.setState({link:event.target.value});
-      let type = utils.getTypeData(event.target.value);
-      if(!type)
-        this.setState({type:"link"})
-      else
-        this.setState({type:type})
+        this.setState({link:event.target.value});
+        let type = utils.getTypeData(event.target.value);
+        if(!type)
+            this.setState({type:"link"})
+        else
+            this.setState({type:type})
     }
 
     handleChangeTitle(event) {
@@ -48,29 +48,46 @@ export default  class PostCreatorView extends Component {
         let self = this;
 
         this.setState({
-          isSubmitDisabled:true,
+            isSubmitDisabled:true,
         })
 
-        fetch("http://localhost:8888/salt-im/api/p/post/add/1",
-        {
-            method: "post",
-            body: new FormData(self.refs.form),
-        })
-        .then((res) => {
-            return res.text();
-        }).then((data) => {
-          let datap = "success";
-          if(datap == "success")
-            this.launchSuccessCreation();
-        })
+
+        fetch("http://localhost/salt-im/api/p/post/add/8",
+              {
+                  method: "post",
+                  body: new FormData(self.refs.formA),
+              })
+            .then((res) => {
+                return res.text();
+            }).then((data) => {
+                let datap = "success";
+                if(datap == "success")
+                    this.launchFetchImage();
+            })
     }
 
+    launchFetchImage(response) {
 
+        fetch("http://localhost/salt-im/api/media/" + response.id + "/img",
+              {
+                  method: "post",
+                  body: new FormData(self.refs.formB),
+              })
+            .then((res) => {
+                return res.text();
+            })
+            .then((data) => {
+                let datap = "success";
+                if(datap == "success")
+                    this.launchSuccessCreation();
+            })
+
+    }
 
     launchSuccessCreation() {
-      this.setState({
-        isSuccess:true,
-      })
+        this.setState({
+            isSuccess:true,
+        })
     }
 
     render() {
@@ -83,61 +100,65 @@ export default  class PostCreatorView extends Component {
 
         let classSuccess = "success";
         if(this.state.isSuccess)
-          classSuccess += " success--active";
+            classSuccess += " success--active";
 
         return (
             <div className="postcreator center">
-              <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
-                  <div className="form__header">Nouveau post</div>
-                  <div className="form__input">
-                    <label for="title">Titre
-                        <input
-                            type="text" name="title" id="title" placeholder="Un truc bien salé"
-                            onChange={this.handleChangeTitle.bind(this)}
-                            required="required"
-                        />
-                    </label>
-                  </div>
-                  <div className="form__input">
-                    <label for="text">Description du post
-                        <input
-                            type="text" name="text" id="text" placeholder="Décris tes propos"
-                            onChange={this.handleChangeDescription.bind(this)}
-                            required="required"
-                        />
-                    </label>
-                  </div>
-                  <div className="form__input">
-                    <label for="tags">Tags
-                        <input
-                            type="text" name="tags" id="tags" placeholder="Des tags séparés par des virgules"
-                            onChange={this.handleChangeTags.bind(this)}
-                            required="required"
-                        />
-                    </label>
-                  </div>
+                <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="formA">
+                    <div className="form__header">Nouveau post</div>
+                    <div className="form__input">
+                        <label for="title">Titre
+                            <input
+                                type="text" name="title" id="title" placeholder="Un truc bien salé"
+                                onChange={this.handleChangeTitle.bind(this)}
+                                required="required"
+                            />
+                        </label>
+                    </div>
+                    <div className="form__input">
+                        <label for="text">Description du post
+                            <input
+                                type="text" name="text" id="text" placeholder="Décris tes propos"
+                                onChange={this.handleChangeDescription.bind(this)}
+                                required="required"
+                            />
+                        </label>
+                    </div>
+                    <div className="form__input">
+                        <label for="tags">Tags
+                            <input
+                                type="text" name="tags" id="tags" placeholder="Des tags séparés par des virgules"
+                                onChange={this.handleChangeTags.bind(this)}
+                                required="required"
+                            />
+                        </label>
+                    </div>
 
-                  <div className="form__input">
-                    <label for="tags">Link
-                        <input
-                            type="text" name="link" id="link" placeholder="url"
-                            onChange={this.handleChangeLink.bind(this)}
-                        />
-                    </label>
-                  </div>
+                    <div className="form__input">
+                        <label for="tags">Link
+                            <input
+                                type="text" name="link" id="link" placeholder="url"
+                                onChange={this.handleChangeLink.bind(this)}
+                            />
+                        </label>
+                    </div>
+                    <form enctype="multipart/form-data" ref="formB">
 
-                  <div className="form__input form__input--side flex">
-                      <div className="form__title">image du post</div>
-                      <input type="file" name=""/>
-                  </div>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
 
-                  <input type="hidden" value={locale_date_string} name="date" />
-                  <input type="hidden" value={3} name="user_id"/>
-                  <input type="hidden" value="post" name="type"/>
-                  <input type="hidden" value={this.state.type} name="type"/>
-                  <input type="submit" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
-                  <div className={classSuccess}>Le post a bien été créé</div>
-              </form>
+                        <div className="form__input form__input--side flex">
+                            <div className="form__title">image du post</div>
+                            <input type="file" name="userfile"/>
+                        </div>
+                    </form>
+
+                    <input type="hidden" value={locale_date_string} name="date" />
+                    <input type="hidden" value={3} name="user_id"/>
+                    <input type="hidden" value="post" name="type"/>
+                    <input type="hidden" value={this.state.type} name="type"/>
+                    <input type="submit" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
+                    <div className={classSuccess}>Le post a bien été créé</div>
+                </form>
             </div>
         )
     }
