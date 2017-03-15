@@ -95,9 +95,10 @@ class userController {
     public function who() {
         include "connect.php";
         $manager = new UsersManager($db);
+        echo "hey";
         if(isset($_SESSION)) {
             $user = $manager->who_is_logged_in($_SESSION);
-            if ($user == false) {
+            if ($user == false || $user == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
             } else if ($user != null) {
                 $json = json_encode(utf8_encode($user->get_id()), JSON_UNESCAPED_UNICODE);
