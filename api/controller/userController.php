@@ -95,9 +95,10 @@ class userController {
     public function who() {
         include "connect.php";
         $manager = new UsersManager($db);
+        echo "hey";
         if(isset($_SESSION)) {
             $user = $manager->who_is_logged_in($_SESSION);
-            if ($user == false) {
+            if ($user == false || $user == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
             } else if ($user != null) {
                 $json = json_encode(utf8_encode($user->get_id()), JSON_UNESCAPED_UNICODE);
@@ -159,6 +160,7 @@ class userController {
     public function jsonSerialize(User $user) {
         // Represent your object using a nested array or stdClass,
         $data = array(
+            'id' => utf8_encode($user->get_id()),
             'mail' => utf8_encode($user->get_mail()),
             'username' => utf8_encode($user->get_username()),
             'avatar' => utf8_encode($user->get_avatar()),
