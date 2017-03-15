@@ -1,2 +1,11 @@
 @import '../../styles/core.scss';
 
+.listComment {
+    .listAnswer {
+        margin-left: 50px;
+
+        .listAnswer {
+            margin-left: 0;
+        }
+    }
+}

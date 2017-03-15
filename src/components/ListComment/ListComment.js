@@ -32,12 +32,12 @@ export default class ListComment extends Component {
         if(!this.props.data){
             if(this.state.commentData.length) {
                 commentsNode = this.state.commentData.map((elmt,i) => {
-                    return (<Comment key={i} data={elmt}/>)
+                    return (<Comment key={i} data={elmt} isFirst={true}/>)
                 })
             }
         } else {
             commentsNode = this.props.data.map((elmt,i) => {
-                return (<Comment key={i} data={elmt}/>)
+                return (<Comment key={i} data={elmt} isFirst={true}/>)
             })
         }
         return (

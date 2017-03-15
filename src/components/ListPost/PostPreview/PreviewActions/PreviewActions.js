@@ -74,24 +74,24 @@ export default class PreviewActions extends Component {
     }
 
     statValue=()=>{
-        
+
         if(this.props.stats){
                 var i = this.statMaxId();
                 if(this.props.stats[i]){
-                    return this.props.stats[i].value;            
+                    return this.props.stats[i].value;
                 }
                 else{
                     return "no_data";
                 }
         }
         else{
-            return "no data";      
+            return "no data";
         }
 
     }
 
-    statValueId=(i)=>{
-      
+    statValueId(i) {
+        if(!this.props.stat) return;
         if(this.props.stats[i]){
             return this.props.stats[i].value;
         }
