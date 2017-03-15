@@ -32,9 +32,7 @@ export default class Comment extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        let url = "/comment/add/"+2;
-        if(!this.props.isFirst)
-            url = "/comment/add/comment/"+2;
+        let url = "/comment/add/comment/"+this.props.data[0].id;
 
         fetch(utils.getFetchUrl()+url,
             {

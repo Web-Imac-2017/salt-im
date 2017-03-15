@@ -10,19 +10,19 @@ class CommentsManager {
 
   public function add(Comment $comment, $id)
   {
-    $q = $this->_db->query('SELECT id FROM publication JOIN subject ON publication.id = subject.publication_id WHERE subject.id = "'.$id.'"');
+    $q = $this->_db->query('SELECT publication.id FROM publication JOIN subject ON publication.id = subject.publication_id WHERE subject.id = "'.$id.'"');
     $pub_id = $q->fetch(PDO::FETCH_ASSOC);
       
     $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.$comment->get_date().'", "'.$comment->get_user_id().'")');
     $publication_id = $this->_db->lastInsertId();
 
-    $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$pub_id.'", "'.$publication_id.'")');
+    $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$pub_id['id'].'", "'.$publication_id.'")');
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("0", "0", "'.$publication_id.'")');
-      
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$publication_id.'")'); 
-      
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$publication_id.'")');
+      $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("0", "0", NULL, "'.$publication_id.'")');
+
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("1", "0", NULL, "'.$publication_id.'")');
+
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("2", "0", NULL, "'.$publication_id.'")');
   }
     
   public function addToComment(Comment $comment, $id)
@@ -106,28 +106,7 @@ class CommentsManager {
 
     return $comments;
   }
-    
-    public function getAllCommentsFromPostOLD($id) {
-    $comments = [];
-
-    $q = $this->_db->query('SELECT id FROM comment WHERE related_publication_id = "'.$id.'"');
-
-    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-    { 
-      $comments[] = $this->get($donnees['id']);
-      $result = $this->cherche($donnees['id']);
-      
-      while ($result != null) {
-        $comments[] = $this->get($result);
-        $result = $this->cherche($result);
-      }
-    }
-    return $comments;
-  }
         
-    
-    
-    
   public function getAllCommentsFromPost($id, $order) {
     $comments = [];
     $pack = [];

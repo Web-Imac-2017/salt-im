@@ -26,6 +26,20 @@ export default class ListComment extends Component {
         }
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        let url = "/comment/add/"+this.props.id;
+        fetch(utils.getFetchUrl()+url,
+            {
+                method: "post",
+                body: new FormData(this.refs.form),
+            })
+            .then( (data) => data.text())
+            .then( (object) => {
+                console.log(object)
+            })
+    }
+
     render() {
         let commentsNode = (<div>Personne n est salé ici.</div>)
 
@@ -42,6 +56,10 @@ export default class ListComment extends Component {
         }
         return (
             <div className="listComment">
+                <form ref="form" onSubmit={this.handleSubmit.bind(this)} className="gocomment">
+                    <textarea type="text" name="text" rows="4"/>
+                    <input type="submit" value="envoyer"/>
+                </form>
                 <div className="listComment__commentwrapper">
                     {commentsNode}
                 </div>

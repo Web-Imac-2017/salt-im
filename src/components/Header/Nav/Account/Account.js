@@ -23,11 +23,12 @@ export default class Account extends Component{
                 </div>
             )
         }
+        console.log(this.props.dataUser);
         return (
-            <div className="user">
+            <Link to={"/profile/"+this.props.dataUser.id} className="user">
                 <Pseudo/>
                 <Pic/>
-            </div>
+            </Link>
         )
     }
 }
