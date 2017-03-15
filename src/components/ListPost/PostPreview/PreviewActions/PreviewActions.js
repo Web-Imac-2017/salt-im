@@ -50,8 +50,8 @@ export default class PreviewActions extends Component {
 
     }
 
-    clicked = () => {
-        this.setState({IconIsClicked:true});
+    clicked = (e) => {
+        e.target.classList.add("circle-animation")
     }
 
     statMaxId=()=>{
@@ -77,12 +77,12 @@ export default class PreviewActions extends Component {
         
         if(this.props.stats){
                 var i = this.statMaxId();
-                if(this.props.stats[i]){
+                if(this.props.stats[i])
                     return this.props.stats[i].value;            
-                }
-                else{
+                
+                else
                     return "no_data";
-                }
+                
         }
         else{
             return "no data";      
@@ -92,22 +92,16 @@ export default class PreviewActions extends Component {
 
     statValueId=(i)=>{
       
-        if(this.props.stats[i]){
+        if(this.props.stats[i])
             return this.props.stats[i].value;
-        }
-        else{
+        else
             return "";
-        }
-
-
-
     }
 
     render() {
 
         let iconClass = "preview__action__reaction icones";
-        this.state.IconIsClicked ? iconClass+=" circle-animation" : "";
-
+        
         return(
             <div className="preview__actions">
                 <div className="preview__action">
@@ -123,17 +117,23 @@ export default class PreviewActions extends Component {
                     <div className="preview__action__icon icon icon--favorite"/>
                 </div>
                 <div className="preview__action preview__action--salty">
-                    <div className={'preview__action__icon icon icon--'+this.statMax()}/>
+                    <div className={'preview__action__icon icon icon--salty'}/>
                     <div className="preview__action__value">{this.statValue}</div>
                     {this.props.dataUser ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
-                                <div onClick={this.clicked} className={iconClass}></div>
-                                {this.statValueId(0)}
-                                <div onClick={this.clicked} className={iconClass}></div>
-                                {this.statValueId(1)}
-                                <div onClick={this.clicked} className={iconClass}></div>
-                                 {this.statValueId(2)}
+                                <div className="icon__wrapper">
+                                    <div ref="salt" onClick={this.clicked} className={iconClass}></div>
+                                    <div className="statAction">{this.statValueId(0)}</div>
+                                </div>
+                                <div className="icon__wrapper">
+                                    <div ref="pepper" onClick={this.clicked} className={iconClass}></div>
+                                    <div className="statAction">{this.statValueId(1)}</div>
+                                </div>
+                                <div className="icon__wrapper">
+                                    <div ref="lol" onClick={this.clicked} className={iconClass}></div>
+                                    <div className="statAction">{this.statValueId(2)}</div>
+                                </div>
                             </div>
                             <div className="preview__action__arrow"/>
                         </div>

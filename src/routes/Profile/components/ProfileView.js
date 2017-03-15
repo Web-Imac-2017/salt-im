@@ -91,9 +91,7 @@ export default class ProfileView extends Component {
         for(let i = 0; i < this.state.dataBadge.length; i++){
             let rank = parseInt(this.state.dataUser.rank);
             let cond = this.state.dataBadge[i].cond;
-            console.log(rank+'>'+cond);
                 if(rank  >= cond ){
-                    console.log('ok');
                     this.state.badgeUser = this.state.dataBadge[i];
                 }
          }
@@ -145,9 +143,9 @@ export default class ProfileView extends Component {
                     <div className="profile__header__infos">
                         <h1 className="profile__header__infos__pseudo">{this.state.dataUser.username}</h1>
                         <h2 className="profile__header__infos__email">{this.state.dataUser.mail}</h2>
-                        <h2 className="profile__header__infos__rank">{this.state.dataUser.rank}</h2>
-                        <h2 className="profile__header__infos__rank">{this.state.badgeUser.name}</h2>
-                        <img src={this.state.badgeUser.icon}/>
+                        <h2 className="profile__header__infos__rank">Elo :  {this.state.dataUser.rank}</h2>
+                        <h2 className="profile__header__infos__rank">Rank : {this.state.badgeUser.name}</h2>
+
                     </div>
                     {this.props.dataUser ? (
                         <button className="profile__header__updateBtn" onClick={this.toggleModal.bind(this)}>modifier mon profil</button>

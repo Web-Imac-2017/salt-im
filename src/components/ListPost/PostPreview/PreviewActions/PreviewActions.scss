@@ -1,3 +1,5 @@
+@import "../../../../styles/core.scss";
+
 $sizeIcon : 50px;
 
 .preview__action {
@@ -14,7 +16,7 @@ $sizeIcon : 50px;
 
     &__reactions {
         pointer-events:none;
-        opacity: 1;
+        opacity: 0;
         position:absolute;
         display:flex;
         top:0;
@@ -60,7 +62,8 @@ $sizeIcon : 50px;
         -webkit-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
         -moz-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
         box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
-        width: 240px;
+        width: 260px;
+        height:75px;
     }
 
     &__arrow {
@@ -98,7 +101,7 @@ $sizeIcon : 50px;
     &--salty {
         width: 36px;
         height: 20px;
-        background-image: url("./assets/salty.svg");
+        background-image: url("./assets/salt.svg");
     }
 }
 
@@ -120,15 +123,19 @@ $sizeIcon : 50px;
         position: absolute;
         display: block;
         border: #000;
-        border-width: 1px;
+        border-width: 0.5px;
         border-style: solid;
         top: 50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%); 
         transform-origin: 50% 50%;
-    }
+    }    
+}
 
-    &:nth-child(1) {
+.icon__wrapper{
+
+    width: 77px;
+       &:nth-child(1) {
         background : no-repeat url(./assets/salt.svg) 50%;
 
         &:hover{
@@ -150,7 +157,16 @@ $sizeIcon : 50px;
         &:hover{
             background : no-repeat url(./assets/fireworks-selected.svg) 50%;
         }
-    }    
+    }
+}
+
+.statAction {
+    flex: 1;
+    font-size: 12px;
+    font-family: $karla;
+    position: absolute;
+    top: 12px;
+    margin-left: 58px;
 }
 
 .circle-animation {
@@ -161,10 +177,14 @@ $sizeIcon : 50px;
 
 @keyframes pop {
     from {
-        transform :scale(0)
+        transform :scale(0);
+        border-width:1px;
+        opacity: 1;
     }
 
     to {
-        transform :scale(5)       
+        transform :scale(5);
+        border-width:0px;  
+        opacity: 0;    
     }
 }

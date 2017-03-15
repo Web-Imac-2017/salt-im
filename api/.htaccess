@@ -1,4 +1,4 @@
-#Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Origin "*"
 
 # on empêche la visualisation de l'arboresence, n'a rien à voir avec le masquage du index.php
 Options +Indexes
