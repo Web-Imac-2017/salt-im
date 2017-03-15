@@ -29,17 +29,17 @@ export default class PostPreview extends Component {
     }
 
     loadMedia(id) {
-        fetch(utils.getFetchUrl()+'/media/'+id)
-            .then((response) => response.json())
-            .then((object) => {
-              this.setState({dataMedia: object})
-              this.loadUser(this.props.data.user_id);
-              this.loadStat(this.props.data.user_id);
-            })
+        // fetch(utils.getFetchUrl()+'/media/'+id)
+        //     .then((response) => response.json())
+        //     .then((object) => {
+        //       this.setState({dataMedia: object})
+        //       this.loadUser(this.props.data.user_id);
+        //       this.loadStat(this.props.data.user_id);
+        //     })
     }
 
     loadStat(id) {
-        fetch(utils.getFetchUrl()+'/p/'+1+'/stat/') //à remplacer par id du post qd c gud
+        fetch(utils.getFetchUrl()+'/p/'+this.props.params.id+'/stat/') //à remplacer par id du post qd c gud
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataStat: object})
