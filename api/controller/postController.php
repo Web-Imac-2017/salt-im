@@ -136,6 +136,7 @@ class postController  {
         $search = $this->search;
         $subject = $manager->search_title($search);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+        echo $json;
     }
 
     public function jsonSerialize(Subject $subject) {
