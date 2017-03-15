@@ -1,6 +1,29 @@
-Data) => {this.setState({dataListTags : Data})})
+import React, {Component} from 'react'
+import './HomeView.scss'
+import '../../Tags/components/TagView.scss'
+import ListPost from '../../../components/ListPost/ListPost.js'
+import SearchBar from '../../../components/SearchBar/SearchBar.js'
+import ListTagColumn from '../../../components/ListTag/column/ListTagColumn.js'
+import Filter from '../../../components/Filter/Filter.js'
+import utils from '../../../../public/utils.js'
 
-        fetch("http://www.json-generator.com/api/jsoccn/get/bSmxnPKrma?indent=2")
+
+export default class HomeView extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            dataListPost:{},
+            dataListTags:{}
+        };
+    }
+
+    componentDidMount() {
+        fetch(utils.getFetchUrl()+"/tag/all")
+            .then((tagResponse) => tagResponse.json())
+            .then((tagData) => {this.setState({dataListTags : Data})})
+
+        fetch("http://www.json-generator.com/api/json/get/bSmxnPKrma?indent=2")
             .then((response) => response.json())
             .then((data) =>{this.setState({dataListPost : data})})
     }
