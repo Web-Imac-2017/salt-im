@@ -48,6 +48,18 @@ class tagController {
         $tag = $manager->get($id);
         $manager->img($tag, $_FILES);
     }
+
+        public function search_tag() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        if (!isset($_POST['searchTag']))
+            echo "Please provide keywords";
+        else {
+            $tag = $manager->search_tag($_POST['searchTag']);
+            $json = json_encode($this->jsonSerializeArray($tag), JSON_UNESCAPED_UNICODE);
+            echo $json;
+        }
+    }
     
     public function jsonSerializeArray(array $tags) {
         // Represent your object using a nested array or stdClass,

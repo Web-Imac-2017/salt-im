@@ -213,6 +213,42 @@ class TagsManager {
     $q->execute();
   }
 
+
+public function search_tag($search)
+  {
+      // liste des sujets
+      $tags = [];
+      $fetchedTags = [];
+
+      $searchClean = preg_replace('!\s+!', ' ', $search);
+      
+      // tableau des mots recherchés
+      $searchTab = explode(" ", $searchClean);
+      print_r($searchTab);
+
+      // taille du tableau (nombre de mots)
+      $searchSize = count($searchTab);
+      print_r($searchSize);
+
+      // pour chaque mot, effectuer une recherche
+      for ($i = 0; $i < $searchSize; $i++) {
+          $q = $this->_db->query('SELECT id FROM tags
+            WHERE name LIKE "%'.$searchTab[$i].'%"');
+
+          while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+              $currentTag = $this->get($donnees['id']);
+              if (!in_array($currentTag, $fetchedTags)) {
+                $tags[] = $currentTag;
+                $fetchedTags[] = $currentTag;
+              }
+          }
+      }
+      
+      echo $search;
+      return $tags;
+  }
+
+
   public function setDb(PDO $db)
   {
     $this->_db = $db;
