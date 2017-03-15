@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './BigSearch.scss'
 
+import utils from "../../../../public/utils.js";
+
 class BigSearch extends Component {
   constructor(props) {
     super(props);
@@ -9,11 +11,21 @@ class BigSearch extends Component {
     this.state = {
         isOpen:false,
         search:"",
+        results:{},
     };
   }
 
   handleChangeSearch(event){
     this.setState({search: event.target.value});
+    fetch(utils.getFetchUrl()+'/search/p/' + event.target.value,
+              {
+                  method: "post",
+                  body: new FormData(this.refs.formA),
+              })
+            .then( (response) => response.json())
+            .then( (data) => {this.setState({results:data})});
+
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,6 +35,7 @@ class BigSearch extends Component {
   }
 
   render() {
+    console.log(this.state.results);
     let classes = "bigsearch";
     let resultClass = "results";
 
@@ -37,7 +50,7 @@ class BigSearch extends Component {
     return (
       <div>
         <div className={classes}>
-          <form>
+          <form ref="form">
               <input type="text" name="search" onChange={this.handleChangeSearch.bind(this)} placeholder="Search"/>
           </form>
         </div>

@@ -27,7 +27,7 @@ class CommentsManager {
     
   public function addToComment(Comment $comment, $id)
   {
-    $q = $this->_db->query('SELECT id FROM publication JOIN comment ON publication.id = comment.publication_id WHERE comment.id = "'.$id.'"');
+    $q = $this->_db->query('SELECT publication.id FROM publication JOIN comment ON publication.id = comment.publication_id WHERE comment.id = "'.$id.'"');
     $pub_id = $q->fetch(PDO::FETCH_ASSOC);
       
     $this->_db->exec('INSERT INTO publication(text, date, user_id) VALUES("'.$comment->get_text().'", "'.$comment->get_date().'", "'.$comment->get_user_id().'")');
@@ -35,11 +35,11 @@ class CommentsManager {
 
     $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$pub_id.'", "'.$publication_id.'")');
       
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("0", "0", "'.$publication_id.'")');
-      
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("1", "0", "'.$publication_id.'")'); 
-      
-    $this->_db->exec('INSERT INTO stat(name, value, related_element_id) VALUES("2", "0", "'.$publication_id.'")');
+    $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("0", "0", NULL, "'.$publication_id.'")');
+
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("1", "0", NULL, "'.$publication_id.'")');
+
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("2", "0", NULL, "'.$publication_id.'")');
   }
 
   public function delete(Comment $comment)

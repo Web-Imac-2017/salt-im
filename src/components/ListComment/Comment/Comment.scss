@@ -11,13 +11,15 @@
 }
 
 .comment{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-
     padding: 20px;
     margin-bottom: 25px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+    }
 
 
     &__left{
@@ -82,6 +84,38 @@
 
         &__right {
             margin-left: 10px;
+        }
+    }
+
+    &__answer {
+        display:block;
+        font-family: $karla;
+        text-decoration:underline;
+        cursor:pointer;
+        margin-left: 120px;
+    }
+
+    &__form {
+        display:none;
+
+        &--active {
+            display:block;
+        }
+
+        textarea {
+            width:calc(100% - 120px);
+            margin-top: 5px;
+            resize:none;
+            margin-left: 120px;
+        }
+
+        input {
+            margin-left: 120px;
+            color:white;
+            font-family:$karla;
+            border:0;
+            background: -webkit-linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
+            background: linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
         }
     }
 
