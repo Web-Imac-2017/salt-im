@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 
 import InputText from '../../../components/InputText/InputText.js'
 import InputTextarea from '../../../components/InputTextarea/InputTextarea.js'
+import utils from '../../../../public/utils.js'
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class SignIn extends Component {
 
   handleSubmit(event) {
       event.preventDefault();
-      fetch("http://localhost:8888/salt-im/api/u/login/1",
+      fetch(utils.getFetchUrl()+"/u/login/1",
         {
             method: "post",
             body: new FormData(this.refs.form),
