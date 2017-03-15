@@ -92,19 +92,19 @@ class userController {
         echo($json);
     }
 
-    public function who_is_logged_in() {
+    public function who() {
         include "connect.php";
         $manager = new UsersManager($db);
         if(isset($_SESSION)) {
             $user = $manager->who_is_logged_in($_SESSION);
             if ($user == false) {
-                echo "Aucun utilisateur ne correspond à cette session";
-            } else {
+                echo "Aucun utilisateur ne correspond à cette session.";
+            } else if ($user != null) {
                 $json = json_encode(utf8_encode($user->get_id()), JSON_UNESCAPED_UNICODE);
             echo($json);
             }
         } else {
-            echo "Il n'y a pas de session";
+            echo "Il n'y a pas de session.";
         }
 
     }

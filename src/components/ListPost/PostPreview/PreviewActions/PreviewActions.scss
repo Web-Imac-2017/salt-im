@@ -1,3 +1,5 @@
+$sizeIcon : 50px;
+
 .preview__action {
     margin-right: 40px;
 
@@ -12,7 +14,7 @@
 
     &__reactions {
         pointer-events:none;
-        opacity: 0;
+        opacity: 1;
         position:absolute;
         display:flex;
         top:0;
@@ -58,6 +60,7 @@
         -webkit-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
         -moz-box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
         box-shadow: 0px 7px 44px 1px rgba(0,0,0,0.28);
+        width: 240px;
     }
 
     &__arrow {
@@ -70,6 +73,7 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+        z-index:1;
     }
 }
 
@@ -98,27 +102,69 @@
     }
 }
 
-.icon--salt {
-    background : url(./assets/salty.png);
-    width: 15px;
-    height:15px;
-    background-size:cover;
-    background-position:center;
+.icones {
+    width: $sizeIcon;
+    height:$sizeIcon;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    z-index:250;
 
+
+
+    &:after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 150px;
+        background: hsla(0,0%,100%,0);
+        position: absolute;
+        display: block;
+        border: #000;
+        border-width: 1px;
+        border-style: solid;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%); 
+        transform-origin: 50% 50%;
+    }
+
+    &:nth-child(1) {
+        background : no-repeat url(./assets/salt.svg) 50%;
+
+        &:hover{
+            background : no-repeat url(./assets/salt-selected.svg) 50%;
+        }
+    }
+
+    &:nth-child(2) {
+        background : no-repeat url(./assets/pepper.svg) 50%;
+
+        &:hover{
+            background : no-repeat url(./assets/pepper-selected.svg) 50%;
+        }
+    }
+
+    &:nth-child(3) {
+        background : no-repeat url(./assets/fireworks.svg) 50%;
+
+        &:hover{
+            background : no-repeat url(./assets/fireworks-selected.svg) 50%;
+        }
+    }    
 }
 
-.icon--pepper {
-    background : url(./assets/poivre.png);   
-    width: 15px;
-    height:15px;
-    background-size:cover;
-    background-position:center; 
+.circle-animation {
+    &:after{
+        animation: pop ease forwards 0.5s;    
+    }
 }
 
-.icon--lol {
-    background : url(./assets/lol.png); 
-    width: 15px;
-    height:15px;
-    background-size:cover;
-    background-position:center;   
+@keyframes pop {
+    from {
+        transform :scale(0)
+    }
+
+    to {
+        transform :scale(5)       
+    }
 }

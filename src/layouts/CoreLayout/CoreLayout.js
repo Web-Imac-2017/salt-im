@@ -17,6 +17,7 @@ export default class CoreLayout extends Component {
     }
 
     loadUser(){
+
         fetch(utils.getFetchUrl()+"/u/islogged/1")
             .then((data) => {return data.text()})
             .then((data) => {
@@ -27,7 +28,7 @@ export default class CoreLayout extends Component {
     componentWillMount() {
         setTimeout(() => {
             this.loadUser();
-        },5000)
+        },0)
     }
 
     render() {

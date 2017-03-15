@@ -14,6 +14,17 @@ class TagsManager {
       
     // Exécution de la requête.
     $q->execute();
+      
+    return $this->_db->lastInsertId();
+  }
+    
+  public function addTagToPost($tag_id, $post_id)
+  {
+    // Préparation de la requête d'insertion.
+    $q = $this->_db->prepare('INSERT INTO rel_tag_publication(tag_id, publication_id) VALUES("'.$tag_id.'", "'.$post_id.'")');
+      
+    // Exécution de la requête.
+    $q->execute();
   }
 
   public function delete(Tag $tag)
