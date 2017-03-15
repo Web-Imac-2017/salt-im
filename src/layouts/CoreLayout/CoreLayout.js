@@ -10,7 +10,7 @@ import '../../styles/core.scss'
 export default class CoreLayout extends Component {
     componentDidMount() {
         console.log("did mount")
-        fetch("http://localhost:8888/salt-im/api/p/u/session")
+        fetch("http://localhost/salt-im/api/p/u/session")
             .then((data) => data.text())
             .then((data) => {console.log(data)})
     }

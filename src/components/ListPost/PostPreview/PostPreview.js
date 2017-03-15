@@ -37,7 +37,7 @@ export default class PostPreview extends Component {
     }
 
     loadStat(id) {
-        fetch('http://localhost/salt-im/api/u/'+2+'/stat/') //à remplacer par les stats du post qd c gud
+        fetch('http://localhost/salt-im/api/p/'+1+'/stat/') //à remplacer par id du post qd c gud
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataStat: object})
@@ -61,6 +61,7 @@ export default class PostPreview extends Component {
     }
 
     render() {
+        console.log(this.props)
         return(
             <div className="preview">
                 <div className="preview__left">

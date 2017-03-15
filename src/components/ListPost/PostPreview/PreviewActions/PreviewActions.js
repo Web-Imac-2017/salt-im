@@ -70,7 +70,7 @@ export default class PreviewActions extends Component {
 
     }
 
-    render() {      
+    render() {     
         return(
             <div className="preview__actions">
                 <div className="preview__action">
