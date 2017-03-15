@@ -4,7 +4,7 @@ import Footer from '../../components/Footer'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
-// u/session
+import utils from '../../../public/utils.js'
 
 
 export default class CoreLayout extends Component {
@@ -17,7 +17,8 @@ export default class CoreLayout extends Component {
     }
 
     loadUser(){
-        fetch("http://localhost/salt-im/api/u/islogged/2")
+
+        fetch(utils.getFetchUrl()+"/u/islogged/1")
             .then((data) => {return data.text()})
             .then((data) => {
                 this.setState({dataUser:data,})
@@ -27,7 +28,7 @@ export default class CoreLayout extends Component {
     componentWillMount() {
         setTimeout(() => {
             this.loadUser();
-        },5000)
+        },0)
     }
 
     render() {

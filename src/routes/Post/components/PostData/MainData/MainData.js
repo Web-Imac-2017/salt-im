@@ -19,7 +19,7 @@ export default class MainData extends Component {
                 <div className="data__title">{this.props.data.title}</div>
                 <div className="data__description">{this.props.data.text}</div>
                 {dataLink}
-                <PreviewActions data={this.props.data} nbComment={this.props.nbComment}/>
+                <PreviewActions data={this.props.data} nbComment={this.props.nbComment} dataUser={this.props.user}/>
             </div>
         )
     }

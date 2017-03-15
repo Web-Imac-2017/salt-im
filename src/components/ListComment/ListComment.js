@@ -3,6 +3,8 @@ import Comment from './Comment/Comment.js'
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+import utils from '../../../public/utils.js'
+
 export default class ListComment extends Component {
     constructor(props) {
       super(props);
@@ -15,10 +17,9 @@ export default class ListComment extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(this.state.repeat == true){
-            fetch('http://localhost:8888/salt-im/api/p/comment/'+nextProps.id)
+            fetch(utils.getFetchUrl()+'/p/comment/'+nextProps.id)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     this.props.getNbComments(data.length);
                     this.setState({commentData:data, repeat:false});
                 })

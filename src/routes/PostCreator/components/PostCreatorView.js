@@ -53,7 +53,7 @@ export default  class PostCreatorView extends Component {
         })
 
 
-        fetch("http://localhost:8888/salt-im/api/p/post/add/8",
+        fetch(utils.getFetchUrl()+"/p/post/add/8",
               {
                   method: "post",
                   body: new FormData(self.refs.formA),
@@ -62,14 +62,16 @@ export default  class PostCreatorView extends Component {
                 return res.text();
             }).then((data) => {
                 let datap = "success";
-                if(datap == "success")
-                    this.launchFetchImage();
+                if(datap == "success"){
+                  this.launchSuccessCreation();
+                  //this.launchFetchImage();
+                }
             })
     }
 
     launchFetchImage(response) {
 
-        fetch("http://localhost:8888/salt-im/api/media/" + response.id + "/img",
+        fetch(utils.getFetchUrl()+"/media/" + response.id + "/img",
               {
                   method: "post",
                   body: new FormData(self.refs.formB),
@@ -82,8 +84,25 @@ export default  class PostCreatorView extends Component {
                 if(datap == "success")
                     this.launchSuccessCreation();
             })
-
     }
+
+    /* launchFetchImage(response) {
+
+     *     fetch("http://localhost/salt-im/api/media/" + response.id + "/img",
+     *           {
+     *               method: "post",
+     *               body: new FormData(self.refs.formB),
+     *           })
+     *         .then((res) => {
+     *             return res.text();
+     *         })
+     *         .then((data) => {
+     *             let datap = "success";
+     *             if(datap == "success")
+     *                 this.launchSuccessCreation();
+     *         })
+
+     * }*/
 
     launchSuccessCreation() {
         this.setState({

@@ -4,6 +4,8 @@ import PicData from './PicData/PicData.js'
 import TextData from './TextData/TextData.js'
 import LinkData from './LinkData/LinkData.js'
 
+import utils from '../../../../../public/utils.js'
+
 export default class PostData extends Component {
     constructor(props) {
       super(props);
@@ -15,7 +17,7 @@ export default class PostData extends Component {
     }
 
     loadUser(id) {
-        fetch('http://localhost:8888/salt-im/api/u/name/'+id)
+        fetch(utils.getFetchUrl()+'/u/name/'+id)
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataUser: object})
@@ -24,8 +26,7 @@ export default class PostData extends Component {
 
     componentWillReceiveProps(nextProps) {
         const myInit = {method: 'POST'};
-        console.log(nextProps.data)
-        fetch('http://localhost:8888/salt-im/api/media/'+nextProps.data.media_id)
+        fetch(utils.getFetchUrl()+'/media/'+nextProps.data.media_id)
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataMedia: object})
@@ -35,20 +36,20 @@ export default class PostData extends Component {
     render() {
         let nodeData;
         if(!this.state.dataMedia)
-            nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
+            nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} user={this.props.dataUser } dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
         else {
             switch(this.state.dataMedia.type) {
                 case "video":
-                    nodeData = (<VideoData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
+                    nodeData = (<VideoData data={this.props.data} dataMedia={this.state.dataMedia} user={this.props.dataUser } dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
                     break;
                 case "img":
-                    nodeData =(<PicData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>)
+                    nodeData =(<PicData data={this.props.data} dataMedia={this.state.dataMedia} user={this.props.dataUser } dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>)
                     break;
                 case "link":
-                    nodeData = (<LinkData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
+                    nodeData = (<LinkData data={this.props.data} dataMedia={this.state.dataMedia} user={this.props.dataUser } dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
                     break;
                 default:
-                    nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
+                    nodeData = (<TextData data={this.props.data} dataMedia={this.state.dataMedia} user={this.props.dataUser } dataUser={this.state.dataUser} nbComment={this.props.nbComment}/>);
                     break;
             }
         }

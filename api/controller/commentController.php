@@ -86,7 +86,6 @@ class commentController  {
         $comments = $manager->commentFromUser($id);
         $json = json_encode($this->jsonSerializeArray($comments), JSON_UNESCAPED_UNICODE);
         echo $json;
-        
     }
     
     public function set_id($id) {

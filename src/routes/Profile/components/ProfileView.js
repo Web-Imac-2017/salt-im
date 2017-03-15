@@ -4,6 +4,8 @@ import ListPost from '../../../components/ListPost/ListPost.js'
 import ListComment from '../../../components/ListComment/ListComment.js'
 import ProfileUpdateView from '../../ProfileUpdate/components/ProfileUpdateView.js'
 
+import utils from '../../../../public/utils.js'
+
 export default class ProfileView extends Component {
     constructor(props) {
       super(props);
@@ -20,12 +22,12 @@ export default class ProfileView extends Component {
 
     componentDidMount() {
         // Call for user data.
-        fetch('http://localhost/salt-im/api/u/' + this.props.params.userId)
+        fetch(utils.getFetchUrl()+'/u/' + this.props.params.userId)
             .then( (response) => response.json())
             .then( (data) => {this.setState({dataUser:data})});
 
         // Call for posts data by default.
-        fetch('http://localhost/salt-im/api/p/u/' + this.props.params.userId)
+        fetch(utils.getFetchUrl()+'/p/u/' + this.props.params.userId)
             .then( (response) => response.json())
             .then( (data) => {
                 this.setState({dataPost:data})
@@ -42,7 +44,7 @@ export default class ProfileView extends Component {
     }
 
     loadComments() {
-        fetch('http://localhost/salt-im/api/comment/u/' + this.props.params.userId)
+        fetch(utils.getFetchUrl()+'/comment/u/' + this.props.params.userId)
             .then( (response) => response.json())
             .then( (data) => {this.setState({dataComment:data})});
     }

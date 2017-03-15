@@ -6,6 +6,8 @@ import PreviewLeft from './PreviewLeft/PreviewLeft.js'
 import PreviewActions from './PreviewActions/PreviewActions.js'
 import Wave from './Wave/Wave.js'
 
+import utils from '../../../../public/utils.js'
+
 export default class PostPreview extends Component {
     constructor(props) {
       super(props);
@@ -19,7 +21,7 @@ export default class PostPreview extends Component {
     }
 
     loadUser(id) {
-        fetch('http://localhost/salt-im/api/u/name/'+id)
+        fetch(utils.getFetchUrl()+'/u/name/'+id)
             .then((response) => response.json())
             .then((object) => {
               this.setState({dataUser: object})
@@ -27,7 +29,7 @@ export default class PostPreview extends Component {
     }
 
     loadMedia(id) {
-        fetch('http://localhost/salt-im/api/media/'+id)
+        fetch(utils.getFetchUrl()+'/media/'+id)
             .then((response) => response.json())
             .then((object) => {
               this.setState({dataMedia: object})
@@ -37,7 +39,7 @@ export default class PostPreview extends Component {
     }
 
     loadStat(id) {
-        fetch('http://localhost/salt-im/api/p/'+1+'/stat/') //à remplacer par id du post qd c gud
+        fetch(utils.getFetchUrl()+'/p/'+1+'/stat/') //à remplacer par id du post qd c gud
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataStat: object})
