@@ -20,8 +20,57 @@ export default class PreviewActions extends Component {
             this.setState({isShareActive:true});
     }
 
-    render() {
+    statMax(){
+        var param = this.props.stats;
 
+        var maxIndex = 0;
+        for(var i = 1; i < param.length; i++){
+            if(param[i].value > param[maxIndex].value){
+                maxIndex = i;
+            }
+        }
+
+        switch(maxIndex){
+            case 1:
+                return "pepper"
+            break;
+            case 2:
+                return "lol"
+            break;
+            default:
+                return "salt"
+            break;
+        }
+
+    }
+
+    statMaxId(){
+        var param = this.props.stats;
+
+        var maxIndex = 0;
+        for(var i = 1; i < param.length; i++){
+            if(param[i].value > param[maxIndex].value){
+                maxIndex = i;
+            }
+        }
+
+       return maxIndex;
+
+    }
+
+    statValue(){
+
+        if(this.props.stats.length){
+            var i = this.statMaxId();
+            return this.props.stats[i].value;
+        }
+        else{
+            return "no_data";
+        }
+
+    }
+
+    render() {
         return(
             <div className="preview__actions">
                 <div className="preview__action">
@@ -37,8 +86,8 @@ export default class PreviewActions extends Component {
                     <div className="preview__action__icon icon icon--favorite"/>
                 </div>
                 <div className="preview__action preview__action--salty">
-                    <div className="preview__action__icon icon icon--salty"/>
-                    <div className="preview__action__value">66%</div>
+                    <div className={'preview__action__icon icon icon--'+this.statMax()}/>
+                    <div className="preview__action__value">{this.statValue()}</div>
                     {this.props.dataUser ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
