@@ -60,7 +60,7 @@ export default class HomeView extends Component {
             <p className="tagview__titleTrends">Les salés du jour</p>
             <Filter/>
           </div>
-          <ListPost data={this.state.dataListPost}/>
+          <ListPost data={this.state.dataListPost} dataUser={this.props.dataUser}/>
         </div>
       </div>
     )

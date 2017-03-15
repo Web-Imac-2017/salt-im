@@ -72,8 +72,8 @@ export default class ProfileView extends Component {
         }
 
         let classes = "modal ";
-        
-        if(this.state.isActive) 
+
+        if(this.state.isActive)
             classes += "modal--active"
 
         let dataItem = (<div/>);
@@ -110,7 +110,9 @@ export default class ProfileView extends Component {
                         <h2 className="profile__header__infos__email">{this.state.dataUser.mail}</h2>
                         <h2 className="profile__header__infos__rank">{this.state.dataUser.rank}</h2>
                     </div>
-                    <button className="profile__header__updateBtn" onClick={this.toggleModal.bind(this)}>modifier mon profil</button>
+                    {this.props.dataUser ? (
+                        <button className="profile__header__updateBtn" onClick={this.toggleModal.bind(this)}>modifier mon profil</button>
+                    ) : (<div/>)}
 
                 </div>
 

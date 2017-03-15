@@ -13,12 +13,13 @@ export default class PostPreview extends Component {
       this.state = {
         dataUser:"",
         dataMedia:"",
+        dataStat:{},
         score:this.props.state,
       };
     }
 
     loadUser(id) {
-        fetch('http://localhost:8888/salt-im/api/u/name/'+id)
+        fetch('http://localhost/salt-im/api/u/name/'+id)
             .then((response) => response.json())
             .then((object) => {
               this.setState({dataUser: object})
@@ -26,13 +27,24 @@ export default class PostPreview extends Component {
     }
 
     loadMedia(id) {
-        fetch('http://localhost:8888/salt-im/api/media/'+id)
+        fetch('http://localhost/salt-im/api/media/'+id)
             .then((response) => response.json())
             .then((object) => {
               this.setState({dataMedia: object})
               this.loadUser(this.props.data.user_id);
+              this.loadStat(this.props.data.user_id);
             })
     }
+
+    loadStat(id) {
+        fetch('http://localhost/salt-im/api/p/'+1+'/stat/') //à remplacer par id du post qd c gud
+          .then((response) => response.json())
+          .then((object) => {
+            this.setState({dataStat: object})
+          })
+    }
+
+
 
     componentWillReceiveProps(nextProps) {
         this.loadUser(nextProps.data.user_id);
@@ -49,6 +61,7 @@ export default class PostPreview extends Component {
     }
 
     render() {
+        console.log(this.props)
         return(
             <div className="preview">
                 <div className="preview__left">
@@ -58,7 +71,7 @@ export default class PostPreview extends Component {
                     <div className="preview__content">
                         <div className="preview__title">{this.props.data.title}</div>
                         <div className="preview__description">{this.props.data.text}</div>
-                        <PreviewActions data={this.props.data}/>
+                        <PreviewActions data={this.props.data} dataUser={this.props.dataUser} stats={this.state.dataStat}/>
                         <div className="preview__infos">
                             <div className="preview__author">{this.state.dataUser}</div>
                             <div className="preview__date">le {this.props.data.date}</div>

@@ -14,7 +14,7 @@ export default class Account extends Component{
     }
 
     render() {
-        if(!this.state.isLogged) {
+        if(!this.props.dataUser) {
             return (
                 <div className="accountWrapper">
                     <Link style={{cursor:"pointer"}} to="/auth">

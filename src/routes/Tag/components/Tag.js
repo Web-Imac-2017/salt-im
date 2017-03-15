@@ -36,7 +36,6 @@ export default class TagSolo extends Component {
   }
 
   render() {
-    console.log(this.state)
         return (
 
         <div className="tagSingle">

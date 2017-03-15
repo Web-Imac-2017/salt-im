@@ -65,7 +65,7 @@ export default class ListPost extends Component {
         if(!this.props.data.length)
             return (<div className="listpost--empty">T'es comme le "ç" de sel, t'existe pas</div>)
         let postsNode = this.props.data.map( (elmt,i) => (
-            <PostPreview key={i} data={elmt} state={values[i%3]} maxValue={this.state.maxValue} handleMax={this.handleMax.bind(this)}/>
+            <PostPreview key={i} data={elmt} state={values[i%3]} maxValue={this.state.maxValue} handleMax={this.handleMax.bind(this)} dataUser={this.props.dataUser}/>
         ))
 
         return (

@@ -4,6 +4,7 @@ import './PostCreatorView.scss'
 
 import InputText from '../../../components/InputText/InputText.js'
 import InputTextarea from '../../../components/InputTextarea/InputTextarea.js'
+import Redirection from '../../../components/Redirection/Redirection.js'
 
 import utils from "../../../../public/utils.js";
 
@@ -52,7 +53,7 @@ export default  class PostCreatorView extends Component {
         })
 
 
-        fetch("http://localhost/salt-im/api/p/post/add/8",
+        fetch("http://localhost:8888/salt-im/api/p/post/add/8",
               {
                   method: "post",
                   body: new FormData(self.refs.formA),
@@ -102,6 +103,9 @@ export default  class PostCreatorView extends Component {
         let classSuccess = "success";
         if(this.state.isSuccess)
             classSuccess += " success--active";
+
+        if(!this.props.dataUser)
+          return(<Redirection/>)
 
         return (
             <div className="postcreator center">

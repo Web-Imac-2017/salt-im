@@ -8,20 +8,36 @@ import '../../styles/core.scss'
 
 
 export default class CoreLayout extends Component {
-    componentDidMount() {
-        console.log("did mount")
-        fetch("http://localhost:8888/salt-im/api/p/u/session")
-            .then((data) => data.text())
-            .then((data) => {console.log(data)})
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        dataUser:null,
+      };
+    }
+
+    loadUser(){
+        fetch("http://localhost:8888/salt-im/api/u/islogged/2")
+            .then((data) => {return data.text()})
+            .then((data) => {
+                this.setState({dataUser:data,})
+            })
+    }
+
+    componentWillMount() {
+        setTimeout(() => {
+            this.loadUser();
+        },5000)
     }
 
     render() {
-        console.log("render layout")
         return (
             <div className='container text-center'>
-              <Header />
+              <Header dataUser={this.state.dataUser}/>
               <div className='core-layout__viewport'>
-                {this.props.children}
+                {React.cloneElement(this.props.children, {
+                  dataUser:this.state.dataUser
+                })}
               </div>
               <Footer />
             </div>
