@@ -68,11 +68,29 @@ class postController  {
     
     public function add() {
         include "connect.php";
-        echo "add";
         $manager = new SubjectsManager($db);
+        $tagmanager = new TagsManager($db);
         $subject = new Subject($_POST);
+        $tag_names = explode(',', $_POST['tags']);
+        $tag_ids = [];
+        for($i=0; $i<count($tag_names); $i++) {
+            $tag = $tagmanager->getFromName($tag_names[$i]);
+            if ($tag == null || $tag == false) {
+                $tag = new Tag(array(
+                    'name' => $tag_names[$i],
+                    'img_url' => '',
+                    'description' => ''
+                ))
+                $tag_ids[] = $tagmanager->add($tag);
+            } else {
+                $tag_ids[] = $tag->get_id();
+            }
+        }
         try {
             $subject = $manager->add($subject);
+            for($i=0; $i<count($tag_ids); $i++) {
+                $tagmanager->addTagToPost($tag_ids[$i], $subject->get_id());
+            }
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         }
