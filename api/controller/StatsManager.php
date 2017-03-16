@@ -156,8 +156,6 @@ class StatsManager {
       AND publication_id = "'.$id.'"
       AND name = "'.$name.'"');
     
-    DELETE FROM vote WHERE vote.id = 1
-
     $q1->execute();
     $q2->execute();
     $q3->execute();
