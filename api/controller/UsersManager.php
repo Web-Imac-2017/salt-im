@@ -212,6 +212,7 @@ public function getSubjects(User $user) {
                 $_SESSION['login'] = array(
                     'username' => utf8_encode($data['username'])
                 );
+                var_dump($_SESSION);
                 return true;
              }
              else {

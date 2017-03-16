@@ -53,17 +53,17 @@ class MediasManager {
         
         try {
     
-            // Undefined | Multiple Files | $_FILES Corruption Attack
+            // Undefined | Multiple Files | $date Corruption Attack
             // If this request falls under any of them, treat it invalid.
             if (
-                !isset($_FILES['userfile']['error']) ||
-                is_array($_FILES['userfile']['error'])
+                !isset($date['userfile']['error']) ||
+                is_array($date['userfile']['error'])
             ) {
                 throw new RuntimeException('Invalid parameters.');
             }
 
-            // Check $_FILES['upfile']['error'] value.
-            switch ($_FILES['userfile']['error']) {
+            // Check $date['upfile']['error'] value.
+            switch ($date['userfile']['error']) {
                 case UPLOAD_ERR_OK:
                     break;
                 case UPLOAD_ERR_NO_FILE:
@@ -76,15 +76,15 @@ class MediasManager {
             }
 
             // You should also check filesize here. 
-            if ($_FILES['userfile']['size'] > 2000000) {
+            if ($date['userfile']['size'] > 2000000) {
                 throw new RuntimeException('Exceeded filesize limit.');
             }
 
-            // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
+            // DO NOT TRUST $date['upfile']['mime'] VALUE !!
             // Check MIME Type by yourself.
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             if (false === $ext = array_search(
-                $finfo->file($_FILES['userfile']['tmp_name']),
+                $finfo->file($date['userfile']['tmp_name']),
                 array(
                     'jpg' => 'image/jpeg',
                     'png' => 'image/png',
@@ -96,14 +96,14 @@ class MediasManager {
             }
 
             // You should name it uniquely.
-            // DO NOT USE $_FILES['upfile']['name'] WITHOUT ANY VALIDATION !!
+            // DO NOT USE $date['upfile']['name'] WITHOUT ANY VALIDATION !!
             // On this example, obtain safe unique name from its binary data.
             $uploadfile = sprintf('../public/uploads/%s.%s',
-                    sha1_file($_FILES['userfile']['tmp_name']),
+                    sha1_file($date['userfile']['tmp_name']),
                     $ext
                 );
             if (!move_uploaded_file(
-                $_FILES['userfile']['tmp_name'], $uploadfile
+                $date['userfile']['tmp_name'], $uploadfile
             )) {
                 throw new RuntimeException('Failed to move uploaded file.');
             }
