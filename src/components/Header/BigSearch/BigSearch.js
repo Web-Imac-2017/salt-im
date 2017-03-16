@@ -15,6 +15,7 @@ class BigSearch extends Component {
         resultsTag:{},
         resultsUser:{}
     };
+
   }
 
   handleLinkClick() {
@@ -39,13 +40,13 @@ class BigSearch extends Component {
       .then( (response) => response.json())
       .then( (data) => {this.setState({resultsTag:data})});
 
-      // fetch(utils.getFetchUrl()+'/search/u/' + event.target.value,
-      // {
-      //     method: "post",
-      //     body: new FormData(this.refs.form),
-      // })
-      // .then( (response) => response.json())
-      // .then( (data) => {console.log(data);this.setState({resultsUser:data})});
+      fetch(utils.getFetchUrl()+'/search/u/' + event.target.value,
+      {
+          method: "post",
+          body: new FormData(this.refs.form),
+      })
+      .then( (response) => response.text())
+      .then( (data) => {console.log(data);this.setState({resultsUser:data})});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,10 +56,11 @@ class BigSearch extends Component {
   }
 
   render() {
+    
     let classes = "bigsearch";
     let resultClass = "results";
 
-    if(this.state.isOpen){
+    if(this.state.isOpen || 'http://localhost:3000/' == window.location.href){
         classes += " bigsearch--open"
     }
 

@@ -1,11 +1,11 @@
 ﻿-- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 15 Mars 2017 à 22:09
--- Version du serveur :  5.7.9
--- Version de PHP :  5.6.16
+-- Généré le :  Jeu 16 Mars 2017 à 19:30
+-- Version du serveur :  10.1.8-MariaDB
+-- Version de PHP :  5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,14 +26,12 @@ SET time_zone = "+00:00";
 -- Structure de la table `badge`
 --
 
-DROP TABLE IF EXISTS `badge`;
-CREATE TABLE IF NOT EXISTS `badge` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `badge` (
+  `id` int(11) NOT NULL,
   `cond` int(11) NOT NULL,
   `name` tinytext NOT NULL,
-  `icon` tinytext NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `icon` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `badge`
@@ -48,15 +46,11 @@ INSERT INTO `badge` (`id`, `cond`, `name`, `icon`) VALUES
 -- Structure de la table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
   `related_publication_id` int(11) NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `related_publication_id` (`related_publication_id`),
-  KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `comment`
@@ -73,15 +67,12 @@ INSERT INTO `comment` (`id`, `related_publication_id`, `publication_id`) VALUES
 -- Structure de la table `media`
 --
 
-DROP TABLE IF EXISTS `media`;
-CREATE TABLE IF NOT EXISTS `media` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `media` (
+  `id` int(11) NOT NULL,
   `link` text NOT NULL,
   `type` tinytext NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `media`
@@ -96,15 +87,12 @@ INSERT INTO `media` (`id`, `link`, `type`, `publication_id`) VALUES
 -- Structure de la table `publication`
 --
 
-DROP TABLE IF EXISTS `publication`;
-CREATE TABLE IF NOT EXISTS `publication` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `publication` (
+  `id` int(11) NOT NULL,
   `text` text NOT NULL,
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `publication`
@@ -139,15 +127,11 @@ INSERT INTO `publication` (`id`, `text`, `date`, `user_id`) VALUES
 -- Structure de la table `rel_tag_publication`
 --
 
-DROP TABLE IF EXISTS `rel_tag_publication`;
-CREATE TABLE IF NOT EXISTS `rel_tag_publication` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `rel_tag_publication` (
+  `id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `tag_id` (`tag_id`),
-  KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `rel_tag_publication`
@@ -163,17 +147,13 @@ INSERT INTO `rel_tag_publication` (`id`, `tag_id`, `publication_id`) VALUES
 -- Structure de la table `stat`
 --
 
-DROP TABLE IF EXISTS `stat`;
-CREATE TABLE IF NOT EXISTS `stat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stat` (
+  `id` int(11) NOT NULL,
   `name` int(11) NOT NULL,
   `value` int(11) NOT NULL,
   `related_user_id` int(11) DEFAULT NULL,
-  `related_publication_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `related_user_id` (`related_user_id`),
-  KEY `related_publication_id` (`related_publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+  `related_publication_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `stat`
@@ -186,16 +166,16 @@ INSERT INTO `stat` (`id`, `name`, `value`, `related_user_id`, `related_publicati
 (4, 0, 25, 1, NULL),
 (5, 1, 30, 1, NULL),
 (6, 2, 35, 1, NULL),
-(7, 0, 0, NULL, 18),
+(7, 0, 78, NULL, 18),
 (8, 1, 0, NULL, 18),
 (9, 2, 0, NULL, 18),
-(10, 0, 0, NULL, 19),
+(10, 0, 19654, NULL, 19),
 (11, 1, 0, NULL, 19),
 (12, 2, 0, NULL, 19),
-(13, 0, 0, NULL, 20),
+(13, 0, 25000, NULL, 20),
 (14, 1, 0, NULL, 20),
 (15, 2, 0, NULL, 20),
-(16, 0, 0, NULL, 21),
+(16, 0, 1250, NULL, 21),
 (17, 1, 0, NULL, 21),
 (18, 2, 0, NULL, 21);
 
@@ -205,17 +185,13 @@ INSERT INTO `stat` (`id`, `name`, `value`, `related_user_id`, `related_publicati
 -- Structure de la table `subject`
 --
 
-DROP TABLE IF EXISTS `subject`;
-CREATE TABLE IF NOT EXISTS `subject` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subject` (
+  `id` int(11) NOT NULL,
   `title` tinytext NOT NULL,
   `flair` tinytext NOT NULL,
   `type` tinytext NOT NULL,
-  `publication_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `publication_id` (`publication_id`),
-  KEY `publication_id_2` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `publication_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `subject`
@@ -244,14 +220,12 @@ INSERT INTO `subject` (`id`, `title`, `flair`, `type`, `publication_id`) VALUES
 -- Structure de la table `tag`
 --
 
-DROP TABLE IF EXISTS `tag`;
-CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL,
   `name` tinytext NOT NULL,
   `img_url` text NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `tag`
@@ -277,9 +251,8 @@ INSERT INTO `tag` (`id`, `name`, `img_url`, `description`) VALUES
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
   `username` tinytext NOT NULL,
   `password` text NOT NULL,
   `mail` tinytext NOT NULL,
@@ -288,10 +261,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `rank` int(11) NOT NULL,
   `signupDate` date NOT NULL,
   `badge_id` int(11) NOT NULL,
-  `token` tinytext NOT NULL COMMENT '60 random chars',
-  PRIMARY KEY (`id`),
-  KEY `badge_id` (`badge_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `token` tinytext NOT NULL COMMENT '60 random chars'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `user`
@@ -309,17 +280,144 @@ INSERT INTO `user` (`id`, `username`, `password`, `mail`, `avatar`, `birthDate`,
 -- Structure de la table `vote`
 --
 
-DROP TABLE IF EXISTS `vote`;
-CREATE TABLE IF NOT EXISTS `vote` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vote` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `publication_id` (`publication_id`)
+  `name` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `badge`
+--
+ALTER TABLE `badge`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `related_publication_id` (`related_publication_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+--
+-- Index pour la table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `publication_id` (`publication_id`);
+
+--
+-- Index pour la table `publication`
+--
+ALTER TABLE `publication`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `rel_tag_publication`
+--
+ALTER TABLE `rel_tag_publication`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tag_id` (`tag_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+--
+-- Index pour la table `stat`
+--
+ALTER TABLE `stat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `related_user_id` (`related_user_id`),
+  ADD KEY `related_publication_id` (`related_publication_id`);
+
+--
+-- Index pour la table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `publication_id` (`publication_id`),
+  ADD KEY `publication_id_2` (`publication_id`);
+
+--
+-- Index pour la table `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `badge_id` (`badge_id`);
+
+--
+-- Index pour la table `vote`
+--
+ALTER TABLE `vote`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `badge`
+--
+ALTER TABLE `badge`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `media`
+--
+ALTER TABLE `media`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `publication`
+--
+ALTER TABLE `publication`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT pour la table `rel_tag_publication`
+--
+ALTER TABLE `rel_tag_publication`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `stat`
+--
+ALTER TABLE `stat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT pour la table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `vote`
+--
+ALTER TABLE `vote`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --

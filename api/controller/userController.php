@@ -69,6 +69,7 @@ class userController {
         if($isloggedin != true) {
             $isloggedin = $manager->login($_POST);
         }
+
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
                 header('Location: http://localhost/salt-im/shit.php');
@@ -78,7 +79,6 @@ class userController {
         }
 
     public function autologin() {
-        var_dump($_COOKIE);
         if(isset($_COOKIE)) {
             $isloggedin = $manager->reconnect_from_cookie($_COOKIE, $_SESSION);
         }
@@ -112,8 +112,14 @@ class userController {
             if ($user == false || $user == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
             } else if ($user != null) {
-                $json = json_encode($user->get_id(), JSON_UNESCAPED_UNICODE);
+                $c = array(
+                    'id' => utf8_encode($user->get_id())
+                );
+
+                $json = json_encode($c, JSON_UNESCAPED_UNICODE);
                 echo($json);
+            } else {
+                echo("fail");
             }
         } else {
             echo "Il n'y a pas de session.";
@@ -205,7 +211,6 @@ class userController {
             echo "Please provide keywords";
         else {
             $subject = $manager->search_users($_POST['search']);
-            var_dump($subject);
             $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
             echo $json;
         }

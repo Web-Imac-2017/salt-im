@@ -29,6 +29,7 @@ export const Tag = (props) => {
             </div>
         )
     }
+
     let link = "/tag/" + props.data.id;
 
     return(

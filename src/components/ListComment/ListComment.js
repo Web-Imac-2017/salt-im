@@ -16,7 +16,6 @@ export default class ListComment extends Component {
     }
 
     loadAllComments(id) {
-        console.log("okoko")
         fetch(utils.getFetchUrl()+'/p/comment/3')
             .then((response) => response.json())
             .then((data) => {
@@ -44,7 +43,6 @@ export default class ListComment extends Component {
     }
 
     render() {
-        console.log(this.state.commentData)
         let commentsNode = (<div>Personne n est salé ici.</div>)
 
             if(this.state.commentData.length) {

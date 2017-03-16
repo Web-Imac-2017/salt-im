@@ -40,7 +40,10 @@ export default class PostView extends Component {
               <p className="post__commentBlock__title">Commentaires</p>
               <Filter/>
             </div>
-            <ListComment getNbComments={this.handleNbComments.bind(this)} id={this.state.postdata.id}/>
+            <ListComment
+              getNbComments={this.handleNbComments.bind(this)}
+              id={this.state.postdata.id}
+              dataUser={this.props.dataUser}/>
         </div>
       </div>
     );

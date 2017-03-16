@@ -105,6 +105,14 @@ class commentController  {
         return $this->order; 
     }
     
+    public function sortCommentsByStat() {
+        include "connect.php";
+        $manager = new CommentsManager($db);
+        $comment = $manager->sort_comments_by_stat($_POST['comment_stat_id']);
+        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+        echo $json;
+    }
+
     public function jsonSerialize(Comment $comment) {
         // Represent your object using a nested array or stdClass,
         $data = array(
