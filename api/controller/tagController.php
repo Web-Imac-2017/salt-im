@@ -93,6 +93,19 @@ class tagController {
         return $data;
     }
 
+    public function tag_by_id() {
+    include "connect.php";
+    $manager = new TagsManager($db);
+    $id = $this->id;
+    if($manager->get($id) != null) {
+        $tag = $manager->get($id);
+        $json = json_encode($this->jsonSerialize($tag),JSON_UNESCAPED_UNICODE);
+        echo $json;
+    } else {
+         echo "Aie aie aie on a pas pu récupérer le tag.";
+        }
+    }
+
     // Hydrate
     public function hydrate(array $donnees) {
         foreach ($donnees as $key => $value) {
