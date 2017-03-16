@@ -87,21 +87,32 @@ $sizeIcon : 50px;
     background-position:center;
 
     &--comment {
-        background-image: url("./assets/comment.svg");
+        background-image: url("./assets/chat.svg");
+
+        &:hover {
+            background-image: url("./assets/chat-hover.svg");
+        }
     }
 
     &--share {
         background-image: url("./assets/share.svg");
+        &:hover{
+           background-image: url("./assets/share-selected.svg"); 
+        }
     }
 
     &--favorite {
-        background-image: url("./assets/favorite.svg");
+        background-image: url("./assets/like.svg");
+        &:hover{
+            background-image: url("./assets/like-selected.svg");
+        }
     }
 
     &--salty {
-        width: 36px;
-        height: 20px;
-        background-image: url("./assets/salt.svg");
+        background-image: url("./assets/saltiness.svg");
+        &:hover{
+           background-image: url("./assets/saltiness-selected.svg"); 
+        }
     }
 }
 
@@ -125,8 +136,8 @@ $sizeIcon : 50px;
         border: #000;
         border-width: 0.5px;
         border-style: solid;
-        top: 50%;
-        left: 50%;
+        top: 57%;
+        left: 76%;
         transform: translateX(-50%) translateY(-50%); 
         transform-origin: 50% 50%;
     }    
