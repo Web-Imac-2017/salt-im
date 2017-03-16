@@ -21,7 +21,6 @@ export default class CoreLayout extends Component {
 
         fetch(utils.getFetchUrl()+"/u/session/1",
           {
-            mode:"no-cors",
             credentials:"include"
           }
         )
