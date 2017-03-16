@@ -68,7 +68,7 @@ export default  class PostCreatorView extends Component {
 
     launchFetchImage() {
 
-        fetch(utils.getFetchUrl()+"/media/25/img",
+        fetch(utils.getFetchUrl()+"p/25/media/add",
               {
                   method: "post",
                   body: new FormData(this.refs.formB),
