@@ -32,3 +32,22 @@
 		}
 	}
 }
+
+.vicos .preview:after {
+	content: "Aidez-moi !";
+	width: 100px;
+	height: 30px;
+	display: -ms-flexbox;
+	display: flex;
+	background: red;
+	position: relative;
+	bottom: 0;
+	right: 112px;
+	text-align: center;
+	background: #3d9bae;
+	font-family: Cousine,monospace;
+	font-weight: 700;
+	padding: 10px;
+	color: #fff;
+	font-size: 12px;
+}

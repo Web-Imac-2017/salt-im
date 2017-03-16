@@ -9,6 +9,7 @@ export const Filter = () => (
 	        <select className="select__input">
 	          <option>taux de sel</option>
 	          <option>taux de poivre</option>
+	          <option>taux d'humour</option>
 	          <option>date</option>
 	        </select>
         </div>
