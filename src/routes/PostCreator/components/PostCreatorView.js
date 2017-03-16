@@ -54,7 +54,7 @@ export default  class PostCreatorView extends Component {
         fetch(utils.getFetchUrl()+"/p/post/add/8",
               {
                   method: "post",
-                  body: new FormData(self.refs.form),
+                  body: new FormData(this.refs.formA),
               })
             .then((res) => {
                 return res.text();
@@ -68,7 +68,7 @@ export default  class PostCreatorView extends Component {
 
     launchFetchImage() {
 
-        fetch(utils.getFetchUrl()+"/media/25/img",
+        fetch(utils.getFetchUrl()+"p/25/media/add",
               {
                   method: "post",
                   body: new FormData(this.refs.formB),
