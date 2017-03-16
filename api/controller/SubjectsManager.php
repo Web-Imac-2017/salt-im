@@ -29,7 +29,6 @@
 
        $subject2 = $this->get($subject_id);
        return $subject2;
-
    }
 
    public function delete(Subject $subject)

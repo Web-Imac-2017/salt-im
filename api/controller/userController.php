@@ -71,6 +71,7 @@ class userController {
         }
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
+                header('Location: http://localhost/salt-im/shit.php');
             } else {
                 echo "L'utilisateur n'est pas connecté.";
             }
@@ -111,8 +112,8 @@ class userController {
             if ($user == false || $user == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
             } else if ($user != null) {
-                $json = json_encode(utf8_encode($user->get_id()), JSON_UNESCAPED_UNICODE);
-            echo($json);
+                $json = json_encode($user->get_id(), JSON_UNESCAPED_UNICODE);
+                echo($json);
             }
         } else {
             echo "Il n'y a pas de session.";
