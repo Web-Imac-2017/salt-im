@@ -64,15 +64,24 @@ export default class ProfileView extends Component {
             .then( (data) => {this.setState({dataComment:data})});
     }
 
-    handleCommentClick() {
+    handleCommentClick(e) {
+        this.clicked(this,e)
         this.setState({
             itemActive:"comments"
         })
     }
 
-    handleFavsClick() {
+    handleFavsClick(e) {
+        this.clicked(this,e)
         this.setState({
             itemActive:"favs"
+        })
+    }
+
+    handlePostsClick(e) {
+        this.clicked(this, e);
+        this.setState({
+            itemActive:"posts"
         })
     }
 
@@ -99,6 +108,29 @@ export default class ProfileView extends Component {
         return;
     }
 
+    getAllSiblings(elem) {
+        var sibs = [];
+        elem = elem.parentNode.firstChild;
+        do {
+            if (elem.nodeType === 3) continue;
+            sibs.push(elem);
+        } while (elem = elem.nextSibling)
+        return sibs;
+    }   
+
+    clicked(ctx, e) {
+        console.log("bite")
+        let ok = e.target;
+        let siblings = this.getAllSiblings(e.target);
+
+        for (var i = 0; i<3; i++){
+            siblings[i].classList.remove("profile__nav__list--active");
+        }
+
+        e.target.classList.add("profile__nav__list--active");
+
+    }
+
     render() {
         let backgroundUrlStyle = {
             backgroundImage: "url("+this.state.dataUser.avatar+")"
@@ -110,6 +142,13 @@ export default class ProfileView extends Component {
             classes += "modal--active"
 
         let dataItem = (<div/>);
+
+        switch (this.state.itemActive)
+        {
+            case "posts" : 
+            case "comments" :
+            case "favs" :
+        }
 
 
 
@@ -155,7 +194,7 @@ export default class ProfileView extends Component {
 
                 <div className="profile__nav">
                 <ul className="profile__nav__list">
-                    <li className="profile__nav__list__item profile__nav__list--active" onClick={()=>{this.setState({itemActive:"posts"})}}>Posts ({this.state.dataPost.length})</li>
+                    <li className="profile__nav__list__item profile__nav__list--active" onClick={this.handlePostsClick.bind(this)}>Posts ({this.state.dataPost.length})</li>
                     <li className="profile__nav__list__item" onClick={this.handleCommentClick.bind(this)}>Commentaires ({this.state.dataComment.length})</li>
                     <li className="profile__nav__list__item" onClick={this.handleFavsClick.bind(this)}>Favoris ({this.state.dataFav.length})</li>
                 </ul>
