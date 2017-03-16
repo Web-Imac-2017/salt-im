@@ -242,6 +242,7 @@ class TagsManager {
 
           while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
               $currentTag = $this->get($donnees['id']);
+              var_dump($currentTag);
               if (!in_array($currentTag, $fetchedTags)) {
                 $tags[] = $currentTag;
                 $fetchedTags[] = $currentTag;

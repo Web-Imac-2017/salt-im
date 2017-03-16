@@ -48,13 +48,13 @@ export default class SignIn extends Component {
         <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
             <div className="form__header">Connexion</div>
             <div className="form__input">
-                <label for="pseudo">Pseudo
+                <label htmlFor="pseudo">Pseudo
                   <input type="text" required={true} name="username" id="pseudo" placeholder="Votre pseudo (8 à 20 caractères)"
                     onChange={(event)=>{this.handleChangePseudo.bind(this)}}/>
                 </label>
             </div>
             <div className="form__input">
-                <label for="password">Mot de passe
+                <label htmlFor="password">Mot de passe
                 <input type="password" required={true} name="password" id="password" placeholder="Mot de passe"
                   onChange={this.handleChangePassword.bind(this)}/>
                 </label>

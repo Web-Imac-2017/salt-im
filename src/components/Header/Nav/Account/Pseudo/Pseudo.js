@@ -1,14 +1,28 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Pseudo.scss'
 
 
+export default class Pseudo extends Component{
+	constructor(props) {
+        super(props);
 
-export const Pseudo = () => (
-  <div>
-    <p className="user__name">ptitcon77</p>
-  </div>
-)
+        this.state = {
+            isLogged:false,
+        };
+    }
+    render() {
+    	return(
+    	<div>
+    		<p className="user__name">{this.props.username}</p>
+    	</div>
+    	)
+    }
+	 
+}
 
-export default Pseudo
+   
+
+
+
 

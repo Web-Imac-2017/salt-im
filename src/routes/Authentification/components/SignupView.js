@@ -88,25 +88,25 @@ export default class SignupView extends Component {
                 <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
                     <div className="form__header">Si vous n'êtes pas inscrit, c'est le moment de le faire !</div>
                     <div className="form__input">
-                        <label for="mail">Mail
+                        <label htmlFor="mail">Mail
                             <input type="text" required={true} name="mail" id="mail" placeholder="Insérez votre mail"
                                    onChange={this.handleChangeMail.bind(this)}/>
                         </label>
                     </div>
                     <div className="form__input">
-                        <label for="username">Pseudo
+                        <label htmlFor="username">Pseudo
                             <input className={pseudoClass} type="text" required={true} name="username" id="username" placeholder="Votre pseudo (8 à 20 caractères)"
                                    onChange={this.handleChangePseudo.bind(this)}/>
                         </label>
                     </div>
                     <div className="form__input">
-                        <label for="password">Mot de passe
+                        <label htmlFor="password">Mot de passe
                             <input className={passwordClass} type="password" required={true} name="password" id="password" placeholder="Mot de passe"
                                    onChange={this.handleChangePassword.bind(this)}/>
                         </label>
                     </div>
                     <div className="form__input">
-                        <label for="passwordconfirmation">Confirmation du mot de passe
+                        <label htmlFor="passwordconfirmation">Confirmation du mot de passe
                             <input ref="passconfirm" className={passwordClass} type="password" required={true} name="passwordconfirmation" id="passconfirm" placeholder="Mot de passe"
                             onChange={this.handleChangePasswordConfirmation.bind(this)}/>
                         </label>
