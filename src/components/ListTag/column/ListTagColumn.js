@@ -8,7 +8,7 @@ export const ListTagColumn = (props) => {
     if(props.data.map != undefined  ){
         let tagsNode = props.data.map( (elmt,i) => {
             if(i < props.size)
-                return (<Tag key={i} idTag={i} data={elmt}/>);
+                return (<Tag key={i} data={elmt}/>);
         })
 
         return (

@@ -54,12 +54,7 @@ export default class PostPreview extends Component {
           .then((object) => {
             this.setState({dataComments: object})
           })
-
-
-
     }
-
-
 
     componentWillReceiveProps(nextProps) {
         this.loadUser(nextProps.data.user_id);
@@ -83,10 +78,9 @@ export default class PostPreview extends Component {
                 </div>
                 <div className="preview__right">
                     <div className="preview__content">
-                        <div className="preview__comments">{this.state.dataComments.length}</div>
                         <div className="preview__title">{this.props.data.title}</div>
                         <div className="preview__description">{this.props.data.text}</div>
-                        <PreviewActions data={this.props.data} dataUser={this.props.dataUser} stats={this.state.dataStat}/>
+                        <PreviewActions data={this.props.data} dataUser={this.props.dataUser} stats={this.state.dataStat} nbComment={this.state.dataComments.length}/>
                         <div className="preview__infos">
                             <div className="preview__author">{this.state.dataUser}</div>
                             <div className="preview__date">le {this.props.data.date}</div>

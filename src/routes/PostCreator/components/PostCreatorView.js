@@ -54,29 +54,11 @@ export default  class PostCreatorView extends Component {
         fetch(utils.getFetchUrl()+"/p/post/add/8",
               {
                   method: "post",
-                  body: new FormData(self.refs.form),
+                  body: new FormData(this.refs.form),
               })
             .then((res) => {
                 return res.text();
             }).then((data) => {
-                let datap = "success";
-                if(datap == "success"){
-                    this.launchFetchImage();
-                }
-            })
-    }
-
-    launchFetchImage() {
-
-        fetch(utils.getFetchUrl()+"/media/25/img",
-              {
-                  method: "post",
-                  body: new FormData(this.refs.formB),
-              })
-            .then((res) => {
-                return res.text();
-            })
-            .then((data) => {
                 let datap = "success";
                 if(datap == "success"){
                     this.launchSuccessCreation();
@@ -107,7 +89,7 @@ export default  class PostCreatorView extends Component {
 
         return (
             <div className="postcreator center">
-                <form className="form" onSubmit={this.handleSubmit.bind(this)} ref="formA">
+                <form enctype="multipart/form-data" className="form" onSubmit={this.handleSubmit.bind(this)} ref="form">
                     <div className="form__header">Nouveau post</div>
                     <div className="form__input">
                         <label for="title">Titre
@@ -145,21 +127,19 @@ export default  class PostCreatorView extends Component {
                             />
                         </label>
                     </div>
-                    <form enctype="multipart/form-data" ref="formB">
 
-                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
 
-                        <div className="form__input form__input--side flex">
-                            <div className="form__title">image du post</div>
-                            <input type="file" name="userfile"/>
-                        </div>
-                    </form>
+                    <div className="form__input form__input--side flex">
+                        <div className="form__title">image du post</div>
+                        <input type="file" name="userfile"/>
+                    </div>
 
                     <input type="hidden" value={locale_date_string} name="date" />
                     <input type="hidden" value={3} name="user_id"/>
-                    <input type="hidden" value="post" name="type"/>
+                    <input type="hidden" value="post" name="flair"/>
                     <input type="hidden" value={this.state.type} name="type"/>
-                    <input type="submit" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
+                    <input type="submit" className="submitButton" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
                     <div className={classSuccess}>Le post a bien été créé</div>
                 </form>
             </div>

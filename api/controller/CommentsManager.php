@@ -152,12 +152,13 @@ class CommentsManager {
           $orderby = ' ORDER BY publication.date';     
       } else if ($order == "sel") {
            
-            
+          
       } else if ($order == "poivre") {
            
           
       } else if ($order == "humour") {
             
+          
       }
       
       // Sélectionne les id des comments qui correspondent

@@ -29,10 +29,17 @@ export default class TagView extends Component {
 
         return (
             <div className="tagview">
-                <p className="tagview__titleTrends">Tags tendances</p>
+                <div className="tagview__titles">
+                    <p className="tagview__titles__titleTrends">Tags tendances</p>
+                    <Link to="/tag/create">
+                        <button className="tagview__titles__addTrends">+ Ajouter un tag</button>
+                    </Link>
+                </div>
+
                 <ListTagColumn data={this.state.tagdata } size={10} />
 
                 <p className="tagview__titleAll">Retrouvez tous les tags</p>
+
                 <ListTagLine data={this.state.tagdata} line={this.state.line}/>
 
             </div>
