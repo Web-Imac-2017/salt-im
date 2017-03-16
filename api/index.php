@@ -30,8 +30,8 @@ $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'v
 // $router->addRule('p/help/', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
-$router->addRule('p/all/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
-$router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
+$router->addRule('p/all/order/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
+$router->addRule('p/all/stat/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
 
 
 // comment routes
@@ -64,11 +64,12 @@ $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'))
 $router->addRule('tag/add/:id', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 $router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by_id'));
+$router->addRule('tag/p/:id', array('controller' => 'tag', 'action' => 'tag_from_post'));
 
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
-// route de recherche qui marche maitenant
+// route de recherche qui marche maintenant
 
 // search routes
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));

@@ -89,7 +89,7 @@
      $id = (int) $id;
 
      // Récupère le subject
-     $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'" AND type = "post"');
+     $q = $this->_db->query('SELECT id, title, flair, type, publication_id FROM subject WHERE id = "'.$id.'" AND type = "post"');
      $donnees = $q->fetch(PDO::FETCH_ASSOC);
      if ($donnees != false) {
          $subject = new Subject($donnees);
@@ -228,9 +228,9 @@
   }
 
     public function sortPostsByStat(){
-    // Exécute une requête de type SELECT avec les posts triés par date
+    // Exécute une requête de type SELECT avec les posts triés par taux de sel/poivre/lol
     $sort = $_GET['post_stat_id'];
-    // récupère les subjects dont le type est POST et triés par date
+    // récupère les subjects dont le type est POST et triés par sel/poivre/lol
       $q = $this->_db->query('SELECT subject.*, stat.id, stat.related_publication_id, stat.value FROM subject JOIN stat ON stat.related_publication_id = subject.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
       $subject = new Subject($donnees);

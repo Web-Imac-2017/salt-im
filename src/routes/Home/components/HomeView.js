@@ -14,7 +14,8 @@ export default class HomeView extends Component {
 
         this.state = {
             dataListPost:{},
-            dataListTags:{}
+            dataListTags:{},
+            idStat: 0
         };
     }
 
@@ -23,9 +24,18 @@ export default class HomeView extends Component {
             .then((tagResponse) => tagResponse.json())
             .then((tagData) => {this.setState({dataListTags : tagData})})
 
-        fetch(utils.getFetchUrl()+"/p/all/0")
+        fetch(utils.getFetchUrl()+"/p/all/"+this.state.idStat)
             .then((response) => response.json())
             .then((data) =>{this.setState({dataListPost : data})})
+    }
+
+    handleStatSelect = (e) => {
+        console.log(e)
+        this.setState({idStat: e})
+
+        fetch(utils.getFetchUrl()+"/p/all/"+this.state.idStat)
+               .then((response) => response.json())
+               .then((data) =>{this.setState({dataListPost : data})})
     }
 
     render() {
@@ -36,7 +46,7 @@ export default class HomeView extends Component {
                 <div className="tagview__section">
                     <div className="home__titles">
                         <p className="home__title">Les salés du jour</p>
-                        <Filter/>
+                        <Filter onChange={this.handleStatSelect} />
                     </div>
                     <ListPost data={this.state.dataListPost} dataUser={this.props.dataUser}/>
                 </div>
