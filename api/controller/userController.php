@@ -56,6 +56,10 @@ class userController {
             session_start();
         }
     }
+    
+    public function close() {
+        session_write_close();
+    }
 
     public function login() {
         include "connect.php";

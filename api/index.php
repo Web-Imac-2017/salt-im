@@ -54,6 +54,7 @@ $router->addRule('u/islogged/:id', array('controller' => 'user', 'action' => 'is
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
 $router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
 $router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
+$router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close'));
 
 //tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
