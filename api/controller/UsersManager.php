@@ -290,7 +290,6 @@ public function reconnect_from_cookie($cookie, $session){
     public function search_users($search){
       // liste des users
       $users = [];
-
       $fetchedUsers = [];
       $searchClean = preg_replace('!\s+!', ' ', $search);
       // tableau des mots recherchés
