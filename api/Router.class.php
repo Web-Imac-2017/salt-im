@@ -10,7 +10,7 @@
  * Router permettant la mise en place du pattern MVC
  * Permet un routage simple ou à base de règle de routage.
  * Supporte également le routage multilingue
- * 
+ *
  * @version 1.2.2
  * @copyright  2007-2012 Olivier ROGER <roger.olivier[ at ]gmail.com>
  *
@@ -99,22 +99,22 @@ class Router
      * @var string
      */
     private $errorAction;
-	
+
 	/**
 	 * Le router gère t'il les url du type site.com/fr/controller/action
-	 * @var boolean 
+	 * @var boolean
 	 */
 	private $isMultiLangue	= false;
-	
+
 	/**
 	 * Code langue choisie
-	 * @var string 
+	 * @var string
 	 */
 	private $codeLangue		= '';
-	
+
     /**
      *Liste des traductions pour les url multilingues
-     * @var array 
+     * @var array
      */
 	private $tradController;
 
@@ -140,7 +140,7 @@ class Router
         //Permet de nettoyer l'url des éventuels sous dossier
         $tabUrl     = $this->formatUrl($url, $script);
         $isCustom   = false;
-        
+
         //Supression des éventuelles parties vides de l'url
         $this->clear_empty_value($tabUrl);
 
@@ -166,7 +166,7 @@ class Router
         $this->action       = (!empty($this->action)) ? $this->action : $this->defaultAction;
         $ctrlPath           = str_replace('_', DIRECTORY_SEPARATOR, $this->controller); // Gestion des sous dossiers dans les controllers
         $this->file         = realpath($this->path) . DIRECTORY_SEPARATOR . $ctrlPath . '.php';
-        
+
 		//is_file bien plus rapide que file_exists
         if (!is_file($this->file))
         {
@@ -180,7 +180,7 @@ class Router
         include $this->file;
 
         $class      = $this->controller . 'Controller';
-        
+
 		if(!empty($this->codeLangue))
 			$controller = new $class($this->getParameters(),$this->codeLangue);
 		else
@@ -255,7 +255,7 @@ class Router
         {
             if($this->isMultiLangue)
 				$this->codeLangue = array_shift ($items);
-			
+
 			$this->controller   = array_shift($items);
             $this->action       = array_shift($items);
 			$size = count($items);
@@ -267,7 +267,7 @@ class Router
 				}
 			else
 				$this->params = $items;
-			
+
 			//Permet d'avoir des URL multilingue
 			if(!empty($this->tradController))
 			{
@@ -277,7 +277,7 @@ class Router
 					if(!empty($controller))
 						$this->controller = $controller;
 				}
-				
+
 				if(isset($this->tradController[$this->codeLangue][$this->controller]['actionsNames'][$this->action]))
 				{
 					$action = $this->tradController[$this->codeLangue][$this->controller]['actionsNames'][$this->action];
@@ -301,21 +301,21 @@ class Router
 
         $this->path = $path;
     }
-	
+
 	/**
 	 * Défini le router comme pouvant gérer ou non le multinlangue
-	 * @param boolean $is 
+	 * @param boolean $is
 	 */
 	public function setMultiLangue($is)
 	{
 		$this->isMultiLangue = $is;
 	}
-	
+
 	/**
 	 * Défini un tableau permettant d'avoir des URL multi langue.
-	 * Format du tableau : 
-	 * 
-	 * @param array $trad format : 
+	 * Format du tableau :
+	 *
+	 * @param array $trad format :
 	 * $urlTraduction = array(
 		'fr'=>array(
 			'accueil'=>array(
@@ -395,7 +395,7 @@ class Router
 
         return array_values($tabUrl);
     }
-    
+
     /**
      * Constructeur
      */

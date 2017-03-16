@@ -1,0 +1,35 @@
+@import '../styles/core.scss';
+
+.tagsColumn{
+	&__list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 10px;
+
+        @include mobile {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 5px;            
+        }
+        @include tablet-only {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;            
+        }
+        @include tabpor {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;            
+        }
+	}
+}
+
+.loader {
+    position: absolute;
+    left: 50%;
+    width: 75px;
+    height: 75px;
+    display: flex;
+}
+
+.loader__wrapper {
+    position:relative;
+    height:80px;
+}

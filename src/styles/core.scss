@@ -1,21 +1,219 @@
 @import 'base';
+@import 'mixins';
 @import '~normalize.css/normalize';
+@import url('https://fonts.googleapis.com/css?family=Cousine:400,700|Karla:400,700');
+
+$karla : "Karla", sans-serif;
+$cousine : "Cousine", monospace;
+
+a:visited, a:hover, a:link, a:active{
+    outline: 0;
+}
+
+
+// Colors.
+$darkblue: #4D71BA;
+$cyan : #3DAEAA;
+$backcolor:#F7FAFF;
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background:$backcolor;
 }
 
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+.flex {
+    display:flex;
+
+    &-4 {
+        flex:4;
+    }
+
+    &-3 {
+        flex:3;
+    }
+
+    &-7 {
+        flex:7;
+    }
+
+    &-6 {
+        flex:6;
+    }
+}
+
+.modal {
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    transform:translateY(100vh);
+    transition:0.7s;
+
+    .stop {
+        max-height: 400px;
+        margin: 0 auto;
+        width: auto;
+        display: block;
+    }
+
+    .error-text {
+        color:red;
+    }
+
+    .form, form {
+        margin:0 !important;
+    }
+
+    &__filter {
+        background:black;
+        opacity:0;
+    }
+}
+
+.modal__filter {
+    background:black;
+    width:100%;
+    height:100%;
+    position:absolute;
+    opacity:0;
+    transition:0.5s;
+}
+
+.modal--active {
+    transform:translateY(0vh);
+
+    .modal__filter {
+        opacity:0.3;
+    }
+}
+
+.modal__wrapper {
+    background:#f7faff;
+    width:70%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:50px;
+    color:black;
+}
+
+.error-text {
+    color:red;
+    font-family: $karla;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.stop {
+    max-height: 350px;
+    margin: 0 auto;
+    width: auto;
+    display: block;
+}
+
+iframe {
+    border:0;
+}
+
+
+.bigger {
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    transform:translateY(100vh);
+    z-index: 100;
+    transition:0.7s;
+
+    &__filter {
+        background:black;
+        opacity: 0;
+        width:100%;
+        height:100%;
+        transition:0.7s;
+    }
+
+    &__wrapper {
+        width:100%;
+        height:100%;
+        position: absolute;
+        left:0;
+        top:0;
+
+        img, .iframeWrapper {
+            width:auto;
+            height:auto;
+            max-height:95%;
+            max-width: 95%;
+            margin: 0 auto;
+            display: block;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+
+        .iframeWrapper {
+            width:90%;
+            height:90%;
+
+            iframe {
+                width:100%;
+                height:100%;
+            }
+        }
+    }
+
+    &__close {
+        position:absolute;
+        right:20px;
+        top:20px;
+        z-index: 10000;
+        cursor:pointer;
+        width:60px;
+        height:60px;
+    }
+
+    &--active {
+        transform:translateY(0);
+
+        .bigger__filter {
+            opacity: 0.9;
+        }
+    }
+}
+
+.success {
+    display:none;
+
+    &--active {
+        margin-top: 20px;
+        color:#2ecc71;
+        font-family: $karla;
+        font-weight: 800;
+        display:block;
+    }
 }

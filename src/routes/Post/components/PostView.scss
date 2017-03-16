@@ -1,0 +1,93 @@
+@import '../../../styles/core.scss';
+
+$valTop:50px;
+
+.center{
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding:0 20px;
+    position:relative;
+}
+
+.postdata {
+    position:relative;
+    @include mobile {
+        .preview__tags {
+            padding-bottom:10px !important;
+        }
+
+        .preview__actions {
+            overflow-x:hidden;
+        }
+    }
+    &__top {
+        background:white;
+        position: relative;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+        &:before {
+            content:"";
+            display: block;
+            width: 100%;
+            height: 100px;
+            top:-100px;
+            position: absolute;
+            background:white;
+            left: 0;
+        }
+    }
+
+    .linkdata {
+        &__left {
+            background-size:cover;
+            background-position:center;
+        }
+
+        @include mobile {
+            display:block;
+            &__left {
+                height: calc(100vw - 40px);
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .content-wrapper {
+        padding: $valTop 0;
+        position:relative;
+    }
+
+    &__signal {
+        position:absolute;
+        top:$valTop;
+        right: 0;
+        font-family: $cousine;
+        font-weight: bolder;
+
+        @include mobile {
+            right: 20px !important;
+        }
+
+        &:after {
+            content:"";
+            display:block;
+            height:1px;
+            width:100%;
+            bottom:0;
+            left:0;
+            background:black;
+        }
+    }
+}
+
+.post {
+    &__commentBlock {
+        &__titles {
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}

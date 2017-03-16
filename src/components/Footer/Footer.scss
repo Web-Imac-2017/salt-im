@@ -1,0 +1,12 @@
+@import '../../styles/core.scss';
+
+.footer {
+    text-align:center;
+    padding: 20px 0;
+    font-family: $cousine;
+}
+
+.route--active {
+  font-weight: bold;
+  text-decoration: underline;
+}

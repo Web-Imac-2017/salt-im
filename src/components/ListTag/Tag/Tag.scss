@@ -1,0 +1,52 @@
+@import '../styles/core.scss';
+
+.tag{
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	align-content: center;
+	jusify-content: center;
+	margin-bottom: 40px;
+	flex-basis: 20%;
+
+	&__img{
+		width: 180px;
+		height: 310px;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		&:after{
+			content: "";
+			display: block;
+			position: relative;
+			top: 0;
+			left: 0;
+			background: linear-gradient(125deg, rgba(17, 27, 247, 0.48), rgba(0, 255, 194, 0.57));
+			width: 100%;
+			height: 100%;
+			opacity: 0.65;
+		}
+	}
+
+	&__title{
+		font-family: $karla;
+		font-weight: 700;
+		margin-top: 15px;
+		font-size: 1.3em;
+	}
+
+	@include mobile {
+
+		margin-right: 20px;
+		margin-bottom: 5px;
+
+		&__title {
+			font-size: 1em;
+		}
+
+	    &__img {
+	    	width: 30vw;
+	    	height: 45vw;
+	    }
+	}
+}

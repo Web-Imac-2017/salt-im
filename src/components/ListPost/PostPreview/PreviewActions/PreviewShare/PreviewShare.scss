@@ -1,0 +1,97 @@
+@import '../../../../../styles/core.scss';
+
+.previewshare {
+    display:block;
+    position:fixed;
+    top:0;
+    width: 100%;
+    height:100%;
+    left:0;
+    transform:translateY(100vh);
+    transition: 0.7s;
+    z-index: 10;
+
+    &__title {
+        font-family: $cousine;
+        font-size: 20px;
+    }
+
+    &__filter {
+        background:black;
+        opacity:0;
+
+        position:absolute;
+        width:100%;
+        height:100%;
+    }
+
+    &--active {
+        transform:translateY(0);
+
+        .previewshare__filter {
+            opacity: 0.7;
+        }
+    }
+
+    &__close {
+        position:absolute;
+        right: 0;
+        top:0;
+        cursor: pointer;
+    }
+
+    &__wrapper {
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        background:white;
+        padding:40px;
+        width:50%;
+    }
+
+    &__buttons {
+        display:flex;
+        margin-top:10px;
+
+        button {
+            flex:1;
+            margin:10px;
+            border: 0;
+            background: linear-gradient(90deg,#4e71ba,#3d9bae);
+            padding: 10px;
+            color: white;
+            font-family: $cousine;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &__input {
+        width:100%;
+        padding:10px;
+
+    }
+
+    &__copy {
+        position:relative;
+    }
+
+    &__copybutton {
+        position: absolute;
+        right:0;
+        top:0;
+        height:100%;
+        padding: 12px 10px 8px 10px;
+        background:linear-gradient(90deg,#4e71ba,#3d9bae);
+        color:white;
+        font-family: $karla;
+        cursor: pointer;
+    }
+}

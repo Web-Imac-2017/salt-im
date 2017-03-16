@@ -1,19 +1,51 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
-export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
-    <Header />
-    <div className='core-layout__viewport'>
-      {children}
-    </div>
-  </div>
-)
+import utils from '../../../public/utils.js'
+
+
+export default class CoreLayout extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        dataUser:null,
+      };
+    }
+
+    loadUser(){
+
+        fetch(utils.getFetchUrl()+"/u/islogged/1")
+            .then((data) => {return data.text()})
+            .then((data) => {
+                this.setState({dataUser:data})
+            })
+    }
+
+    componentWillMount() {
+        setTimeout(() => {
+            this.loadUser();
+        },1)
+    }
+
+    render() {
+        return (
+            <div className='container text-center'>
+              <Header dataUser={this.state.dataUser}/>
+              <div className='core-layout__viewport'>
+                {React.cloneElement(this.props.children, {
+                  dataUser:this.state.dataUser
+                })}
+              </div>
+              <Footer />
+            </div>
+        )
+    }
+}
 
 CoreLayout.propTypes = {
   children : React.PropTypes.element.isRequired
 }
-
-export default CoreLayout

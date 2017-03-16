@@ -1,8 +1,4 @@
 <?php
-
-require_once "UsersManager.php";
-require_once "User.php";
-
 class StatsManager {
   private $_db; // Instance de PDO.
 
@@ -15,7 +11,7 @@ class StatsManager {
   {
     // Préparation de la requête d'insertion.
     $q = $this->_db->prepare('INSERT INTO stat(name, value) VALUES("'.$stat->get_name().'", "'.$stat->get_value().'")');
-    
+
     // Exécution de la requête.
     $q->execute();
   }
@@ -57,8 +53,7 @@ class StatsManager {
     // Retourne les 3 stats d'un post
     $stats = [];
     $q = $this->_db->query('SELECT name, value FROM stat
-      WHERE related_element_type = "0"
-      AND related_element_id = "'.$id.'"');
+      WHERE related_publication_id = "'.$id.'"');
 
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
@@ -67,14 +62,13 @@ class StatsManager {
 
     return $stats;
   }
-  
+
   public function getStatUser($id)
   {
     // Retourne les 3 stats d'un post
     $stats = [];
     $q = $this->_db->query('SELECT name, value FROM stat
-      WHERE related_element_type = "1"
-      AND related_element_id = "'.$id.'"');
+      WHERE related_user_id = "'.$id.'"');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $stats[] = new Stat($donnees);
@@ -112,8 +106,7 @@ class StatsManager {
     else {
       // update les stats de la publication
       $q1 = $this->_db->prepare('UPDATE stat SET value = value+1
-        WHERE related_element_id = "'.$id.'"
-        AND related_element_type = "0"
+        WHERE related_publication_id = "'.$id.'"
         AND name = "'.$name.'"');
 
       // récupérer l'auteur de la publication
@@ -124,7 +117,7 @@ class StatsManager {
       
       // update les stats de l'auteur
       $q3 = $this->_db->prepare('UPDATE stat SET value = value+1
-        WHERE related_element_id = "'.$name.'"
+        WHERE related_user_id = "'.$user.'"
         AND name = "'.$name.'"');
 
       // change la table vote
@@ -139,16 +132,16 @@ class StatsManager {
   public function cancelVote($id, $name)
   {
     $q1 = $this->_db->prepare('UPDATE stat SET value = value-1
-      WHERE related_element_id = "'.$id.'"
-      AND related_element_type = "0"
+      WHERE related_publication_id = "'.$id.'"
       AND name = "'.$name.'"');
 
     $q2 = $this->_db->query('SELECT user_id FROM publication WHERE id = "'.$id.'"');
     $donnees = $q2->fetch(PDO::FETCH_ASSOC);
+    $user_manager = new UsersManager($this->_db);
     $user = $donnees->get($donnees['user_id']);
     
     $q3 = $this->_db->prepare('UPDATE stat SET value = value-1
-      WHERE related_element_id = "'.$name.'"
+      WHERE related_user_id = "'.$user.'"
       AND name = "'.$name.'"');
 
     $q1->execute();
@@ -160,7 +153,7 @@ class StatsManager {
   {
     // Prépare une requête de type UPDATE.
     $q = $this->_db->prepare('UPDATE stat SET name = "'.$stat->get_name().'", value = "'.$stat->get_value().'" WHERE id = "'.$stat->get_id().'"');
-      
+
     // Exécution de la requête.
     $q->execute();
   }
@@ -170,5 +163,3 @@ class StatsManager {
     $this->_db = $db;
   }
 }
-
-?>

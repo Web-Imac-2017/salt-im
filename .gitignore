@@ -1,7 +1,8 @@
 .DS_STORE
 *.log
-
+./api/controller/connect.php
 node_modules
+./api/.htaccess
 
 dist
 coverage

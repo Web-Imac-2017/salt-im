@@ -11,7 +11,7 @@
    {
      $this->_db = $db;
    }
- 
+
 
    public function add(Subject $subject)
    {
@@ -21,12 +21,12 @@
      $this->_db->exec('INSERT INTO subject(title, flair, type, publication_id) VALUES("'.$subject->get_title().'", "'.$subject->get_flair().'", "'.$subject->get_type().'", "'.$publication_id.'")');
      $subject_id = $this->_db->lastInsertId();
 
-     $this->_db->exec('INSERT INTO stat(name, value, related_publication_id) VALUES("0", "0", "'.$publication_id.'")');
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("0", "0", NULL, "'.$publication_id.'")');
 
-     $this->_db->exec('INSERT INTO stat(name, value, related_publication_id) VALUES("1", "0", "'.$publication_id.'")');
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("1", "0", NULL, "'.$publication_id.'")');
 
-     $this->_db->exec('INSERT INTO stat(name, value, related_publication_id) VALUES("2", "0", "'.$publication_id.'")');
-       
+     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("2", "0", NULL, "'.$publication_id.'")');
+
        $subject2 = $this->get($subject_id);
        return $subject2;
 
@@ -119,7 +119,7 @@
      return $subject;
 
    }
-     
+
      public function postFromUser($id) {
         $subjects = [];
 
@@ -130,9 +130,9 @@
           $q2 = $this->_db->query('SELECT id FROM subject WHERE publication_id = '.$donnees['id']);
           $ids = $q2->fetch(PDO::FETCH_ASSOC);
             if($ids != false && $this->get($ids['id']) != null) {
-                $subjects[] = $this->get($ids['id']);  
+                $subjects[] = $this->get($ids['id']);
             }
-                  
+
         }
          return $subjects;
      }
@@ -166,7 +166,7 @@
 
      return $subject;
    }
-     
+
 
   public function sort_date(){
     // Exécute une requête de type SELECT avec les posts triés par date
@@ -204,14 +204,12 @@
       $fetchedSubjects = [];
 
       $searchClean = preg_replace('!\s+!', ' ', $search);
-      
+
       // tableau des mots recherchés
       $searchTab = explode(" ", $searchClean);
-      print_r($searchTab);
 
       // taille du tableau (nombre de mots)
       $searchSize = count($searchTab);
-      print_r($searchSize);
 
       // pour chaque mot, effectuer une recherche
       for ($i = 0; $i < $searchSize; $i++) {
@@ -226,8 +224,7 @@
               }
           }
       }
-      
-      echo $search;
+
       return $subjects;
   }
 }

@@ -1,0 +1,50 @@
+@import '../../../styles/core.scss';
+
+$valTop:50px;
+
+.postcreator{
+    margin-top: 50px;
+}
+
+.postdata {
+    position:relative;
+    &__top {
+        background:white;
+        position: relative;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+        &:before {
+            content:"";
+            display: block;
+            width: 100%;
+            height: 100px;
+            top:-100px;
+            position: absolute;
+            background:white;
+            left: 0;
+        }
+    }
+
+    .content-wrapper {
+        padding: $valTop 0;
+        position:relative;
+    }
+
+    &__signal {
+        position:absolute;
+        top:$valTop;
+        right: 0;
+        font-family: $cousine;
+        font-weight: bolder;
+
+        &:after {
+            content:"";
+            display:block;
+            height:1px;
+            width:100%;
+            bottom:0;
+            left:0;
+            background:black;
+        }
+    }
+}
