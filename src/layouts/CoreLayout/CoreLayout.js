@@ -34,7 +34,7 @@ export default class CoreLayout extends Component {
 
     getUser(data){
       console.log(data);
-      fetch(utils.getFetchUrl()+"/u/get/"+data)
+      fetch(utils.getFetchUrl()+"/u/get/1")
           .then((data) => {return data.json()})
           .then((data) => {
               this.setState({dataUser:data})
@@ -58,11 +58,11 @@ export default class CoreLayout extends Component {
     }
 
     componentDidMount() {
-      this.endSession();
+      //this.endSession();
     }
 
     componentWillUnmount() {
-      this.endSession();
+      //this.endSession();
     }
 
     render() {
