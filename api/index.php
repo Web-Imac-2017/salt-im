@@ -17,6 +17,7 @@ $router->setErrorControllerAction('error', 'alert');
 // media routes
 $router->addRule('media/:id', array('controller' => 'media', 'action' => 'index'));
 $router->addRule('media/:id/img', array('controller' => 'media', 'action' => 'img'));
+$router->addRule('p/:id/media/add', array('controller' => 'media', 'action' => 'add'));
 
 // post routes
 $router->addRule('p/post/add/:id', array('controller' => 'post', 'action' => 'add'));
