@@ -67,6 +67,7 @@ class userController {
         }
 
     public function autologin() {
+        var_dump($_COOKIE);
         if(isset($_COOKIE)) {
             $isloggedin = $manager->reconnect_from_cookie($_COOKIE, $_SESSION);
         }

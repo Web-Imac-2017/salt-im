@@ -51,11 +51,10 @@ export default  class PostCreatorView extends Component {
             isSubmitDisabled:true,
         })
 
-
         fetch(utils.getFetchUrl()+"/p/post/add/8",
               {
                   method: "post",
-                  body: new FormData(this.refs.formA),
+                  body: new FormData(self.refs.form),
               })
             .then((res) => {
                 return res.text();
