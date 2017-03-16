@@ -150,6 +150,15 @@ class postController  {
         }
     }
 
+
+    public function sort_stat(){
+        include "connect.php";
+        $manager = new SubjectsManager($db);
+        subject = $manager->sort_stat($_POST['id_stat']);
+        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+        echo $json;
+    }
+
     public function jsonSerialize(Subject $subject) {
         // Represent your object using a nested array or stdClass,
         $data = array(
@@ -165,6 +174,7 @@ class postController  {
         // in the way you want it arranged in your API
         return $data;
     }
+
 
     public function jsonSerializeArray(array $subjects) {
         // Represent your object using a nested array or stdClass,
