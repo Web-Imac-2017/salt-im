@@ -30,13 +30,14 @@ $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'v
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
-$router->addRule('p/all/:stat'), array('controller' => 'post', 'action' => 'sort_stat'));
+$router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
 
 // comment routes
 $router->addRule('comment/get/:id', array('controller' => 'comment', 'action' => 'index'));
 $router->addRule('comment/u/:id', array('controller' => 'comment', 'action' => 'commentFromUser'));
 $router->addRule('comment/add/:id', array('controller' => 'comment', 'action' => 'add'));
 $router->addRule('comment/add/comment/:id', array('controller' => 'comment', 'action' => 'addToComment'));
+$router->addRule('p/comment/:id/:sort', array('controller' => 'comment', 'action' => 'sortCommentsByStat'));
 
 // user routes
 $router->addRule('u/signup/:id', array('controller' => 'user', 'action' => 'signup'));
