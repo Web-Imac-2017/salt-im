@@ -93,7 +93,8 @@ export default class PreviewActions extends Component {
 
 
     statValueId=(i)=>{
-
+        if(!this.props.stats)
+            return
         if(this.props.stats[i])
             return this.props.stats[i].value;
         else

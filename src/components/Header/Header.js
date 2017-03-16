@@ -56,7 +56,7 @@ export default class Header extends Component {
           <Account dataUser={this.props.dataUser}/>
         </div>
 
-        <BigSearch isOpen={this.state.isOpen} />
+        <BigSearch isOpen={this.state.isOpen} handleClose={this.handleChangeBigSearch.bind(this)} />
       </div>
     );
   }
