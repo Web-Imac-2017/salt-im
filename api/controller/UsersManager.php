@@ -246,9 +246,7 @@ public function getSubjects(User $user) {
           if($stmt->rowCount() > 0) {
              if(sha1('gz'.$data['password']) == $userRow['password']) {
                 setcookie('user_session', $userRow['token'], time() + 60 * 60 * 24 * 365);
-                setcookie('login', array(
-                    'username' => utf8_encode($data['username'])
-                ), time() + 60 * 60 * 24 * 365);
+                setcookie('login', utf8_encode($data['username']), time() + 60 * 60 * 24 * 365);
                  echo(json_encode(utf8_encode($userRow['id'])));
                 return true;
              }
