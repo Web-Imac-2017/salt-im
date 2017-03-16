@@ -201,7 +201,8 @@ class postController  {
                     'text' => utf8_encode($subjects[$i]->get_text()),
                     'date' => utf8_encode($subjects[$i]->get_date()),
                     'user_id' => utf8_encode($subjects[$i]->get_user_id()),
-                    'media_id' => utf8_encode($subjects[$i]->get_media_id())
+                    'media_id' => utf8_encode($subjects[$i]->get_media_id()),
+                    'publication_id' => utf8_encode($subjects[$i]->get_publication_id())
                 );
                 $data[] = $c;
         }

@@ -61,6 +61,7 @@ $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'))
 $router->addRule('tag/add/:id', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 $router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by_id'));
+$router->addRule('tag/p/:id', array('controller' => 'tag', 'action' => 'tag_from_post'));
 
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));

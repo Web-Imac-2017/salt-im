@@ -89,7 +89,7 @@
      $id = (int) $id;
 
      // Récupère le subject
-     $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE id = "'.$id.'" AND type = "post"');
+     $q = $this->_db->query('SELECT id, title, flair, type, publication_id FROM subject WHERE id = "'.$id.'" AND type = "post"');
      $donnees = $q->fetch(PDO::FETCH_ASSOC);
      if ($donnees != false) {
          $subject = new Subject($donnees);
