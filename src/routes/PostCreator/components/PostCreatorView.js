@@ -46,7 +46,6 @@ export default  class PostCreatorView extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        let self = this;
 
         this.setState({
             isSubmitDisabled:true,
@@ -62,46 +61,30 @@ export default  class PostCreatorView extends Component {
             }).then((data) => {
                 let datap = "success";
                 if(datap == "success"){
-                  this.launchSuccessCreation();
-                  //this.launchFetchImage();
+                    console.log("yop")
+                    this.launchFetchImage();
                 }
             })
     }
 
-    launchFetchImage(response) {
+    launchFetchImage() {
 
-        fetch(utils.getFetchUrl()+"/media/" + response.id + "/img",
+        fetch(utils.getFetchUrl()+"/media/25/img",
               {
                   method: "post",
-                  body: new FormData(self.refs.formB),
+                  body: new FormData(this.refs.formB),
               })
             .then((res) => {
                 return res.text();
             })
             .then((data) => {
                 let datap = "success";
-                if(datap == "success")
+                if(datap == "success"){
+                    console.log("yep")
                     this.launchSuccessCreation();
+                }
             })
     }
-
-    /* launchFetchImage(response) {
-
-     *     fetch("http://localhost/salt-im/api/media/" + response.id + "/img",
-     *           {
-     *               method: "post",
-     *               body: new FormData(self.refs.formB),
-     *           })
-     *         .then((res) => {
-     *             return res.text();
-     *         })
-     *         .then((data) => {
-     *             let datap = "success";
-     *             if(datap == "success")
-     *                 this.launchSuccessCreation();
-     *         })
-
-     * }*/
 
     launchSuccessCreation() {
         this.setState({
@@ -122,7 +105,7 @@ export default  class PostCreatorView extends Component {
             classSuccess += " success--active";
 
         if(!this.props.dataUser)
-          return(<Redirection/>)
+            return(<Redirection/>)
 
         return (
             <div className="postcreator center">

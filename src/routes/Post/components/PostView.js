@@ -36,8 +36,10 @@ export default class PostView extends Component {
       <div className="post">
         <PostData data={this.state.postdata} nbComment={this.state.nbComment} dataUser={this.props.dataUser}/>
         <div className="post__commentBlock center">
-            <p className="tagview__titleAll">Commentaires</p>
-            <Filter/>
+            <div className="post__commentBlock__titles">
+              <p className="tagview__titleAll">Commentaires</p>
+              <Filter/>
+            </div>
             <ListComment getNbComments={this.handleNbComments.bind(this)} id={this.state.postdata.id}/>
         </div>
       </div>

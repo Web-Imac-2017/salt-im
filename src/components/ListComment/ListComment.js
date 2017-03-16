@@ -58,7 +58,7 @@ export default class ListComment extends Component {
             <div className="listComment">
                 <form ref="form" onSubmit={this.handleSubmit.bind(this)} className="gocomment">
                     <textarea type="text" name="text" rows="4"/>
-                    <input type="submit" value="envoyer"/>
+                    <input className="listComment__submitButton" type="submit" value="envoyer"/>
                 </form>
                 <div className="listComment__commentwrapper">
                     {commentsNode}

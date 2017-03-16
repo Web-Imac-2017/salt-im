@@ -71,7 +71,7 @@ export default class Comment extends Component {
                     <div className="comment__answer" onClick={this.toggleComment.bind(this)}>répondre</div>
                     <form ref="form" onSubmit={this.handleSubmit.bind(this)} className={this.state.isCommentShown ? "comment__form comment__form--active" : "comment__form"}>
                         <textarea type="text" name="text" cols="4"/>
-                        <input type="submit" value="envoyer"/>
+                        <input className="comment__answer__submit__button" type="submit" value="envoyer"/>
                     </form>
 
                 </div>
