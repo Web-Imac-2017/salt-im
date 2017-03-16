@@ -50,13 +50,28 @@ class tagController {
         $tag = $manager->get($id);
         $manager->img($tag, $_FILES);
     }
+
+        public function search_tag() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        if (!isset($_POST['searchTag']))
+            echo "Please provide keywords";
+        else {
+            $tag = $manager->search_tag($_POST['searchTag']);
+            $json = json_encode($this->jsonSerializeArray($tag), JSON_UNESCAPED_UNICODE);
+            echo $json;
+        }
+    }
     
     public function jsonSerialize($tag) {
         // Represent your object using a nested array or stdClass,
                 $c = array(
-                    'name' => utf8_encode($tag->get_name()),
-                    'img_url' => utf8_encode($tag->get_img_url()),
-                    'description' => utf8_encode($tag->get_description())
+
+                    'id' => utf8_encode($stat[$i]->get_id()),
+                    'name' => utf8_encode($tags[$i]->get_name()),
+                    'img_url' => utf8_encode($tags[$i]->get_img_url()),
+                    'description' => utf8_encode($tags[$i]->get_description())
+
                 );
         // in the way you want it arranged in your API
         return $c;
@@ -67,6 +82,7 @@ class tagController {
         $data = [];
         for($i=0; $i<count($tags); $i++) {
                 $c = array(
+                    'id' => utf8_encode($stat[$i]->get_id()),
                     'name' => utf8_encode($tags[$i]->get_name()),
                     'img_url' => utf8_encode($tags[$i]->get_img_url()),
                     'description' => utf8_encode($tags[$i]->get_description())
