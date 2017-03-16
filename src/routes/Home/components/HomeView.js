@@ -21,7 +21,7 @@ export default class HomeView extends Component {
     componentDidMount() {
         fetch(utils.getFetchUrl()+"/tag/all")
             .then((tagResponse) => tagResponse.json())
-            .then((tagData) => {this.setState({dataListTags : Data})})
+            .then((tagData) => {this.setState({dataListTags : tagData})})
 
         fetch("http://www.json-generator.com/api/json/get/bSmxnPKrma?indent=2")
             .then((response) => response.json())
@@ -33,7 +33,7 @@ export default class HomeView extends Component {
             <div className="home center">
                 <SearchBar/>
                 <p className="tagview__titleTrends">Tags tendances</p>
-                <ListTagColumn data={this.state.dataListTags}/>
+                <ListTagColumn data={this.state.dataListTags} size={5}/>
                 <div className="tagview__section">
                     <div className="home__titles">
                         <p className="tagview__titleTrends">Les salés du jour</p>

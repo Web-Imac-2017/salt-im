@@ -62,7 +62,6 @@ export default  class PostCreatorView extends Component {
             }).then((data) => {
                 let datap = "success";
                 if(datap == "success"){
-                    console.log("yop")
                     this.launchFetchImage();
                 }
             })
@@ -81,7 +80,6 @@ export default  class PostCreatorView extends Component {
             .then((data) => {
                 let datap = "success";
                 if(datap == "success"){
-                    console.log("yep")
                     this.launchSuccessCreation();
                 }
             })
