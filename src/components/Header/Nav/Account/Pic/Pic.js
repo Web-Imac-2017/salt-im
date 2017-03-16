@@ -1,10 +1,22 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { IndexLink, Link } from 'react-router'
 import './Pic.scss'
 
-export const Pic = () => (
-  <div className="user__img"></div>
-)
+export default class Pic extends Component{
+	constructor(props) {
+        super(props);
 
-export default Pic
+        this.state = {
+            isLogged:false,
+        };
+    }
+    render() {
+    	return(
+    	<div>
+    		 <div className="user__img">{this.props.avatar}</div>
+    	</div>
+    	)
+    }
+	 
+}
 

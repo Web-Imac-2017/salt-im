@@ -52,7 +52,7 @@ export default class Header extends Component {
         <div className="header__right">
           {addPostContent}
           <Research changeSearch={this.handleChangeBigSearch.bind(this)}/>
-
+          
           <Account dataUser={this.props.dataUser}/>
         </div>
 
