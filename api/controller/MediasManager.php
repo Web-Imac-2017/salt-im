@@ -13,6 +13,8 @@ class MediasManager {
       
     // Exécution de la requête.
     $q->execute();
+      
+    return $this->get($this->db->lastInsertId());
   }
 
   public function delete(Media $media)
