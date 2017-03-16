@@ -32,6 +32,8 @@ $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
 $router->addRule('p/all/order/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
 $router->addRule('p/all/stat/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
+//$router->addRule('p/all/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
+$router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
 
 
 // comment routes
