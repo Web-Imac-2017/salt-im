@@ -31,8 +31,8 @@ $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'v
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
 $router->addRule('p/all/order/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
-$router->addRule('p/all/stat/:id', array('controller' => 'post', 'action' => 'sortPostsByStat'));
-$router->addRule('p/all/date', array('controller' => 'post', 'action' => 'sort_date'));
+$router->addRule('p/all/stat/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
+
 
 // comment routes
 $router->addRule('comment/get/:id', array('controller' => 'comment', 'action' => 'index'));

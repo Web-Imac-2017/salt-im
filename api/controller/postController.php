@@ -165,19 +165,11 @@ class postController  {
         }
     }
 
+
     public function sortPostsByStat(){
         include "connect.php";
-        $sort = $this->id;
         $manager = new SubjectsManager($db);
-        $subject = $manager->sortPostsByStat($sort);
-        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
-        echo $json;
-    }
-    
-    public function sort_date() {
-        include "connect.php";
-        $manager = new SubjectsManager($db);
-        $subject = $manager->sort_date();
+        $subject = $manager->sortPostsByStat($_GET['post_stat_id']);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
