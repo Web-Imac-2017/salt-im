@@ -60,7 +60,7 @@ $router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add/:id', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
-
+$router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by_id'));
 
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));

@@ -6,6 +6,7 @@ import Tags from './Tags'
 import PostCreator from './PostCreator'
 import TagCreator from './TagCreator'
 import Tag from './Tag'
+import Vicos from './Vicos'
 import Profile from './Profile'
 import Authentification from './Authentification'
 import Page404 from './Page404'
@@ -21,6 +22,11 @@ const postRoute = {
 const tagsRoute = {
   path: 'tags',
   indexRoute: Tags
+}
+
+const vicosRoute = {
+  path: 'vicos',
+  indexRoute: Vicos
 }
 
 let CreatePostRoute = {
@@ -62,6 +68,7 @@ export const createRoutes = (store) => ({
     postRoute,
     tagsRoute,
     tagRoute,
+    vicosRoute,
     profileRoute,
     authentificationRoute,
     page404Route
