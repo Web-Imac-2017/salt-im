@@ -32,11 +32,11 @@ export default class HomeView extends Component {
         return(
             <div className="home center">
                 <SearchBar/>
-                <p className="tagview__titleTrends">Tags tendances</p>
+                <p className="home__title">Tags tendances</p>
                 <ListTagColumn data={this.state.dataListTags} size={5}/>
                 <div className="tagview__section">
                     <div className="home__titles">
-                        <p className="tagview__titleTrends">Les salés du jour</p>
+                        <p className="home__title">Les salés du jour</p>
                         <Filter/>
                     </div>
                     <ListPost data={this.state.dataListPost} dataUser={this.props.dataUser}/>

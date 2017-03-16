@@ -55,6 +55,10 @@
         text-align: right;
         padding-right: 20px;
         cursor: pointer;
+
+        &:hover {
+            color:rgb(77, 113, 186);
+        }
         
 
         &:after {
@@ -75,5 +79,6 @@
         font-family : $karla;
         font-size : 1.2em;
         display: inline-block;
+        margin-right: 15px;
     }
 
