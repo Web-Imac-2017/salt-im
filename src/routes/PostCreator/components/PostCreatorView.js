@@ -159,7 +159,7 @@ export default  class PostCreatorView extends Component {
                     <input type="hidden" value={3} name="user_id"/>
                     <input type="hidden" value="post" name="type"/>
                     <input type="hidden" value={this.state.type} name="type"/>
-                    <input type="submit" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
+                    <input type="submit" className="submitButton" value="Ajouter un post" disabled={this.state.isSubmitDisabled}/>
                     <div className={classSuccess}>Le post a bien été créé</div>
                 </form>
             </div>

@@ -63,7 +63,6 @@ $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 $router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by_id'));
 
 
-
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
 // route de recherche qui marche pas
