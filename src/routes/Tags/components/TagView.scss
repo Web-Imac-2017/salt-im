@@ -30,8 +30,9 @@
             font-family: $cousine;
             &:hover{
                 cursor: pointer;
-                background: #000;
+                background:linear-gradient(90deg,#4e71ba,#3d9bae);
                 color: #fff;
+                border : 1px solid #3d9bae;
             }
         }
     }

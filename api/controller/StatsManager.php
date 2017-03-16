@@ -112,8 +112,11 @@ class StatsManager {
       // récupérer l'auteur de la publication
       $q2 = $this->_db->query('SELECT user_id FROM publication WHERE id = "'.$id.'"');
       $donnees[] = $q2->fetch(PDO::FETCH_ASSOC);
+      var_dump($donnees);
       $user_manager = new UsersManager($this->_db);
+      var_dump($user_manager);
       $user = $user_manager->get($donnees['user_id']);
+      var_dump($user);
       
       // update les stats de l'auteur
       $q3 = $this->_db->prepare('UPDATE stat SET value = value+1
@@ -121,10 +124,13 @@ class StatsManager {
         AND name = "'.$name.'"');
 
       // change la table vote
+      $q4 = $this->_db->prepare('INSERT INTO vote (user_id, publication_id, name)
+        VALUES ("'.$user.'", "'.$id.'", "'.$name.'"');
 
       $q1->execute();
       $q2->execute();
       $q3->execute();
+      $q4->execute();
       return true;
     }
   }
@@ -144,6 +150,12 @@ class StatsManager {
       WHERE related_user_id = "'.$user.'"
       AND name = "'.$name.'"');
 
+    // change la table vote
+    $q4 = $this->_db->prepare('DELETE FROM vote
+      WHERE user_id = "'.$user.'"
+      AND publication_id = "'.$id.'"
+      AND name = "'.$name.'"');
+    
     $q1->execute();
     $q2->execute();
     $q3->execute();

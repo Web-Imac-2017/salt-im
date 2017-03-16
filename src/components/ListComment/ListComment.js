@@ -19,8 +19,6 @@ export default class ListComment extends Component {
         fetch(utils.getFetchUrl()+'/p/comment/3')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.size())
-                console.log(data.length)
                 this.props.getNbComments(data.length);
                 this.setState({commentData:data});
             })

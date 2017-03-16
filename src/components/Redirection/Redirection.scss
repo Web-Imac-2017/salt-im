@@ -1,0 +1,24 @@
+@import '../styles/core.scss';
+
+.redirection {
+
+	position:relative;
+	width:100%;
+	margin-top:30vh;
+	margin-bottom:3em;
+	text-align:center;
+
+	&__text {
+		font-family: $karla;
+		font-size: 2.7em;
+		text-align: center;
+	}
+
+	&__link {
+		font-family: $karla;
+		font-size: 2.7em;
+		color: #4e71ba;
+		margin-top: 1em;
+		margin-bottom: 25vh;
+	}
+}
