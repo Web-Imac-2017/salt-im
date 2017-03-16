@@ -70,7 +70,6 @@ class userController {
             $isloggedin = $manager->login($_POST);
         }
 
-        var_dump($_SESSION);
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
             } else {
@@ -79,7 +78,6 @@ class userController {
         }
 
     public function autologin() {
-        var_dump($_COOKIE);
         if(isset($_COOKIE)) {
             $isloggedin = $manager->reconnect_from_cookie($_COOKIE, $_SESSION);
         }
@@ -113,8 +111,15 @@ class userController {
             if ($user == false || $user == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
             } else if ($user != null) {
-                $json = json_encode(utf8_encode($user->get_id()), JSON_UNESCAPED_UNICODE);
-            echo($json);
+
+                $c = array(
+                    'id' => utf8_encode($user->get_id())
+                );
+
+                $json = json_encode($c, JSON_UNESCAPED_UNICODE);
+                echo($json);
+            } else {
+                echo("fail");
             }
         } else {
             echo "Il n'y a pas de session.";
