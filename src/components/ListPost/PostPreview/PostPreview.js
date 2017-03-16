@@ -39,7 +39,7 @@ export default class PostPreview extends Component {
     }
 
     loadStat(id) {
-        fetch(utils.getFetchUrl()+'/p/'+this.props.params.id+'/stat/') //à remplacer par id du post qd c gud
+        fetch(utils.getFetchUrl()+'/p/'+this.props.data.id+'/stat/') //à remplacer par id du post qd c gud
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataStat: object})
