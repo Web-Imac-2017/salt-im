@@ -30,7 +30,11 @@ $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'v
 // $router->addRule('p/help/', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
+<<<<<<< HEAD
+$router->addRule('p/all/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
+=======
 $router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
+>>>>>>> 3ece735acc5ea0600b205fc78fb53b2f4d0843a6
 
 // comment routes
 $router->addRule('comment/get/:id', array('controller' => 'comment', 'action' => 'index'));
@@ -55,6 +59,7 @@ $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getSta
 $router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
 $router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
 $router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close'));
+$router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
 
 // tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
@@ -64,6 +69,8 @@ $router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by
 
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
+
+// route de recherche qui marche maitenant
 
 // search routes
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
