@@ -143,6 +143,8 @@ class postController  {
         return $this->id;
     }
 
+
+
     public function help() {
         include "connect.php";
         $manager = new SubjectsManager($db);
@@ -167,7 +169,7 @@ class postController  {
     public function sortPostsByStat(){
         include "connect.php";
         $manager = new SubjectsManager($db);
-        $subject = $manager->sort_posts_by_stat($_POST['post_stat_id']);
+        $subject = $manager->sortPostsByStats($_GET['post_stat_id']);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }

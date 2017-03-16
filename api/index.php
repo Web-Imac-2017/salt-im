@@ -27,10 +27,12 @@ $router->addRule('p/u/:id', array('controller' => 'post', 'action' => 'postFromU
 $router->addRule('p/:id/stat/up/:name', array('controller' => 'stat', 'action' => 'upVote'));
 $router->addRule('p/:id/stat/cancel/:name', array('controller' => 'stat', 'action' => 'cancelVote'));
 $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'voteStatus'));
-$router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
+// $router->addRule('p/help/', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
+$router->addRule('p/all/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
 $router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
+
 
 // comment routes
 $router->addRule('comment/get/:id', array('controller' => 'comment', 'action' => 'index'));
@@ -55,6 +57,7 @@ $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getSta
 $router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
 $router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
 $router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close'));
+$router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
 
 // tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
@@ -66,6 +69,8 @@ $router->addRule('tag/p/:id', array('controller' => 'tag', 'action' => 'tag_from
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
+// route de recherche qui marche maintenant
+
 // search routes
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
 $router->addRule('search/t/:search', array('controller' => 'tag', 'action' => 'search_tags'));
@@ -73,6 +78,10 @@ $router->addRule('search/u/:search', array('controller' => 'user', 'action' => '
 
 // tag de débug A SUPPRIMER QUAND FINI
 $router->addRule('u/test/:id', array('controller' => 'user', 'action' => 'test'));
+
+
+// routes qui marchent pas
+$router->addRule('p/help/', array('controller' => 'post', 'action' => 'help'));
 
 
 $router->load();

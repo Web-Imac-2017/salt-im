@@ -141,12 +141,12 @@
      // Exécute une requête de type SELECT récupérant les posts dont le type est HELP
 
      // récupère les subjects dont le type est HELP
-      $q = $this->_db->query('SELECT id, title, flair, type FROM subject WHERE type = "help"');
+      $q = $this->_db->query('SELECT * FROM subject WHERE type = "help"');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
       $subject = new Subject($donnees);
 
       // Récupère l'id de la publication associée
-      $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$id.'"');
+      $q = $this->_db->query('SELECT publication_id FROM subject JOIN publication ON publication.id = subject.publication_id');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
       // Récupère les données de la publication
@@ -154,7 +154,7 @@
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
       // Récupère l'id du media de la publication
-      $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
+      $q = $this->_db->query('SELECT id FROM media JOIN publication ON publication.id = media.publication_id');
       $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
 
       // Rajoute les infos manquantes de subject
@@ -228,9 +228,9 @@
   }
 
     public function sortPostsByStat(){
-    // Exécute une requête de type SELECT avec les posts triés par date
-    $sort = $_POST['post_stat_id'];
-    // récupère les subjects dont le type est POST et triés par date
+    // Exécute une requête de type SELECT avec les posts triés par taux de sel/poivre/lol
+    $sort = $_GET['post_stat_id'];
+    // récupère les subjects dont le type est POST et triés par sel/poivre/lol
       $q = $this->_db->query('SELECT subject.*, stat.id, stat.related_publication_id, stat.value FROM subject JOIN stat ON stat.related_publication_id = subject.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
       $subject = new Subject($donnees);

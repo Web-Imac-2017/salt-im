@@ -108,7 +108,7 @@ class commentController  {
     public function sortCommentsByStat() {
         include "connect.php";
         $manager = new CommentsManager($db);
-        $comment = $manager->sort_comments_by_stat($_POST['comment_stat_id']);
+        $comment = $manager->sort_comments_by_stat($_GET['comment_stat_id']);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }

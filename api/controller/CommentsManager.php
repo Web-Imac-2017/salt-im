@@ -251,7 +251,7 @@ class CommentsManager {
 
 public function sortCommentsByStat(){
     // Exécute une requête de type SELECT avec les posts triés par date
-    $sort = $_POST['comment_stat_id'];
+    $sort = $_GET['comment_stat_id'];
     // récupère les subjects dont le type est POST et triés par date
       $q = $this->_db->query('SELECT comment.*, stat.id, stat.related_publication_id, stat.value FROM comment JOIN stat ON stat.related_publication_id = comment.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
