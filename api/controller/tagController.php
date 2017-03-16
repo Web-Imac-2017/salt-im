@@ -34,6 +34,8 @@ class tagController {
         try {
             $tag = $manager->add($tag);
             echo "Le tag a bien été envoyé !";
+            $json = json_encode($this->jsonSerialize($tag),JSON_UNESCAPED_UNICODE);
+            echo $json;
         }
         catch(Exception $e) {
             echo "Oops le tag n'a pas pu être envoyé : " . $e->getMessage();
@@ -47,6 +49,21 @@ class tagController {
         $id = $this->id;
         $tag = $manager->get($id);
         $manager->img($tag, $_FILES);
+    }
+    
+    public function jsonSerialize($tag) {
+        // Represent your object using a nested array or stdClass,
+        $data = [];
+        for($i=0; $i<count($tags); $i++) {
+                $c = array(
+                    'name' => utf8_encode($tags[$i]->get_name()),
+                    'img_url' => utf8_encode($tags[$i]->get_img_url()),
+                    'description' => utf8_encode($tags[$i]->get_description())
+                );
+                $data[] = $c;
+        }
+        // in the way you want it arranged in your API
+        return $data;
     }
 
     public function jsonSerializeArray(array $tags) {
