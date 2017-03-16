@@ -177,7 +177,7 @@ class Router
         }
 
         //Inclusion du controller
-        require_once $this->file;
+        //require_once $this->file;
 
         $class      = $this->controller . 'Controller';
 
