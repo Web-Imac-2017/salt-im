@@ -32,6 +32,7 @@ export default class Comment extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        console.log(this.props.data[0].id)
         let url = "/comment/add/comment/"+this.props.data[0].id;
 
         fetch(utils.getFetchUrl()+url,

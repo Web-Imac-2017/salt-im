@@ -15,17 +15,19 @@ class BigSearch extends Component {
     };
   }
 
+  handleLinkClick() {
+    this.props.handleClose();
+  }
+
   handleChangeSearch(event){
     this.setState({search: event.target.value});
     fetch(utils.getFetchUrl()+'/search/p/' + event.target.value,
-              {
-                  method: "post",
-                  body: new FormData(this.refs.formA),
-              })
-            .then( (response) => response.json())
-            .then( (data) => {this.setState({results:data})});
-
-
+      {
+          method: "post",
+          body: new FormData(this.refs.form),
+      })
+      .then( (response) => response.json())
+      .then( (data) => {this.setState({results:data})});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,17 +37,26 @@ class BigSearch extends Component {
   }
 
   render() {
-    console.log(this.state.results);
+    console.log(this.state.isOpen)
     let classes = "bigsearch";
     let resultClass = "results";
 
-    if(this.state.isOpen)
-    {
+    if(this.state.isOpen){
         classes += " bigsearch--open"
     }
 
-    if(this.state.search != "")
+    if(this.state.search != "" && this.state.isOpen)
       resultClass +=" results--open"
+
+    let nodeSearch = (<div/>)
+    if(this.state.results.length) {
+      nodeSearch = this.state.results.map((elmt,i) => {
+        let url = "/post/"+elmt.id
+        return(
+          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.title}</Link></li>
+        )
+      })
+    }
 
     return (
       <div>
@@ -61,10 +72,7 @@ class BigSearch extends Component {
             <div className="results__wrapper">
               <h1> Posts </h1>
                 <ul>
-                  <li>manger des pates</li>
-                  <li>manger des anus</li>
-                  <li>manger la chatte à la voisine</li>
-                  <li>manger son sexe</li>
+                  {nodeSearch}
                 </ul>
             </div>
           </div>

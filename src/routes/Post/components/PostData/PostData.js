@@ -11,7 +11,7 @@ export default class PostData extends Component {
       super(props);
 
       this.state = {
-        dataMedia:{},
+        dataMedia:null,
         dataUser:""
       };
     }
@@ -27,7 +27,9 @@ export default class PostData extends Component {
     componentWillReceiveProps(nextProps) {
         const myInit = {method: 'POST'};
         fetch(utils.getFetchUrl()+'/media/'+nextProps.data.media_id)
-          .then((response) => response.json())
+          .then((response) => {
+            return response.json()
+          })
           .then((object) => {
             this.setState({dataMedia: object})
             this.loadUser(nextProps.data.user_id);
