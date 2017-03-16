@@ -38,7 +38,7 @@ export default class TagView extends Component {
 
                 <ListTagColumn data={this.state.tagdata } size={10} />
 
-                <p className="tagview__titleAll">Retrouvez tous les tags</p>
+                <p className="tagview__titles__titleTrends">Retrouvez tous les tags</p>
 
                 <ListTagLine data={this.state.tagdata} line={this.state.line}/>
 
