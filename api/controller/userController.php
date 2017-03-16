@@ -1,7 +1,5 @@
 <?php
 
-// require_once "User.php";
-
 require_once "UsersManager.php";
 
 class userController {
@@ -44,6 +42,20 @@ class userController {
             echo "Oops l'utilisateur n'a pas pu être envoyé : " . $e->getMessage();
         }
     }
+    
+    public function signup_dirty() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        $user = new User($_POST);
+        try {
+            if($manager->get($user->get_id()) == null) {
+                $manager->add_dirty($user);
+                echo "L'utilisateur a bien été ajouté.";
+            }
+        } catch(Exception $e) {
+            echo "Oops l'utilisateur n'a pas pu être envoyé : " . $e->getMessage();
+        }
+    }
 
     public function signout() {
         include "connect.php";
@@ -68,6 +80,22 @@ class userController {
 
         if($isloggedin != true) {
             $isloggedin = $manager->login($_POST);
+        }
+
+            if($isloggedin == true) {
+                echo "L'utilisateur est connecté.";
+            } else {
+                echo "L'utilisateur n'est pas connecté.";
+            }
+        }
+    
+    public function login_dirty() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        $isloggedin = false;
+
+        if($isloggedin != true) {
+            $isloggedin = $manager->login_dirty($_POST);
         }
 
             if($isloggedin == true) {
@@ -126,6 +154,30 @@ class userController {
         }
 
     }
+    
+    public function who_dirty() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        if(isset($_COOKIE)) {
+            $user = $manager->who_is_logged_in($_COOKIE);
+            if ($user == false || $user == null) {
+                echo "Aucun utilisateur ne correspond à cette session.";
+            } else if ($user != null) {
+                $u = (int) $user->get_id();
+                $c = array(
+                    'id' => utf8_encode($u)
+                );
+
+                $json = json_encode($c, JSON_UNESCAPED_UNICODE);
+                echo($json);
+            } else {
+                echo("fail");
+            }
+        } else {
+            echo "Il n'y a pas de session.";
+        }
+
+    }
 
     public function is_logged() {
         include "connect.php";
@@ -133,6 +185,15 @@ class userController {
         $manager = new UsersManager($db);
         $user = $manager->get($id);
         $answer = is_logged_in($user, $_SESSION);
+        echo($answer);
+    }
+    
+    public function is_logged_dirty() {
+        include "connect.php";
+        $id = $this->id;
+        $manager = new UsersManager($db);
+        $user = $manager->get($id);
+        $answer = is_logged_in($user, $_COOKIE);
         echo($answer);
     }
 

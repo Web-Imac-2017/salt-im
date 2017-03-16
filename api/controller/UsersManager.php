@@ -26,6 +26,23 @@ class UsersManager {
     $_SESSION['id'] = $user->get_id();
     $_SESSION['pseudo'] = $user->get_username();
   }
+    
+ public function add_dirty(User $user) {
+    // Préparation de la requête
+    $pass_hache = sha1('gz'.$user->get_password());
+
+    $this->_db->exec('INSERT INTO user(mail, username, password, avatar, birthDate, rank, signupDate, badge_id, token) VALUES("'.$user->get_mail().'", "'.$user->get_username().'", "'.$pass_hache.'", "'.$user->get_avatar().'", "'.$user->get_birthDate().'", "0", "'.date("Y-m-d H:i:s").'", "1", "'.$this->createToken($user->get_username()).'")');
+    $user_id = $this->_db->lastInsertId();
+
+    $this->_db->exec('INSERT INTO stat(name, value, related_publication_id, related_user_id) VALUES("0", "0", null, "'.$user_id.'")');
+
+    $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("1", "0", null, "'.$user_id.'")');
+
+    $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("2", "0", null, "'.$user_id.'")');
+     
+     setcookie('id', $user->get_id(), time() + 60 * 60 * 24 * 365);
+     setcookie('pseudo', $user->get_username(), time() + 60 * 60 * 24 * 365);
+  }
 
   public function delete(User $user) {
     // Exécute une requête de type DELETE.
@@ -219,6 +236,25 @@ public function getSubjects(User $user) {
              }
           }
        }
+    
+    public function login_dirty($data) {
+          if (session_status() != PHP_SESSION_DISABLED) {
+              session_start();
+          }
+          $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
+          $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+          if($stmt->rowCount() > 0) {
+             if(sha1('gz'.$data['password']) == $userRow['password']) {
+                setcookie('user_session', $userRow['token'], time() + 60 * 60 * 24 * 365);
+                setcookie('login', utf8_encode($data['username']), time() + 60 * 60 * 24 * 365);
+                 echo(json_encode(utf8_encode($userRow['id'])));
+                return true;
+             }
+             else {
+                return false;
+             }
+          }
+       }
 
     public function createToken($data) {
     $tokenGeneric = "saltyh0rse";
@@ -268,7 +304,6 @@ public function reconnect_from_cookie($cookie, $session){
         } else {
             return false;
         }
-
     }
 
     public function is_logged_in(User $user, $session) {

@@ -15,7 +15,7 @@ export default class HomeView extends Component {
         this.state = {
             dataListPost:{},
             dataListTags:{},
-            idStat: 0
+            idStat: 1
         };
     }
 
@@ -24,7 +24,7 @@ export default class HomeView extends Component {
             .then((tagResponse) => tagResponse.json())
             .then((tagData) => {this.setState({dataListTags : tagData})})
 
-        fetch(utils.getFetchUrl()+"/p/all/"+this.state.idStat)
+        fetch(utils.getFetchUrl()+"/p/all/stat/"+this.state.idStat)
             .then((response) => response.json())
             .then((data) =>{this.setState({dataListPost : data})})
     }
