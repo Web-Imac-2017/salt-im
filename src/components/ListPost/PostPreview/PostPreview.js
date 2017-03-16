@@ -16,6 +16,7 @@ export default class PostPreview extends Component {
         dataUser:"",
         dataMedia:"",
         dataStat:{},
+        dataComments:{},
         score:this.props.state,
       };
     }
@@ -35,15 +36,27 @@ export default class PostPreview extends Component {
               this.setState({dataMedia: object})
               this.loadUser(this.props.data.user_id);
               this.loadStat(this.props.data.user_id);
+              this.loadCommentsNumber(this.props.data.user_id);
             })
     }
 
     loadStat(id) {
-        fetch(utils.getFetchUrl()+'/p/'+this.props.params.id+'/stat/') //à remplacer par id du post qd c gud
+        fetch(utils.getFetchUrl()+'/p/'+id+'/stat/') //à remplacer par id du post qd c gud
           .then((response) => response.json())
           .then((object) => {
             this.setState({dataStat: object})
           })
+    }
+
+    loadCommentsNumber(id){
+        fetch(utils.getFetchUrl()+'/p/comment/'+id) //à remplacer par id du post qd c gud
+          .then((response) => response.json())
+          .then((object) => {
+            this.setState({dataComments: object})
+          })
+
+
+        
     }
 
 
@@ -66,10 +79,11 @@ export default class PostPreview extends Component {
         return(
             <div className="preview">
                 <div className="preview__left">
-                    <PreviewLeft data={this.state.dataMedia} id={this.props.data.id}/>
+                    <PreviewLeft data={this.state.dataMedia} id={this.props.data.id}/>                    
                 </div>
                 <div className="preview__right">
                     <div className="preview__content">
+                        <div className="preview__comments">{this.state.dataComments.length}</div>
                         <div className="preview__title">{this.props.data.title}</div>
                         <div className="preview__description">{this.props.data.text}</div>
                         <PreviewActions data={this.props.data} dataUser={this.props.dataUser} stats={this.state.dataStat}/>
