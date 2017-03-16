@@ -227,17 +227,16 @@
       return $subjects;
   }
 
-    public function sortPostsByStat($sort){
+    public function sortPostsByStat(){
     // Exécute une requête de type SELECT avec les posts triés par taux de sel/poivre/lol
-      $sort = (int)$sort-1;
+    $sort = ((int)$_GET['post_stat_id'])-1;
     // récupère les subjects dont le type est POST et triés par sel/poivre/lol
       $q = $this->_db->query('SELECT subject.*, stat.id, stat.related_publication_id, stat.value FROM subject JOIN stat ON stat.related_publication_id = subject.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
       $subject = new Subject($donnees);
-      $subjects = [];
 
       // Récupère l'id de la publication associée
-      $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$donnees['publication_id'].'"');
+      $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$id.'"');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
       // Récupère les données de la publication
@@ -245,7 +244,7 @@
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
       // Récupère l'id du media de la publication
-      $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$donnees['publication_id'].'"');
+      $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
       $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
 
       // Rajoute les infos manquantes de subject
@@ -254,17 +253,6 @@
       $subject->set_user_id($donnees['user_id']);
       $subject->set_media_id($donnees_media['id']);
 
-      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-        {
-          $q2 = $this->_db->query('SELECT id FROM subject WHERE publication_id = '.$donnees['id']);
-          $ids = $q2->fetch(PDO::FETCH_ASSOC);
-            if($ids != false && $this->get($ids['id']) != null) {
-                $subjects[] = $this->get($ids['id']);
-            }
-
-        }
-
-      return $subjects;
+      return $subject;
   }
-
 }
