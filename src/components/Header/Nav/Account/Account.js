@@ -14,7 +14,6 @@ export default class Account extends Component{
     }
 
     render() {
-        console.log(this.props.dataUser);
         if(!this.props.dataUser) {
             return (
                 <div className="accountWrapper">
