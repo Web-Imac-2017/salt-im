@@ -35,7 +35,13 @@ export default class SignIn extends Component {
             return res.text();
         }).then((data) => {
           console.log(data);
+          this.handleErrors(data);
         })
+  }
+
+  handleErrors(data){
+    if(data.includes("n'est pas connecté"))
+      this.setState({nbFail:this.state.nbFail+1})
   }
 
   render() {
