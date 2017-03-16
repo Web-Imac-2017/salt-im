@@ -154,7 +154,7 @@ class postController  {
     public function sort_stat(){
         include "connect.php";
         $manager = new SubjectsManager($db);
-        subject = $manager->sort_stat($_POST['id_stat']);
+        $subject = $manager->sort_stat($_POST['id_stat']);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
