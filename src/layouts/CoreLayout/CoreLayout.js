@@ -18,7 +18,7 @@ export default class CoreLayout extends Component {
 
     loadUser(){
 
-        fetch(utils.getFetchUrl()+"/u/islogged/1")
+        fetch(utils.getFetchUrl()+"/u/session/1")
             .then((data) => {return data.text()})
             .then((data) => {
                 this.setState({dataUser:data,})
