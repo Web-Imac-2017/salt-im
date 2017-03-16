@@ -20,11 +20,6 @@
             font-size: 3.4em;
             font-weight: 700;
             color: #000;
-
-            @include mobile {
-                margin-bottom:10px;
-                font-size: 1.3em;
-            }
         }
         &__addTrends{
             background: none;
