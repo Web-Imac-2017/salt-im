@@ -10,10 +10,12 @@ export const Tag = (props) => {
     if(props.line){
         return(
             <div className="tag">
-
+            <Link to={link}>
                 <div className="tag__title">
                     > {props.data.name}
                 </div>
+            </Link>
+
 
             </div>
         )
@@ -22,10 +24,13 @@ export const Tag = (props) => {
     else if(props.solo){
         return(
             <div className="tag">
-                <div className="tag__title">
-                    > {props.data.name}
-                </div>
-                <div className="tag__description">{props.data.description}</div>
+                <Link to={link}>
+                    <div className="tag__title">
+                       > {props.data.name}
+                    </div>
+                
+                    <div className="tag__description">{props.data.description}</div>
+                </Link>
             </div>
         )
     }
@@ -38,10 +43,11 @@ export const Tag = (props) => {
             <Link to={link}>
                 <div className="tag__img" style={backgroundUrlStyle}></div>
             </Link>
-
-            <div className="tag__title">
-                {props.data.name}
-            </div>
+            <Link to={link}>
+                <div className="tag__title">
+                    {props.data.name}
+                </div>
+            </Link>
 
         </div>
     )
