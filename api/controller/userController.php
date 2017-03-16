@@ -205,7 +205,7 @@ class userController {
         if (!isset($_POST['search']))
             echo "Please provide keywords";
         else {
-            $subject = $manager->search_users("lu");
+            $subject = $manager->search_users($_POST['search']);
             $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
             echo $json;
         }
