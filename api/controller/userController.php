@@ -50,6 +50,10 @@ class userController {
         $manager = new UsersManager($db);
         $manager->signout();
     }
+    
+    public function start() {
+        session_start();
+    }
 
     public function login() {
         include "connect.php";
