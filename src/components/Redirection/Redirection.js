@@ -6,9 +6,9 @@ import './Redirection.scss';
 export default class Redirection extends Component {
   render() {
     return (
-      <div className="redirection">
-        <div className="redirection__text">Vous devez être connecter pour voir cette page.</div>
-        <Link to="/auth">Authentification</Link>
+      <div className="center redirection">
+        <div className="center redirection__text">Vous devez être connecté pour voir cette page.</div>
+        <Link to="/auth"> <div className="center redirection__link">| Authentification | </div></Link>
       </div>
     )
   }
