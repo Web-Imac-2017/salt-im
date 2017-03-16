@@ -21,14 +21,14 @@ export default class CoreLayout extends Component {
         fetch(utils.getFetchUrl()+"/u/session/1")
             .then((data) => {return data.text()})
             .then((data) => {
-                this.setState({dataUser:data,})
+                this.setState({dataUser:data})
             })
     }
 
     componentWillMount() {
         setTimeout(() => {
             this.loadUser();
-        },0)
+        },1)
     }
 
     render() {
