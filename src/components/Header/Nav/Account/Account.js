@@ -23,9 +23,10 @@ export default class Account extends Component{
                 </div>
             )
         }
+
         return (
             <Link to={"/profile/"+this.props.dataUser.id} className="user">
-                <Pseudo dataUser={this.props.dataUser.username}/>
+                <Pseudo dataUser={this.props.dataUser}/>
                 <Pic dataUser={this.props.dataUser.avatar}/>
             </Link>
         )
