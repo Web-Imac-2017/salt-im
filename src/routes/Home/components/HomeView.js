@@ -23,7 +23,7 @@ export default class HomeView extends Component {
             .then((tagResponse) => tagResponse.json())
             .then((tagData) => {this.setState({dataListTags : tagData})})
 
-        fetch(utils.getFetchUrl()+"/post/all")
+        fetch(utils.getFetchUrl()+"/p/all/0")
             .then((response) => response.json())
             .then((data) =>{this.setState({dataListPost : data})})
     }
