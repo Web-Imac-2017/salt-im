@@ -68,7 +68,7 @@ $router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
-// route de recherche qui marche maitenant
+// route de recherche qui marche maintenant
 
 // search routes
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
