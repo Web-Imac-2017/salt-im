@@ -32,7 +32,7 @@ class tagController {
         $manager = new TagsManager($db);
         $tag = new Tag($_POST);
         try {
-            $manager->add($tag);
+            $tag = $manager->add($tag);
             echo "Le tag a bien été envoyé !";
         }
         catch(Exception $e) {
