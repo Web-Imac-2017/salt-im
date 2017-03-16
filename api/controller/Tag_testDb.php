@@ -21,7 +21,7 @@
     
 
 <?php
-require "Tag.php";
+//require "Tag.php";
 require "TagsManager.php";
 
 //Connexion à la base -------------------------
