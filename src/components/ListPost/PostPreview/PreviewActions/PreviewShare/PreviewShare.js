@@ -32,7 +32,7 @@ export default class PreviewShare extends Component {
                 <div className="previewshare__filter" onClick={this.toggleClose.bind(this)}/>
                 <img src="/close.svg" className="bigger__close" onClick={this.toggleClose.bind(this)}/>
                 <div className="previewshare__wrapper">
-                    <div className="previewshare__title">Partager cette article sur :</div>
+                    <div className="previewshare__title">Partager cet article sur :</div>
 
                     <div className="previewshare__buttons">
                         <FacebookButton url={url} appId={1595976023764540}>
