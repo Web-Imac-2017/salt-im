@@ -29,13 +29,13 @@ export default class PostPreview extends Component {
     }
 
     loadMedia(id) {
-        // fetch(utils.getFetchUrl()+'/media/'+id)
-        //     .then((response) => response.json())
-        //     .then((object) => {
-        //       this.setState({dataMedia: object})
-        //       this.loadUser(this.props.data.user_id);
-        //       this.loadStat(this.props.data.user_id);
-        //     })
+        fetch(utils.getFetchUrl()+'/media/'+id)
+            .then((response) => response.json())
+            .then((object) => {
+              this.setState({dataMedia: object})
+              this.loadUser(this.props.data.user_id);
+              this.loadStat(this.props.data.user_id);
+            })
     }
 
     loadStat(id) {
