@@ -8,7 +8,7 @@ require_once "SubjectsManager.php";
 
 require_once "TagsManager.php";
 
-require_once "Tag.php";
+//require_once "Tag.php";
 
 class postController  {
     
