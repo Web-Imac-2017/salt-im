@@ -81,7 +81,7 @@ class tagController {
         $data = [];
         for($i=0; $i<count($tags); $i++) {
                 $c = array(
-                    'id' => utf8_encode($stat[$i]->get_id()),
+                    'id' => utf8_encode($tags[$i]->get_id()),
                     'name' => utf8_encode($tags[$i]->get_name()),
                     'img_url' => utf8_encode($tags[$i]->get_img_url()),
                     'description' => utf8_encode($tags[$i]->get_description())
@@ -90,6 +90,19 @@ class tagController {
         }
         // in the way you want it arranged in your API
         return $data;
+    }
+
+    public function tag_by_id() {
+    include "connect.php";
+    $manager = new TagsManager($db);
+    $id = $this->id;
+    if($manager->get($id) != null) {
+        $tag = $manager->get($id);
+        $json = json_encode($this->jsonSerialize($tag),JSON_UNESCAPED_UNICODE);
+        echo $json;
+    } else {
+         echo "Aie aie aie on a pas pu récupérer le tag.";
+        }
     }
 
     // Hydrate

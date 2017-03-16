@@ -32,7 +32,6 @@ export default class Comment extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.props.data[0].id)
         let url = "/comment/add/comment/"+this.props.data[0].id;
 
         fetch(utils.getFetchUrl()+url,
@@ -43,6 +42,7 @@ export default class Comment extends Component {
             .then( (data) => data.text())
             .then( (object) => {
                 console.log(object)
+                this.props.loadComments();
             })
 
     }
@@ -73,7 +73,6 @@ export default class Comment extends Component {
                         <textarea type="text" name="text" cols="4"/>
                         <input className="comment__answer__submit__button" type="submit" value="envoyer"/>
                     </form>
-
                 </div>
                 <ListAnswer data={this.props.data[1]}/>
             </div>
