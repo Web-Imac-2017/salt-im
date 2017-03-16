@@ -130,6 +130,8 @@ class postController  {
         return $this->id;
     }
 
+
+
     public function help() {
         include "connect.php";
         $manager = new SubjectsManager($db);
