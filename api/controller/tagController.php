@@ -92,6 +92,14 @@ class tagController {
         return $data;
     }
 
+    public function get_id() {
+        return $this->id;
+    }
+
+    public function set_id($id) {
+        $this->id = $id;
+    }
+
     public function tag_by_id() {
     include "connect.php";
     $manager = new TagsManager($db);

@@ -39,8 +39,9 @@ class TagsManager {
   public function get($id)
   {
     $q = $this->_db->query('SELECT * FROM tag WHERE id = "'.$id.'"');
+    var_dump($id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
+    var_dump($donnees);
     return new Tag($donnees);
   }
 
