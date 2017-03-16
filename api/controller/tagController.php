@@ -81,7 +81,7 @@ class tagController {
         $data = [];
         for($i=0; $i<count($tags); $i++) {
                 $c = array(
-                    'id' => utf8_encode($stat[$i]->get_id()),
+                    'id' => utf8_encode($tags[$i]->get_id()),
                     'name' => utf8_encode($tags[$i]->get_name()),
                     'img_url' => utf8_encode($tags[$i]->get_img_url()),
                     'description' => utf8_encode($tags[$i]->get_description())
