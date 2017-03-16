@@ -35,6 +35,19 @@ class mediaController  {
         $media = $manager->get($id);
         $manager->img($media, $_FILES);
     }
+
+    public function add() {
+        include "connect.php";
+        $manager = new MediasManager($db);
+        $media = new Media($_POST);
+        try {
+            $manager->add($media);
+            echo "Le media a bien été envoyé !";
+        }
+        catch(Exception $e) {
+            echo "Oops le media n'a pas pu être envoyé : " . $e->getMessage();
+        }
+    }
     
     public function set_id($id) {
         $this->id = $id; 
