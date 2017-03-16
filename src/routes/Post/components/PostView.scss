@@ -89,5 +89,12 @@ $valTop:50px;
             align-items: center;
             justify-content: space-between;
         }
+
+        &__title {
+            font-family: $karla;
+            font-size: 3.4em;
+            font-weight: 700;
+            color: #000;
+        }
     }
 }
