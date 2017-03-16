@@ -81,8 +81,8 @@ $sizeIcon : 50px;
 }
 
 .icon {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-size: cover;
     background-position:center;
 
@@ -140,6 +140,7 @@ $sizeIcon : 50px;
         left: 76%;
         transform: translateX(-50%) translateY(-50%); 
         transform-origin: 50% 50%;
+        transform:scale(0);
     }    
 }
 
