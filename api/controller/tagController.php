@@ -66,11 +66,10 @@ class tagController {
     public function jsonSerialize($tag) {
         // Represent your object using a nested array or stdClass,
                 $c = array(
-
-                    'id' => utf8_encode($tags[$i]->get_id()),
-                    'name' => utf8_encode($tags[$i]->get_name()),
-                    'img_url' => utf8_encode($tags[$i]->get_img_url()),
-                    'description' => utf8_encode($tags[$i]->get_description())
+                    'id' => utf8_encode($tag->get_id()),
+                    'name' => utf8_encode($tag->get_name()),
+                    'img_url' => utf8_encode($tag->get_img_url()),
+                    'description' => utf8_encode($tag->get_description())
 
                 );
         // in the way you want it arranged in your API
