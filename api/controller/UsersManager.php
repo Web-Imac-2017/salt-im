@@ -190,9 +190,6 @@ public function getSubjects(User $user) {
     }
 
     public function logged_only() {
-        if(session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
         if(!isset($_SESSION['auth'])) {
             $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
             exit();
@@ -200,9 +197,6 @@ public function getSubjects(User $user) {
     }
 
     public function login($data) {
-        if(session_status() == PHP_SESSION_NONE){
-            session_start();
-        }
           $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
           $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
           if($stmt->rowCount() > 0) {
@@ -230,9 +224,6 @@ public function getSubjects(User $user) {
 }
 
 public function reconnect_from_cookie($cookie, $session){
-    if(session_status() == PHP_SESSION_NONE){
-        session_start();
-    }
     if(isset($cookie['user_session']) && !isset($session['login']) ){
         $remember_token = $cookie['user_session'];
         $stmt = $this->_db->query('SELECT id FROM user WHERE username = "'.$cookie['login']['username'].'" LIMIT 1');
@@ -241,7 +232,6 @@ public function reconnect_from_cookie($cookie, $session){
         if($user) {
             $expected = $user->get_token();
             if($expected == $remember_token){
-                session_start();
                 $_SESSION['login'] = array(
                     'username' => utf8_encode($user->get_username())
                 );
