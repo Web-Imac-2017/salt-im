@@ -30,7 +30,7 @@ export default class HomeView extends Component {
 
     render() {
         return(
-            <div className="home center">
+            <div className="home">
                 <p className="home__title">Tags tendances</p>
                 <ListTagColumn data={this.state.dataListTags} size={5}/>
                 <div className="tagview__section">
