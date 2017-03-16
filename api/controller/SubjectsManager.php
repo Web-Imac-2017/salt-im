@@ -29,7 +29,6 @@
 
        $subject2 = $this->get($subject_id);
        return $subject2;
-
    }
 
    public function delete(Subject $subject)
@@ -228,9 +227,9 @@
       return $subjects;
   }
 
-    public function sort_stat(){
+    public function sortPostsByStat(){
     // Exécute une requête de type SELECT avec les posts triés par date
-    $sort = $_POST['id_stat'];
+    $sort = $_POST['post_stat_id'];
     // récupère les subjects dont le type est POST et triés par date
       $q = $this->_db->query('SELECT subject.*, stat.id, stat.related_publication_id, stat.value FROM subject JOIN stat ON stat.related_publication_id = subject.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);

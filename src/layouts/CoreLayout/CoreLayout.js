@@ -17,17 +17,25 @@ export default class CoreLayout extends Component {
     }
 
     loadUser(){
+      console.log("usession")
 
-        fetch(utils.getFetchUrl()+"/u/session/1")
-            .then((data) => {return data.text()})
+        fetch(utils.getFetchUrl()+"/u/session/1",
+          {
+            mode:"no-cors",
+            credentials:"include"
+          }
+        )
+            .then((data) => {return data.json()})
             .then((data) => {
-              console.log("wow" + data);
-                this.getUser();
+              console.log("response" + data);
+              console.log(data);
+                //this.getUser(data);
             })
     }
 
-    getUser(){
-      fetch(utils.getFetchUrl()+"/u/get/1")
+    getUser(data){
+      console.log(data);
+      fetch(utils.getFetchUrl()+"/u/get/"+data)
           .then((data) => {return data.json()})
           .then((data) => {
               this.setState({dataUser:data})
@@ -35,17 +43,23 @@ export default class CoreLayout extends Component {
     }
 
     componentWillMount() {
-        setTimeout(() => {
+      fetch(utils.getFetchUrl()+"/u/start/1",{
+          })
+          .then(() => {
             this.loadUser();
-        },1)
+          })
     }
 
     endSession() {
       fetch(utils.getFetchUrl()+"/u/close/1")
-          .then((data) => {return data.text()})
+          .then((data) => {return data.json()})
           .then((data) => {
-
+            console.log(data);
           })
+    }
+
+    componentDidMount() {
+      this.endSession();
     }
 
     componentWillUnmount() {

@@ -23,14 +23,14 @@ export default class HomeView extends Component {
             .then((tagResponse) => tagResponse.json())
             .then((tagData) => {this.setState({dataListTags : tagData})})
 
-        fetch("http://www.json-generator.com/api/json/get/bSmxnPKrma?indent=2")
+        fetch(utils.getFetchUrl()+"/p/all/0")
             .then((response) => response.json())
             .then((data) =>{this.setState({dataListPost : data})})
     }
 
     render() {
         return(
-            <div className="home center">
+            <div className="home">
                 <p className="home__title">Tags tendances</p>
                 <ListTagColumn data={this.state.dataListTags} size={5}/>
                 <div className="tagview__section">

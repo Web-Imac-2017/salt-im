@@ -30,7 +30,7 @@ export default class VicosView extends Component {
         <div className="center">
           <div className="vicos">
             <h1 className="vicos__title">Cimetière des Vicos</h1>
-            <p className="vicos__subtitle">Ils ont douillé et c'est pas fini.</p>
+            <p className="vicos__subtitle">Apportez un peu de votre répartie à ces personnes en détresse !</p>
             <ListPost className="vicos__postpreview" data={this.state.postdata} />
 
           </div>

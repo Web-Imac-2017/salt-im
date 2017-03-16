@@ -10,6 +10,10 @@ require_once "TagsManager.php";
 
 require_once "Tag.php";
 
+require_once "Media.php";
+
+require_once "MediasManager.php";
+
 class postController  {
 
     private $id;
@@ -90,6 +94,15 @@ class postController  {
             for($i=0; $i<count($tag_ids); $i++) {
                 $tagmanager->addTagToPost($tag_ids[$i], $subject->get_id());
             }
+            // Ajout du media
+            $media_manager = new MediasManager($db);
+            $media = new Media(array(
+                "publication_id" => $subject->get_id()
+            ));
+            $id_media = $media_manager->add($media);
+            $media->set_id($id_media);
+            $media_manager->img($media, $_FILES);
+            
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         }
@@ -130,6 +143,8 @@ class postController  {
         return $this->id;
     }
 
+
+
     public function help() {
         include "connect.php";
         $manager = new SubjectsManager($db);
@@ -151,10 +166,11 @@ class postController  {
     }
 
 
-    public function sort_stat(){
+    public function sortPostsByStat(){
         include "connect.php";
         $manager = new SubjectsManager($db);
         $subject = $manager->sort_stat($_POST['id_stat']);
+        $subject = $manager->sort_posts_by_stat($_POST['post_stat_id']);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
