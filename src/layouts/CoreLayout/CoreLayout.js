@@ -18,12 +18,20 @@ export default class CoreLayout extends Component {
 
     loadUser(){
 
-        fetch(utils.getFetchUrl()+"/u/start/1")
+        fetch(utils.getFetchUrl()+"/u/session/1")
             .then((data) => {return data.text()})
             .then((data) => {
-              console.log(data)
-                this.setState({dataUser:data})
+              console.log("wow" + data);
+                this.getUser();
             })
+    }
+
+    getUser(){
+      fetch(utils.getFetchUrl()+"/u/get/1")
+          .then((data) => {return data.json()})
+          .then((data) => {
+              this.setState({dataUser:data})
+          })
     }
 
     componentWillMount() {
@@ -32,8 +40,16 @@ export default class CoreLayout extends Component {
         },1)
     }
 
+    endSession() {
+      fetch(utils.getFetchUrl()+"/u/close/1")
+          .then((data) => {return data.text()})
+          .then((data) => {
+
+          })
+    }
+
     componentWillUnmount() {
-      console.log("unmount");
+      this.endSession();
     }
 
     render() {

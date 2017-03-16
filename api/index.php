@@ -12,8 +12,6 @@ $router->setDefaultControllerAction('accueil','index');
 // En cas d'url invalid on appèlera le controller errorController et sa méthode alert()
 $router->setErrorControllerAction('error', 'alert');
 
-// SUR MA ROUTE OUIHIHI Y A EU DU MOUV OUIHIHI
-
 // media routes
 $router->addRule('media/:id', array('controller' => 'media', 'action' => 'index'));
 $router->addRule('media/:id/img', array('controller' => 'media', 'action' => 'img'));
@@ -56,7 +54,7 @@ $router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who
 $router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
 $router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close'));
 
-//tag routes
+// tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
 $router->addRule('tag/add/:id', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
@@ -65,7 +63,11 @@ $router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by
 
 $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
 
+<<<<<<< HEAD
 // route de recherche qui marche maitenant
+=======
+// search routes
+>>>>>>> b71c5b7e08b92991407e1c5f94ce6547116271ee
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
 $router->addRule('search/t/:search', array('controller' => 'tag', 'action' => 'search_tags'));
 $router->addRule('search/u/:search', array('controller' => 'user', 'action' => 'search_users'));
