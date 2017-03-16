@@ -93,6 +93,23 @@
         text-decoration:underline;
         cursor:pointer;
         margin-left: 120px;
+
+        &__submit {
+            &__button {
+                width:calc(100% - 120px);
+                height: 35px;
+                margin-top: 6px;
+                font-size: 16px;
+                transition:font-size ease 0.5s, opacity ease 0.5s;
+                border-radius:0;
+
+                &:hover {
+                    font-size: 18px;
+                    transition: font-size ease 0.5s, opacity ease 0.5s;
+                    opacity: 0.8;
+                }
+            }
+        }
     }
 
     &__form {
@@ -116,14 +133,6 @@
             border:0;
             background: -webkit-linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
             background: linear-gradient(90deg, rgb(78, 113, 186), rgb(61, 155, 174));
-        }
-    }
-
-    &__submit {
-        &__button {
-            width:calc(100% - 120px);
-            height: 35px;
-            margin-top: 6px;
         }
     }
 
