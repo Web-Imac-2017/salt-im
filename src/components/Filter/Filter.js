@@ -21,10 +21,10 @@ export default class Filter extends Component{
                 <span className="select__text">Filtrer par</span>
                 <div className="select__wrap">
                     <select className="select__input" onChange={this.change} value={this.state.value}>
-                        <option value={0}>taux de sel</option>
-                        <option value={1}>taux de poivre</option>
-                        <option value={2}>taux d'humour</option>
-                        <option value={3}>date</option>
+                        <option value={1}>taux de sel</option>
+                        <option value={2}>taux de poivre</option>
+                        <option value={3}>taux d'humour</option>
+                        <option value={4}>date</option>
                     </select>
                 </div>
             </div>

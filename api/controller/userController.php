@@ -114,7 +114,7 @@ class userController {
             } else if ($user != null) {
                 $u = (int) $user->get_id();
                 $c = array(
-                    'id' => utf8_encode($u);
+                    'id' => utf8_encode($u)
                 );
 
                 $json = json_encode($c, JSON_UNESCAPED_UNICODE);
