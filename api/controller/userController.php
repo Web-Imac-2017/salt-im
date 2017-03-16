@@ -190,6 +190,19 @@ class userController {
             }
         }
     }
+
+    public function search_users() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        if (!isset($_POST['search']))
+            echo "Please provide keywords";
+        else {
+            $subject = $manager->search_users($_POST['search']);
+            var_dump($subject);
+            $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+            echo $json;
+        }
+    }
 }
 
 ?>
