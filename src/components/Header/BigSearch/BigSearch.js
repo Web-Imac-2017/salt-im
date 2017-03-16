@@ -15,6 +15,7 @@ class BigSearch extends Component {
         resultsTag:{},
         resultsUser:{}
     };
+
   }
 
   handleLinkClick() {
@@ -38,7 +39,6 @@ class BigSearch extends Component {
       })
       .then( (response) => response.json())
       .then( (data) => {this.setState({resultsTag:data})});
-
       // fetch(utils.getFetchUrl()+'/search/u/' + event.target.value,
       // {
       //     method: "post",
@@ -55,10 +55,11 @@ class BigSearch extends Component {
   }
 
   render() {
+    
     let classes = "bigsearch";
     let resultClass = "results";
 
-    if(this.state.isOpen){
+    if(this.state.isOpen || 'http://localhost:3000/' == window.location.href){
         classes += " bigsearch--open"
     }
 

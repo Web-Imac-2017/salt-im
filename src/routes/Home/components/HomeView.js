@@ -31,7 +31,7 @@ export default class HomeView extends Component {
     render() {
         return(
             <div className="home center">
-                <SearchBar/>
+                
                 <p className="tagview__titleTrends">Tags tendances</p>
                 <ListTagColumn data={this.state.dataListTags} size={5}/>
                 <div className="tagview__section">
@@ -45,3 +45,4 @@ export default class HomeView extends Component {
         )
     }
 }
+//<SearchBar/>
