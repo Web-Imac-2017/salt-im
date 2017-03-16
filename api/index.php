@@ -65,6 +65,8 @@ $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'))
 
 // route de recherche qui marche pas
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
+$router->addRule('search/t/:search', array('controller' => 'tag', 'action' => 'search_tags'));
+$router->addRule('search/u/:search', array('controller' => 'user', 'action' => 'search_users'));
 
 
 $router->load();
