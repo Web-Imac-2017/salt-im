@@ -3,6 +3,8 @@
 /*require_once "Stat.php";*/
 require_once "StatsManager.php";
 
+require_once "User.php";
+
 class statController  {
     
     private $id;

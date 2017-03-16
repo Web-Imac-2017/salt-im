@@ -81,9 +81,7 @@ export default class PreviewActions extends Component {
 
         //if(!newData) return;
 
-        console.log(newData)
-
-        fetch(utils.getFetchUrl()+"/p/1/stat/up/1", {
+        fetch(utils.getFetchUrl()+"/p/"+this.props.data.id+"/stat/up/"+id, {
                 method: "post",
                 body: newData,
             })
