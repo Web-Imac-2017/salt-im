@@ -48,8 +48,9 @@ class commentController  {
         $manager = new CommentsManager($db);
         $comment = new Comment($_POST);
         try {
-            $manager->addToComment($comment, $id);
+            $comment = $manager->addToComment($comment, $id);
             echo "Le commentaire a bien été ajouté.";
+            $json = json_encode($this->jsonSerialize($comment), JSON_UNESCAPED_UNICODE);
         } catch(Exception $e) {
             echo "Oops le commentaire n'a pas pu être envoyé : " . $e->getMessage();
         }
@@ -107,6 +108,7 @@ class commentController  {
     public function jsonSerialize(Comment $comment) {
         // Represent your object using a nested array or stdClass,
         $data = array(
+            'id' => utf8_encode($comment->get_id()),
             'text' => utf8_encode($comment->get_text()),
             'date' => utf8_encode($comment->get_date()),
             'user_id' => utf8_encode($comment->get_user_id())
@@ -120,6 +122,7 @@ class commentController  {
         $data = [];
         for($i=0; $i<count($comments); $i++) {
                 $c = array(
+                    'id' => utf8_encode($comments[$i]->get_id()),
                     'text' => utf8_encode($comments[$i]->get_text()),
                     'date' => utf8_encode($comments[$i]->get_date()),
                     'user_id' => utf8_encode($comments[$i]->get_user_id())

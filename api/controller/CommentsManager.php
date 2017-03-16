@@ -34,12 +34,17 @@ class CommentsManager {
     $publication_id = $this->_db->lastInsertId();
 
     $this->_db->exec('INSERT INTO comment(related_publication_id, publication_id) VALUES("'.$pub_id['id'].'", "'.$publication_id.'")');
+      $comment_id = $this->_db->lastInsertId();
       
     $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("0", "0", NULL, "'.$publication_id.'")');
 
      $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("1", "0", NULL, "'.$publication_id.'")');
 
      $this->_db->exec('INSERT INTO stat(name, value, related_user_id, related_publication_id) VALUES("2", "0", NULL, "'.$publication_id.'")');
+      
+      return $this->get($comment_id);
+      
+      
   }
 
   public function delete(Comment $comment)
