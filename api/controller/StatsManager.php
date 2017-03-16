@@ -130,7 +130,7 @@ class StatsManager {
       $q1->execute();
       $q2->execute();
       $q3->execute();
-      q4->execute();
+      $q4->execute();
       return true;
     }
   }
