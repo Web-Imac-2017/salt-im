@@ -20,3 +20,16 @@
         }
 	}
 }
+
+.loader {
+    position: absolute;
+    left: 50%;
+    width: 75px;
+    height: 75px;
+    display: flex;
+}
+
+.loader__wrapper {
+    position:relative;
+    height:80px;
+}
