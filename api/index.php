@@ -30,11 +30,9 @@ $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'v
 $router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
-<<<<<<< HEAD
 $router->addRule('p/all/:order', array('controller' => 'stat', 'action' => 'sortByOrder'));
-=======
 $router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
->>>>>>> 3ece735acc5ea0600b205fc78fb53b2f4d0843a6
+
 
 // comment routes
 $router->addRule('comment/get/:id', array('controller' => 'comment', 'action' => 'index'));
