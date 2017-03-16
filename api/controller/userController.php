@@ -50,6 +50,10 @@ class userController {
         $manager = new UsersManager($db);
         $manager->signout();
     }
+    
+    public function start() {
+        session_start();
+    }
 
     public function login() {
         include "connect.php";
@@ -184,6 +188,19 @@ class userController {
                 // On appelle le setter
                 $this->$method($value);
             }
+        }
+    }
+
+    public function search_users() {
+        include "connect.php";
+        $manager = new UsersManager($db);
+        if (!isset($_POST['search']))
+            echo "Please provide keywords";
+        else {
+            $subject = $manager->search_users($_POST['search']);
+            var_dump($subject);
+            $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+            echo $json;
         }
     }
 }
