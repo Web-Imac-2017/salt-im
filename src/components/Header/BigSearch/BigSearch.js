@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { IndexLink, Link } from 'react-router';
 import './BigSearch.scss'
 
 import utils from "../../../../public/utils.js";
