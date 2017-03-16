@@ -50,13 +50,13 @@ class userController {
         $manager = new UsersManager($db);
         $manager->signout();
     }
-    
+
     public function start() {
         if(session_status() == PHP_SESSION_NONE){
             session_start();
         }
     }
-    
+
     public function close() {
         session_write_close();
     }

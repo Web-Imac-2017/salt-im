@@ -14,6 +14,7 @@ export default class Account extends Component{
     }
 
     render() {
+        console.log(this.props.dataUser);
         if(!this.props.dataUser) {
             return (
                 <div className="accountWrapper">
@@ -25,8 +26,8 @@ export default class Account extends Component{
         }
         return (
             <Link to={"/profile/"+this.props.dataUser.id} className="user">
-                <Pseudo/>
-                <Pic/>
+                <Pseudo dataUser={this.props.dataUser.username}/>
+                <Pic dataUser={this.props.dataUser.avatar}/>
             </Link>
         )
     }

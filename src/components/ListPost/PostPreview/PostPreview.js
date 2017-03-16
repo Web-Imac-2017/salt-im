@@ -56,7 +56,7 @@ export default class PostPreview extends Component {
           })
 
 
-        
+
     }
 
 
@@ -79,7 +79,7 @@ export default class PostPreview extends Component {
         return(
             <div className="preview">
                 <div className="preview__left">
-                    <PreviewLeft data={this.state.dataMedia} id={this.props.data.id}/>                    
+                    <PreviewLeft data={this.state.dataMedia} id={this.props.data.id}/>
                 </div>
                 <div className="preview__right">
                     <div className="preview__content">
