@@ -119,4 +119,12 @@
         }
     }
 
+    &__submit {
+        &__button {
+            width:calc(100% - 120px);
+            height: 35px;
+            margin-top: 6px;
+        }
+    }
+
 }
