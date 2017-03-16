@@ -69,6 +69,8 @@ class userController {
         if($isloggedin != true) {
             $isloggedin = $manager->login($_POST);
         }
+
+        var_dump($_SESSION);
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
             } else {

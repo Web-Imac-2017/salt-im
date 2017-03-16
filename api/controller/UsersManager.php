@@ -190,6 +190,9 @@ public function getSubjects(User $user) {
     }
 
     public function logged_only() {
+        if(session_status() == PHP_SESSION_NONE) {
+           session_start();
+        }
         if(!isset($_SESSION['auth'])) {
             $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
             exit();
@@ -197,6 +200,10 @@ public function getSubjects(User $user) {
     }
 
     public function login($data) {
+          if (session_status() != PHP_SESSION_DISABLED) {
+              session_start();
+          } else {
+          }
           $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
           $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
           if($stmt->rowCount() > 0) {
@@ -224,6 +231,9 @@ public function getSubjects(User $user) {
 }
 
 public function reconnect_from_cookie($cookie, $session){
+    if(session_status() == PHP_SESSION_NONE) {
+           session_start();
+        }
     if(isset($cookie['user_session']) && !isset($session['login']) ){
         $remember_token = $cookie['user_session'];
         $stmt = $this->_db->query('SELECT id FROM user WHERE username = "'.$cookie['login']['username'].'" LIMIT 1');
@@ -250,12 +260,15 @@ public function reconnect_from_cookie($cookie, $session){
 }
 
     public function who_is_logged_in($session) {
+      var_dump("qdhgdjofghfdjgh");
+      var_dump($session);
         $stmt = $this->_db->query('SELECT id FROM user WHERE token = "'.$session['user_session'].'" LIMIT 1');
         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
         if($userRow != null) {
             $user = $this->get($userRow['id']);
             return $user;
         } else {
+
             return false;
         }
 
@@ -297,7 +310,6 @@ public function reconnect_from_cookie($cookie, $session){
            while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
                $currentUser = $this->get($donnees['id']);
 
-               var_dump($currentUser);
                if (!in_array($currentUser, $fetchedUsers)) {
                  $users[] = $currentUser;
                  $fetchedUsers[] = $currentUser;

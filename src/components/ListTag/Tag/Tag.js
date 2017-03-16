@@ -19,7 +19,17 @@ export const Tag = (props) => {
         )
     }
 
-    let link = "/tag/" + props.idTag;
+    else if(props.solo){
+        return(
+            <div className="tag">
+                <div className="tag__title">
+                    > {props.data.name}
+                </div>
+                <div className="tag__description">{props.data.description}</div>
+            </div>
+        )
+    }
+    let link = "/tag/" + props.data.id;
 
     return(
         <div className="tag">

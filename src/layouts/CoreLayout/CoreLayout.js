@@ -21,9 +21,8 @@ export default class CoreLayout extends Component {
         fetch(utils.getFetchUrl()+"/u/session/1")
             .then((data) => {return data.text()})
             .then((data) => {
-              console.log(data);
+              console.log("wow" + data);
                 this.getUser();
-                this.endSession();
             })
     }
 

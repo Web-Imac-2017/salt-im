@@ -43,6 +43,13 @@
         top:0;
     }
 
+    &__comments {
+        bottom: 14px;
+        position: absolute;
+        display: flex;
+        left: 46px;
+    }
+
     &__right {
         flex:8;
         position:relative;
