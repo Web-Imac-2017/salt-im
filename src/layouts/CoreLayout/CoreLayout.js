@@ -32,6 +32,10 @@ export default class CoreLayout extends Component {
         },1)
     }
 
+    componentWillUnmount() {
+      console.log("unmount");
+    }
+
     render() {
         return (
             <div className='container text-center'>

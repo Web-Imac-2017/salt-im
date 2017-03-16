@@ -15,15 +15,18 @@ export default class ListComment extends Component {
       };
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.state.repeat == true){
-            fetch(utils.getFetchUrl()+'/p/comment/'+nextProps.id)
-                .then((response) => response.json())
-                .then((data) => {
-                    this.props.getNbComments(data.length);
-                    this.setState({commentData:data, repeat:false});
-                })
-        }
+    loadAllComments(id) {
+        console.log("okoko")
+        fetch(utils.getFetchUrl()+'/p/comment/3')
+            .then((response) => response.json())
+            .then((data) => {
+                this.props.getNbComments(data.length);
+                this.setState({commentData:data});
+            })
+    }
+
+    componentDidMount() {
+        this.loadAllComments(this.props.id);
     }
 
     handleSubmit(e) {
@@ -36,24 +39,19 @@ export default class ListComment extends Component {
             })
             .then( (data) => data.text())
             .then( (object) => {
-                console.log(object)
+                this.loadAllComments(this.props.id);
             })
     }
 
     render() {
+        console.log(this.state.commentData)
         let commentsNode = (<div>Personne n est salé ici.</div>)
 
-        if(!this.props.data){
             if(this.state.commentData.length) {
                 commentsNode = this.state.commentData.map((elmt,i) => {
-                    return (<Comment key={i} data={elmt} isFirst={true}/>)
+                    return (<Comment key={i} data={elmt} isFirst={true} loadComments={this.loadAllComments.bind(this)}/>)
                 })
             }
-        } else {
-            commentsNode = this.props.data.map((elmt,i) => {
-                return (<Comment key={i} data={elmt} isFirst={true}/>)
-            })
-        }
         return (
             <div className="listComment">
                 <form ref="form" onSubmit={this.handleSubmit.bind(this)} className="gocomment">
