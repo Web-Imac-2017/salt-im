@@ -22,14 +22,14 @@ export const Tag = (props) => {
     else if(props.solo){
         return(
             <div className="tag">
-                <http://localhost/salt-im/api/tag/0div className="tag__title">
+                <div className="tag__title">
                     > {props.data.name}
                 </div>
                 <div className="tag__description">{props.data.description}</div>
             </div>
         )
     }
-    let link = "/tag/" + props.idTag;
+    let link = "/tag/" + props.data.id;
 
     return(
         <div className="tag">
