@@ -6,7 +6,6 @@ class UsersManager {
     $this->setDb($db);
   }
 
-
   public function getDb() {
         return $this->_db;
     }

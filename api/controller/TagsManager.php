@@ -17,6 +17,19 @@ class TagsManager {
 
     return $this->get($this->_db->lastInsertId());
   }
+    
+    public function tag_from_post(Subject $subject)
+    {
+         $q = $this->_db->query('SELECT tag.id FROM tag JOIN rel_tag_publication ON rel_tag_publication.tag_id = tag.id WHERE rel_tag_publication.publication_id = "'.$subject->get_publication_id().'"');
+        
+        $tags = [];
+        
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+            $tags[] = $this->get($donnees['id']);
+        }
+        
+        return $tags;
+    }
 
   public function addTagToPost($tag_id, $post_id)
   {

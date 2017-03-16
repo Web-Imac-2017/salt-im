@@ -18,6 +18,7 @@ class Subject extends Publication {
     private $title;
     private $flair;
     private $type;
+    private $publication_id;
 
     // Construction de la classe
     public function __construct(array $donnees) {
@@ -44,6 +45,10 @@ class Subject extends Publication {
     public function get_type() {
         return $this->type;
     }
+    // Getter publication_id
+    public function get_publication_id() {
+        return $this->publication_id;
+    }
 
     // Setter id
     public function set_id($id) {
@@ -63,6 +68,11 @@ class Subject extends Publication {
     // Setter type
     public function set_type($type) {
         $this->type = $type;
+    }
+    
+    // Setter publication_id
+    public function set_publication_id($publication_id) {
+        $this->publication_id = $publication_id;
     }
     // Fin du multiplier--------------------------------
 

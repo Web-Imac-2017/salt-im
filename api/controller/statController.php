@@ -70,6 +70,14 @@ class statController  {
         $name = $this->name;
         $stat = $manager->upVote($id, $name);
     }
+
+    public function cancelVote() {
+        include "connect.php";
+        $manager = new StatsManager($db);
+        $id = $this->id;
+        $name = $this->name;
+        $stat = $manager->cancelVote($id, $name);
+    }
     
     public function set_id($id) {
         $this->id = $id; 

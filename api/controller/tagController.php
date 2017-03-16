@@ -1,5 +1,9 @@
 <?php
 
+require_once "SubjectsManager.php";
+
+require_once "Subject.php";
+
 require_once "TagsManager.php";
 
 //require_once "Tag.php";
@@ -111,6 +115,33 @@ class tagController {
     } else {
          echo "Aie aie aie on a pas pu récupérer le tag.";
         }
+    }
+    
+    public function tag_from_post() {
+        include "connect.php";
+        $manager = new TagsManager($db);
+        $s_manager = new SubjectsManager($db);
+        $id = $this->id;
+        $subject = $s_manager->get($id);
+        if($subject != null) {
+            try {
+            $tags = $manager->tag_from_post($subject);
+            if($tags != false) {
+                $json = json_encode($this->jsonSerializeArray($tags), JSON_UNESCAPED_UNICODE);
+                echo $json;
+            }
+            else {
+                echo "Ce post n'a pas de tags associés";
+            }
+        }
+        catch(Exception $e) {
+            echo "Les tags n'ont pas pu être récupérés : " . $e->getMessage();
+        }
+        } else {
+            echo "pas de subject.";
+        }
+        
+        
     }
 
     // Hydrate
