@@ -51,7 +51,9 @@ export default class PreviewActions extends Component {
     }
 
     clicked = (e) => {
-        e.target.classList.add("circle-animation")
+        let ok = e.target;
+        e.target.classList.add("circle-animation");
+        setTimeout(()=>{ok.classList.remove("circle-animation")}, 500);
     }
 
     statMaxId=()=>{
@@ -91,7 +93,8 @@ export default class PreviewActions extends Component {
 
 
     statValueId=(i)=>{
-
+        if(!this.props.stats)
+            return
         if(this.props.stats[i])
             return this.props.stats[i].value;
         else

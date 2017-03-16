@@ -1,6 +1,7 @@
 import React from 'react'
 import './ListTagColumn.scss'
 import Tag from '../Tag/Tag.js'
+
 // import CreateTag from '../CreateTag/CreateTag.js'
 
 
@@ -22,7 +23,12 @@ export const ListTagColumn = (props) => {
 
    else {
         return (
-            <div>Chargement des tags</div>
+            <div className="loader__wrapper">
+             <div className="loader">
+                <img src="loader.gif" alt="Chargement des tags..." height="75" width="75"/>
+                <p>Chargement des tags</p>
+             </div>
+            </div>
         )
 
     }

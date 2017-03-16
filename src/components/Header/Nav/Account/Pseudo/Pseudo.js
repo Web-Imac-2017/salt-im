@@ -6,7 +6,7 @@ import './Pseudo.scss'
 
 export const Pseudo = () => (
   <div>
-    <Link to="/profile"><p className="user__name">ptitcon77</p></Link>
+    <p className="user__name">ptitcon77</p>
   </div>
 )
 
