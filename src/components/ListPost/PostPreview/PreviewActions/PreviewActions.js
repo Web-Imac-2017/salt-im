@@ -4,6 +4,8 @@ import { IndexLink, Link } from 'react-router'
 import PreviewShare from './PreviewShare/PreviewShare.js'
 import './PreviewActions.scss'
 
+import utils from '../../../../../public/utils.js'
+
 export default class PreviewActions extends Component {
     constructor(props) {
       super(props);
@@ -51,9 +53,42 @@ export default class PreviewActions extends Component {
     }
 
     clicked = (e) => {
-        let ok = e.target;
+        let ok = e.target,
+            name = ok.dataset.name;
         e.target.classList.add("circle-animation");
         setTimeout(()=>{ok.classList.remove("circle-animation")}, 500);
+
+        this.vote(name);
+    }
+
+    vote(id) {
+        let newData;
+        console.log(id)
+        switch(id) {
+            case 0 :
+                newData = new FormData(this.refs.formSalt)
+                break;
+            case 1 :
+                newData = new FormData(this.refs.formPepper)
+                break;
+            case 2 :
+                newData = new FormData(this.refs.formLol)
+                break;
+            default :
+                newData = new FormData(this.refs.formLol)
+                break;
+        }
+
+        //if(!newData) return;
+
+        console.log(newData)
+
+        fetch(utils.getFetchUrl()+"/p/1/stat/up/1", {
+                method: "post",
+                body: newData,
+            })
+            .then((data) => data.text())
+            .then((object) => {console.log(object)})
     }
 
     statMaxId=()=>{
@@ -83,7 +118,6 @@ export default class PreviewActions extends Component {
                     return this.props.stats[i].value;
                 else
                     return "no_data";
-
         }
         else{
             return "no data";
@@ -122,19 +156,31 @@ export default class PreviewActions extends Component {
                 <div className="preview__action preview__action--salty">
                     <div className={'preview__action__icon icon icon--salty'}/>
                     <div className="preview__action__value">{this.statValue}</div>
-                    {this.props.dataUser ? (
+                    {true ? (
                         <div className="preview__action__reactions">
                             <div className="preview__action__reactionwrapper">
                                 <div className="icon__wrapper">
-                                    <div ref="salt" onClick={this.clicked} className={iconClass}></div>
+                                    <div ref="salt" onClick={this.clicked} data-name={0} className={iconClass}>
+                                        <form ref="formSalt">
+                                            <input type="hidden" value={this.props.dataUser ? this.props.dataUser.id : 0} name="user_id"/>
+                                        </form>
+                                    </div>
                                     <div className="statAction">{this.statValueId(0)}</div>
                                 </div>
                                 <div className="icon__wrapper">
-                                    <div ref="pepper" onClick={this.clicked} className={iconClass}></div>
+                                    <div ref="pepper" onClick={this.clicked} data-name={1} className={iconClass}>
+                                        <form ref="formPepper">
+                                            <input type="hidden" value={this.props.dataUser ? this.props.dataUser.id : 0} name="user_id"/>
+                                        </form>
+                                    </div>
                                     <div className="statAction">{this.statValueId(1)}</div>
                                 </div>
                                 <div className="icon__wrapper">
-                                    <div ref="lol" onClick={this.clicked} className={iconClass}></div>
+                                    <div ref="lol" onClick={this.clicked} data-name={2} className={iconClass}>
+                                        <form ref="formLol">
+                                            <input type="hidden" value={this.props.dataUser ? this.props.dataUser.id : 0} name="user_id"/>
+                                        </form>
+                                    </div>
                                     <div className="statAction">{this.statValueId(2)}</div>
                                 </div>
                             </div>
