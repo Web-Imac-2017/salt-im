@@ -27,7 +27,7 @@ $router->addRule('p/u/:id', array('controller' => 'post', 'action' => 'postFromU
 $router->addRule('p/:id/stat/up/:name', array('controller' => 'stat', 'action' => 'upVote'));
 $router->addRule('p/:id/stat/cancel/:name', array('controller' => 'stat', 'action' => 'cancelVote'));
 $router->addRule('p/:id/stat/vote', array('controller' => 'stat', 'action' => 'voteStatus'));
-$router->addRule('p/help/:id', array('controller' => 'post', 'action' => 'help'));
+// $router->addRule('p/help/', array('controller' => 'post', 'action' => 'help'));
 $router->addRule('p/tag', array('controller' => 'post', 'action' => 'getFromTags'));
 $router->addRule('p/:id/stat', array('controller' => 'stat', 'action' => 'getStatPost'));
 $router->addRule('p/all/:stat', array('controller' => 'post', 'action' => 'sortPostsByStat'));
@@ -72,6 +72,10 @@ $router->addRule('search/u/:search', array('controller' => 'user', 'action' => '
 
 // tag de débug A SUPPRIMER QUAND FINI
 $router->addRule('u/test/:id', array('controller' => 'user', 'action' => 'test'));
+
+
+// routes qui marchent pas
+$router->addRule('p/help/', array('controller' => 'post', 'action' => 'help'));
 
 
 $router->load();
