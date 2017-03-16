@@ -23,7 +23,7 @@ class UsersManager {
     $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("1", "0", null, "'.$user_id.'")');
 
     $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("2", "0", null, "'.$user_id.'")');
-      
+
     $_SESSION['id'] = $user->get_id();
     $_SESSION['pseudo'] = $user->get_username();
   }
