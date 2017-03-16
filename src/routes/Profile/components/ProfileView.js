@@ -172,7 +172,7 @@ export default class ProfileView extends Component {
                 <div className={classes}>
                     <div className="modal__filter" onClick={this.toggleModal.bind(this)}/>
                     <div className="modal__wrapper">
-                        <ProfileUpdateView/>
+                        <ProfileUpdateView idUser={this.props.params.userId} />
                     </div>
                 </div>
 
