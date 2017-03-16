@@ -16,6 +16,9 @@ class BigSearch extends Component {
         resultsUser:{}
     };
 
+    if('http://localhost:3000/' == window.location.href)
+      this.state.isOpen = true;
+
   }
 
   handleLinkClick() {
@@ -60,7 +63,7 @@ class BigSearch extends Component {
     let classes = "bigsearch";
     let resultClass = "results";
 
-    if(this.state.isOpen || 'http://localhost:3000/' == window.location.href){
+    if(this.state.isOpen ){
         classes += " bigsearch--open"
     }
 
@@ -102,7 +105,7 @@ class BigSearch extends Component {
       <div>
         <div className={classes}>
           <form ref="form">
-              <input type="text" name="search" onChange={this.handleChangeSearch.bind(this)} placeholder="Search"/>
+              <input type="text" name="search" onChange={this.handleChangeSearch.bind(this)} placeholder="Rechercher un post, un tag, un user..."/>
           </form>
         </div>
 
