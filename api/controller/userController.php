@@ -1,7 +1,5 @@
 <?php
 
-// require_once "User.php";
-
 require_once "UsersManager.php";
 
 class userController {

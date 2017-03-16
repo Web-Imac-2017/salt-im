@@ -240,17 +240,14 @@ public function getSubjects(User $user) {
     public function login_dirty($data) {
           if (session_status() != PHP_SESSION_DISABLED) {
               session_start();
-          } else {
           }
           $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
           $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
           if($stmt->rowCount() > 0) {
              if(sha1('gz'.$data['password']) == $userRow['password']) {
                 setcookie('user_session', $userRow['token'], time() + 60 * 60 * 24 * 365);
-                setcookie('login', array(
-                    'username' => utf8_encode($data['username'])
-                ), time() + 60 * 60 * 24 * 365);
-                 
+                setcookie('login', utf8_encode($data['username']), time() + 60 * 60 * 24 * 365);
+                 echo(json_encode(utf8_encode($userRow['id'])));
                 return true;
              }
              else {
