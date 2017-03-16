@@ -260,15 +260,12 @@ public function reconnect_from_cookie($cookie, $session){
 }
 
     public function who_is_logged_in($session) {
-      var_dump("qdhgdjofghfdjgh");
-      var_dump($session);
         $stmt = $this->_db->query('SELECT id FROM user WHERE token = "'.$session['user_session'].'" LIMIT 1');
         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
         if($userRow != null) {
             $user = $this->get($userRow['id']);
             return $user;
         } else {
-
             return false;
         }
 
