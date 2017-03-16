@@ -23,7 +23,7 @@ class UsersManager {
     $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("1", "0", null, "'.$user_id.'")');
 
     $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("2", "0", null, "'.$user_id.'")');
-      
+
     $_SESSION['id'] = $user->get_id();
     $_SESSION['pseudo'] = $user->get_username();
   }
@@ -190,6 +190,9 @@ public function getSubjects(User $user) {
     }
 
     public function logged_only() {
+        if(session_status() == PHP_SESSION_NONE) {
+           session_start();
+        }
         if(!isset($_SESSION['auth'])) {
             $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
             exit();
@@ -197,6 +200,10 @@ public function getSubjects(User $user) {
     }
 
     public function login($data) {
+          if (session_status() != PHP_SESSION_DISABLED) {
+              session_start();
+          } else {
+          }
           $stmt = $this->_db->query('SELECT * FROM user WHERE username = "'.$data['username'].'" OR mail = "'.$data['username'].'" LIMIT 1');
           $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
           if($stmt->rowCount() > 0) {
@@ -224,6 +231,9 @@ public function getSubjects(User $user) {
 }
 
 public function reconnect_from_cookie($cookie, $session){
+    if(session_status() == PHP_SESSION_NONE) {
+           session_start();
+        }
     if(isset($cookie['user_session']) && !isset($session['login']) ){
         $remember_token = $cookie['user_session'];
         $stmt = $this->_db->query('SELECT id FROM user WHERE username = "'.$cookie['login']['username'].'" LIMIT 1');
@@ -250,12 +260,15 @@ public function reconnect_from_cookie($cookie, $session){
 }
 
     public function who_is_logged_in($session) {
+      var_dump("qdhgdjofghfdjgh");
+      var_dump($session);
         $stmt = $this->_db->query('SELECT id FROM user WHERE token = "'.$session['user_session'].'" LIMIT 1');
         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
         if($userRow != null) {
             $user = $this->get($userRow['id']);
             return $user;
         } else {
+
             return false;
         }
 
@@ -273,37 +286,35 @@ public function reconnect_from_cookie($cookie, $session){
 
 
 
-   public function setDb(PDO $db)
-   {
-     $this->_db = $db;
-   }
+    public function setDb(PDO $db)
+    {
+      $this->_db = $db;
+    }
 
-   public function search_users($search){
-       // liste des sujets
-       $users = [];
-       $fetchedUsers = [];
-       $searchClean = preg_replace('!\s+!', ' ', $search);
-       // tableau des mots recherchés
-       $searchTab = explode(" ", $searchClean);
+    public function search_users($search){
+      // liste des users
+      $users = [];
+      $fetchedUsers = [];
+      $searchClean = preg_replace('!\s+!', ' ', $search);
+      // tableau des mots recherchés
+      $searchTab = explode(" ", $searchClean);
 
-       // taille du tableau (nombre de mots)
-       $searchSize = count($searchTab);
+      // taille du tableau (nombre de mots)
+      $searchSize = count($searchTab);
 
-       // pour chaque mot, effectuer une recherche
-       for ($i = 0; $i < $searchSize; $i++) {
-           $q = $this->_db->query('SELECT id FROM user
-             WHERE username LIKE "%'.$searchTab[$i].'%"');
+      // pour chaque mot, effectuer une recherche
+      for ($i = 0; $i < $searchSize; $i++) {
+          $q = $this->_db->query('SELECT id FROM user
+            WHERE username LIKE "%'.$searchTab[$i].'%"');
 
-           while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-               $currentUser = $this->get($donnees['id']);
-
-               var_dump($currentUser);
-               if (!in_array($currentUser, $fetchedUsers)) {
-                 $users[] = $currentUser;
-                 $fetchedUsers[] = $currentUser;
-               }
-           }
-       }
+          while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+              $currentUser = $this->get($donnees['id']);
+              if (!in_array($currentUser, $fetchedUsers)) {
+                  $users[] = $currentUser;
+                  $fetchedUsers[] = $currentUser;
+                }
+            }
+        }
 
        return $users;
    }

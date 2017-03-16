@@ -226,7 +226,7 @@ class TagsManager {
   }
 
   public function search_tags($search){
-      // liste des sujets
+      // liste des tags
       $tags = [];
       $fetchedTags = [];
       $searchClean = preg_replace('!\s+!', ' ', $search);
@@ -243,7 +243,6 @@ class TagsManager {
 
           while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
               $currentTag = $this->get($donnees['id']);
-              //var_dump($currentTag);
               if (!in_array($currentTag, $fetchedTags)) {
                 $tags[] = $currentTag;
                 $fetchedTags[] = $currentTag;

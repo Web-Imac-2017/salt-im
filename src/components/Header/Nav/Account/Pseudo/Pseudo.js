@@ -14,14 +14,14 @@ export default class Pseudo extends Component{
     render() {
     	return(
     	<div>
-    		<p className="user__name">{this.props.username}</p>
+    		<p className="user__name">{this.props.dataUser.username}</p>
     	</div>
     	)
     }
-	 
+
 }
 
-   
+
 
 
 
