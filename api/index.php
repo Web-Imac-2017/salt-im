@@ -57,7 +57,7 @@ $router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start
 
 //tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
-$router->addRule('tag/add', array('controller' => 'tag', 'action' => 'add'));
+$router->addRule('tag/add/:id', array('controller' => 'tag', 'action' => 'add'));
 $router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
 
 
