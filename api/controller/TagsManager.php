@@ -39,9 +39,9 @@ class TagsManager {
   public function get($id)
   {
     $q = $this->_db->query('SELECT * FROM tag WHERE id = "'.$id.'"');
-    var_dump($id);
+    //var_dump($id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    var_dump($donnees);
+    //var_dump($donnees);
     return new Tag($donnees);
   }
 
@@ -243,7 +243,7 @@ class TagsManager {
 
           while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
               $currentTag = $this->get($donnees['id']);
-              var_dump($currentTag);
+              //var_dump($currentTag);
               if (!in_array($currentTag, $fetchedTags)) {
                 $tags[] = $currentTag;
                 $fetchedTags[] = $currentTag;
