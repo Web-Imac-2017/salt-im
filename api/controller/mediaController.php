@@ -41,7 +41,8 @@ class mediaController  {
         $manager = new MediasManager($db);
         $media = new Media($_POST);
         try {
-            $manager->add($media);
+            $media = $manager->add($media);
+            $manager->img($media, $_FILES);
             echo "Le media a bien été envoyé !";
         }
         catch(Exception $e) {

@@ -15,7 +15,7 @@ class TagsManager {
     // Exécution de la requête.
     $q->execute();
 
-    return $this->_db->lastInsertId();
+    return $this->get($this->_db->lastInsertId());
   }
 
   public function addTagToPost($tag_id, $post_id)
