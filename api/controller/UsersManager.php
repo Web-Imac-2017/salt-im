@@ -286,36 +286,35 @@ public function reconnect_from_cookie($cookie, $session){
 
 
 
-   public function setDb(PDO $db)
-   {
-     $this->_db = $db;
-   }
+    public function setDb(PDO $db)
+    {
+      $this->_db = $db;
+    }
 
-   public function search_users($search){
-       // liste des sujets
-       $users = [];
-       $fetchedUsers = [];
-       $searchClean = preg_replace('!\s+!', ' ', $search);
-       // tableau des mots recherchés
-       $searchTab = explode(" ", $searchClean);
+    public function search_users($search){
+      // liste des users
+      $users = [];
+      $fetchedUsers = [];
+      $searchClean = preg_replace('!\s+!', ' ', $search);
+      // tableau des mots recherchés
+      $searchTab = explode(" ", $searchClean);
 
-       // taille du tableau (nombre de mots)
-       $searchSize = count($searchTab);
+      // taille du tableau (nombre de mots)
+      $searchSize = count($searchTab);
 
-       // pour chaque mot, effectuer une recherche
-       for ($i = 0; $i < $searchSize; $i++) {
-           $q = $this->_db->query('SELECT id FROM user
-             WHERE username LIKE "%'.$searchTab[$i].'%"');
+      // pour chaque mot, effectuer une recherche
+      for ($i = 0; $i < $searchSize; $i++) {
+          $q = $this->_db->query('SELECT id FROM user
+            WHERE username LIKE "%'.$searchTab[$i].'%"');
 
-           while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-               $currentUser = $this->get($donnees['id']);
-
-               if (!in_array($currentUser, $fetchedUsers)) {
-                 $users[] = $currentUser;
-                 $fetchedUsers[] = $currentUser;
-               }
-           }
-       }
+          while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+              $currentUser = $this->get($donnees['id']);
+              if (!in_array($currentUser, $fetchedUsers)) {
+                  $users[] = $currentUser;
+                  $fetchedUsers[] = $currentUser;
+                }
+            }
+        }
 
        return $users;
    }
