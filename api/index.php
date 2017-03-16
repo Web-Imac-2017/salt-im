@@ -53,6 +53,7 @@ $router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avat
 $router->addRule('u/islogged/:id', array('controller' => 'user', 'action' => 'islogged'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
 $router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
+$router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
 
 //tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
@@ -65,6 +66,9 @@ $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'))
 
 // route de recherche qui marche pas
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
+
+// tag de débug A SUPPRIMER QUAND FINI
+$router->addRule('u/test/:id', array('controller' => 'user', 'action' => 'test'));
 
 
 $router->load();
