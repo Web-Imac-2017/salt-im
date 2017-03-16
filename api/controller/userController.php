@@ -1,6 +1,6 @@
 <?php
 
-require_once "User.php";
+// require_once "User.php";
 
 require_once "UsersManager.php";
 
@@ -72,7 +72,6 @@ class userController {
 
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
-                header('Location: http://localhost/salt-im/shit.php');
             } else {
                 echo "L'utilisateur n'est pas connecté.";
             }
@@ -114,7 +113,7 @@ class userController {
             } else if ($user != null) {
                 $u = (int) $user->get_id();
                 $c = array(
-                    'id' => utf8_encode($u);
+                    'id' => utf8_encode($u)
                 );
 
                 $json = json_encode($c, JSON_UNESCAPED_UNICODE);
