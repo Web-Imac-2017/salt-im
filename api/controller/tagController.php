@@ -66,7 +66,7 @@ class tagController {
             echo $json;
         }
     }
-    
+
     public function jsonSerialize($tag) {
         // Represent your object using a nested array or stdClass,
                 $c = array(
@@ -116,7 +116,7 @@ class tagController {
          echo "Aie aie aie on a pas pu récupérer le tag.";
         }
     }
-    
+
     public function tag_from_post() {
         include "connect.php";
         $manager = new TagsManager($db);
@@ -140,8 +140,8 @@ class tagController {
         } else {
             echo "pas de subject.";
         }
-        
-        
+
+
     }
 
     // Hydrate

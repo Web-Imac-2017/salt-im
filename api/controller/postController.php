@@ -105,7 +105,7 @@ class postController  {
             $id_media = $media_manager->add($media);
             $media->set_id($id_media);
             $media_manager->img($media, $_FILES);
-            
+
             $json = json_encode($this->jsonSerialize($subject),JSON_UNESCAPED_UNICODE);
             echo $json;
         }
@@ -174,6 +174,15 @@ class postController  {
         $id = $this->id;
         $manager = new SubjectsManager($db);
         $subject = $manager->sortPostsByStat($id);
+        $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
+        echo $json;
+    }
+
+    public function sortPostsByDate(){
+        include "connect.php";
+        $id = $this->id;
+        $manager = new SubjectsManager($db);
+        $subject = $manager->sortPostsByDate($id);
         $json = json_encode($this->jsonSerializeArray($subject), JSON_UNESCAPED_UNICODE);
         echo $json;
     }
