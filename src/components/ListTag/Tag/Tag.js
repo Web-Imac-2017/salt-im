@@ -28,13 +28,11 @@ export const Tag = (props) => {
 
         return(
             <div className="tag">
-                <Link to={link}>
                     <div className="tag__title">
                         > {props.data.name}
                     </div>
-
                     <div className="tag__description">{props.data.description}</div>
-                </Link>
+                
             </div>
         )
     }
