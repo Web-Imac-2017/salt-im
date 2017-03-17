@@ -57,9 +57,30 @@ class BigSearch extends Component {
     let nodeSearch = (<div/>)
     if(this.state.results.length) {
       nodeSearch = this.state.results.map((elmt,i) => {
-        let url = "/post/"+elmt.id
+        var url = "/post/"+elmt.id
+
         return(
           <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.title}</Link></li>
+        )
+      })
+    }
+
+    let nodeSearchTags = (<div/>)
+    if(this.state.resultsTag.length) {
+      nodeSearchTags = this.state.resultsTag.map((elmt,i) => {
+        let url = "/tag/"+elmt.id
+        return(
+          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.name}</Link></li>
+        )
+      })
+    }
+
+    let nodeSearchUsers = (<div/>)
+    if(this.state.resultsUser.length) {
+      nodeSearchUsers = this.state.resultsUser.map((elmt,i) => {
+        let url = "/u/"+elmt.id
+        return(
+          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.username}</Link></li>
         )
       })
     }
@@ -87,17 +108,7 @@ class BigSearch extends Component {
             <div className="results__wrapper">
               <h1> Tags </h1>
                 <ul>
-                  <li>manger des pates</li>
-                  <li>manger des anus</li>
-                  <li>manger la chatte à la voisine</li>
-                  <li>manger son sexe</li>
-                  <li>manger des pates</li>
-                  <li>manger des anus</li>
-                  <li>manger la chatte à la voisine</li>
-                  <li>manger son sexe</li>
-                  <li>manger des pates</li>
-                  <li>manger des anus</li>
-
+                  {nodeSearchTags}
                 </ul>
 
                 <span className="results__seeall"> Voir tout </span>
@@ -111,10 +122,7 @@ class BigSearch extends Component {
 
               </div>
                 <ul>
-                  <li>manger des pates</li>
-                  <li>manger des anus</li>
-                  <li>manger la chatte à la voisine</li>
-                  <li>manger son sexe</li>
+                  {nodeSearchUsers}
                 </ul>
 
                 <span className="results__seeall"> Voir tout </span>
