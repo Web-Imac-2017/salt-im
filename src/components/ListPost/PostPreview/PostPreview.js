@@ -71,6 +71,7 @@ export default class PostPreview extends Component {
     }
 
     render() {
+        let urlToPost = "/post/"+this.props.data.id;
         return(
             <div className="preview">
                 <div className="preview__left">
