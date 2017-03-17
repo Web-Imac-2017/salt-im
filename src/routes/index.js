@@ -54,7 +54,7 @@ const authentificationRoute = {
 }
 
 const page404Route = {
-  path: '404',
+  path: '/*',
   indexRoute: Page404
 }
 
