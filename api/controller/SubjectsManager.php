@@ -89,7 +89,7 @@
      $id = (int) $id;
 
      // Récupère le subject
-     $q = $this->_db->query('SELECT id, title, flair, type, publication_id FROM subject WHERE id = "'.$id.'" AND type = "post"');
+     $q = $this->_db->query('SELECT id, title, flair, type, publication_id FROM subject WHERE id = "'.$id.'"');
      $donnees = $q->fetch(PDO::FETCH_ASSOC);
      if ($donnees != false) {
          $subject = new Subject($donnees);
@@ -232,12 +232,12 @@
     $sort = ($id)-1;
     // récupère les subjects dont le type est POST et triés par sel/poivre/lol
       $q = $this->_db->query('SELECT subject.*, stat.id, stat.related_publication_id, stat.value FROM subject JOIN stat ON stat.related_publication_id = subject.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
-        
+
     $subjects = [];
-        
+
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             $subject = new Subject($donnees);
-            
+
             // Récupère l'id de la publication associée
 
               // Récupère les données de la publication
@@ -248,7 +248,7 @@
       $subject->set_text($donnees2['text']);
       $subject->set_date($donnees2['date']);
       $subject->set_user_id($donnees2['user_id']);
-            
+
             $subjects[] = $subject;
         }
 

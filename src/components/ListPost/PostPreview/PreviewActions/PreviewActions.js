@@ -6,6 +6,13 @@ import './PreviewActions.scss'
 
 import utils from '../../../../../public/utils.js'
 
+const arrayIconClass = [
+    "preview__action__icon icon icon--salty",
+    "preview__action__icon icon salto",
+    "preview__action__icon icon pepper",
+    "preview__action__icon icon lol"
+]
+
 export default class PreviewActions extends Component {
     constructor(props) {
       super(props);
@@ -13,6 +20,7 @@ export default class PreviewActions extends Component {
       this.state = {
         isShareActive:false,
         iconIsClicked:false,
+        currentName:0,
       };
     }
 
@@ -57,13 +65,11 @@ export default class PreviewActions extends Component {
             name = ok.dataset.name;
         e.target.classList.add("circle-animation");
         setTimeout(()=>{ok.classList.remove("circle-animation")}, 500);
-
         this.vote(name);
     }
 
     vote(id) {
         let newData;
-        console.log(id)
         switch(id) {
             case 0 :
                 newData = new FormData(this.refs.formSalt)
@@ -81,12 +87,17 @@ export default class PreviewActions extends Component {
 
         //if(!newData) return;
 
-        fetch(utils.getFetchUrl()+"/p/"+this.props.data.id+"/stat/up/"+id, {
+        fetch(utils.getFetchUrl()+"/p/"+this.props.data.id+"/stat/up/"+id+1, {
                 method: "post",
                 body: newData,
             })
             .then((data) => data.text())
-            .then((object) => {console.log(object)})
+            .then((object) => {
+                console.log(object)
+                this.setState({
+                    currentName:parseInt(id)+1,
+                })
+            })
     }
 
     statMaxId=()=>{
@@ -135,6 +146,10 @@ export default class PreviewActions extends Component {
 
     render() {
 
+        console.log(arrayIconClass[this.state.currentName])
+
+        let selected = arrayIconClass[this.state.currentName];
+
         let iconClass = "preview__action__reaction icones";
 
         return(
@@ -152,7 +167,7 @@ export default class PreviewActions extends Component {
                     <div className="preview__action__icon icon icon--favorite"/>
                 </div>
                 <div className="preview__action preview__action--salty">
-                    <div className={'preview__action__icon icon icon--salty'}/>
+                    <div className={selected}/>
                     <div className="preview__action__value">{this.statValue}</div>
                     {true ? (
                         <div className="preview__action__reactions">
