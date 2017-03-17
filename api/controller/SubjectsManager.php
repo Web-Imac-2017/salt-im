@@ -227,32 +227,31 @@
       return $subjects;
   }
 
-    public function sortPostsByStat(){
+    public function sortPostsByStat($id){
     // Exécute une requête de type SELECT avec les posts triés par taux de sel/poivre/lol
-    $sort = ((int)$_GET['post_stat_id'])-1;
+    $sort = ($id)-1;
     // récupère les subjects dont le type est POST et triés par sel/poivre/lol
       $q = $this->_db->query('SELECT subject.*, stat.id, stat.related_publication_id, stat.value FROM subject JOIN stat ON stat.related_publication_id = subject.publication_id WHERE stat.name = '.$sort.' ORDER BY stat.value DESC');
-      $donnees = $q->fetch(PDO::FETCH_ASSOC);
-      $subject = new Subject($donnees);
+        
+    $subjects = [];
+        
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+            $subject = new Subject($donnees);
+            
+            // Récupère l'id de la publication associée
 
-      // Récupère l'id de la publication associée
-      $q = $this->_db->query('SELECT publication_id FROM subject WHERE id = "'.$id.'"');
-      $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-      // Récupère les données de la publication
-      $q = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$donnees["publication_id"].'"');
-      $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-      // Récupère l'id du media de la publication
-      $q = $this->_db->query('SELECT id FROM media WHERE publication_id = "'.$id.'"');
-      $donnees_media = $q->fetch(PDO::FETCH_ASSOC);
+              // Récupère les données de la publication
+              $q3 = $this->_db->query('SELECT id, text, date, user_id FROM publication WHERE id = "'.$subject->get_publication_id().'"');
+              $donnees2 = $q3->fetch(PDO::FETCH_ASSOC);
 
       // Rajoute les infos manquantes de subject
-      $subject->set_text($donnees['text']);
-      $subject->set_date($donnees['date']);
-      $subject->set_user_id($donnees['user_id']);
-      $subject->set_media_id($donnees_media['id']);
+      $subject->set_text($donnees2['text']);
+      $subject->set_date($donnees2['date']);
+      $subject->set_user_id($donnees2['user_id']);
+            
+            $subjects[] = $subject;
+        }
 
-      return $subject;
+      return $subjects;
   }
 }
