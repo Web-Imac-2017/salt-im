@@ -84,7 +84,8 @@ class postController  {
                     'img_url' => '',
                     'description' => ''
                 ));
-                $tag_ids[] = $tagmanager->add($tag);
+                $tag = $tagmanager->add($tag);
+                $tag_ids[] = $tag->get_id();
             } else {
                 $tag_ids[] = $tag->get_id();
             }
@@ -92,6 +93,8 @@ class postController  {
         try {
             $subject = $manager->add($subject);
             for($i=0; $i<count($tag_ids); $i++) {
+                var_dump($tag_ids[$i]);
+                var_dump($subject->get_id());
                 $tagmanager->addTagToPost($tag_ids[$i], $subject->get_id());
             }
             // Ajout du media
