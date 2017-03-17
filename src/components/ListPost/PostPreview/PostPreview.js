@@ -71,6 +71,7 @@ export default class PostPreview extends Component {
     }
 
     render() {
+        let urlToPost = "/post/"+this.props.data.id;
         return(
             <div className="preview">
                 <div className="preview__left">
@@ -78,7 +79,7 @@ export default class PostPreview extends Component {
                 </div>
                 <div className="preview__right">
                     <div className="preview__content">
-                        <div className="preview__title">{this.props.data.title}</div>
+                        <Link to={urlToPost}><div className="preview__title">{this.props.data.title}</div></Link>
                         <div className="preview__description">{this.props.data.text}</div>
                         <PreviewActions data={this.props.data} dataUser={this.props.dataUser} stats={this.state.dataStat} nbComment={this.state.dataComments.length}/>
                         <div className="preview__infos">

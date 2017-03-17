@@ -12,6 +12,19 @@ $sizeIcon : 50px;
 
     &__icon {
         margin-right: 5px;
+
+
+        &.salto {
+            background : no-repeat url(./assets/salt-selected.svg) 50%;
+        }
+
+        &.lol {
+            background : no-repeat url(./assets/fireworks-selected.svg) 50%;
+        }
+
+        &.pepper {
+            background : no-repeat url(./assets/pepper-selected.svg) 50%;
+        }
     }
 
     &__reactions {
@@ -93,7 +106,7 @@ $sizeIcon : 50px;
     &--share {
         background-image: url("./assets/share.svg");
         &:hover{
-           background-image: url("./assets/share-selected.svg"); 
+           background-image: url("./assets/share-selected.svg");
         }
     }
 
@@ -107,7 +120,7 @@ $sizeIcon : 50px;
     &--salty {
         background-image: url("./assets/saltiness.svg");
         &:hover{
-           background-image: url("./assets/saltiness-selected.svg"); 
+           background-image: url("./assets/saltiness-selected.svg");
         }
     }
 }
@@ -134,10 +147,10 @@ $sizeIcon : 50px;
         border-style: solid;
         top: 57%;
         left: 76%;
-        transform: translateX(-50%) translateY(-50%); 
+        transform: translateX(-50%) translateY(-50%);
         transform-origin: 50% 50%;
         transform:scale(0);
-    }    
+    }
 }
 
 .icon__wrapper{
@@ -179,7 +192,7 @@ $sizeIcon : 50px;
 
 .circle-animation {
     &:after{
-        animation: pop ease forwards 0.5s;    
+        animation: pop ease forwards 0.5s;
     }
 }
 
@@ -192,7 +205,7 @@ $sizeIcon : 50px;
 
     to {
         transform :scale(5);
-        border-width:0px;  
-        opacity: 0;    
+        border-width:0px;
+        opacity: 0;
     }
 }
