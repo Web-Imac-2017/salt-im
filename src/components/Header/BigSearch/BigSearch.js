@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IndexLink, Link } from 'react-router';
+import { Link } from 'react-router';
 import './BigSearch.scss'
 
 import utils from "../../../../public/utils.js";
@@ -34,22 +34,6 @@ class BigSearch extends Component {
       })
       .then( (response) => response.json())
       .then( (data) => {this.setState({results:data})});
-
-      fetch(utils.getFetchUrl()+'/search/t/' + event.target.value,
-      {
-          method: "post",
-          body: new FormData(this.refs.form),
-      })
-      .then( (response) => response.json())
-      .then( (data) => {this.setState({resultsTag:data})});
-
-      fetch(utils.getFetchUrl()+'/search/u/' + event.target.value,
-      {
-          method: "post",
-          body: new FormData(this.refs.form),
-      })
-      .then( (response) => response.text())
-      .then( (data) => {console.log(data);this.setState({resultsUser:data})});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,11 +43,11 @@ class BigSearch extends Component {
   }
 
   render() {
-    
+    console.log(this.state.isOpen)
     let classes = "bigsearch";
     let resultClass = "results";
 
-    if(this.state.isOpen ){
+    if(this.state.isOpen){
         classes += " bigsearch--open"
     }
 
@@ -73,30 +57,9 @@ class BigSearch extends Component {
     let nodeSearch = (<div/>)
     if(this.state.results.length) {
       nodeSearch = this.state.results.map((elmt,i) => {
-        var url = "/post/"+elmt.id
-
+        let url = "/post/"+elmt.id
         return(
           <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.title}</Link></li>
-        )
-      })
-    }
-
-    let nodeSearchTags = (<div/>)
-    if(this.state.resultsTag.length) {
-      nodeSearchTags = this.state.resultsTag.map((elmt,i) => {
-        let url = "/tag/"+elmt.id
-        return(
-          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.name}</Link></li>
-        )
-      })
-    }
-
-    let nodeSearchUsers = (<div/>)
-    if(this.state.resultsUser.length) {
-      nodeSearchUsers = this.state.resultsUser.map((elmt,i) => {
-        let url = "/u/"+elmt.id
-        return(
-          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.username}</Link></li>
         )
       })
     }
@@ -105,7 +68,7 @@ class BigSearch extends Component {
       <div>
         <div className={classes}>
           <form ref="form">
-              <input type="text" name="search" onChange={this.handleChangeSearch.bind(this)} placeholder="Rechercher un post, un tag, un user..."/>
+              <input type="text" name="search" onChange={this.handleChangeSearch.bind(this)} placeholder="Search"/>
           </form>
         </div>
 
@@ -124,7 +87,17 @@ class BigSearch extends Component {
             <div className="results__wrapper">
               <h1> Tags </h1>
                 <ul>
-                  {nodeSearchTags}
+                  <li>manger des pates</li>
+                  <li>manger des anus</li>
+                  <li>manger la chatte à la voisine</li>
+                  <li>manger son sexe</li>
+                  <li>manger des pates</li>
+                  <li>manger des anus</li>
+                  <li>manger la chatte à la voisine</li>
+                  <li>manger son sexe</li>
+                  <li>manger des pates</li>
+                  <li>manger des anus</li>
+
                 </ul>
 
                 <span className="results__seeall"> Voir tout </span>
@@ -138,7 +111,10 @@ class BigSearch extends Component {
 
               </div>
                 <ul>
-                  {nodeSearchUsers}
+                  <li>manger des pates</li>
+                  <li>manger des anus</li>
+                  <li>manger la chatte à la voisine</li>
+                  <li>manger son sexe</li>
                 </ul>
 
                 <span className="results__seeall"> Voir tout </span>
