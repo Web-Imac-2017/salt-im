@@ -46,6 +46,7 @@ class BigSearch extends Component {
     console.log(this.state.isOpen)
     let classes = "bigsearch";
     let resultClass = "results";
+    let noResult = <div> Aucun résultat trouvé </div>;
 
     if(this.state.isOpen){
         classes += " bigsearch--open"
@@ -60,9 +61,14 @@ class BigSearch extends Component {
         var url = "/post/"+elmt.id
 
         return(
-          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.title}</Link></li>
+          <div>
+            <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.title}</Link></li>
+          </div>
         )
       })
+    }
+    else {
+      nodeSearch = noResult;
     }
 
     let nodeSearchTags = (<div/>)
@@ -70,9 +76,14 @@ class BigSearch extends Component {
       nodeSearchTags = this.state.resultsTag.map((elmt,i) => {
         let url = "/tag/"+elmt.id
         return(
-          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.name}</Link></li>
+          <div>
+            <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.name}</Link></li>
+          </div>
         )
       })
+    }
+    else {
+      nodeSearchTags = noResult
     }
 
     let nodeSearchUsers = (<div/>)
@@ -80,9 +91,14 @@ class BigSearch extends Component {
       nodeSearchUsers = this.state.resultsUser.map((elmt,i) => {
         let url = "/u/"+elmt.id
         return(
-          <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.username}</Link></li>
+          <div>
+            <li key={i}><Link to={url} onClick={this.handleLinkClick.bind(this)}>{elmt.username}</Link></li>
+          </div>
         )
       })
+    }
+    else {
+      nodeSearchUsers = noResult
     }
 
     return (
@@ -111,7 +127,7 @@ class BigSearch extends Component {
                   {nodeSearchTags}
                 </ul>
 
-                <span className="results__seeall"> Voir tout </span>
+                
             </div>
           </div>
 
@@ -124,8 +140,6 @@ class BigSearch extends Component {
                 <ul>
                   {nodeSearchUsers}
                 </ul>
-
-                <span className="results__seeall"> Voir tout </span>
             </div>
           </div>
 
