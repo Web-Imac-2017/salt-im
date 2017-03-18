@@ -135,16 +135,11 @@ class userController {
         include "connect.php";
         $manager = new UsersManager($db);
         if(isset($_SESSION)) {
-            $user = $manager->who_is_logged_in($_SESSION);
+            $user_id = $manager->who_is_logged_in($_SESSION);
             if ($user == false || $user == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
             } else if ($user != null) {
-                $u = (int) $user->get_id();
-                $c = array(
-                    'id' => utf8_encode($u)
-                );
-
-                $json = json_encode($c, JSON_UNESCAPED_UNICODE);
+                $json = json_encode(trim($user_id), JSON_UNESCAPED_UNICODE);
                 echo($json);
             } else {
                 echo("fail");

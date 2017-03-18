@@ -300,7 +300,7 @@ public function reconnect_from_cookie($cookie, $session){
         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
         if($userRow != null) {
             $user = $this->get($userRow['id']);
-            return $user;
+            return $user->get_id();
         } else {
             return false;
         }

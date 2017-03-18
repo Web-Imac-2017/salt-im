@@ -41,10 +41,10 @@ $router->addRule('comment/add/comment/:id', array('controller' => 'comment', 'ac
 $router->addRule('p/comment/:id/:sort', array('controller' => 'comment', 'action' => 'sortCommentsByStat'));
 
 // user routes
-$router->addRule('u/signup/:id', array('controller' => 'user', 'action' => 'signup_dirty'));
+$router->addRule('u/signup/:id', array('controller' => 'user', 'action' => 'signup'));
 $router->addRule('u/signout', array('controller' => 'user', 'action' => 'signout'));
-$router->addRule('u/login/:id', array('controller' => 'user', 'action' => 'login_dirty'));
-$router->addRule('u/autologin/:id', array('controller' => 'user', 'action' => 'login'));
+$router->addRule('u/login/:id', array('controller' => 'user', 'action' => 'login'));
+$router->addRule('u/autologin/:id', array('controller' => 'user', 'action' => 'autologin'));
 $router->addRule('u/logout', array('controller' => 'user', 'action' => 'logout'));
 $router->addRule('u/name/:id', array('controller' => 'user', 'action' => 'name'));
 $router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
@@ -53,7 +53,7 @@ $router->addRule('u/get/:id', array('controller' => 'user', 'action' => 'index')
 $router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avatar'));
 $router->addRule('u/islogged/:id', array('controller' => 'user', 'action' => 'islogged'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
-$router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who_dirty'));
+$router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
 $router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
 $router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close'));
 $router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
