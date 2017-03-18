@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 class UsersManager {
   private $_db; // Instance de PDO.
