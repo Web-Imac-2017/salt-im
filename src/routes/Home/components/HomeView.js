@@ -24,18 +24,26 @@ export default class HomeView extends Component {
             .then((tagResponse) => tagResponse.json())
             .then((tagData) => {this.setState({dataListTags : tagData})})
 
-        fetch(utils.getFetchUrl()+"/p/all/order/"+this.state.idStat)
+        fetch(utils.getFetchUrl()+"/p/all/stat/"+this.state.idStat)
             .then((response) => response.json())
-            .then((data) =>{this.setState({dataListPost : data})})
+            .then((data) =>{
+                console.log(data);
+                this.setState({dataListPost : data})
+            })
     }
 
     handleStatSelect = (e) => {
         console.log(e)
         this.setState({idStat: e})
-
-        fetch(utils.getFetchUrl()+"/p/all/"+this.state.idStat)
+        let urlToFetch = "/p/all/stat/"+this.state.idStat;
+        if(e==4)
+            urlToFetch = "/p/all/date/"+this.state.idStat
+        fetch(utils.getFetchUrl()+urlToFetch)
                .then((response) => response.json())
-               .then((data) =>{this.setState({dataListPost : data})})
+               .then((data) =>{
+                console.log(data)
+                this.setState({dataListPost : data})
+            })
     }
 
     render() {

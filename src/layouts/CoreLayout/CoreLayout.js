@@ -42,11 +42,12 @@ export default class CoreLayout extends Component {
     }
 
     componentWillMount() {
-      fetch(utils.getFetchUrl()+"/u/start/1",{
-          })
-          .then(() => {
-            this.loadUser();
-          })
+      this.getUser(1);
+      // fetch(utils.getFetchUrl()+"/u/start/1",{
+      //     })
+      //     .then(() => {
+      //       this.loadUser();
+      //     })
     }
 
     endSession() {

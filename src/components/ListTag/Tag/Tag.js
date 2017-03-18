@@ -7,14 +7,17 @@ export const Tag = (props) => {
         backgroundImage: "url("+props.data.img_url+")"
     }
 
+    let link = "/tag/" + props.data.id;
+
     if(props.line){
+
         return(
             <div className="tag">
-            <Link to={link}>
-                <div className="tag__title">
-                    > {props.data.name}
-                </div>
-            </Link>
+                <Link to={link}>
+                    <div className="tag__title">
+                        > {props.data.name}
+                    </div>
+                </Link>
 
 
             </div>
@@ -22,20 +25,18 @@ export const Tag = (props) => {
     }
 
     else if(props.solo){
+
         return(
             <div className="tag">
-                <Link to={link}>
                     <div className="tag__title">
-                       > {props.data.name}
+                        > {props.data.name}
                     </div>
-                
                     <div className="tag__description">{props.data.description}</div>
-                </Link>
+                
             </div>
         )
     }
 
-    let link = "/tag/" + props.data.id;
 
     return(
         <div className="tag">

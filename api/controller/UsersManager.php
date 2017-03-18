@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 class UsersManager {
   private $_db; // Instance de PDO.
@@ -352,4 +353,3 @@ public function reconnect_from_cookie($cookie, $session){
    }
 
 }
-

@@ -43,7 +43,9 @@ var utils = {
 
     getFetchUrl() {
         //return "http://localhost:8888/salt-im/api"
-        return "http://saltfactory.tk/api"
+        //return "/api"
+        return "http://localhost/salt-im/api"
+        //return "http://saltfactory.tk/api"
     }
 }
 

@@ -19,18 +19,25 @@ export const ListTagColumn = (props) => {
             </div>
         )
     }
-
-    else {
+    else{
         return (
-            <div className="loader__wrapper">
-                <div className="loader">
-                    <img src="loader.gif" alt="Chargement des tags..." height="75" width="75"/>
-                    <p>Chargement des tags</p>
-                </div>
-            </div>
+            <div></div>
         )
-
     }
+
+
 }
 
 export default ListTagColumn
+
+/* else {
+ *     return (
+ *         <div className="loader__wrapper">
+ *             <div className="loader">
+ *                 <img src="loader.gif" alt="Chargement des tags..." height="75" width="75"/>
+ *                 <p>Chargement des tags</p>
+ *             </div>
+ *         </div>
+ *     )
+
+ * }*/

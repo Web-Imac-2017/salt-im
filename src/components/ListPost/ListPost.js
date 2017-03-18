@@ -49,11 +49,11 @@ let values = [
 
 export default class ListPost extends Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-        maxValue:{"name":0,"value":1},
-      };
+        this.state = {
+            maxValue:{"name":0,"value":1},
+        };
     }
 
     handleMax(val) {
@@ -62,18 +62,34 @@ export default class ListPost extends Component {
         }
     }
     render() {
-        if(!this.props.data.length)
-            return (<div className="listpost--empty">T'es comme le "ç" de sel, t'existe pas</div>)
-        let postsNode = this.props.data.map( (elmt,i) => (
-            <PostPreview key={i} data={elmt} state={values[i%3]} maxValue={this.state.maxValue} handleMax={this.handleMax.bind(this)} dataUser={this.props.dataUser}/>
-        ))
 
-        return (
-            <div className="listpost">
-              <div className="listpost__postwrapper">
+
+        if(this.props.data.map != undefined){
+            if(!this.props.data.length)
+                return (<div className="listpost--empty">T'es comme le "ç" de sel, t'existe pas</div>)
+
+            let postsNode = this.props.data.map( (elmt,i) => (
+                <PostPreview key={i} data={elmt} state={values[i%3]} maxValue={this.state.maxValue} handleMax={this.handleMax.bind(this)} dataUser={this.props.dataUser}/>
+            ))
+
+            return(
+                <div className="listpost">
+                <div className="listpost__postwrapper">
                 {postsNode}
-              </div>
-            </div>
-        )
+                </div>
+                </div>
+            )
+        }
+
+        else {
+            return(
+                <div className="loader">
+                    <div className="loader__data">
+                        <div className="imgLoader"></div>
+                        <p>Déversement de sel en cours</p>
+                    </div>
+                </div>
+            )
+        }
     }
 }
