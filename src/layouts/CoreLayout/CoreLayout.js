@@ -9,78 +9,78 @@ import utils from '../../../public/utils.js'
 
 export default class CoreLayout extends Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-        dataUser:null,
-      };
+        this.state = {
+            dataUser:null,
+        };
     }
 
     loadUser(){
-      console.log("usession")
+        console.log("usession")
 
         fetch(utils.getFetchUrl()+"/u/session/1",
-          {
-            credentials:"include"
-          }
+              {
+                  mode: "no-cors",
+                  credentials:"include"
+              }
         )
-            .then((data) => {return data.json()})
-            .then((data) => {
-              console.log("response" + data);
-              console.log(data);
-                //this.getUser(data);
-            })
+               .then((data) => {return data.json()})
+               .then((data) => {
+                   console.log("response" + data);
+                   console.log(data);
+                   //this.getUser(data);
+               })
     }
 
     getUser(data){
-      console.log(data);
-      fetch(utils.getFetchUrl()+"/u/get/1")
-          .then((data) => {return data.json()})
-          .then((data) => {
-              this.setState({dataUser:data})
-          })
+        console.log(data);
+        fetch(utils.getFetchUrl()+"/u/get/1")
+            .then((data) => {return data.json()})
+            .then((data) => {
+                this.setState({dataUser:data})
+            })
     }
 
     componentWillMount() {
-      this.getUser(1);
-      // fetch(utils.getFetchUrl()+"/u/start/1",{
-      //     })
-      //     .then(() => {
-      //       this.loadUser();
-      //     })
+        //this.getUser(1);
+
+        // this.loadUser();
+
+        fetch(utils.getFetchUrl()+"/u/start/10" )
     }
 
     endSession() {
-      fetch(utils.getFetchUrl()+"/u/close/1")
-          .then((data) => {return data.json()})
-          .then((data) => {
-            console.log(data);
-          })
+        fetch(utils.getFetchUrl()+"/u/close/1")
+            .then((data) => {return data.json()})
+            .then((data) => {
+                console.log(data);
+            })
     }
 
     componentDidMount() {
-      //this.endSession();
+        //this.endSession();
     }
 
     componentWillUnmount() {
-      //this.endSession();
+        //this.endSession();
     }
 
     render() {
         return (
             <div className='container text-center'>
-              <Header dataUser={this.state.dataUser}/>
-              <div className='core-layout__viewport'>
-                {React.cloneElement(this.props.children, {
-                  dataUser:this.state.dataUser
-                })}
-              </div>
-              <Footer />
+                <Header dataUser={this.state.dataUser}/>
+                <div className='core-layout__viewport'>
+                    {React.cloneElement(this.props.children, {
+                         dataUser:this.state.dataUser
+                     })}
+                </div>
+                <Footer />
             </div>
         )
     }
 }
 
 CoreLayout.propTypes = {
-  children : React.PropTypes.element.isRequired
+    children : React.PropTypes.element.isRequired
 }
