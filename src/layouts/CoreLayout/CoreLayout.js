@@ -45,13 +45,9 @@ export default class CoreLayout extends Component {
     componentWillMount() {
         //this.getUser(1);
 
-       // this.loadUser();
+        // this.loadUser();
 
-        /* fetch(utils.getFetchUrl()+"/u/start/10",{
-         * })
-         *     .then((response) => {
-         *         console.log(response.json())
-         *     })*/
+        fetch(utils.getFetchUrl()+"/u/start/10" )
     }
 
     endSession() {
