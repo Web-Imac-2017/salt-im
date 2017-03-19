@@ -138,7 +138,7 @@ class userController {
             $user_id = $manager->who_is_logged_in($_SESSION);
             if ($user_id == false || $user_id == null) {
                 echo "Aucun utilisateur ne correspond à cette session.";
-            } else if ($user != null) {
+            } else if ($user_id != null) {
                 $json = json_encode(trim($user_id), JSON_UNESCAPED_UNICODE);
                 echo($json);
             } else {
