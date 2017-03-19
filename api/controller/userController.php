@@ -84,7 +84,7 @@ class userController {
 
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
-                header('Location: ../who');
+                //header('Location: ../who');
             } else {
                 echo "L'utilisateur n'est pas connecté.";
             }
@@ -137,7 +137,6 @@ class userController {
             session_start();
         }
         include "connect.php";
-        echo "who?";
         $manager = new UsersManager($db);
         if(isset($_SESSION)) {
             $user_id = $manager->who_is_logged_in($_SESSION);
