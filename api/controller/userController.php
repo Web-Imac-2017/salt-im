@@ -84,7 +84,7 @@ class userController {
 
             if($isloggedin == true) {
                 echo "L'utilisateur est connecté.";
-                //header('Location: ../who');
+                header('Location: ../who');
             } else {
                 echo "L'utilisateur n'est pas connecté.";
             }
