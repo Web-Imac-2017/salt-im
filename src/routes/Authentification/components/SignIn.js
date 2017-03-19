@@ -29,14 +29,14 @@ export default class SignIn extends Component {
       fetch(utils.getFetchUrl()+"/u/login/1",
         {
             method: "post",
-            mode:"no-cors",
             body: new FormData(this.refs.form),
+            mode: "no-cors",
             credentials:"include"
         })
         .then((res) => {
             return res.text();
         }).then((data) => {
-          fetch(utils.getFetchUrl()+"/u/session/1")
+          fetch(utils.getFetchUrl()+"/u/session/5")
               .then((data) => {return data.text()})
               .then((data) => {
                 console.log("wow" + data);
