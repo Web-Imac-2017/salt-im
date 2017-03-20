@@ -16,10 +16,6 @@ $valTop:50px;
         .preview__tags {
             padding-bottom:10px !important;
         }
-
-        .preview__actions {
-            overflow-x:hidden;
-        }
     }
     &__top {
         background:white;
@@ -95,6 +91,10 @@ $valTop:50px;
             font-size: 3.4em;
             font-weight: 700;
             color: #000;
+
+            @include mobile {
+                font-size: 1.5em;
+            }
         }
     }
 }

@@ -7,6 +7,10 @@
     align-items: baseline;
     margin-top: 18px;
 
+    @include mobile {
+        margin-top:5px;
+    }
+
 
     &__text {
         flex:1;
@@ -23,16 +27,16 @@
             width: 12px;
             height: 12px;
             position : absolute;
-            right:0;
+            right:20px;
             margin-top: -15px;
         }
         select {
 
-        
+
         appearance:none;
         -moz-appearance:none; /* Firefox */
         -webkit-appearance:none;
-        
+
 
 
         }
@@ -59,7 +63,7 @@
         &:hover {
             color:rgb(77, 113, 186);
         }
-        
+
 
         &:after {
             content: "";

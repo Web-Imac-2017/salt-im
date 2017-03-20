@@ -27,6 +27,10 @@
     font-family: $cousine;
     margin-bottom: 20px;
     margin-bottom: 80px;
+
+    @include mobile {
+        margin-bottom:30px;
+    }
 }
 
 .data__author {

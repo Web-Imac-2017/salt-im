@@ -59,11 +59,10 @@ export default class CoreLayout extends Component {
     }
 
     componentDidMount() {
-        //this.endSession();
     }
 
     componentWillUnmount() {
-        //this.endSession();
+        this.endSession();
     }
 
     render() {

@@ -1,7 +1,21 @@
+@import '../../../../../styles/core.scss';
+
 .picdata {
+    @include mobile {
+        margin-top:-60px;
+    }
     &__left {
         background-size:cover;
         background-position:center;
         cursor:pointer;
+
+        @include mobile {
+            height:70vw !important;
+            margin-bottom:30px;
+        }
+    }
+
+    &.flex {
+        display:block;
     }
 }

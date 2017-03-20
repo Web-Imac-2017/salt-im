@@ -26,7 +26,7 @@ class UsersManager {
     $_SESSION['id'] = $user->get_id();
     $_SESSION['pseudo'] = $user->get_username();
   }
-    
+
  public function add_dirty(User $user) {
     // Préparation de la requête
     $pass_hache = sha1('gz'.$user->get_password());
@@ -39,7 +39,7 @@ class UsersManager {
     $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("1", "0", null, "'.$user_id.'")');
 
     $this->_db->exec('INSERT INTO stat(name, value,  related_publication_id, related_user_id) VALUES("2", "0", null, "'.$user_id.'")');
-     
+
      setcookie('id', $user->get_id(), time() + 60 * 60 * 24 * 365);
      setcookie('pseudo', $user->get_username(), time() + 60 * 60 * 24 * 365);
   }
@@ -228,7 +228,7 @@ public function getSubjects(User $user) {
                 $_SESSION['login'] = array(
                     'username' => utf8_encode($data['username'])
                 );
-                var_dump($_SESSION);
+
                 return true;
              }
              else {
@@ -236,7 +236,7 @@ public function getSubjects(User $user) {
              }
           }
        }
-    
+
     public function login_dirty($data) {
           if (session_status() != PHP_SESSION_DISABLED) {
               session_start();

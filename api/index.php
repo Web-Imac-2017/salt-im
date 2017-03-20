@@ -41,22 +41,22 @@ $router->addRule('comment/add/comment/:id', array('controller' => 'comment', 'ac
 $router->addRule('p/comment/:id/:sort', array('controller' => 'comment', 'action' => 'sortCommentsByStat'));
 
 // user routes
-$router->addRule('u/signup/:id', array('controller' => 'user', 'action' => 'signup'));
-$router->addRule('u/signout', array('controller' => 'user', 'action' => 'signout'));
-$router->addRule('u/login/:id', array('controller' => 'user', 'action' => 'login'));
-$router->addRule('u/autologin/:id', array('controller' => 'user', 'action' => 'autologin'));
-$router->addRule('u/logout', array('controller' => 'user', 'action' => 'logout'));
-$router->addRule('u/name/:id', array('controller' => 'user', 'action' => 'name'));
-$router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
-$router->addRule('u/:id', array('controller' => 'user', 'action' => 'index'));
-$router->addRule('u/get/:id', array('controller' => 'user', 'action' => 'index'));
-$router->addRule('u/:id/avatar', array('controller' => 'user', 'action' => 'avatar'));
-$router->addRule('u/islogged/:id', array('controller' => 'user', 'action' => 'islogged'));
+$router->addRule('u/signup/:id', array('controller' => 'User', 'action' => 'signup'));
+$router->addRule('u/signout', array('controller' => 'User', 'action' => 'signout'));
+$router->addRule('u/login/:id', array('controller' => 'User', 'action' => 'login'));
+$router->addRule('u/autologin/:id', array('controller' => 'User', 'action' => 'autologin'));
+$router->addRule('u/logout', array('controller' => 'User', 'action' => 'logout'));
+$router->addRule('u/name/:id', array('controller' => 'User', 'action' => 'name'));
+$router->addRule('u/update/:id', array('controller' => 'User', 'action' => 'update'));
+$router->addRule('u/:id', array('controller' => 'User', 'action' => 'index'));
+$router->addRule('u/get/:id', array('controller' => 'User', 'action' => 'index'));
+$router->addRule('u/:id/avatar', array('controller' => 'User', 'action' => 'avatar'));
+$router->addRule('u/islogged/:id', array('controller' => 'User', 'action' => 'islogged'));
 $router->addRule('u/:id/stat', array('controller' => 'stat', 'action' => 'getStatUser'));
-$router->addRule('u/session/:id', array('controller' => 'user', 'action' => 'who'));
-$router->addRule('u/start/:id', array('controller' => 'user', 'action' => 'start'));
-$router->addRule('u/close/:id', array('controller' => 'user', 'action' => 'close'));
-$router->addRule('u/update/:id', array('controller' => 'user', 'action' => 'update'));
+$router->addRule('u/session/:id', array('controller' => 'User', 'action' => 'who'));
+$router->addRule('u/start/:id', array('controller' => 'User', 'action' => 'start'));
+$router->addRule('u/close/:id', array('controller' => 'User', 'action' => 'close'));
+$router->addRule('u/update/:id', array('controller' => 'User', 'action' => 'update'));
 
 // tag routes
 $router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
@@ -73,10 +73,10 @@ $router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'))
 // search routes
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
 $router->addRule('search/t/:search', array('controller' => 'tag', 'action' => 'search_tags'));
-$router->addRule('search/u/:search', array('controller' => 'user', 'action' => 'search_users'));
+$router->addRule('search/u/:search', array('controller' => 'User', 'action' => 'search_users'));
 
 // tag de débug A SUPPRIMER QUAND FINI
-$router->addRule('u/test/:id', array('controller' => 'user', 'action' => 'test'));
+$router->addRule('u/test/:id', array('controller' => 'User', 'action' => 'test'));
 
 
 // routes qui marchent pas
