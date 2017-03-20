@@ -93,7 +93,6 @@ export default class PreviewActions extends Component {
             })
             .then((data) => data.text())
             .then((object) => {
-                console.log(object)
                 this.setState({
                     currentName:parseInt(id)+1,
                 })
@@ -145,8 +144,6 @@ export default class PreviewActions extends Component {
     }
 
     render() {
-
-        console.log(arrayIconClass[this.state.currentName])
 
         let selected = arrayIconClass[this.state.currentName];
 

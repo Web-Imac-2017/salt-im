@@ -43,7 +43,6 @@ class BigSearch extends Component {
     }
 
     render() {
-        console.log(this.state.isOpen)
         let classes = "bigsearch";
         let resultClass = "results";
         let noResult = <div> Aucun résultat trouvé </div>;

@@ -30,7 +30,6 @@ export default class CoreLayout extends Component {
     }
 
     getUser(data){
-        console.log(data);
         fetch(utils.getFetchUrl()+"/u/get/1")
             .then((data) => {return data.json()})
             .then((data) => {

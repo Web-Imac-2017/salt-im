@@ -42,8 +42,6 @@ export default class TagCreatorView extends Component{
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log(this.refs.file);
-
         fetch(utils.getFetchUrl()+"/tag/add/",
               {
                   method: "post",

@@ -27,7 +27,6 @@ export default class HomeView extends Component {
         fetch(utils.getFetchUrl()+"/p/all/stat/"+this.state.idStat)
             .then((response) => response.json())
             .then((data) =>{
-                console.log(data);
                 this.setState({dataListPost : data})
             })
     }

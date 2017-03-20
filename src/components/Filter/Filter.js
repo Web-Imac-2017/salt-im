@@ -12,7 +12,6 @@ export default class Filter extends Component{
     }
 
     change = (e) => {
-        console.log(e.target.value);
         this.setState({idStat : e.target.value})
         this.props.onChange(e.target.value)
     }

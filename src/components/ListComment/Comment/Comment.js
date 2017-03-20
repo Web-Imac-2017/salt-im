@@ -41,7 +41,6 @@ export default class Comment extends Component {
             })
             .then( (data) => data.text())
             .then( (object) => {
-                console.log(object)
                 this.props.loadComments();
             })
 
