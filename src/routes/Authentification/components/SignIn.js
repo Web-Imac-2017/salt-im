@@ -26,6 +26,7 @@ export default class SignIn extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
         fetch(utils.getFetchUrl()+"/u/login/1",
               {
                   method: "post",
@@ -33,19 +34,37 @@ export default class SignIn extends Component {
                   mode: "no-cors",
                   credentials:"include"
               })
-            .then((res) => {
-                return res.text();
-            })
-            .then( (res) => {
-                fetch(utils.getFetchUrl() + "/u/start/11")
-            })
-            .then(() => {
-                fetch(utils.getFetchUrl()+"/u/session/5")
-                    .then((data) => data.text() )
-                    .then((response) => {
-                        console.log("wow " + response);
-                        this.handleErrors(response);
-                    })
+
+            .then(() => this.checkSession())
+
+        /* fetch(utils.getFetchUrl()+"/u/start/10")
+         *     .then(() => this.launchLogin())*/
+    }
+
+    launchLogin(){
+
+        fetch(utils.getFetchUrl()+"/u/login/1",
+              {
+                  method: "post",
+                  body: new FormData(this.refs.form),
+                  mode: "no-cors",
+                  credentials:"include"
+              })
+
+            .then(() => this.checkSession())
+    }
+
+    checkSession(){
+
+        fetch(utils.getFetchUrl()+"/u/session/5", {
+            method: "post",
+            mode: "no-cors",
+            credientials: "include"
+        })
+            .then((data) => data.text() )
+            .then((response) => {
+                console.log("response session " + response);
+                this.handleErrors(response);
             })
     }
 

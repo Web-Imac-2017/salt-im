@@ -17,20 +17,18 @@ export default class CoreLayout extends Component {
     }
 
     loadUser(){
-        console.log("usession")
+
+        let headers = new Headers();
+        headers.set('Content-Type', 'application/json');
 
         fetch(utils.getFetchUrl()+"/u/session/1",
               {
+                  headers: headers,
                   mode: "no-cors",
                   credentials:"include"
               }
         )
-               .then((data) => {return data.json()})
-               .then((data) => {
-                   console.log("response" + data);
-                   console.log(data);
-                   //this.getUser(data);
-               })
+               .then((data) => {console.log(JSON.parse(data))} )
     }
 
     getUser(data){
@@ -45,18 +43,18 @@ export default class CoreLayout extends Component {
     componentWillMount() {
         //this.getUser(1);
 
-        // this.loadUser();
 
-        fetch(utils.getFetchUrl()+"/u/start/10" )
+        fetch(utils.getFetchUrl()+"/u/start/10")
+            .then( () => this.loadUser())
     }
 
-    endSession() {
-        fetch(utils.getFetchUrl()+"/u/close/1")
-            .then((data) => {return data.json()})
-            .then((data) => {
-                console.log(data);
-            })
-    }
+    /* endSession() {
+     *     fetch(utils.getFetchUrl()+"/u/close/1")
+     *         .then((data) => {return data.json()})
+     *         .then((data) => {
+     *             console.log(data);
+     *         })
+     * }*/
 
     componentDidMount() {
     }
