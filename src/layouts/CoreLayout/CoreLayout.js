@@ -18,17 +18,15 @@ export default class CoreLayout extends Component {
 
     loadUser(){
 
-        let headers = new Headers();
-        headers.set('Content-Type', 'application/json');
-
         fetch(utils.getFetchUrl()+"/u/session/1",
               {
-                  headers: headers,
-                  mode: "no-cors",
-                  credentials:"include"
+                  mode: 'cors',
+                  method:"get",
+                  credentials: "same-origin"
               }
         )
-               .then((data) => {console.log(JSON.parse(data))} )
+            .then((data) => data.json())
+            .then((response) => console.log(response))
     }
 
     getUser(data){
