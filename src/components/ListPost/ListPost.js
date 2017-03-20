@@ -63,7 +63,7 @@ export default class ListPost extends Component {
     }
     render() {
 
-
+        console.log(this.props.data);
         if(this.props.data.map != undefined){
             if(!this.props.data.length)
                 return (<div className="listpost--empty">T'es comme le "ç" de sel, t'existe pas</div>)

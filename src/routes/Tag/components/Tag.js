@@ -25,11 +25,11 @@ export default class TagSolo extends Component {
 
         const myInit = {method: 'POST'};
 
-        fetch(utils.getFetchUrl()+"/tag/get/"+this.props.params.tagId, myInit)
+        fetch(utils.getFetchUrl()+"/tag/all/"+this.props.params.tagId, myInit)
             .then((response) => response.json())
-            .then((object) => { this.setState({tagdata: object})})
+            .then((object) => { this.setState({tagdata: object[this.props.params.tagId]})})
 
-        fetch(utils.getFetchUrl()+"/p/comment/"+this.props.params.tagId, myInit)
+        fetch(utils.getFetchUrl()+"/p/all/stat/1", myInit)
             .then((response) => response.json())
             .then((object) => { this.setState({postdata: object})})
 

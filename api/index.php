@@ -59,20 +59,20 @@ $router->addRule('u/close/:id', array('controller' => 'User', 'action' => 'close
 $router->addRule('u/update/:id', array('controller' => 'User', 'action' => 'update'));
 
 // tag routes
-$router->addRule('tag/all', array('controller' => 'tag', 'action' => 'getList'));
-$router->addRule('tag/add/:id', array('controller' => 'tag', 'action' => 'add'));
-$router->addRule('tag/img', array('controller' => 'tag', 'action' => 'img'));
-$router->addRule('tag/get/:id', array('controller' => 'tag', 'action' => 'tag_by_id'));
-$router->addRule('tag/p/:id', array('controller' => 'tag', 'action' => 'tag_from_post'));
+$router->addRule('tag/all', array('controller' => 'Tags', 'action' => 'getList'));
+$router->addRule('tag/add/:id', array('controller' => 'Tags', 'action' => 'add'));
+$router->addRule('tag/img', array('controller' => 'Tags', 'action' => 'img'));
+$router->addRule('tag/get/:id', array('controller' => 'Tags', 'action' => 'tag_by_id'));
+$router->addRule('tag/p/:id', array('controller' => 'Tags', 'action' => 'tag_from_post'));
 
 
-$router->addRule('tag/:id/img', array('controller' => 'tag', 'action' => 'img'));
+$router->addRule('tag/:id/img', array('controller' => 'Tags', 'action' => 'img'));
 
 // route de recherche qui marche maintenant
 
 // search routes
 $router->addRule('search/p/:search', array('controller' => 'post', 'action' => 'search_title'));
-$router->addRule('search/t/:search', array('controller' => 'tag', 'action' => 'search_tags'));
+$router->addRule('search/t/:search', array('controller' => 'Tags', 'action' => 'search_tags'));
 $router->addRule('search/u/:search', array('controller' => 'User', 'action' => 'search_users'));
 
 // tag de débug A SUPPRIMER QUAND FINI

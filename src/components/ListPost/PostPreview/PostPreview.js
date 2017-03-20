@@ -30,7 +30,8 @@ export default class PostPreview extends Component {
     }
 
     loadMedia(id) {
-        fetch(utils.getFetchUrl()+'/media/'+id)
+        var ids = ["1","2","3","4"];
+        fetch(utils.getFetchUrl()+'/media/'+ids[Math.floor(Math.random() * 3) + 1])
             .then((response) => response.json())
             .then((object) => {
               this.setState({dataMedia: object})
