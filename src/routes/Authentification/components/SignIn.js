@@ -56,7 +56,11 @@ export default class SignIn extends Component {
 
     checkSession(){
 
-        fetch(utils.getFetchUrl()+"/u/session/5")
+        fetch(utils.getFetchUrl()+"/u/session/5", {
+            method: "post",
+            mode: "no-cors",
+            credientials: "include"
+        })
             .then((data) => data.text() )
             .then((response) => {
                 console.log("response session " + response);
